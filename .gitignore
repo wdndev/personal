@@ -1,6 +1,16 @@
 # 输出文件
 __pycache__
-attention_mechanism/__pycache__
-bert/__pycache__
-old/__pycache__
-transformer/__pycache__
+
+transformer/.data
+
+bert_torch/data/glue_data
+bert_d2l/data
+
+
+vision_transformer/data
+vision_transformer/model
+vision_transformer/runs
+
+
+
+
