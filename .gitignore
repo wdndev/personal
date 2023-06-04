@@ -4,6 +4,7 @@ __pycache__
 transformer/.data
 
 bert_torch/data/glue_data
+bert_torch/data/output
 bert_d2l/data
 
 
