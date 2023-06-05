@@ -12,6 +12,8 @@ vision_transformer/data
 vision_transformer/model
 vision_transformer/runs
 
-
+swim_transformer/data
+swim_transformer/model
+swim_transformer/runs
 
 

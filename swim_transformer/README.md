@@ -1,14 +1,14 @@
-# ViT 实现
+# Swim Transformer 实现
 
 # 1.Description
 
-Vision Transformer算法pytorch实现
+Swim Transformer算法pytorch实现
 
-代码来源：https://github.com/rwightman/pytorch-image-models/blob/master/timm/models/vision_transformer.py
+代码来源：https://github.com/microsoft/Swin-Transformer
 
-Transformer架构解析可参考如下文章：
+Swim Transformer 架构解析可参考如下文章：
 
-[Transformer架构解析](https://wdndev.github.io/2023/05/25/Transformer/Transformer%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90)
+[Swim Transformer架构解析](https://wdndev.github.io/2023/05/25/Transformer/Transformer%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90)
 
 # 2.Environment
 
@@ -37,12 +37,10 @@ Transformer架构解析可参考如下文章：
 
 预训练模型下载地址：查看model文件中的注释
 
-如果网络有问题，可以使用百度网盘下载：链接：https://pan.baidu.com/s/1td_WlB9ow3JVHvsvjEAZ7Q  提取码：o4r3
-
 ## 4.2 需要修改源码地方
 
 1. 在train.py脚本中将--data-path设置成解压后的flower_photos文件夹绝对路径
-2. 下载预训练权重，在vit_model.py文件中每个模型都有提供预训练权重的下载地址，根据自己使用的模型下载对应预训练权重,如果速度过慢，使用上述百度网盘链接
+2. 下载预训练权重，在model.py文件中每个模型都有提供预训练权重的下载地址，根据自己使用的模型下载对应预训练权重,如果速度过慢，使用上述百度网盘链接
 3. 在train.py脚本中将--weights参数设成下载好的预训练权重路径
 4. 设置好数据集的路径--data-path以及预训练权重的路径--weights就能使用train.py脚本开始训练了(训练过程中会自动生成class_indices.json文件)
 5. 在predict.py脚本中导入和训练脚本中同样的模型，并将model_weight_path设置成训练好的模型权重路径(默认保存在weights文件夹下)

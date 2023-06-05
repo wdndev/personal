@@ -6,18 +6,18 @@ from PIL import Image
 from torchvision import transforms
 import matplotlib.pyplot as plt
 
-from vit_model import vit_base_patch32_224_in21k as create_model
+from model import swin_small_patch4_window7_224 as create_model
 
 
 def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    device = "cpu"
 
+    img_size = 224
     data_transform = transforms.Compose(
-        [transforms.Resize(256),
-         transforms.CenterCrop(224),
+        [transforms.Resize(int(img_size * 1.14)),
+         transforms.CenterCrop(img_size),
          transforms.ToTensor(),
-         transforms.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])])
+         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
 
     # load image
     img_path = "data/test.jpg"
@@ -37,7 +37,7 @@ def main():
         class_indict = json.load(f)
 
     # create model
-    model = create_model(num_classes=5, has_logits=False).to(device)
+    model = create_model(num_classes=5).to(device)
     # load model weights
     model_weight_path = "model/weights/model-9.pth"
     model.load_state_dict(torch.load(model_weight_path, map_location=device))
