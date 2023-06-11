@@ -79,12 +79,12 @@ def copy_task_train(epochs):
     for epoch in range(epochs):
          # 模型使用训练模式, 所有参数将被更新
         model.train()
-        run_epoch(data_generator(V, batch_size, 20), model, loss,
+        run_epoch(data_generator(epoch, V, batch_size, 20), model, loss,
             optimizer, lr_scheduler, mode="train")
         
         # 模型使用评估模式, 参数将不会变化 
         model.eval()
-        run_epoch(data_generator(V, batch_size, 5), model, loss,
+        run_epoch(data_generator(epoch, V, batch_size, 5), model, loss,
             DummyOptimizer(), DummyScheduler(), mode="eval")[0]
 
     model.eval()

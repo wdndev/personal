@@ -72,6 +72,7 @@ class TrainState:
     tokens: int = 0  # total # of tokens processed
 
 def run_epoch(
+    cur_epoch,
     data_iter,
     model,
     loss_compute,
@@ -116,7 +117,7 @@ def run_epoch(
                     "Epoch Step: %6d | Accumulation Step: %3d | Loss: %6.2f "
                     + "| Tokens / Sec: %7.1f | Learning Rate: %6.1e"
                 )
-                % (i, n_accum, loss / batch.ntokens, tokens / elapsed, lr)
+                % (cur_epoch, n_accum, loss / batch.ntokens, tokens / elapsed, lr)
             )
             start = time.time()
             tokens = 0
