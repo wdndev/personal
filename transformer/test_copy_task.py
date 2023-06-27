@@ -64,7 +64,7 @@ def copy_task_train(epochs):
     """
     V = 11
     batch_size = 80
-    model = make_model(V, V, N=2)
+    model = make_model(V, V, N=2, d_model=256, d_ff=512, h=4, dropout=0.2)
     # 获得模型优化器
     optimizer = torch.optim.Adam(model.parameters(), 
                                  lr=0.5, betas=(0.9, 0.98), eps=1e-9)
@@ -79,14 +79,16 @@ def copy_task_train(epochs):
     for epoch in range(epochs):
          # 模型使用训练模式, 所有参数将被更新
         model.train()
-        run_epoch(data_generator(epoch, V, batch_size, 20), model, loss,
+        # data_generator(V, batch_size, 20).to("cuda")
+        run_epoch(epoch, data_generator(V, batch_size, 20), model, loss,
             optimizer, lr_scheduler, mode="train")
         
         # 模型使用评估模式, 参数将不会变化 
         model.eval()
-        run_epoch(data_generator(epoch, V, batch_size, 5), model, loss,
+        run_epoch(epoch, data_generator(V, batch_size, 5), model, loss,
             DummyOptimizer(), DummyScheduler(), mode="eval")[0]
 
+    # torch.save(model.state_dict(), "model")
     model.eval()
     src = torch.LongTensor([[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
     max_len = src.shape[1]
@@ -98,4 +100,4 @@ def copy_task_train(epochs):
 
 if __name__ == '__main__' :
 
-    copy_task_train(20)
+    copy_task_train(60)

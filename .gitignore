@@ -1,7 +1,7 @@
 # 输出文件
 __pycache__
 
-transformer/.data
+transformer/.data/wikitext-2
 
 bert_torch/data/glue_data
 bert_torch/data/output

@@ -10,7 +10,7 @@ import torchtext
 from torchtext.data.utils import get_tokenizer
 from torchtext.legacy.data import Field
 
-from transformer_model import TransformerModel
+from transformer_model import TransformerModel, TransformerModelMy
 
 
 def get_wiki_text2_data():
@@ -225,7 +225,8 @@ def main():
 
     bptt = 35
     # 将参数输入到TransformerModel中
-    model = TransformerModel(ntokens, emsize, nhead, nhid, nlayers, dropout).to(device)
+    # model = TransformerModelMy(ntokens, ntokens, N=nlayers, d_model=emsize, d_ff=nhid, h=nhead, dropout=dropout)
+    model = TransformerModel(ntokens, emsize, nhead, nhid, nlayers, dropout)
     # 模型初始化后, 接下来进行损失函数和优化方法的选择.
     # 关于损失函数, 我们使用nn自带的交叉熵损失
     criterion = nn.CrossEntropyLoss()
