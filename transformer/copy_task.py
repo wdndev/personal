@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import torch
 import os
+import glob
 
 from torch.autograd import Variable
 from torch.optim.lr_scheduler import LambdaLR
@@ -91,6 +92,27 @@ def copy_task_train(epochs, device="cpu"):
     V = 11
     batch_size = 128
     model = make_model(V, V, N=2, d_model=256, d_ff=512, h=4, dropout=0.2).to(device)
+    # 定义模型文件夹路径
+    folder_path = 'tmp_model'
+    # 判断文件夹是否存在
+    if os.path.exists(folder_path):
+        # 获取文件夹中的所有模型文件
+        model_files = glob.glob(os.path.join(folder_path, '*.pt'))
+
+        # 检查是否存在模型文件
+        if model_files:
+            # 按照文件修改时间进行排序
+            model_files.sort(key=os.path.getmtime)
+            # 获取最新的一个模型文件名
+            latest_model = model_files[-1]
+            # 输出最新的模型文件名
+            print(latest_model)
+            model.load_state_dict(torch.load(latest_model))
+    
+        else:
+            print("模型文件夹中不存在模型文件")
+
+    model.to(device)
     # 获得模型优化器
     optimizer = torch.optim.Adam(model.parameters(), 
                                  lr=0.5, betas=(0.9, 0.98), eps=1e-9)
@@ -153,3 +175,6 @@ if __name__ == '__main__' :
         copy_task_train(60, device)
 
     copy_task_eval(device)
+
+
+    
