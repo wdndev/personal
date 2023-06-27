@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+#  @file        - utils.py
+#  @author      - dongnian.wang(dongnian.wang@outlook.com)
+#  @brief       - Transformer模型公用函数
+#  @version     - 0.0
+#  @date        - 2023.06.06
+#  @copyright   - Copyright (c) 2023
+
 import math
 import numpy as np
 import pandas as pd

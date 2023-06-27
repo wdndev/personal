@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+#  @file        - transformer.py
+#  @author      - dongnian.wang(dongnian.wang@outlook.com)
+#  @brief       - Transformer模型
+#  @version     - 0.0
+#  @date        - 2023.06.06
+#  @copyright   - Copyright (c) 2023
 import math
 import numpy as np
 import pandas as pd
@@ -7,8 +14,8 @@ from torch import nn
 from torch.autograd import Variable
 import copy
 
-from multihead_attention import MultiHeadAttention
-from transformer_utils import clones
+from .multihead_attention import MultiHeadAttention
+from .utils import clones
 
 
 

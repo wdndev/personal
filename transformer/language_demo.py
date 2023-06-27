@@ -10,7 +10,7 @@ import torchtext
 from torchtext.data.utils import get_tokenizer
 from torchtext.legacy.data import Field
 
-from transformer_model import TransformerModel, TransformerModelMy
+from model.transformer import TransformerModel, TransformerModelMy
 
 
 def get_wiki_text2_data():

@@ -1,5 +1,5 @@
-from transformer_model import *
-from transformer_utils import subsequent_mask
+from model.transformer import *
+from model.utils import subsequent_mask
 import matplotlib.pyplot as plt
 import copy
 

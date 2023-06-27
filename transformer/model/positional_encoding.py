@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+#  @file        - positional_encoding.py
+#  @author      - dongnian.wang(dongnian.wang@outlook.com)
+#  @brief       - 位置编码
+#  @version     - 0.0
+#  @date        - 2023.06.06
+#  @copyright   - Copyright (c) 2023
 
 import torch
 from torch import nn 

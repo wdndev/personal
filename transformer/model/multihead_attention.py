@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+#  @file        - multihead_attention.py
+#  @author      - dongnian.wang(dongnian.wang@outlook.com)
+#  @brief       - 多头注意力
+#  @version     - 0.0
+#  @date        - 2023.06.06
+#  @copyright   - Copyright (c) 2023
+
 import math
 import pandas as pd
 import torch
@@ -6,7 +14,7 @@ from torch.autograd import Variable
 import copy
 
 
-from transformer_utils import clones
+from .utils import clones
 
 
 def attention(query, key, value, mask=None, dropout=None):
@@ -117,7 +125,7 @@ class MultiHeadAttention(nn.Module):
 
 
 
-from positional_encoding import Embeddings, PositionalEncoding
+from .positional_encoding import Embeddings, PositionalEncoding
 
 def test_attention():
     d_model = 512
