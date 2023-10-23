@@ -26,6 +26,7 @@
 // 子串 "barthefoo" 开始位置是 9。它是 words 中以 ["bar","the","foo"] 顺序排列的连接。
 // 子串 "thefoobar" 开始位置是 12。它是 words 中以 ["the","foo","bar"] 顺序排列的连接。
  
+// @lc code=start
 class Solution {
 public:
     // words数组中：单词数量 word_num，每个单词的长度 word_len
@@ -83,3 +84,4 @@ public:
     }
 };
 
+// @lc code=end
