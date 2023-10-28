@@ -57,7 +57,7 @@
 class Solution {
 public:
     // 1.动态规划
-    int coinChange(vector<int>& coins, int amount) {
+    int coinChange1(vector<int>& coins, int amount) {
         int max_amount = amount + 1;
         std::vector<int> dp(amount + 1, max_amount);
         dp[0] = 0;
@@ -70,6 +70,42 @@ public:
         }
 
         return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+    // 2.递归方法
+    int coinChange(vector<int>& coins, int amount) {
+        if (amount < 1) {
+            return 0;
+        }
+
+        std::vector<int> count(amount, 0);
+        return this->dp(coins, amount, count);
+    }
+
+private:
+    // rem : 剩余的价值
+    // count[rem] 最小到达的数量
+    int dp(std::vector<int>& coins, int rem, std::vector<int>& count) {
+        // 无效数据
+        if (rem < 0) {
+            return -1;
+        }
+        // 终止条件
+        if (rem == 0) {
+            return 0;
+        }
+        if (count[rem - 1] != 0) {
+            return count[rem - 1];
+        }
+        int min = INT_MAX;
+        for (int& coin : coins) {
+            int res = this->dp(coins, rem - coin, count);
+            if (res >= 0 && res < min) {
+                min = res + 1;
+            }
+        }
+        count[rem - 1] = (min == INT_MAX) ? -1 : min;
+        return count[rem - 1];
     }
 };
 // @lc code=end
