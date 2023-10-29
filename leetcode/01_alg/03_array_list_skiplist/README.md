@@ -224,4 +224,74 @@ public:
 ```
 
 ```c++
+// 1.暴力求解，需要三重循环 O(n^3)
+// 2.hash表来记录， a+b到hash表中去查，是否存在-c
+// 3.左右下标推进
+class Solution {
+public:
+    // 1.暴力求解方法
+    vector<vector<int>> threeSum1(vector<int>& nums) {
+        std::vector<std::vector<int>> ans;
+        for (int i = 0; i < nums.size() - 2; i++) {
+            for (int j = i + 1; j < nums.size() - 1; j++) {
+                for (int k = j + 1; k < nums.size(); k++) {
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        ans.push_back({nums[i], nums[j], nums[k]});
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    // 3.左右下标推进
+    // 固定3个指针中最左数字的指针k，双指针i，j分设在数据两端
+    // 通过双指针交替向中间移动，记录对于每个固定指针k所有满足
+    // nums[k] + nums[i] + nums[j] == 0 的 i, j 组合
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int size = nums.size();
+        if (size < 3)
+            return {};
+        std::vector<std::vector<int>> res;
+        // 排序
+        std::sort(nums.begin(), nums.end());
+        // 固定第一个数，转化为求两数之和
+        for(int i = 0; i < size; i++)
+        {
+            // 如果第一个数为正数，因为是递增的，后面你的数不可能为0了
+            if (nums[i] > 0)
+                return res;
+            // 去重，如果被选过了，跳过
+            if (i > 0 && nums[i] == nums[i-1])
+                continue;
+            // 双指针在nums[i]后面的区间中寻找和为0-nums[i]的另外两个数
+            int left = i + 1;
+            int right = size - 1;
+            while(left < right)
+            {
+                // 两数之和太大，右指针左移
+                if (nums[left] + nums[right] > -nums[i])
+                    right--;
+                // 两数之和太小，左指针右移
+                else if(nums[left] + nums[right] < -nums[i])
+                    left++;
+                else
+                {
+                    // 找到一个和为零的三元组，添加到结果中，左右指针内缩，继续寻找
+                    res.push_back(std::vector<int>{nums[i], nums[left], nums[right]});
+                    left++;
+                    right--;
+
+                    // 去重：第二个数和第三个数也不重复选取
+                    // 例如：[-4,1,1,1,2,3,3,3], i=0, left=1, right=5
+                    while (left < right && nums[left] == nums[left-1])  left++;
+                    while (left < right && nums[right] == nums[right+1])    right--;
+                }
+            }
+        }
+
+        return res;
+    }
+};
 ```
