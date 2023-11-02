@@ -18,13 +18,13 @@
 
 不通过比较来决定元素间的相对次序，它可以突破基于比较类排序的时间下界，以线性时间运行，因此也被称为线性时间非比较类排序
 
-![](image/image_KIgZW-FK_s.png)
+![](image/image_4smP0XFDau.png)
 
 ## 1.2复杂度分析
 
-![](image/image_nF3koDNgXJ.png)
+![](image/image_t8TWO1gqbX.png)
 
-![](image/image_O43AEg0VcS.png)
+![](image/image_WLAXNzD_mc.png)
 
 # 2.初级排序 O(n^2)
 
@@ -39,7 +39,7 @@
 -   每一趟在待排序元素中选取关键字最小（或最大）的元素加入有序子序列中
 -   必须进行总共n-1趟处理
 
-![](image/849589-20171015224719590-1433219824_2-oEgpVDx7.gif)
+![](image/849589-20171015224719590-1433219824_4dinKAGBkn.gif)
 
 ### （2）性能分析
 
@@ -101,7 +101,7 @@ void select_sort(std::vector<int>& nums) {
 
 **稳定性**：稳定
 
-![](image/849589-20171015225645277-1151100000_sAr829Ep-U.gif)
+![](image/849589-20171015225645277-1151100000_dkaScGi6A-.gif)
 
 ### （2）直接插入排序
 
@@ -112,7 +112,7 @@ void select_sort(std::vector<int>& nums) {
 -   将0号位置放哨兵：要插入的元素
 -   **每次将一个待排序的记录按其关键字插入到前面已排号的序列中**
 
-![](image/image_35B1u6YxC9.png)
+![](image/image_tZWKYqOS6x.png)
 
 #### 代码实现
 
@@ -199,7 +199,7 @@ void bin_insert_sort(std::vector<int>& nums) {
 -   **先将排序表分割成若干如L\[i, i+d, i+2d, ..., i+kd] 的“特殊”子表，对各个子表进行直接插入排序**。
 -   缩小增量d，重复上述过程，直到d=1为止。
 
-![](image/849589-20180331170017421-364506073_4upu66lAUq.gif)
+![](image/849589-20180331170017421-364506073_8W_-iqtlw-.gif)
 
 #### 性能
 
@@ -208,7 +208,7 @@ void bin_insert_sort(std::vector<int>& nums) {
 -   **稳定性**：不稳定
 -   **适应性**：仅可适用于顺序表
 
-![](image/image_YqvQcsYgWR.png)
+![](image/image_WvXjj_XbtC.png)
 
 #### 代码实现
 
@@ -246,7 +246,7 @@ void shell_sort(std::vector<int>& nums) {
 -   每一趟排序后都可以使一个元素的移动到最终位置，以确定最终位置的元素在之后的处理中无需对比
 -   如果某一趟排序过程中未发生“交换”，则算法可以提前结束
 
-    ![](image/849589-20171015223238449-2146169197_vU-Mncneec.gif)
+    ![](image/849589-20171015223238449-2146169197_hKGqK-DB0Z.gif)
 
 ### （2）性能
 
@@ -258,7 +258,7 @@ void shell_sort(std::vector<int>& nums) {
 -   **稳定性**：稳定
 -   **适用性**：顺序表、链表都可以
 
-![](image/image_7FyJft21KD.png)
+![](image/image__KJxr9p5Wk.png)
 
 ### （3）代码实现
 
@@ -311,7 +311,7 @@ void bulle_sort(std::vector<int>& nums) {
 -   比它小的往前放，比它大的往后放，则pivot放在最中间位置，这个过程称为一趟快速排序
 -   一次划分为左右两个子表，再分别递归两个子表重复上述过程，直到每个部分只有一个元素为止
 
-![](image/849589-20171015230936371-1413523412_sGZYJHPdf0.gif)
+![](image/849589-20171015230936371-1413523412_-VzyoUFs3c.gif)
 
 ### （2）实现
 
@@ -363,7 +363,7 @@ void bulle_sort(std::vector<int>& nums) {
 -   一次划分：确定一个元素的最终位置
 -   一趟排序：可能确定多个元素的最终位置
 
-![](image/image_2Itbh-GV5R.png)
+![](image/image_qUzI9eFR3U.png)
 
 ### （4）代码实现
 
@@ -420,7 +420,7 @@ k路归并（K合一）
 
 m路归并，每选一个元素需要对比关键字 n-1次
 
-![](image/849589-20171015230557043-37375010_T6Ajdwvs_e.gif)
+![](image/849589-20171015230557043-37375010_4W3l1LpGNt.gif)
 
 ### （1）算法思想
 
@@ -429,7 +429,7 @@ m路归并，每选一个元素需要对比关键字 n-1次
 -   对有半部分 \[mid+1, high] 递归进行归并排序
 -   将左右两个有序序列Merge为一个
 
-![](image/image_EwkoI2brdn.png)
+![](image/image_VUEgBt65Dh.png)
 
 ### （2）性能
 
@@ -503,7 +503,7 @@ void merge_sort(std::vector<int>& nums, int left, int right)
 
 对于每个节点的值都**大于等于**子树中每个节点值的堆，叫作“**大顶堆**”。对于每个节点的值都**小于等于**子树中每个节点值的堆，叫作“**小顶堆**”。
 
-![](image/image_KrS3YdLaKB.png)
+![](image/image_5RMXjCIV71.png)
 
 其中第1个和第2个是大顶堆，第3个是小顶堆，第4个不是堆。除此之外，从图中还可以看出来，对于同一组数据，可以构建多种不同形态的堆。
 
@@ -548,7 +548,7 @@ void initHeap(HeapList& L, int initSize)
 
 **从下往上堆化****：** 以让新插入的节点与父节点对比大小。如果不满足子节点小于等于父节点的大小关系，就互换两个节点。
 
-![](image/image_Wz_xqLa4Z6.png)
+![](image/image_MZTL6Ih2d1.png)
 
 堆化（插入）代码实现
 
@@ -585,7 +585,7 @@ void insertElemHeap(HeapList& L, ElemType data)
 
 当删除堆顶元素之后，就需要把第二大的元素放到堆顶，那第二大元素肯定会出现在左右子节点中。然后再迭代地删除第二大节点，以此类推，直到叶子节点被删除。
 
-![](image/image_epGZcjbSwY.png)
+![](image/image_K-xgIHpzdK.png)
 
 **2）从上往下堆化**
 
@@ -593,7 +593,7 @@ void insertElemHeap(HeapList& L, ElemType data)
 -   对于不满足父子节点大小关系的，互换两个节点，
 -   并且重复进行这个过程，直到父子节点之间满足大小关系为止。
 
-![](image/image_ukw6lDJU64.png)
+![](image/image_M5400o1DIM.png)
 
 **3）代码**
 
@@ -644,7 +644,7 @@ void removeHeapTopElem(HeapList& L, ElemType& elem)
 
 -   是从后往前处理数组，并且每个数据都是从上往下堆化。
 
-![](image/image_wMe-KzZIOr.png)
+![](image/image_PiC0G2KP3x.png)
 
 #### 2）排序
 
@@ -652,7 +652,7 @@ void removeHeapTopElem(HeapList& L, ElemType& elem)
 -   数组中的第一个元素就是堆顶，也就是最大的元素。
 -   把它跟最后一个元素交换，那最大元素就放到了下标为n的位置。
 
-![](image/image_LJTbohj4KV.png)
+![](image/image_r2YcAwQuWt.png)
 
 代码
 
@@ -704,9 +704,9 @@ void heap_sort(std::vector<int>& nums) {
 
 使用优先队列实现
 
-![](image/image_69BIjjXnzU.png)
+![](image/image_cMgLQ8JEiG.png)
 
-![](image/image_K57cf_Gn4u.png)
+![](image/image_bUhLzktmls.png)
 
 ### （4）复杂度
 
@@ -719,6 +719,36 @@ void heap_sort(std::vector<int>& nums) {
 1.  \*\*计数排序 (Counting Sort) \*\*: 计数排序要求输入的数据必须是有确定范围的整数。将输入的数据值转化为键存储在额外开辟的数组空间中；然后依次把计数大于 1的填充回原数组
 2.  **桶排序 (Bucket Sort)** : 假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序(有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排)。
 3.  \*\*基数排序 (Radix Sort) \*\*: 基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集，依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序。
+
+## 4.1 计数排序
+
+计数排序不是基于比较的排序算法，其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。 作为一种线性时间复杂度的排序，计数排序要求输入的数据必须是有确定范围的整数。
+
+-   找出待排序的数组中最大和最小的元素；
+-   统计数组中每个值为i的元素出现的次数，存入数组C的第i项；
+-   对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）；
+-   反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1。
+
+![](image/849589-20171015231740840-6968181_Dlwaja5OTv.gif)
+
+## 4.2 桶排序
+
+桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排）。
+
+-   设置一个定量的数组当作空桶；
+-   遍历输入数据，并且把数据一个一个放到对应的桶里去；
+-   对每个不是空的桶进行排序；
+-   从不是空的桶里把排好序的数据拼接起来。
+
+![](image/849589-20171015232107090-1920702011_KfCZQVN22D.png)
+
+## 4.3 基数排序（Radix Sort）
+
+-   取得数组中的最大数，并取得位数；
+-   arr为原始数组，从最低位开始取每个位组成radix数组；
+-   对radix进行计数排序（利用计数排序适用于小范围数的特点）；
+
+![](image/849589-20171015232453668-1397662527_lqdNquFK5f.gif)
 
 # 5.实战题目
 
