@@ -16,12 +16,12 @@
 12. [动态规划](12_dp/README.md)
 13. [字典树和并查集](13_trie_disjoint_set/README.md)
 14. [高级搜索](14_advanced_search/README.md)
-15. [红黑树和AVL树](01_overview/README.md)
-16. [位运算](01_overview/README.md)
-17. [布隆过滤器和LRU缓存](01_overview/README.md)
-18. [排序算法](01_overview/README.md)
-19. [高级动态规划](01_overview/README.md)
-20. [字符串算法](01_overview/README.md)
+15. [红黑树和AVL树](15_avl_tree/README.md)
+16. [位运算](16_bitwise/README.md)
+17. [布隆过滤器和LRU缓存](17_bloom_filter_lru/README.md)
+18. [排序算法](18_sort/README.md)
+19. [高级动态规划](19_advice_dp/README.md)
+20. [字符串算法](20_string/README.md)
 
 
 
