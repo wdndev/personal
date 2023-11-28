@@ -9,6 +9,7 @@
 3. [bert_d2l](bert_d2l/README.md)
 4. [bert_torch](bert_torch/README.md)
 5. [vision_transformer](vision_transformer/README.md)
+6. [swim_transformer](swim_transformer/README.md)
 
 # 2.DeepLearning
 
