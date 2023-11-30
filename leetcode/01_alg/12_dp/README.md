@@ -721,9 +721,9 @@ private:
 ```
 
 1.  DP方法
-    1.  分治（子问题）：$f[n] = min {f(n-k), for k in [1, 2, 5]} + 1$
+    1.  分治（子问题）：$f[n] = min~ \{f(n-k), for ~k ~in [1, 2, 5]\} + 1$
     2.  状态数组定义：$f(n)$
-    3.  DP方程：$f[n] = min {f(n-k), for k in [1, 2, 5]} + 1$
+    3.  DP方程：$f[n] = min~ \{f(n-k), for ~k ~in [1, 2, 5]\} + 1$
 
 ```c++
 class Solution {
