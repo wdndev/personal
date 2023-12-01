@@ -84,9 +84,16 @@
 - [课程表](09_graph/207.课程表.cpp)
 - [实现Trie-前缀树](09_graph/208.实现-trie-前缀树.cpp)
 
+### 10 [回溯](10_backtracking/README.md)
 
-### 10 回溯
-
+- [全排列](10_backtracking/46.全排列.cpp)
+- [子集](10_backtracking/78.子集.cpp)
+- [电话号码的字母组合](10_backtracking/17.电话号码的字母组合.cpp)
+- [组合总和](10_backtracking/39.组合总和.cpp)
+- [括号生成](10_backtracking/22.括号生成.cpp)
+- []()
+- []()
+- []()
 
 ### 11 二分查找
 
