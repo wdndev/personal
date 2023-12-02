@@ -1,3 +1,0 @@
-python .\main.py -c .\data\mrpc_data\train.txt -t .\data\mrpc_data\test.txt -v .\data\mrpc_data\vocab.small -o .\data\output\bert.model
-
-

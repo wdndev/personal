@@ -2,20 +2,20 @@
 
 个人学习实现的一些模块
 
-# 1.Transformer系列
+# 1.深度学习算法
 
-1. [注意力机制](attention_mechanism/README.md)
-2. [transformer](transformer/README.md)
-3. [bert_d2l](bert_d2l/README.md)
-4. [bert_torch](bert_torch/README.md)
-5. [vision_transformer](vision_transformer/README.md)
-6. [swim_transformer](swim_transformer/README.md)
+1. [注意力机制](dl_algo/attention_mechanism/README.md)
+2. [transformer](dl_algo/transformer/README.md)
+3. [bert_d2l](dl_algo/bert_d2l/README.md)
+4. [bert_torch](dl_algo/bert_torch/README.md)
+5. [vision_transformer](dl_algo/vision_transformer/README.md)
+6. [swim_transformer](dl_algo/swim_transformer/README.md)
+7. [MoE](dl_algo/mixture_of_experts/README.md)
 
-# 2.DeepLearning
+# 2.jupyter
 
-1. [MoE](mixture_of_experts/README.md)
-
-
+1. numpy
+2. tensorflow
 
 # 3.LeetCode
 
@@ -27,5 +27,7 @@
 
 
 
+# 4.Postgraduate Course
 
+研究生一些课程
 

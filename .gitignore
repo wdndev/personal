@@ -1,21 +1,21 @@
 # 输出文件
 __pycache__
 
-transformer/\.data
-transformer\.data
-transformer/tmp_model
+dl_algo/transformer/\.data
+dl_algo/transformer\.data
+dl_algo/transformer/tmp_model
 
-bert_torch/data/glue_data
-bert_torch/data/output
-bert_d2l/data
+dl_algo/bert_torch/data/glue_data
+dl_algo/bert_torch/data/output
+dl_algo/bert_d2l/data
 
 
-vision_transformer/data
-vision_transformer/model
-vision_transformer/runs
+dl_algo/vision_transformer/data
+dl_algo/vision_transformer/model
+dl_algo/vision_transformer/runs
 
-swim_transformer/data
-swim_transformer/model
-swim_transformer/runs
+dl_algo/swim_transformer/data
+dl_algo/swim_transformer/model
+dl_algo/swim_transformer/runs
 
 
