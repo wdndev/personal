@@ -91,9 +91,9 @@
 - [电话号码的字母组合](10_backtracking/17.电话号码的字母组合.cpp)
 - [组合总和](10_backtracking/39.组合总和.cpp)
 - [括号生成](10_backtracking/22.括号生成.cpp)
-- []()
-- []()
-- []()
+- [单词搜索](10_backtracking/79.单词搜索.cpp)
+- [分割回文串](10_backtracking/131.分割回文串.cpp)
+- [N皇后](10_backtracking/51.n-皇后.cpp)
 
 ### 11 二分查找
 
