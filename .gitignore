@@ -18,4 +18,5 @@ dl_algo/swim_transformer/data
 dl_algo/swim_transformer/model
 dl_algo/swim_transformer/runs
 
-
+dl_algo/mixture_of_experts/data
+dl_algo/mixture_of_experts/model

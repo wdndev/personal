@@ -20,34 +20,49 @@ MoE 架构解析可参考如下文章：
 # 3.Directory
 
 ```shell
-  ├── data: 分类数据集存放文件夹
+  ├── data: 数据集存放文件夹
   ├── model: 存放模型
-  ├───── pre_model: 预训练模型存放文件夹
   ├───── weights: 训练生成模型存放文件夹
-  ├── flops.py: 
-  ├── my_dataset.py: 数据类封装
-  ├── predict.py: 预测
-  ├── train.py: 训练
-  ├── utils.py: 共有文件
-  └── vit_model.py：visvision transformer模型实现
+  ├── cifar10_moe.py: cifar10_moe demo文件
+  ├── example.py: moe简单测试
+  └── moe.py：MoE模型实现
 ```
 
 # 4.Running
 
-## 4.1 数据集与预训练模型
+## 4.1 数据集
 
-数据集下载地址：https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz
+cifar10数据集下载，运行程序自动下载
 
-预训练模型下载地址：查看model文件中的注释
+## 4.2 cifar10_moe
 
-## 4.2 需要修改源码地方
+训练10个epoch，准确率达到 40%
 
-1. 在train.py脚本中将--data-path设置成解压后的flower_photos文件夹绝对路径
-2. 下载预训练权重，在model.py文件中每个模型都有提供预训练权重的下载地址，根据自己使用的模型下载对应预训练权重,如果速度过慢，使用上述百度网盘链接
-3. 在train.py脚本中将--weights参数设成下载好的预训练权重路径
-4. 设置好数据集的路径--data-path以及预训练权重的路径--weights就能使用train.py脚本开始训练了(训练过程中会自动生成class_indices.json文件)
-5. 在predict.py脚本中导入和训练脚本中同样的模型，并将model_weight_path设置成训练好的模型权重路径(默认保存在weights文件夹下)
-6. 在predict.py脚本中将img_path设置成你自己需要预测的图片绝对路径
-7. 设置好权重路径model_weight_path和预测的图片路径img_path就能使用predict.py脚本进行预测了
-8. 如果要使用自己的数据集，请按照花分类数据集的文件结构进行摆放(即一个类别对应一个文件夹)，并且将训练以及预测脚本中的num_classes设置成你自己数据的类别数
+```shell
+Files already downloaded and verified
+Files already downloaded and verified
+[1,  3100] loss: 2.215
+[2,  3100] loss: 2.150
+[3,  3100] loss: 2.107
+[4,  3100] loss: 2.092
+[5,  3100] loss: 2.074
+[6,  3100] loss: 2.048
+[7,  3100] loss: 2.052
+[8,  3100] loss: 2.048
+[9,  3100] loss: 2.046
+[10,  3100] loss: 2.037
+Finished Training
+Accuracy of the network on the 10000 test images: 40 %
+```
 
+训练50个epoch，准确率达到 43%
+
+``` shell
+[10,  3100] loss: 2.037
+[20,  3100] loss: 2.006
+[30,  3100] loss: 1.986
+[40,  3100] loss: 1.966
+[50,  3100] loss: 1.944
+Finished Training
+Accuracy of the network on the 10000 test images: 43 %
+```
