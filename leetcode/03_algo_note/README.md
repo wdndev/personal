@@ -67,14 +67,25 @@
 - [统计圆内格点数目](03_basic_algo/3.1_enum/2249.统计圆内格点数目.cpp)
 
 
-### 3.2 递归算法和分治
+### 3.2 [递归算法](03_basic_algo/3.2_recusion/README.md)
 
-### 3.3 回溯算法
+- [斐波那契数](03_basic_algo/3.2_recusion/509.斐波那契数.cpp)
+- [二叉树的最大深度](03_basic_algo/3.2_recusion/104.二叉树的最大深度.cpp)
+- [翻转二叉树](03_basic_algo/3.2_recusion/226.翻转二叉树.cpp)
+- [反转链表](03_basic_algo/3.2_recusion/206.反转链表.cpp)
+- [反转链表 II](03_basic_algo/3.2_recusion/92.反转链表-ii.cpp)
+- [第k个语法符号](03_basic_algo/3.2_recusion/779.第k个语法符号.cpp)
+- [杨辉三角](03_basic_algo/3.2_recusion/118.杨辉三角.cpp)
+- [破冰游戏](03_basic_algo/3.2_recusion/lrc_187.破冰游戏.cpp)
+
+### 3.3 分治算法
+
+### 3.4 回溯算法
 
 
-### 3.4 贪心算法
+### 3.5 贪心算法
 
-### 3.5 位运算
+### 3.6 位运算
 
 
 
