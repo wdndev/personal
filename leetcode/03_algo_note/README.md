@@ -78,7 +78,15 @@
 - [杨辉三角](03_basic_algo/3.2_recusion/118.杨辉三角.cpp)
 - [破冰游戏](03_basic_algo/3.2_recusion/lrc_187.破冰游戏.cpp)
 
-### 3.3 分治算法
+### 3.3 [分治算法](03_basic_algo/3.3_divide/README.md)
+
+- [二分查找](03_basic_algo/3.3_divide/704.二分查找.cpp)
+- [pow-x-n](03_basic_algo/3.3_divide/50.pow-x-n.cpp)
+- [多数元素](03_basic_algo/3.3_divide/169.多数元素.cpp)
+- [最大子数组和](03_basic_algo/3.3_divide/53.最大子数组和.cpp)
+- [漂亮数组](03_basic_algo/3.3_divide/932.漂亮数组.cpp)
+- [为运算表达式设计优先级](03_basic_algo/3.3_divide/241.为运算表达式设计优先级.cpp)
+- [合并-k-个升序链表](03_basic_algo/3.3_divide/23.合并-k-个升序链表.cpp)
 
 ### 3.4 回溯算法
 
