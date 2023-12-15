@@ -16,9 +16,9 @@
 - [加一](01_algo_array/1.2_array/66.加一.cpp)
 - [寻找数组的中心下标](01_algo_array/1.2_array/724.寻找数组的中心下标.cpp)
 - [轮转数组](01_algo_array/1.2_array/189.轮转数组.cpp)
-- []()
-- []()
-- []()
+- [旋转图像](01_algo_array/1.2_array/48.旋转图像.cpp)
+- [螺旋矩阵](01_algo_array/1.2_array/54.螺旋矩阵.cpp)
+- [对角线遍历](01_algo_array/1.2_array/498.对角线遍历.cpp)
 
 ### 1.3 数组排序
 
