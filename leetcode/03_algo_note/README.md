@@ -88,7 +88,17 @@
 - [为运算表达式设计优先级](03_basic_algo/3.3_divide/241.为运算表达式设计优先级.cpp)
 - [合并-k-个升序链表](03_basic_algo/3.3_divide/23.合并-k-个升序链表.cpp)
 
-### 3.4 回溯算法
+### 3.4 [回溯算法](03_basic_algo/3.4_backtracking/README.md)
+
+- [全排列](03_basic_algo/3.4_backtracking/46.全排列.cpp)
+- [全排列-ii](03_basic_algo/3.4_backtracking/47.全排列-ii.cpp)
+- [括号生成](03_basic_algo/3.4_backtracking/22.括号生成.cpp)
+- [电话号码的字母组合](03_basic_algo/3.4_backtracking/17.电话号码的字母组合.cpp)
+- [组合总和](03_basic_algo/3.4_backtracking/39.组合总和.cpp)
+- [组合总和-ii](03_basic_algo/3.4_backtracking/40.组合总和-ii.cpp)
+- [子集](03_basic_algo/3.4_backtracking/78.子集.cpp)
+- [子集-ii](03_basic_algo/3.4_backtracking/90.子集-ii.cpp)
+- [单词搜索](03_basic_algo/3.4_backtracking/79.单词搜索.cpp)
 
 
 ### 3.5 贪心算法
