@@ -100,8 +100,18 @@
 - [子集-ii](03_basic_algo/3.4_backtracking/90.子集-ii.cpp)
 - [单词搜索](03_basic_algo/3.4_backtracking/79.单词搜索.cpp)
 
-
 ### 3.5 贪心算法
+
+- [分发饼干](03_basic_algo/3.5_greedy/455.分发饼干.cpp)
+- [柠檬水找零](03_basic_algo/3.5_greedy/860.柠檬水找零.cpp)
+- [分发糖果](03_basic_algo/3.5_greedy/135.分发糖果.cpp)
+- [跳跃游戏](03_basic_algo/3.5_greedy/55.跳跃游戏.cpp)
+- [跳跃游戏-ii](03_basic_algo/3.5_greedy/45.跳跃游戏-ii.cpp)
+- []()
+- []()
+- []()
+- []()
+- []()
 
 ### 3.6 位运算
 
