@@ -136,7 +136,7 @@ class QAChainWithHistory():
         - Spark_api_secret: 星火秘钥
         - Wenxin_secret_key: 文心秘钥
         - embeddings: 使用的embedding模型
-        - embedding_key: 使用的embedding模型的秘钥(智谱或者OpenAI）) 
+        - embedding_key: 使用的embedding模型的秘钥(智谱或者OpenAI) 
         """
         self.model = model
         self.temperature = temperature
@@ -198,7 +198,8 @@ class QAChainWithHistory():
 
         qa = ConversationalRetrievalChain.from_llm(
             llm = llm,
-            retriever = retriever
+            retriever = retriever,
+
         )
 
         #print(self.llm)
