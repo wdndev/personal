@@ -20,3 +20,8 @@ dl_algo/swim_transformer/runs
 
 dl_algo/mixture_of_experts/data
 dl_algo/mixture_of_experts/model
+
+llm_code/database/knowledge_db
+llm_code/database/vector_zhipuai_db
+llm_code/.env
+
