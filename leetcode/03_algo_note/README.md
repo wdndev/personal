@@ -100,18 +100,17 @@
 - [子集-ii](03_basic_algo/3.4_backtracking/90.子集-ii.cpp)
 - [单词搜索](03_basic_algo/3.4_backtracking/79.单词搜索.cpp)
 
-### 3.5 贪心算法
+### 3.5 [贪心算法](03_basic_algo/3.5_greedy/README.md)
 
 - [分发饼干](03_basic_algo/3.5_greedy/455.分发饼干.cpp)
 - [柠檬水找零](03_basic_algo/3.5_greedy/860.柠檬水找零.cpp)
 - [分发糖果](03_basic_algo/3.5_greedy/135.分发糖果.cpp)
 - [跳跃游戏](03_basic_algo/3.5_greedy/55.跳跃游戏.cpp)
 - [跳跃游戏-ii](03_basic_algo/3.5_greedy/45.跳跃游戏-ii.cpp)
-- []()
-- []()
-- []()
-- []()
-- []()
+- [救生艇](03_basic_algo/3.5_greedy/881.救生艇.cpp)
+- [无重叠区间](03_basic_algo/3.5_greedy/435.无重叠区间.cpp)
+- [用最少数量的箭引爆气球](03_basic_algo/3.5_greedy/452.用最少数量的箭引爆气球.cpp)
+- [卡车上的最大单元数](03_basic_algo/3.5_greedy/1710.卡车上的最大单元数.cpp)
 
 ### 3.6 位运算
 
