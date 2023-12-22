@@ -14,8 +14,10 @@
 
 # 2.jupyter
 
-1. numpy
-2. tensorflow
+1. [Numpy](jupyter/numpy)
+2. [TensorFlow](jupyter)
+3. [huggingface](jupyter/huggingface)
+4. [Peft Funetuning](jupyter/peft_funetuning)
 
 # 3.LeetCode
 
@@ -25,9 +27,12 @@
 4. [hot100题目](leetcode/04_hot100/README.md)
 5. [其他题目](leetcode/255_other/README.md)
 
+# 4.大模型
 
+1. [大模型知识问答](llm_code/llm_qa)
+2. [ChatGLM3](llm_code/chatglm3)
 
-# 4.Postgraduate Course
+# 5.Postgraduate Course
 
 研究生一些课程
 
