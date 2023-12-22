@@ -112,9 +112,14 @@
 - [用最少数量的箭引爆气球](03_basic_algo/3.5_greedy/452.用最少数量的箭引爆气球.cpp)
 - [卡车上的最大单元数](03_basic_algo/3.5_greedy/1710.卡车上的最大单元数.cpp)
 
-### 3.6 位运算
+### 3.6 [位运算](03_basic_algo/3.6_bit_operation/README.md)
 
-
+- [颠倒二进制位](03_basic_algo/3.6_bit_operation/190.颠倒二进制位.cpp)
+- [位-1-的个数](03_basic_algo/3.6_bit_operation/191.位-1-的个数.cpp)
+- [数字范围按位与](03_basic_algo/3.6_bit_operation/201.数字范围按位与.cpp)
+- [只出现一次的数字](03_basic_algo/3.6_bit_operation/136.只出现一次的数字.cpp)
+- [只出现一次的数字-ii](03_basic_algo/3.6_bit_operation/137.只出现一次的数字-ii.cpp)
+- [只出现一次的数字-iii](03_basic_algo/3.6_bit_operation/260.只出现一次的数字-iii.cpp)
 
 ## 4.动态规划
 
