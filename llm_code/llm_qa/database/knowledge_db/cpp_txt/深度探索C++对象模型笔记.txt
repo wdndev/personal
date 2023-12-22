@@ -1,0 +1,451 @@
+1.
+指针前面的类型，只是说明解析内容时，按照何种大小，来获取内容
+指针其实是一样的，指向一块内存而已
+
+2.
+指针和引用的区别，指针可以改变指向，引用相当于绑定了，不能改变指向
+所以说指针和引用都可以实现多态
+
+3.
+编译期间的两个程序扩张
+①增加一个virtual function table（vtbl），内含每一个有作用的virtual function的地址
+②将一个指向virtual function table的指针（vptr），安插在每一个class object内
+
+4.
+有4种情况，编译器会为类生成默认的构造函数
+①“带有Default Constructor”的Member Class Object
+为了要构造Member Class Object，所以要生成
+②“带有Default Constructor”的Base Class
+为了要够着Base Class，所以要生成
+但是如果有其他的构造函数了，则不会生成，因为在其他构造函数里都做完了
+③“带有一个Virtual Function”的Class
+为了要实现多态，需要由编译器构建虚表指针
+④“带有一个Virtual Base Class”的Class
+与虚标指针类似，虚基类指针
+一般而言，这些情况，Destructor不一定会生成，因为不一定需要生成，除非程序逻辑上的需要
+
+5.
+拷贝构造函数
+当一个类，没有显示定义拷贝构造函数时，如果类的成员有，那么编译器就会为本类生成一个，用来调用成员的拷贝构造函数
+总的说来，和构造函数的情况差不多
+copy assignment operator
+也存在四种情况，和构造，拷贝构造相同
+
+6.
+对象为作为参数和返回值时，都会被编译器转换成一个引用类型，然后传入一个临时对象
+
+7.
+如果有class类型传参，class类型返回，那么class应该要有拷贝构造函数
+class X;
+X bar()
+{
+	X x1;
+	// 处理 x1..
+	return x1;
+}
+变成
+void bar(X& __result)	// 加上一个额外参数
+{
+	// 预留x1的内存空间
+	X x1;
+	
+	// 编译器产生的默认构造函数的调用，
+	x1.X::X();
+ 
+	// 处理 x1..
+	// 编译器产生的拷贝操作
+	__result.X::X(x1);
+	return;
+}
+NRV优化，name return value优化，则不需要实现有拷贝构造函数
+变成
+void bar(X& __result)	// 加上一个额外参数
+{
+	
+	__result.X::X();
+	// 处理 __result
+	return;
+}
+
+8.
+为类添加初始化成员列表，可以减少不必要的类型拷贝
+Class.m_name = "111"	写成 Class():m_name("111")
+
+9.
+class类型的sizeof
+class X {} 							sizeof X     1，唯一表示一个对象char
+class Y : public virtual X {}		sizeof Y     1+4，对齐后成为8     	1如X中，4为指向X的指针，可以省略1，变成4
+class Z : public virtual X {}		sizeof Z	 1+4，对齐后成为8		1如X中，4为指向X的指针，可以省略1，变成4
+class A : public Y, public Z {}		sizeof A     1+(4+4)，对齐后成为16	1如X中，Y的大小4，Z的大小4，除去virtual的部分
+
+10.
+Point3d origin, *pt = &origin;
+origin.x = 0.0;
+pt->x = 0.0;
+当Point3d是一个派生类，继承结构中有一个虚基类，而且x来自该虚基类时
+编译时就无法确定，pt到低指向那种class type，运行时判断会产生很多额外的开销
+origin却不同，在编译时，就可以确定x的位置，可以静态的对x进行存取
+
+11.
+vptr不是放在对象的头部，就是放在对象的尾部
+虚表指针一般放置在class头，便于实现多态时的查找，不然还得计算数据偏移
+唯一的损失是，失去了C的兼容，但是很少人会重struct中派生出一个多态性质的class
+
+12.
+Point2d <- Point3d <- Vertex3d
+Vertex <- Vertex3d			//继承关系如上
+进行如下操作：情况①
+Vertex3d v3d;
+Vertex *pv;
+Point2d *p2d;
+Point3d *p3d;
+pv = &v3d;		// pv = (Vertex*)(((char*)&v3d) + sizeof(Point3d));
+p2d = &v3d;  p3d = &v3d;	只需要简单的拷贝地址就行了
+情况②
+Vertex3d* pv3d;
+Vertex *pv;	
+pv = pv3d;		// 由于pv3d可能是空的，pv = pv3d ? (Vertex*)(((char*)&v3d) + sizeof(Point3d)) : 0;
+情况③
+将引用赋值时，同情况①，因为不用考虑指针为空的情况
+
+13.
+一般而言，virtual base class最有效的一种运用形式就是：一个抽象的virtual base class，没有任何data members。
+要测试虚拟继承的效率，应该实际测试，不要光凭推论或常识判断或假设
+每一层虚拟继承都导入一个额外层次的间接性，降低性能
+
+14.
+&Point3d::z   会得到z在Point3d中的offset   unsigned int (Point3d::*)
+&origin.z	得到的实际内存中的地址			unsigned int (*)
+
+15.
+float Point3d::magnitude3d() const {...}	     member function
+float magnitude3d(const Point3d *_this) {...}    nonmember function
+成员函数会重一个member function形式转换成为nonmember function形式
+Point3d obj  obj.magnitude3d()  ->  magnitude3d(&obj)
+Point3d* ptr   ptr->magnitude3d()  ->  magnitude3d(ptr)
+
+16.
+class MyBaseClass
+{
+public:
+	virtual void A() { cout << "MyBaseClass:A" << endl; }
+	virtual void B() { cout << "MyBaseClass:B" << endl; }
+};
+class DeriveClass : public MyBaseClass
+{
+public:
+	void A() { cout << "DeriveClass:A" << endl; B(); DeriveClass::B(); }
+	void B() { cout << "DeriveClass:B" << endl; }
+};
+在子类DeriveClass的A函数中，调用DeriveClass::B()比调用B()效率高，
+因为B()还需要去虚函数表里找一次，已经确定类具体类型后，则可以直接调用。
+
+17.
+类成员函数，在编译过程中会经由"mangled"处理变成一个独有的函数名字
+unsigned int Point3d::object_count() { return _object_count; }
+->  unsigned int object_count_5Point3dSFv() { return _object_count_5Point3d; }
+SFv表明，该函数是一个static member function 拥有一个空白（void）的参数链表
+
+18.
+单一继承时的情况
+虚函数表中的内容，依次为
+①父类的虚函数
+②子类中改写的虚函数
+③子类中新增的虚函数
+ptr->z()
+一般而言，并不知道ptr对象的真正类型，但是ptr指向的对象，有pvtr，然后可以找到virtual table
+此外，z()函数在virtual table的slot4是固定的，所以可以正确调用
+
+19.
+多重继承的情况
+class Derived : public Base1, public Base2 {...};
+Base2 *pbase2 = new Derived;       
+被转化为
+Derived *temp = new Derived;	
+Base2 *pbase2 = temp ? temp + sizeof(Base1) : 0;
+pbase2对象释放时，还得调回原来的temp位置，否则有部分内存无法释放掉
+（上述都是编译器做的事情）
+
+20.
+实现19.中的处理
+方法1：
+要求，每一个virtual table slot，不再只是一个指针，而是一个聚合体，内涵可能的offset以及地址
+但是相当于处罚了所有的虚函数，不管有没有必要使用offset
+方法2：
+thunk技术，每个slot里，要么是一个指针，要么是一个thunk（内含offset、指针）
+
+21.
+多重继承下，会有n-1个额外的virtual tables，n表示其上一层base classes的个数
+如19.中，生成Derived对象时，会有针对Base1，Base2产生两个virtual tables
+vtbl_Derived;				// Base1* 和 Derived* 使用
+vtbl_Base2_Derived;			// Base2* 使用
+虚拟继承时，也会有两个虚函数表：
+vtbl_Derived_Base;
+vtbl_Derived;
+这很好理解：因为Base是虚的，只有一份，自然需要有自己的vtbl，也就是vtbl_Derived_Base;
+189页。197页。201页。
+
+22.
+编译器将“被视为不变的表达式”提到循环之外，因此只计算一次
+for(int iters = 0; iter < 100000000; iters++)
+{
+	fucntion(a,b);
+}
+将function定义为内联inline函数，不只能够节省一般函数调用所带来的的额外负担，也提供了程序优化的额外机会。
+
+23.
+指向一个成员函数的指针
+class Example
+{
+public:
+	double show() { return m_dValue; }
+	double show2() { return m_dValue+1; }
+private:
+	double m_dValue = 1.2;
+};
+
+void Function7()
+{
+	Example a;
+	Example* pa = &a;
+	
+	double (Example::* coord)() = &Example::show;
+	cout << (a.*coord)() << endl;
+	cout << (pa->*coord)() << endl;
+	
+	coord = &Example::show2;
+	cout << (a.*coord)() << endl;
+	cout << (pa->*coord)() << endl;
+}
+当成员函数是虚函数时，这般调用，依然可以展现多态的特性
+&Example::show    show不是虚函数时，为函数实际地址
+&Example::show	  show是虚函数时，为函数在函数表的位置，1,2类似的索引值
+编译器进行特殊处理：(*ptr->vptr[(int)coord])(ptr);
+
+24.
+inline内联函数
+①在c/c++中，为了解决一些频繁调用的小函数大量消耗栈空间（栈内存）的问题，特别的引入了inline修饰符，表示为内联函数
+②inline的使用时有所限制的，inline只适合函数体内部代码简单的函数使用，不能包含复杂的结构控制语句例如while、switch
+③内联函数本身不能是直接递归函数（即，自己内部还调用自己的函数）。
+④inline函数仅仅是一个对编译器的建议，所以最后能否真正内联，看编译器的意思
+
+25.
+定义在类中的成员函数缺省都是内联的
+class A
+{
+    public:void Foo(int x, int y) {  } // 自动地成为内联函数
+}
+将成员函数的定义体放在类声明之中虽然能带来书写上的方便，但不是一种良好的编程风格，上例应该改成：
+// 头文件
+class A
+{
+public:
+    void Foo(int x, int y);
+}
+// 定义文件
+inline void A::Foo(int x, int y){} 
+因此，inline 是一种“用于实现的关键字”，而不是一种“用于声明的关键字”，要内联，必须用在实现的地方，声明处可有可无
+
+26.
+内联函数的副作用
+inline int min(int i, int j)
+{
+	return i < j ? i : j;
+}
+int minval;
+int val1 = 1024;
+int val2 = 2048;
+minval = min(val1, val2);			->       minval = val1 < val2 ? val1 : val2;
+minval = min(1024, 2048);			->		 minval = 1024;	
+minval = min(foo(), bar()+1);		->		 int t1; int t2; minval = (t1=foo()), (t2=bar()+1), t1 < t2 ? t1 : t2;
+最后一处，需要导入两个临时对象
+ps：改为 int a = i < j ? i : j; return a;之后如何展开，又得增加mangled处理的临时变量
+int __min_lv_minval;
+minval = (__min_lv_minval = val1 < val2 ? val1 : val2), __min_lv_minval;
+
+27.
+一般而言，class的data member应该被初始化，并且只在constructor中或是在class的其它member function中指定初值
+其它任何操作都将破坏封装性质，使class的维护和修改更加困难
+
+28.
+如果一个destructor是一个pure virtual函数，则其必须得有定义，不能只声明
+因为，每个派生类的destructor会被编译器扩展，使用静态调用的方式Base::~Base()调用其每个虚基类或者上层父类的destructor
+一个比较好的方案是：不要把virtual destructor 声明为pure
+
+29.
+全局的global对象，其初始化操作将延迟到程序激活是才开始
+
+30.
+class MyList
+{
+public:
+	float x, y, z;
+};
+
+void Function8()
+{
+	MyList object = { 1.0, 2.0, 3.0 };
+	cout << object.x << endl;
+}
+使用这种方式的Explicit initialization list效率高，但有缺点
+①class member必须是public的
+②只能指定常量，因为编译时期就可以被评估求值
+③由于编译器并没有自动实施之，所以初始化行为的失效可能性会比较高一些
+建议：不要使用。
+
+31.
+Point *heap = new Point;
+会被编译器转换为
+Point *heap = __new(sizeof(Point));
+if(heap != 0)
+	heap->Point::Point();
+
+32.
+一般而言，如果你的设计之中，有许多函数都需要以传值方式传回一个local class object，
+那么就应该提供一个copy constructor，因为编译器未必会NRV优化
+
+33.
+class Vertex : virtual public Point {...};
+class Point3d : virtual public Point {...};
+class Vertex3d : public Point3d, public Vertex {...};
+class PVertex : public Vertex3d {...};
+这种继承结构，只能在最末端对Point进行构造函数调用
+例如 PVertex obj; 在PVertex()中，先构造Point()，然后改变标识，其它父类都不能构造Point()了
+
+34.
+vptr应该在何时进行初始化？
+在base class constructors 调用操作之后
+在程序员供应的码或者是“member initialization list”中所列的members初始化操作之前
+也就是说，PVertex对象会先形成一个Point对象、一个Point3d对象、一个Vertex对象、一个Vertex对象，最后才成为PVertex对象
+vptr设定好了之后，才会member initialization list
+
+35.
+如果类的成员简单，那么对类进行=operator时，默认的行为不但足够而且有效率，无须提供copy assignment operator
+
+36.
+在33.的继承结构中
+Vertex3d& Vertex3d::operator=(const VVertex3d &v)
+{
+	this->Point3d::operator=(v);
+	this->Vertex::operator=(v);
+	// 最后进行Point的赋值
+	this->Point::operator=(v);
+} 
+是合理的。
+建议：不要允许virtual base class的拷贝操作，即不要在任何virtual base class中声明数据
+
+37.
+定义一个类型转换函数
+class X
+{
+public:
+	X();
+	~X();
+	operator Y() const;		//类型转换函数
+	X getValue();
+}
+
+38.
+一般而言我们会把object尽可能放置在使用它的那个程序段附近，这样做可以节省不必要的对象产生操作和摧毁操作
+
+39.
+class Matrix
+{
+public:
+	Matrix() { cout << "Matrix()" << endl; }
+	Matrix(int a) : value(a) { cout << "Matrix(int a)" << endl; }
+	~Matrix() { cout << "~Matrix() " << value << endl; }
+	const Matrix& identity() 
+	{
+		static Matrix mat_identity;
+		cout << "调用identity" << endl;
+		return mat_identity;
+	}
+private:
+	int value;
+};
+
+void Function10()
+{
+	Matrix object(10);
+	object.identity();
+	object.identity();
+}
+// 运行结果：static 变量在整个程序结束后才会释放
+Matrix(int a)
+Matrix()
+调用identity
+调用identity
+~Matrix() 10
+~Matrix() 0
+
+40.
+int *pi = new int(5);
+实际的转化过程
+int *pi;
+if (pi = __new(sizeof(int)))
+	*pi = 5;
+
+Point3d *origin = new Point3d;
+实际的转化过程
+Point3d *origin;
+if (origin = __new(sizeof(Point3d)))
+{
+	try
+	{
+		origin = Point3d::Point3d(origin);
+	}
+	catch(...)
+	{
+		__delete(origin);
+		throw;
+	}
+}
+	
+delete pi;
+实际的转化过程
+if (pi != 0)
+	__delete(pi);
+	
+delete origin;
+实际的转化过程
+if (origin != 0)
+{
+	Point3d::~Point3d(origin);
+	__delete(origin);
+}
+
+41.
+class Point
+{
+public:
+	Point();
+	virtual ~Point();
+	// ...
+};
+
+class Point3d : public Point
+{
+public:
+	Point3d();
+	virtual ~Point3d();
+	// ...
+};
+
+Point *ptr = new Point3d[10];
+delete [] ptr;   		// virtual ~Point3d(); virtual ~Point(); 重复调用10次
+
+《高频遗忘》
+4、5:编译器生成默认构造函数和拷贝构造函数的情况
+10:origin.x = 0.0;和pt->x = 0.0;的区别
+11:虚表指针vptr的位置
+13:被继承的虚基类，不要有数据成员
+18、19、20、21:不同继承关系下的虚函数布局 189页。197页。201页。
+24、25:内联函数的规则
+28:不要把virtual destructor 声明为pure
+29:全局的global对象，其初始化操作时机
+33:vptr的初始化时机
+37:定义类型转换函数
+39:static对象何时释放
+40:new和delete多做了什么，相较于malloc和free
+41:new类型数组

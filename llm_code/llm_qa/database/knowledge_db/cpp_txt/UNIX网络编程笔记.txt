@@ -1,0 +1,361 @@
+下载: unpv13e.tar.gz（http://www.unpbook.com/src.html）
+解压: tar xvf unpv13e.tar.gz
+进入到unpv13e目录
+./lib/unp.h 中#include "../config.h"改成#include "config-unp.h"
+./lib/unp.h 中#include "../lib/addrinfo.h"改成#include "addrinfo-unp.h"
+./lib/unp.h 加一行 #define MAX_LINE 2048
+cp ./lib/unp.h /usr/include/
+mv config.h config-unp.h
+mv ./lib/addrinfo.h ./lib/addrinfo-unp.h
+cp ./config-unp.h /usr/include/
+cp ./lib/addrinfo-unp.h /usr/include/
+进入lib里make，生成libunp.a
+cp ./libapue.a /usr/local/lib/
+编译时链接到相应库: gcc -o 1-1 1-1.c -l unp
+
+1.简介
+(1)编写协议无关的程序
+socket(AF_INET/AF_INET6, SOCK_STREAM, 0);
+使用getaddrinfo函数获取相关的地址和协议信息
+---------------------------------------------------------------------------------------
+2.TCP/IP协议族
+IPv4、IPv6、TCP、UDP、
+SCTP：可靠连接、全双工、每个关联的两端均涉及一组IP地址和一个端口号
+ICMP：处理路由器和主机之间流通的错误和控制消息，由TCP/IP网络支持软件本身（非用户进程）产生和处理
+IGMP：用于多播
+DLPI：提供对于数据链路层的访问能力
+(1)TCP生疏点
+①流量控制：TCP总是告诉对端，在任何时刻，它一次能从对端接受多少字节的数据，这称为“通告窗口”（advertised windows）
+数据被接受之后，窗口下次消息到来时，告诉对端，窗口变大了
+②全双工：同时在两个方向上，既发送数据，有接受数据
+(2)SCTP
+①SCTP用“关联”取代“连接”，因为连接是两个地址之间，而关联是两个系统之间，可能是两组IP地址的通信
+②SCTP是“面向消息”的，有点先并行的TCP，TCP一个阻塞全阻塞，SCTP一个流阻塞，其它流不受影响
+(3)TCP的三次握手
+服务器被动打开（socket，bind，listen），accept（阻塞，等待连接）
+客户端主动打开socket，connect（阻塞，等待服务器同意），发动SYN-J（不携带数据）
+服务器应答，ACK-J+1，SYN-K，connect返回
+客户端告知服务器，应答已收到ACK-K+1，accept返回，read（阻塞）
+(4)TCP（SYN）选项
+MSS选项：告诉对端，最大分节大小
+MTU(Maximum Transmit Unit):加了消息头，MSS(Maximum Segment Size):数据部分，不加消息头
+窗口规模选项：告诉对端，最大窗口是65535，16位
+*****
+【TCP的滑动窗口机制】基本的数据单位不是数据段，而是字节
+每个窗口用三个指针表示，第一个指向窗口的第一个字节，第二个指向窗口中马上要发送的字节，第三个指向窗口的最后一个字节。
+【累积确认】接收方对某个编号进行确认，该编号之前的数据必须都已接收到了，从而有时候前面窗口的数据没有接受到，就必须暂存数据，并在接收到前面的其他数据后进行累积确认
+a）优点：允许发送方在对数据进行重发时发送更多的数据，无需对丢失的确认进行重发；为确认数据段也会丢失，但只要下一个确认能够到达对方就无需对前一个确认进行重发
+b）缺点：若第一个窗口的数据丢失，则收到的确认好一直都是关于之前数据的确认，得不到关于新发送的数据包的确认；从而无法确定从该窗口开始的数据包哪些成功发送，哪些丢失了
+【发送方窗口不能大于接收方窗口】，
+凡是ACK 置为1 的数据段都应该将自己接收窗口的当前大小填入TCP数据段头部的窗口字段中，通知给发送方
+【拥塞控制机制】慢启动和成倍减少；TCP 协议实际发送窗口的大小应该是拥塞窗口和接收方接收窗口中小的一个
+a) 成倍减少机制：当TCP 发现数据段丢失（即超时重发）时，就将拥塞窗口的大小减少一半（但其大小至少应为1 ） ，对于减小窗口后仍在发送窗口中的数据段，将其重发的超时值延长一倍。
+b) 慢启动机制：在TCP 启动一个新的连接或拥塞结束后，将拥塞窗口的大小设置为一个数据段的大小，然后每收到一个确认段，TCP 就将拥塞窗口的大小增加一个数据段；在拥塞发生并恢复后，通过慢启动机制使得拥塞窗口的大小达到了拥塞之前的一半，TCP 就启动一个拥塞避免机制以减缓窗口扩大的速度
+【傻窗口症状】极端的情况，接收方的应用程序一直没有处理接收到的数据，这样接收方的TCP 缓冲区都被接收到的数据占满，接收窗口的大小减小为0，TCP 将这个窗口大小通知给发送方TCP，这时整个数据传输就停下来了
+*****
+时间戳选项：防止由失而复现的分组可能造成的数据损坏
+(5)TCP的4次挥手（任一方可是是服务或客户）
+客户端主动关闭close，发送FIN-M
+服务端被动关闭，发送ACK-M+1，应答说明，收到了FIN-M
+服务端把剩余数据发送完，关闭close，发送FIN-N
+客户端应答ACK-N+1，说明，收到了FIN-N
+(6)TIME_WAIT状态
+2个MSL(maximum segment lifetime)最长分节生命期
+MSL是任何IP数据包能在因特网中存在的最长时间
+存在的理由：可靠的实现TCP全双工连接，允许老的重复分节在网络中消逝
+(7)端口号（16位整数）
+众所周知的端口号（0-1023）；21分配给FTP（面向连接的）服务，69分配给TFTP（面向数据报的）服务，80分配给Web服务
+已登记的端口（1024-49151）：不受IANA（Internet Assigned Numbers Authority）控制，但是由其等级，方便使用
+临时端口号（49152-65535，占所有的1/4）：不关心具体值，只要是唯一的即可
+(8)监听套接字（12.106.32.254:21,*:*）、已连接套接字，fork进程1（-，IP:POTR1）fork进程2（-，IP:POTR2）
+①一个分节来自206.168.112.219:1500，目的为12.106.32.254:21，则递送给第一个子进程
+②一个分节来自206.168.112.219:1501，目的为12.106.32.254:21，则递送给第二个子进程
+③目的为12.106.32.254:21的其它消息，则递送给父进程
+(9)UDP首部8字节、TCP首部20字节，IPv4首部是20字节，IPv6首部40字节
+IPv4数据报的最大大小65535（MTU），总长度字段16位
+IPv5数据报的最大大小65575（MTU），净长度字段16位，65535+40=65575
+----------------------------------------------------------------------------------------------------------------
+3.套接字编程简介
+(1)IPv4套接字地址结构
+struct in_addr
+{
+	// in_addr_t 为 uint32_t，32位无符号整数
+	in_addr_t s_addr;			/* 32-bit IPv4 address, network byte order */	
+};
+// 以上定义有历史原因，因为之前in_addr为多种结构的联合union，后面去除了
+struct sockaddr_in
+{
+	uint8_t			sin_len;		/* length of structure (16) 无符号的8位整数 */
+	// sa_family_t 为 uint8_t，8位无符号整数
+	sa_family_t 	sin_family;		/* AF_INET 必须 */
+	// in_port_t 为 uint16_t，16位无符号整数
+	in_port_t		sin_port;		/* 16-bit TCP or UDP port number, network byte order 必须 */
+	struct in_addr 	sin_addr;		/* 32-bit IPv4 address, network byte order 必须 */
+	char 			sin_zero[8];	/* unused */
+};
+// socklen_t 为 uint32_t，32位无符号整数
+(2)通用的套接字地址结构
+struct sockaddr
+{
+	unit8_t 		sa_len;
+	sa_family_t		sa_family;		/* address family: AF_xxx value */
+	char 			sa_data[14];	/* protocol-specific address */
+};
+公用父类，这样便于bind函数泛化，int bind(int, struct sockaddr *, socklen_t);
+(3)IPv6套接字地址结构
+struct in6_addr
+{
+	uint8_t		s6_addr[16];		/* 128-bit IPv6 address, network byte ordered*/
+};
+#define SIN6_LEN		/* required for compile-time tests */
+struct sockaddr_in6
+{
+	uint8_t 		sin6_len;		/* length of this struct (28) */
+	sa_family_t		sin6_family;	/* AF_INET6 */
+	in_port_t		sin6_port;		/* transport layer port, network byte order */
+	uint32_t		sin6_flowinfo;  /* flow information, undefined */
+	struct in6_addr sin6_addr;		/* IPv6 address, network byte order */
+	uint32_t 		sin6_scope_id;	/* set of interfaces for a scope */
+};
+// 此结构中字段的先后顺序做过编排，使得其结构是64位对齐的。对64位机器做了兼容处理
+(4)新的通用套接字地址结构
+克服了sockaddr的缺点，足以容纳系统所支持的任何套接字地址结构
+struct sockaddr_storage
+{
+	uint8 			ss_len;			/* length of this struct (implementation dependent) */
+	sa_family_t 	ss_family;		/* address family: AF_xxx value */	
+};
+与sockaddr相比，有以下两点差别
+①如果系统支持的任何套接字地址结构有对齐需要，那么sockaddr_storage能够满足最苛刻的对齐要求
+②sockaddr_storage足够大，能够容纳系统支持的任何套接字地址结构
+(5)UNIX域套接字
+struct sockaddr_un
+{
+	uint8_t			sun_len;
+	sa_family_t 	sun_family;		/* AF_UNIX */
+	char 			sun_path[108];	/* pathname */
+};
+fd = socket(AF_UNIX, SOCK_STREAM, 0);
+struct sockaddr_un un;
+un.sun_family = AF_UNIX;
+strcpy(un.sun_path, "foo.socket");
+size = offsetof(struct sockaddr_un, sun_path) + strlen(un.sun_path);
+// #define offsetof(TYPE,MEMBER) ((int)&((TYPE *)0)->MEMBER) 假定地址从0开始，这样子就可以得到前面部分的长度
+bind(fd, (struct * sockaddr *)&un, size);	// 执行完后会在当前目录生成foo.socket文件，退出程序，不会删除，需要写代码
+bind函数的第三参数是，第二参数整个结构的大小
+(6)值-结果参数
+从进程到内核传递套接字地址结构的函数：bind、connect、sendto
+从内核到进程传递套接字地址结构的函数：accept、recvfrom、getsockname、getpeername
+(7)字节序转换
+uint32_t htonl(uint32_t hostint32);			// 主机字节序 转 网络字节序 32位
+uint16_t htons(uint16_t hostint16);			// 主机字节序 转 网络字节序 16位
+uint32_t ntohl(uint32_t netint32);			// 网络字节序 转 主机字节序 32位
+uint16_t ntohs(uint16_t netint16);			// 网络字节序 转 主机字节序 16位
+(8)字节操纵函数
+void bzero(void *dest, size_t nbytes);
+void bcopy(const void *src, void *dest, size_t nbytes);
+int bcmp(const void *ptr1, const void *ptr2, size_t nbytes);
+void *memset(void *dest, int c, size_t len);
+void *memcpy(void *dest, const void *src, size_t nbytes);
+int memcmp(const void *ptr1, const void *ptr2, size_t nbytes);
+(9)地址转换函数
+int inet_aton(const char *strptr, struct in_addr *addrptr);		// 将点分十进制数据地址转换成网络字节序地址
+in_addr_t inet_addr(const char *strptr);						// 同上，但是不能表征255.255.255.255，已废弃
+char* inet_ntoa(struct in_addr inaddr);							// 将网络字节序地址转换成点分十进制数据地址
+// 以上函数只适用于IPv4
+随IPv6出现的函数，对于IPv4地址和IPv6地址都适用，函数中p和n分别代表表达（presentation)和数值（numeric)。
+地址的表达格式通常是ASCII字符串，数值格式则是存放到套接字地址结构的二进制值。
+int inet_pton(int domain, const char *str, void *addr);     //将点分十进制的ip地址转化为用于网络传输的数值格式
+返回值：若成功则为1，若输入不是有效的表达式则为0，若出错则为-1
+const char* inet_ntop(int domain, const void* addr, char *str, size_t size);  //将数值格式转化为点分十进制的ip地址格式
+返回值：若成功则为指向结构的指针，若出错则为NULL
+注意：domain参数既可以是AF_INET（ipv4）也可以是AF_INET6（ipv6）
+注意：所以以上两个函数，协议相关，为使协议不相关，可以自己定义一个函数
+-------------------------------------------------------------------------------------------------------------
+4.基本TCP套接字编程
+服务器：socket(),bind(),listen(),accept(),一直阻塞到客户连接到达
+客户端：socket(),bind()--可以不用,connect(),一直阻塞到与服务器连接成功
+每次connect失败后，都必须调用close，关闭当前的套接字描述符，并重新调用socket
+(1)int socket(int domain, int type, int protocal);			// 客户端、服务器端都要调用
+domain=AF_INET（IPv4因特网域）、AF_INET6（IPv6因特网域）、AF_UNIX（UNIX域）、AF_UPSPEC（未指定）
+type=SOCK_DGRAM（固定长度的、无连接的、不可靠的报文传递）、SOCK_RAW（IP协议的数据报接口）
+SOCK_SEQPACKET（固定长度的、有序的、可靠的、面向连接的报文传递）、SOCK_STREAM（有序的、可靠的、双向的、面向连接）
+protocal通常为0，表示为给定的域和套接字类型选择默认协议（IPPROTO_CP、IPPROTO_UDP、IPPROTO_SCTP）
+(2)int bind(int sockfd, const struct sockaddr *addr, socklen_t len);				// 将套接字绑定到一个地址上
+bind是可选的，将地址:端口绑定到sockfd，不调用者，则系统分配。
+通配地址（IPv4）：
+struct sockaddr_in	servaddr;
+servaddr.sin_addr.s_addr = htonl(INADDR_ANY);		// INADDR_ANY即0值
+通配地址（IPv6）：
+struct sockaddr_in6	servaddr;
+servaddr.sin6_addr = in6addr_any;		// in6addr_any 为 in6_addr类型的对象，被初始化成INADDR_ANY
+(3)int listen(int sockfd, int backlog);  //backlog表示，内核应该为相应套接字排队的最大连接个数
+backlog个队列分成两个部分
+①未完成连接队列：已由某个客户发出，并到达服务器，而服务器正在等待完成相应的TCP三路握手过程，这些套接字处于SYN_RCVD
+②已完成连接队列：已完成TCP三路握手过程，这些套接字处于ESTABLISHED
+不要通过将backlog设置为0的方式，来阻止客户端连接，通过直接关掉套接字的方式来阻止
+(4)int accept(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict len);		// 可以阻塞/不阻塞
+// 返回一个sockfd用于和客户端通信(已连接套接字)，原始sockfd，用来接受其他连接请求（监听套接字）
+// addr,len用来填充客户端的地址和地址长度。不感兴趣，置为NULL就行了
+(5)请求连接（客户端调用）
+int connect(int sockfd, const struct sockaddr *addr, socklen_t len);
+(6)int close(int sockfd);			// 关闭套接字
+(7)在并发的情况，父进程可以调用close，让子进程处理，若要强制关闭，发送FIN信号，则调用shutdown()
+(8)
+int getsockname(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict alenp);	
+// 在一个没有bind的TCP客户端上，connect返回后，可以查看本地连接的IP地址和端口
+// 在以端口号0调用bind的客户端上，查看内核赋予的端口号
+// 获取套接字地址族
+// 总之就是bind为指明时，查看内核绑定到哪里去了，IP或端口
+int getpeername(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict alenp);
+// 当一个服务器是由调用accept的某个进程通过调用exec执行程序时，它能获取客户身份的唯一途径
+// 当然可以做一个参数，传递到exec中，然后exec执行程序中，可以知道其客户信息，但不是那么好
+---------------------------------------------------------------------------------------------------------------
+5.TCP案例，略
+6.I/O复用，select和poll函数
+(1)I/O复用的场合
+当客户处理多个描述符（通常是交互式输入和网络套接字）
+一个客户同时处理多个套接字
+一个TCP服务器既要处理监听套接字，又要处理已连接套接字
+一个服务器既要处理TCP，又要处理UDP
+一个服务器要处理多个服务或多个协议
+(2)Unix下可用的5种I/O模型
+①阻塞式I/O ②非阻塞式I/O （轮询polling）
+③I/O复用（select和poll）
+阻塞在select和poll这两个系统调用上，而不是阻塞在系统I/O上
+这两个调用返回，有设备就绪后，再去操作I/O进行输入输出
+【优势】可以同时等待多个描述符就绪
+④信号驱动式I/O（内核在描述符就绪是，发送SIGIO信号） ⑤异步I/O
+(3)
+int select(int maxfdpl, fd_set *restrict readfds, fd_set *restrict writefds, fd_set *restrict exceptfds,
+			struct timeval *restrict timeout);
+timeout == NULL 永远等待，直到有一个描述符做好准备，返回准备好的数量，否则，返回-1，erron设置为EINTER
+timeout->tv_sec和timeout->tv_usec都为0，根本不等待，直接看一下有没有准备好的fd，不断进行轮询（polling）
+timeout->tv_sec和timeout->tv_usec不都为0，跟第一种情况一样，不过只等待指定时间，时间到了返回0
+int FD_ISSET(int fd, fd_set *fdset);		// select返回后，判断描述符是否就绪
+int FD_CLR(int fd, fd_set *fdset);			/* turn off the bit for fd in fdset */
+int FD_SET(int fd, fd_set *fdset);			/* turn on the bit for fd in fdset */ select之前要先调用一次
+int FD_ZERO(fd_set *fdset);					/* clear all bits in fdset*/
+maxfdpl 是检查的最大描述符个数，[0,maxfdpl-1]
+【妙用】如果三个fd_set都设置成null，则有了一个比sleep函数精确度更高的定时器
+【如何判定套接字描述符就绪？（读就绪）】
+a.套接字的接收缓冲>=缓冲的低水位标记，可以通过SO_RCVLOWAT设置套接字选项，TCP，UDP套接字默认设置为1
+b.该连接的读半步关闭（接受了FIN的TCP连接），对这样的套接字读不阻塞，返回0
+c.该套接字是一个监听套接字且已完成的连接数不为0，其accpet一般不会阻塞
+d.其上有一个套接字错误待处理
+【如何判定套接字描述符就绪？（写就绪）】
+a.套接字的发送缓冲>=缓冲的低水位标记，或者已连接，或不需连接，通过SO_SNDLOWAT设置套接字选项，TCP，UDP套接字默认设置为2048
+b.该连接的写半步关闭，对其写，会产生SIGPIPE信号
+c.使用非阻塞式connect的套接字已建立连接，或者connect已经以失败告终
+d.其上有一个套接字错误待处理
+【如何判定套接字描述符就绪？（异常就绪）】
+a.一个套接字存在带外数据或仍处于带外标记
+(4)
+int pselect(int maxfdpl, fd_set *restrict readfds, fd_set *restrict writefds, fd_set *restrict exceptfds,
+			const struct timespec *restrict tsptr,
+			const sigset_t *restrict sigmask);
+//更加精确的实现
+【与select的区别】：
+①timespec第二成员是纳秒，timeval第二成员是微秒
+②select可能因为信号被永远阻塞，最后的参数，表明，先将信号屏蔽字设置为sigmask，等pselect返回后，再设回原来的
+(5)int shutdown(int sockfd, int how);
+// how是SHUT_RD(关闭读端)、how是SHUT_WR(关闭写端)、how是SHUT_RDWR(关闭读写)
+SHUT_RD(关闭读端):套接字不在有数据可接收，并且接受缓冲区的数据被丢弃
+how是SHUT_WR(关闭写端):当前套接字发送缓冲区的数据被发送掉，套接字不再能有数据写入
+how是SHUT_RDWR(关闭读写):前面两个选项各执行一次，与调用这个选项等同
+(6)int poll(struct pollfd *fdarray, unsigned long nfds, int timeout);
+// 返回值表示就绪的描述符数目，这是一个毫秒级的函数
+struct pollfd
+{
+	int fd;				/* descriptor to check */
+	short events; 		/* events of interset on fd */
+	short revents;		/* events that occurred on fd */
+};
+poll识别三类数据：普通normal，优先级带priority band，高优先级high priority
+events、revents:
+POLLIN(普通或优先级带数据可读)、POLLRDNORM(普通数据可读)、POLLRDBAND(优先级带数据可读)、POLLPRI(高优先级数据可读)
+POLLOUT(普通数据可写)、POLLWRNORM(普通数据可写)、POLLWRBAND(优先级带数据可写)
+revents：
+POLLERR(发生错误)、POLLHUP(发生挂起)、POLLNVAL(描述符不是一个打开的文件)
+--------------------------------------------------------------------------------------------------------
+7.套接字选项
+int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
+int getsockopt(int sockfd, int level, int optname, void *restrict optval, socklen_t *restrict optlenp);
+粗分两大基本类型：
+启用或禁止某个特性的二元选项（标志选项）
+取得并返回我们可以设置或检查的特定值的选项（值选项）
+level：SOL_SOCKET、IPPROTO_IP、IPPROTO_ICMPV6、IPPROTO_IPV6、IPPROTO_TCP、IPPROTO_SCTP
+当为标志性选项时，*optval是一个整数，为0表示禁止，不为零表示启用
+(1)通用套接字选项(协议无关)
+SO_BROADCAST（optval=int）：开启或禁止进程发送广播消息
+SO_DEBUG（optval=int）：开启时，内核将为TCP在该套接字发送和接收所有分组保留详细跟踪信息，可用trpt程序检查
+SO_DONTROUTE（optval=int）：本选项规定外出的分组将绕过底层协议的正常路由机制。能否通过网关转发
+SO_ERROR（optval=int）：保存套接字的错误信息，select返回，SIGIO驱动
+SO_KEEPALIVE（optval=int）：设置保活后，2小时没有数据交换，就给对端发送，保持存活探测分节
+对端响应ACK：对方还在，一切正常，只是没法数据而已，然后2小时后再发
+对端响应RST：说明对端崩溃，已重新启动。该套接字的待处理错误设置为ECONNRESET，套接字本身责则被关闭
+无响应：对方不在了，超时ETIMEOUT，不可达EHOSTUNREACH，关闭套接字
+SO_LINGER（optval=linger{}）：指定close()对于面向连接协议（TCP）如何操作
+默认是立即返回，设置后，如果还有数据残留，发送完后，再返会终止
+struct linger
+{
+	int l_onoff;	/* 0=off, nonzero=on */
+	int l_linger;	/* linger time, second */
+};
+如果l_linger时间到了，还没发送完，那么close返回时，会返回EWOULDBLOCK错误
+如果设置为on，l_linger=0，那么将不存在TIME_WAIT状态
+SO_OOBINLINE（optval=int）：开启时，带外数据将被留在正常的输入队列中
+SO_RCVBUF和SO_SNDBUF（optval=int）：发送、接收缓冲区的大小，TCP连接套接字的本项从监听套接字继承而来
+SO_RCVLOWAT和SO_SNDLOWAT（optval=int）：配合shutdown使用，见6.(5)
+SO_RCVTIMEO和SO_SNDTIMEO（optval=timeval{}）：给套接字的接收和发送设置一个超时值，设置为0时，禁止超时
+SO_REUSEADDR（optval=int）:一个地址：端口，可以绑定在多个socket上
+正常重复bind会失败，而设置之后，多个服务都可以bind到一个地址:端口上
+这样也允许一个端口上，启动同一服务的多个实例，给每个实例绑定一个IP地址即可
+SO_REUSEPORT（optval=int）：允许单个进程捆绑同一个端口到多个套接字上
+SO_TYPE（optval=int）：返回诸如：SOCK_STREAM、SOCK_DGRAM之类的值
+(2)IPv4套接字选项（level=IPPROTO_IP）
+IP_HDRINCL：自定义IP首部
+IP_OPTIONS：允许在IP首部设置IP选项
+IP_RECVDSTADDR和IP_RECVIF：导致所收到的UDP数据报的目的【IP地址、接收接口】由recvmsg函数作为辅助数据返回
+IP_TTL：消息在网络中的存活时间
+(3)ICMPV6套接字选项（level=IPPROTO_ICMPV6）
+ICMP6_FILTER：指定哪些ICMPv6消息能被投递给进程
+(4)IPv6套接字选项（level=IPPROTO_IPV6）
+IPV6_DONTFRAG：开启之后，将禁止为UDP套接字或原始套接字自动插入分片首部，分组中超过发送接口MTU的那些分组将被丢弃
+IPV6_NEXTHOP：将外出数据报的下一跳地址指定为一个套接字地址结构
+IPV6_PATHMTU：不能设置，只能获取，返回值为当前的 MTU
+IPV6_UNICAST_HOPS：类似于IPv4的IP_TTL
+IPV6_V6ONLY：开启时，只执行IPv6通信
+IPV6_RECVXXXX：把某些数据，作为recvmsg的辅助数据返回
+(5)TCP套接字选项（level=IPPROTO_TCP）
+TCP_MAXSEG：允许我们获取或设置TCP连接的最大分节大小（MSS）
+TCP_NODELAY：开启后将禁止TCP的Nagle算法，默认是启动的
+【Nagle算法】：旨在减少广域网上的小分组数目，尽可能筹齐MSS再发送
+可以通过writev或者缓冲的方式，尽量不使用TCP_NODELAY
+(6)fcntl函数的套接字相关
+设置套接字为非阻塞式I/O型：F_SETFL，O_NONBLOCK
+设置套接字为信号驱动式I/O型：F_SETFL，O_ASYNC
+设置套接字属主：F_SETOWN，允许我们指定接收SIGIO和SIGURG信号的套接字属主（进程ID或进程组ID）
+获取套接字属主：F_GETOWN
+---------------------------------------------------------------------------------------------------------------
+8.基本UDP套接字编程
+(1)数据的发送和接收
+ssize_t sendto(int sockfd, const void *buf, size_t nbytes, int flags, const struct sockaddr *destaddr, socklen_t destlen);
+ssize_t recvfrom(int sockfd, void *restrict buf, size_t nbytes(lenth-buf数组长度), int flags,
+				struct sockaddr *restrict addr, socklen_t *restrict addrlen);
+前面三个参数和write、read函数一样
+其中destlen是一个int，destaddr是一个const指针，在内部不会改变，addr和addrlen都是指针，是值-结果类型
+(2)一般来说，大多数TCP服务是并发的，大多数UDP服务是迭代的
+(3)UDP客户端发送消息时，服务器未打开，sendto返回的没有ICMP协议中不可达的地址和端口信息
+【解决办法】：仅在进程已将UDP套接字连接到恰恰一个对端时，该异步错误返回给进程
+(4)UDP的connect函数
+UDP套接字调用connect，内核只是检查是否存在立即可知的错误，connect之后发生了3个变化
+①我们再也不能给输出操作指定目的IP地址和端口号，不能使用sendto，只能使用write或者send了
+②不必使用recvfrom以获悉数据报的发送者，改用read，recv，recvmsg，限制该connect了的套接字只能与一个对端交换数据
+③由已连接UDP套接字引发的异步错误会返回给其所在的进程
+【所以，UDP进程只有确定与唯一对端进行通信时，才connect】
+在一个已经connect的UDP套接字上，再次调用connect
+①重新指定对端，不同于TCP套接字，connect只能条调用一次
+②断开一个已连接的UDP套接字，connect时，把套接字地址结构的地址族成员（sin_family/sin6_family）设置为AF_UNSPEC
+
+

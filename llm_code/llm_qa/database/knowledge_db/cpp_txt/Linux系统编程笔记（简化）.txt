@@ -1,0 +1,640 @@
+8.shell中的文件描述符，以及重定向
+
+10.【☆linux中使用键盘产生信号☆】
+一个会话有一个控制终端，其中与终端连接的会话首进程称为控制进程
+一个会话的进程组可分为：一个“前台进程组”，其余为“后台进程组”
+中断键（Delete或Ctrl+C），会将中断信号SIGINT，发送至前台进程组的所有进程
+退出键（Ctrl+\），会将退出信号SIGQUIT，发送至前台进程组的所有进程
+挂起键（Ctrl+Z），会将挂起信号SIGTSTP，发送至前台进程组的所有进程
+状态键（Ctrl+T），会将状态信号SIGINFO，发送至前台进程组的所有进程
+
+11.【☆系统时间☆】
+日历时间（time_t）：自1970.1.1 00:00:00的时间
+进程时间（clock_t）：
+（1）墙上时钟时间：进程运行的时间总量
+（2）用户CPU时间：执行用户指令所用的时间
+（3）系统CPU时间：为该进程执行内核程序所经历的时间
+
+12.【☆配置获取函数☆】
+long sysconf(int name);
+long pathconf(const char *pathname, int name);
+long fpathconf(int fd, int name);
+
+14.【☆文件和目录☆】
+stat结构体中的st_mode成员的set-user-ID，set-group-ID，指明是否设置用户ID，是否设置组ID
+S_ISREG()普通文件、S_ISDIR()目录文件、S_ISCHR()字符特殊文件、S_ISBLK()块特殊文件、S_ISFIFO()管道或FIFO、
+S_ISLNK()符号链接、S_ISSOCK()套接字
+int stat(const char *restrict pathname, struct stat *restrict buf);
+int fstat(int fd, struct stat *buf);
+int fstatat(int fd, const char *restrict pathname, struct stat *restrict buf, int flag);
+int lstat(const char *restrict pathname, struct stat *restrict buf);
+这大体相同，不过当文件名是一个“符号链接”时，返回的是符号链接有关的信息
+mode_t umask(mode_t cmask);		//创建文件时，系统给予的默认权限
+int chmod(const char *pathname, mode_t mode);
+int fchmod(int fd, mode_t mode);
+int fchmodat(int fd, const char *pathname, mode_t mode, int flag);
+int access(const char *pathname, int mode);		// mode = R_OK|W_OK|X_OK
+int faccessat(int fd, const char *pathname, int mode, int flag);
+这两个函数按照实际用户的ID和实际组ID进行访问权限设置
+当flag为AT_EACCESS时，访问检查调用进程的有效用户ID和有效组ID，而不是实际用户ID和实际组ID
+int chown(const char *pathname, uid_t owner, gid_t group);
+int fchown(int fd, uid_t owner, gid_t group);
+int fchownat(int fd, const char *pathname, uid_t owner, gid_t group, int flag);
+int lchown(const char *pathname, uid_t owner, gid_t group);
+如果是“符号链接”，lchown和fchownat（设置了AT_SYMLINK_NOFOLLOW）更改的是链接本身的所有者，而不是对应文件的所有者
+【将文件长度截断为length】
+int truncate(const char *pathname, off_t length);
+int ftruncate(int fd, off_t length);
+【添加链接（硬链接），去除链接】
+int link(const char *existingpath, const chat *newpath); // 不允许构造指向目录的硬链接
+int linkat(int efd, const char *existingpath, int nfd, const char *newpath, int flag);
+int unlink(const char *pathname);
+int unlinkat(int fd, const char *pathname, int flag);
+【创建和读取链接（软链接）】
+int symlink(const char *actualpath, const char *sympath);
+int symlinkat(const char *actualpath, int fd, const char *sympath);
+ssize_t readlink(const char *restric pathname, char *restric buf, size_t bufsize);
+【删除，重命名】
+int remove(const char *pathname);
+int rename(const char *oldname, const char *newname);
+int renameat(int oldfd, const char *oldname, int newfd, const char *newname);
+【文件的时间】：访问时间（st_atim）、修改时间（st_mtim）、状态更改时间（st_ctim）
+int futimens(int fd, const struct timespec times[2]);  // times[2]包含访问时间、修改时间
+int utimensat(int fd, const char *path, const struct timespec times[2], int flag);
+【目录操作】
+int mkdir(const char *pathname, mode_t mode);
+int mkdirat(int fd, const char *pathname, mode_t mode);
+int rmdir(const char *pathname);
+int chdir(const char *pathname);
+int fchdir(int fd);
+char* getcwd(char *buf, size_t size);
+
+13.【☆文件I/O函数☆】
+int open(const char *path, int oflag, ... /* mode_t mode */);
+int openat(int fd, const chat *path, int oflag, ... /* mode_t mode */);
+int creat(const char *path, mode_t mode);
+int close(int fd);	一个进程终止时，内核自动关闭它所有的打开文件。很多程序都利用了这一功能，而不显式地用close关闭打开文件。
+off_t lseek(int fd, off_t offset, int whence);
+ssize_t read(int fd, void *buf, size_t nbytes);
+ssize_t write(int fd, const void *buf, size_t nbytes);
+ssize_t pread(int fd, void *buf, size_t nbytes, off_t offset);
+ssize_t pwrite(int fd, const void *buf, size_t nbytes, off_t offset);
+int dup(int fd);				fcntl(fd,F_DUPFD,0);
+int dup2(int fd, int fd2);		close(fd2); fcntl(fd,F_DUPFD,fd2); 
+void sync(void);	linux系统的守护进程update，周期性（一般是30秒）调用这个函数，来冲洗内核的块缓冲区
+int fsync(int fd);		只对指定的一个文件生效，用于数据库这样的应用程序，需要确保修改过的块立刻写到磁盘上
+int fdatasync(int fd);		类似于fsync，但是只影响文件的数据部分，fsync，还会更新文件属性
+int fcntl(int fd, int cmd, ... /* int arg */);
+
+15.【☆标准I/O函数（默认全缓冲）☆】
+int fwide(FILE *fp, int mode);		流的定向函数（单字节、多字节）
+void setbuf(FILE *restrict fp, char *restrict buf);			全缓冲或行缓冲
+int setvbuf(FILE *restrict fp, char *restrict buf, int mode, size_t size);
+mode = _IOFBF全/_IOLBF行/_IONBF无，size为指定缓冲区大小
+int fflush(FILE *fp);
+FILE *fopen(const char *restrict pathname, const char *restrict type);			//用某文件打开
+FILE *fdopen(int fd, const chat *type)		// 从一个已有描述符打开，一般提供给管道，网络通信通道使用
+// type 为 r、w、a等
+      限制	              r		w	  a    r+    w+    a+
+  文件必须已存在		  √                 √
+放弃文件以前的内容              √                √
+	流可以读              √                 √    √     √
+	流可以写                    √     √     √    √     √
+流只可以在为尾端写                    √                √
+int fclose(FILE *fp);
+int fileno(FILE *fp);		// 获取某个流的文件描述符
+【输入、输出函数（一次一个）】
+int getc(FILE *fp);			宏
+int fgetc(FILE *fp);		函数
+int getchar(void);   等同于getc(stdin);
+int ferror(FILE *fp);
+int feof(FILE *fp);		//每个流在FILE对象中，维护两个标志，出错标志，文件结束标志
+void clearerr(FILE *fp);		//清除上述标志
+int ungetc(int c, FILE *fp);		// 把字符压回流中
+int putc(int c, FILE *fp);
+int fputc(int c, FILE *fp);
+int putchar(int c);
+【输入、输出函数（一次一行）】，效率高，因为用memcopy，而memcopy使用汇编语言编写，非C语言
+char *fgets(char *restrict buf, int n, FILE *restrict fp);
+char *gets(char *buf);
+int fputs(const char *restrict str, FILE *restrict fp);
+int puts(const char *str);
+注意：每行中止处，自己处理换行符
+【输入、输出（二进制, 数组，结构体等）】
+size_t fread(void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);
+size_t fwrite(const void *restrict ptr, size_t size, size_t nobj, FILE *restrict fp);
+【流定位】
+long ftell(FILE *fp);							// 文件当前位置距文件首的距离
+int fseek(FILE *fp, long offset, int whence);	// 类似lseek
+void rewind(FILE *fp);							// 将一个流设置到文件的起始位置
+【格式化输出】
+int printf(const char *restrict format, ...);
+int fprintf(FILE *restrict fp, const char *restrict format, ...);
+int dprintf(int fd, const char *restrict format, ...);
+int sprintf(char *restrict buf, const char *restrict format, ...);
+int snprintf(char *restrict buf, size_t n, const char *restrict format, ...);
+【格式化输入】
+int scanf(const char *restrict format, ...);
+int fscanf(FILE *restrict fp, const char *restrict fromat, ...);
+int sscanf(const char *restrict buf, const char *restrict format, ...);
+
+16.【☆系统数据文件和信息☆】
+passwd信息、阴影口令、组信息、主机和操作系统相关信息、主机名（均略）
+unsigned int sleep(unsigned int seconds);
+//功能和sleep类似，不过reqtp是纳秒级别，remtp是剩余时间，用来返回
+int nanosleep(const struct timespec *reqtp, struct timespec *remtp); 
+【时间函数】
+time_t time(time_t *calptr);			距离1970.1.1 00:00:00的秒数
+time_t now;
+time(&now);	 // 等同于now = time(NULL)
+struct tm *localtime(const time_t *calptr);		获取当前时间
+// 把tm时间进行格式转换
+size_t strftime(char *restrict buf, size_t maxsize, const char *restrict format, const struct tm *restrict tmptr);
+【时钟函数】
+clock_t times(struct tms *buf);		// 返回相对某一系统时刻的时间
+包括tms结构体里面的：用户CPU时间，系统CPU时间，也是相对某一时刻的时间
+要知道两次的相对时间，再相减，才能获得进程执行的各个时间
+struct tms 
+{
+clock_t tms_utime; /* 用户CPU时间 */
+clock_t tms_stime; /* 系统CPU时间 */
+clock_t tms_cutime; /* 已终止子进程的用户CPU时间 */
+clock_t tms_cstime; /* 已终止子进程的系统CPU时间 */
+}
+
+17.【☆进程环境☆】
+void exit(int status);			// 执行清理关闭操作后，再退出，会冲洗缓冲
+void atexit(void (*func)(void));		登记一个处理函数，调用顺序和登记顺序相反，同一个函数可登记多次
+void *malloc(size_t size);
+void *realloc(void *ptr, size_t newsize);
+void free(void *ptr);
+char *getenv(const char *name);				
+int putenv(char *str);		// str格式“name=value”，将其加入到环境表中，name若存在，则删除原来定义
+int getrlimit(int resource, struct rlimit *rlptr);
+int setrlimit(int resource, const struct rlimit *rlptr);
+// resource有一些列枚举，RLIMIT_AS、RLIMIT_CPU等，rlimit结构，有一个软阈值成员，一个硬阈值成员。
+【跳转函数】
+int setjmp(jmp_buf env);		// 返回值：若直接调用，返回0，若从longjmp返回则为非0
+void longjmp(jum_buf env, int val);
+int sigsetjmp(sigjmp_buf env, int savemask);	// 只是增加了一个savemask参数，如果其非0，则保存时，信号屏蔽字也会保存下来
+void siglongjmp(sigjmp_buf env, int val);
+案例实现：
+static jmp_buf buf; 
+void second(void)	{	printf("second\n");   longjmp(buf,1); // 跳回setjmp的调用处 - 使得setjmp返回值为1   }
+void first(void)	{	second();	printf("first\n");        // second跳转了，后一条输出不会执行了 } 
+int main() 
+{   
+    if ( ! setjmp(buf) )
+        first();                // 进入此行前，setjmp返回0
+    else                    	// 当longjmp跳转回，setjmp返回1，因此进入此行
+        printf("main\n");       // 打印
+    return 0;
+}
+输出 second \n main \n
+
+18.【☆进程控制☆】
+【获取进程标识】
+ID为0的进程通常是调度进程，常常被称为交换进程（swapper），内核一部分
+ID为1的init进程，用户进程，以超级用户权限运行，用于启动UNIX系统
+pid_t getpid(void);		// 调用进程的进程ID
+pid_t getppid(void);	// 调用进程的父进程ID
+uid_t getuid(void);		// 调用进程的实际用户ID
+uid_t geteuid(void);	// 调用进程的有效用户ID
+gid_t getgid(void);		// 调用进程的实际组ID
+gid_t getegid(void);	// 调用进程的有效组ID
+【设置进程标识】
+int setuid(uid_t uid);
+int setgid(gid_t gid);			// 这两个设置的都是有效ID
+// 进程有超级用户权限，将实际用户ID，有效用户ID、保存的设置用户ID，都变为uid
+// 进程无超级用户权限，uid等于实际用户ID或保存的设置用户ID，则只将有效用户ID设置为uid
+int setreuid(uid_t ruid, uid_t euid);
+int setregid(gid_t rgid, gid_t egid);
+int seteuid(uid_t uid);
+int setegid(gid_t gid);
+【创建进程】
+pid_t fork(void);		// 子进程返回0，父进程返回子进程ID，若出错，返回-1
+子进程获得父进程数据空间，堆，栈的副本。父子进程不共享存储空间，只共享正文段（代码）。
+父子进程的区别：子进程不继承父进程设置的文件锁，子进程的未处理闹钟被清除，子进程的未处理信号集设置成空集
+pid_t vfork(void);
+子进程立刻调用exec或exit，在调用之前，在父进程空间中运行，效率高
+vfork保证子进程先运行，在其exec或exit之后，父进程才可能被调度运行
+【僵死进程】
+僵死进程的产生：
+在每个进程退出的时候，内核释放该进程所有的资源，包括打开的文件，占用的内存等，但是仍然为其保留一定的信息
+(包括进程号，退出状态，运行时间等)，直到父进程通过wait/waitpid来取时才释放。
+此时该进程处于僵死状态，该进程成为僵死进程(Zombie Process)。 这保证了父进程可以获取到子进程结束时的状态信息。
+仅仅在进程列表中保留一个位置，记载该进程的退出状态等信息供其他进程收集，除此之外，僵死进程不再占有任何内存空间。
+它需要它的父进程来为它收尸，如果他的父进程没安装SIGCHLD信号处理函数调用wait或waitpid()等待子进程结束，
+又没有显式忽略该信号，那么它就一直保持僵死状态，如果这时父进程结束了，僵死的子进程成为"孤儿进程"，
+过继给1号进程init，init始终会负责清理僵死进程，它产生的所有僵死进程也跟着消失
+pid_t wait(int *statloc);						// 等待任何子进程终止
+pid_t waitpid(pid_t pid, int *statloc, int options);		// 等待指定子进程终止，pid = -1时，等效于wait
+// options可以控制非阻塞，因为有时候只想获取状态记录一下，不想阻塞
+【exec系列函数】
+这些函数并不创建新进程，前后进程ID不变，不过用磁盘上的新程序，替换了当前进程的正文段，数据段，堆段，栈段
+寻找pathname的文件执行
+int execl(const char *pathname, const char *arg0, ... /* (char *)0 */);
+int execv(const char *pathname, char *const argv[]);
+int execle(const char *pathname, const char *arg0, ... /* (char *)0, char *const envp[] */);
+int execve(const char *pathname, char *const argv[], char *const envp[]);
+在PATH环境变量查找，filename，然后执行
+int execlp(const char *filename, const char *arg0, ... /* (char *)0 */);
+int execvp(const char *filename, char *const argv[]);
+根据文件描述符，执行
+int fexecve(int fd, char *const argv[], char *const envp[]);
+l : 使用参数列表 
+p：使用文件名，并从PATH环境进行寻找可执行文件 
+v：应先构造一个指向各参数的指针数组，然后将该数组的地址作为这些函数的参数。 
+e：多了envp[]数组，使用新的环境变量代替调用进程的环境变量
+【【特例】】int system(const char *cmdstring);		// 其中调用了fork，exec，waitpid
+【进程调度】
+int nice(int incr);		// 进程调度，nice值，nice越小，优先级越高，incr为0时获取，当前的nice值
+int getpriority(int which, id_t who);
+which = PRIO_PROCESS进程、PRIO_PGRP进程组、PRIO_USER用户ID，
+who参数选择一个或多个感兴趣的进程，如果which参数作用于多个进程，取优先级最高，nice最小的
+int setpriority(int which, id_t who, int value);
+
+19.【☆进程关系☆】
+【进程组ID】
+pid_t getpgrp(void);
+pid_t getpgid(pid_t pid);		getpgid(0);等同于getpgrp();
+每个进程组有一个组长进程，组长进程的进程组ID等于其进程ID，组长进程结束，只要组内还有进程，则进程组就存在
+int setpgid(pid_t pid, pid_t pgid);			// 把某个进程，加入某进程组
+// pid=pgid,则创建了新组，组长为pid，如果pid=0，则使用调用者的进程ID，如果pgid=0，则将pid作为进程组的ID
+【会话】
+会话是一个或多个进程组的集合
+pid_t setsid(void);				// 若成功，返回进程组ID，否则，返回-1
+调用进程不为组长：
+①该进程成为新会话的会话首进程，此进程为会话中唯一进程
+②该进程成为新进程组的组长进程，组ID即进程ID
+③该进程没有控制终端
+调用进程为组长：返回出错，解决办法，调用前fork一把，那就肯定不是组长了
+pid_t getsid(pid_t pid);
+获取进程所在会话首进程的进程组ID
+
+20.【☆信号☆】
+【概念】
+①在信号产生（generation）和递送（delivery）之间的时间间隔内，称信号是"未决的"（pending）
+②进程可以选用“阻塞信号递送”，则进程将此信号保持为未决状态，知道进程对此信号解除了阻塞，或将此信号改为忽略
+③"信号屏蔽字"（signal mask），它规定了当前要阻塞递送到该进程的信号集
+④可重入函数：中断一段时间后，再继续执行，不会受影响
+⑤如果一个函数在相同的时间点，可以被多个线程安全地调用，那称函数是线程安全的
+【SIGCLD信号】
+①进程明确将该信号配置为SIG_IGN,这其子进程不会产生僵死进程
+②这与默认动作（SIG_DFL）不同
+③将其配置成捕获，则做相应处理
+【SIGALRM信号】
+unsigned int alarm(unsigned int seconds);
+启动定时器，多少秒后，发送SIGALRM信号，如果不捕获，则进程会终止。
+多次调用，时间不累计，会不断更新
+【SIGABRT信号】
+void abort(void);
+此函数将SIGABRT信号，发送个调用进程，等同于raise(SIGABRT);
+捕获SIGABRT的作用是，终止前，执行清理操作
+【信号和信号名】
+int sig2str(int signo, char *str);
+int str2sig(const char *str, int *signop);
+【发送信号】
+int kill(pid_t pid, int signo);				// 将信号发送给进程或进程组
+int raise(int signo);						// 允许进程向自身发送信号，等同于 kill(getpid(), signo);
+关于kill的pid参数（4中发送参数pid值，前提是有权限发）
+pid>0  : 给pid的进程发
+pid==0 : 给同一进程组的所有进程发
+pid<0  : 给|pid|的进程组中所有进程发
+pid==-1: 给所有进程发
+非超级用户：发送者的实际/有效用户ID，必须等于接受者的实际/有效ID，才可以发送
+【信号捕捉】
+void (*signal(int signo, void (*func)(int)))(int);
+#define SIG_ERR (void (*)())-1
+#define SIG_DFL (void (*)())0
+#define SIG_IGN (void (*)())1
+func指定为SIG_IGN忽略，SIG_DFL默认，函数指针则为捕获，执行对应函数
+int pause(void);		使进程挂起，直至捕捉到一个信号
+只有执行了一个信号处理程序，并从其返回时，pause才返回，并且返回-1，erron设置为EINTR
+【信号集】
+int sigemptyset(sigset_t *set);
+int sigfillset(sigset_t *set);
+int sigaddset(sigset_t *set, int signo);
+int sigdelset(sigset_t *set, int signo);
+int sigismember(const sigset_t *set, int signo);
+【信号屏蔽字】
+int sigprocmask(int how, const sigset_t *restrict set, sigset_t *restrict oset);
+若oset非空，那么当前信号屏蔽字，通过oset返回
+若set非空，通过how来执行，屏蔽字变更方式
+①how=SIG_BLOCK，往现有的屏蔽字加入set，		注意SIGKILL和SIGSTOP、SIGABRT是不能阻塞的
+②how=SIG_UNBLOCK，往现有屏蔽字去除set
+③how=SIG_SETMASK，现有屏蔽字，完全变更为set
+int sigpending(sigset_t *set)		// 返回当前，阻塞不能提送（未决）的信号集
+阻塞并没有忽略掉，到解除屏蔽字，立刻重新接收到
+
+21.【（1）☆线程☆】
+【线程基本属性】
+int pthread_attr_init(pthread_attr_t *attr);
+int pthread_attr_destory(pthread_attr_t *attr);
+线程的分离状态，创建线程时就知道不需要了解其终止状态，则修改pthread_attr_t中的detachstate属性
+int pthread_attr_getdetachstate(const pthread_attr_t *restrict attr, int *detachstate);
+int pthread_attr_setdetachstate(pthread_attr_t *attr, int detachstate);
+detachstate=PTHREAD_CREATE_DETACHED或PTHREAD_CREATE_JOINABLE
+进程中只有一个栈，它的大小通常不是问题，但是在线程中需要共享这一个栈
+栈属性，可以指定不同大小，而且栈不够时，还可用malloc分配的空调，来代替栈空间
+其中stackaddr是栈的最低地址，但不知道是首还是尾，因为跟系统有关
+int pthread_attr_getstack(const pthread_attr_t *restrict attr, 
+						void **restrict stackaddr, size_t *restrict stacksize);
+int pthread_attr_setstack(pthread_attr_t *attr, void *stackaddr, size_t stacksize);
+int pthread_attr_getstacksize(const pthread_attr_t *restrict attr, size_t *restrict stacksize);
+int pthread_attr_setstacksize(pthread_attr_t *attr, size_t stacksize);
+线程属性guardsize控制线程栈末尾之后用以避免栈溢出的扩展内存大小
+int pthread_attr_getguardsize(const pthread_attr_t *restrict attr, size_t *restrict guardsize);
+int pthread_attr_setguardsize(pthread_attr_t *attr, size_t guardsize);
+【线程创建与结束】
+pthread_t pthread_self(void);
+int pthread_create(pthread_t *restrict tidp, const pthread_attr_t *restrict attr, 
+					void *(*start_rtn)(void *), void *restrict arg);
+新创建的线程ID会被设置成tidp指向的内存单元，attr参数用于定制各种不同的线程属性（默认属性，使用NULL）
+新线程，从start_rtn函数开始，只有一个无类型指针参数arg，如果多个参数，要定义个结构，然后传结构指针
+void pthread_exit(void * rval_ptr);		// rval_ptr包含返回码(退出时自己指定)
+int pthread_cancel(pthread_t tid);		// 取消同进程的其它线程
+【*】如果进程中的任意线程调用了exit、_Exit或者_exit，那么整个进程就会终止。信号也是如此
+int pthread_join(pthread_t thread, void **rval_ptr);
+【*】调用此函数的线程将阻塞，直到指定线程thread，返回或被取消
+【*】原有的线程等待创建的线程结束。
+【*】只有当pthread_join（）函数返回时，创建的线程才算终止，才能释放自己占用的系统资源
+int pthread_detach(pthread_t tid);  
+【*】pthread_detach使子线程进入分离状态的意思是，主线程不能再用pthread_join()和子线程同步
+【*】就是说对子线程调用pthread_detach之后，主线程再调用pthread_join()不会导致等待主线程阻塞等待
+【*】这时候主线程和子线程相当于两个执行序列，两者之间处于一种 分离状态
+void pthread_cleanup_push(void (*rtn)(void *), void *arg);			// 类似atexit函数
+【*】①调用pthread_exit时②响应取消请求时③void pthread_cleanup_pop(int execute);被调用，且execute不为0
+
+21.【（2）☆线程同步☆】
+【互斥锁】
+int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+初始化一个互斥量，销毁一个互斥量，通过默认属性初始化，attr=NULL即可
+int pthread_mutex_lock(pthread_mutex_t *mutex);			// 如果已经被锁了，则阻塞自己，直到解锁
+int pthread_mutex_trylock(pthread_mutex_t *mutex);		// 未锁住，返回0，锁住，返回EBUSY，不会被阻塞（避免死锁）
+int pthread_mutex_unlock(pthread_mutex_t *mutex);		 
+带有超时的互斥锁
+int pthread_mutex_timedlock(pthread_mutex_t *restrict mutex, const struct timespec *restrict tsptr);
+超时指定愿意等待的绝对时间，即在X之前可以阻塞等待，而不是说愿意阻塞Y秒
+返回值：若成功，返回0，否则，返回错误编号
+【互斥锁-属性】
+int pthread_mutexattr_init(pthread_mutexattr_t *attr);
+int pthread_mutexattr_destory(pthread_mutexattr_t *attr);
+共享属性，设置为PTHREAD_PROCESS_SHARED后不同进程中的线程，都受影响，反之PTHREAD_PROCESS_PRIVATE
+int pthread_mutexattr_getpshared(const pthread_mutexattr_t *restrict attr, int *restrict pshared);
+int pthread_mutexattr_setpshared(pthread_mutexattr_t *attr, int pshared);
+健壮属性，PTHREAD_MUTEX_ROBUST，表示持有mutex的进程中止时，要恢复mutex，否则使用PTHREAD_MUTEX_STALLED啥也不干
+int pthread_mutexattr_getrobust(const pthread_mutexattr_t *restrict attr, int *restrict robust);
+int pthread_mutexattr_setrobust(pthread_mutexattr_t *attr, int robust); 
+以及一些相关，类型属性(比如，重复加锁会怎么样，解锁状态解锁会怎么样)
+int pthread_mutexattr_gettype(const pthread_mutexattr_t *restrict attr, int *restrict type);
+int pthread_mutexattr_settype(pthread_mutexattr_t *attr, int type); 
+---------------------------------------------------------------------------------------------------------------------
+【自旋锁】
+和互斥锁类似，但是互斥锁是休眠，而自旋锁是忙等
+int pthread_spin_init(pthread_spinlock_t *lock, int pshared);	
+int pthread_spin_destroy(pthread_spinlock_t *lock);
+int pthread_spin_lock(pthread_spinlock_t *lock);
+int pthread_spin_trylock(pthread_spinlock_t *lock);
+int pthread_spin_unlock(pthread_spinlock_t *lock);
+【自旋锁-属性】
+int pthread_spin_init(pthread_spinlock_t *lock, int pshared);
+// pshared = PTHREAD_PROCESS_SHARED可被不同进程的线程获取，=PTHREAD_PROCESS_PRIVATE只能被同进程的线程获取
+---------------------------------------------------------------------------------------------------------------------
+【读写锁】
+一次只有一个线性可以占有写模式的读写锁，但是多个线程可以同时占有读模式的读写锁。
+int pthread_rwlock_init(pthread_rwlock_t *restrict rwlock, const pthread_rwlockattr_t *restrict attr);
+int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);
+和互斥锁类似
+int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);
+int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);		// 同样与互斥锁的try版本类似
+带有超时的读写锁
+int pthread_rwlock_timedrdlock(pthread_rwlock_t *restrict rwlock, const struct timespec *restrict tsptr);
+int pthread_rwlock_timedwrlock(pthread_rwlock_t *restrict rwlock, const struct timespec *restrict tsptr);
+【读写锁-属性】
+int pthread_rwlockattr_init(pthread_rwlockattr_t *attr);
+int pthread_rwlockattr_destory(pthread_rwlockattr_t *attr);
+共享属性，设置为PTHREAD_PROCESS_SHARED后不同进程中的线程，都受影响，反之PTHREAD_PROCESS_PRIVATE
+int pthread_rwlockattr_getpshared(const pthread_rwlockattr_t *restrict attr, int *restrict pshared);
+int pthread_rwlockattr_setpshared(pthread_rwlockattr_t *attr, int pshared);
+---------------------------------------------------------------------------------------------------------------------
+【条件变量（需要更互斥锁搭配使用）】
+条件改变前，上锁，改变完，解锁，再发送signal，在改变时，不让其他线程获取，但是wait函数处，要先解锁一下
+条件获取前，上锁，获取完，解锁，不上锁的化，在获取时，不让其他线程改变
+int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr);
+int pthread_cond_destroy(pthread_cond_t *cond);
+// 调用者把锁住的互斥量存入，再等待条件，对互斥量解锁，保证不会错过条件变化，冲wait函数返回时，互斥量再次被锁上
+int pthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex);
+int pthread_cond_timedwait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex,
+							const struct timespec *restrict tsptr);
+int pthread_cond_signal(pthread_cond_t *cond);		// 至少一个
+int pthread_cond_broadcast(pthread_cond_t *cond);	// 唤醒等待该条件的所有线程
+【条件变量-属性】
+int pthread_condattr_init(pthread_condattr_t *attr);
+int pthread_condattr_destory(pthread_condattr_t *attr);
+共享属性，设置为PTHREAD_PROCESS_SHARED后不同进程中的线程，都受影响，反之PTHREAD_PROCESS_PRIVATE
+int pthread_condattr_getpshared(const pthread_condattr_t *restrict attr, int *restrict pshared);
+int pthread_condattr_setpshared(pthread_condattr_t *attr, int pshared);
+时钟属性，用于控制pthread_cond_timedwait函数超时参数，采用哪个时钟
+int pthread_condattr_getpclock(const pthread_condattr_t *restrict attr, clockid_t *restrict clock_id);
+int pthread_condattr_setpclock(pthread_condattr_t *attr, clockid_t clock_id);
+---------------------------------------------------------------------------------------------------------------------
+【屏障】
+int pthread_barrier_init(pthread_barrier_t *restrict barrier,
+						const pthread_barrierattr_t *restrict attr,
+						unsigned int count);
+其中count表示屏障需要达到的数量
+int pthread_barrier_destroy(pthread_barrier_t *barrier);
+int pthread_barrier_wait(pthread_barrier_t *barrier);
+调用一次，记一次数，知道最后一次调用，计数达到count时，所有所有线程启动
+【屏障-属性】
+int pthread_barrierattr_init(pthread_barrierattr_t *attr);
+int pthread_barrierattr_destory(pthread_barrierattr_t *attr);
+共享属性，设置为PTHREAD_PROCESS_SHARED后不同进程中的线程，都受影响，反之PTHREAD_PROCESS_PRIVATE
+int pthread_barrierattr_getpshared(const pthread_barrierattr_t *restrict attr, int *restrict pshared);
+int pthread_barrierattr_setpshared(pthread_barrierattr_t *attr, int pshared);
+
+22.【☆线程控制☆】
+【线程特定数据（线程私有数据）】
+int pthread_once(pthread_once_t *once_control, void (*init_routine) (void))；
+在多线程编程环境下，尽管pthread_once()调用会出现在多个线程中
+init_routine()函数仅执行一次，究竟在哪个线程中执行是不定的，是由内核调度来决定。
+Linux Threads使用互斥锁和条件变量保证由pthread_once()指定的函数执行且仅执行一次，而once_control表示是否执行过
+int pthread_key_create(pthread_key_t *keyp, void (*destructor)(void *));		// 将键与特定线程关联
+int pthread_key_delete(pthread_key_t key);     									// 将键与特定线程取消关联
+void *pthread_getspecific(pthread_key_t key);
+int pthread_setspecific(pthread_key_t key, const void *value);
+【线程与信号】
+int pthread_sigmask(int how, const sigset_t *restrict set, sigset_t *restrict oset);
+int sigwait(const sigset_t *restrict set, int *restrict signop);
+int pthread_kill(pthread_t thread, int signo);
+创建线程时，新建线程会继承现有信号屏蔽字，但是sigwait会解除信号的阻塞状态，这样就只有一个线程可以获取到信号了
+
+23.【☆守护进程☆】
+(1)用户层守护进程的父进程是init进程
+(2)编程规则
+①首先要做的是调用umask将文件模式创建屏蔽字设置为一个已知值（通常是0）
+②调用fork，然后使父进程exit。这样在父进程的组里，但不是组长，才可以调用setsid来创建会话
+③调用setsid创建一个新会话
+④将当前工作目录更改为根目录
+⑤关闭不在需要的fd，守护进程不再持有从其父进程继承来的任何fd
+⑥某些守护进程打开/dev/null使其具有文件描述符0,1,2，这样就不与终端相关联了，无输出，无显示
+(3)守护进程无法输出到终端，所以输出日志
+void openlog(const char *ident, int option, int facility);
+void syslog(int priority, const char *format, ...);
+void closelog(void);
+int setlogmask(int maskpri);
+openlog和closelog都是可选的，如果不调用openlog，在第一次syslog时，会自动调用openlog
+ident一般是程序名称，facility程序类型，系统定义
+/var/log/syslog。日志记录的位置
+(4)如何保证单实例守护进程
+使用文件和记录锁，lockfile(int)，如果锁失败了，就不能运行此守护进程了
+(5)守护进程的惯例
+若守护进程使用锁文件：该文件通常存储在/var/run中，name.pid
+若守护进程支持配置选项：那么配置文件通常存放在/etc中，name.conf
+若更改了某配置项，守护进程要停止，然后再启动一遍配置生效。
+为了避免这种麻烦：守护进程可以捕捉SIGHUP信号，重新读配置文件
+
+24.【☆高级I/O☆】
+【记录锁】
+int fcntl(int fd, int cmd, .../* struct flock *flockptr */)
+cmd = F_GETLK、F_SETLK、F_SETLKW(阻塞式)
+struct flock
+{
+	short l_type;		/* F_RDLCK F_WRLCK or F_UNLCK */
+	short l_whence;		/* SEEK_SET SEEK_CUR or SEEK_END */
+	off_t l_start;		/* offset in bytes, relative to l_whence */
+	off_t l_len;		/* length, in bytes; 0 means lock to EOF */
+	pid_t l_pid;		/* return with F_GETLK, owner of lock */
+}
+建议性锁：文件加了写锁，这时再加读锁，加不上，但是，从中读内容，系统也会让你读，正确性，用户自己保证
+强制性锁：文件加了写锁，这时再加读锁，加不上，并且，从中读内容，系统不会让你读，正确性，系统来保证
+【散步读，聚集写】
+ssize_t readv(int fd, const struct iovec *iov, int iovcnt);		
+ssize_t writev(int fd, const struct iovec *iov, int iovcnt);
+iov是数组第一个，数组中包含多个iovec
+struct iovec
+{
+	void *iov_base;		/*starting address of buffer*/
+	size_t iov_len;		/*size of buffer*/
+}
+ssize_t readn(int fd, void *buf, size_t nbytes);
+ssize_t writen(int fd, void *buf, size_t nbytes);
+readn和writen的实现只是按需多次调用read和write，直至读写了n个字节数据
+
+25.【☆进程间通信☆】
+【（无命名）管道】：只能用于有亲戚关系的进程之间通信（半双工）
+int pipe(int fd[2])		// 经由参数fd返回两个文件描述符，fd[0]为读打开，fd[1]为写而打开，fd[1]的输出是fd[0]的输入
+先pipe，然后fork，然后结果如下，控制流向，只要父子进程各选一个fd，关闭掉close(fd)即可
+父进程 fd[0]<-管道<-fd[1]   子进程 fd[0]<-同一管道<-fd[1]
+【命名管道】：named pipe或者FIFO
+int mkfifo(const char *path, mode_t mode);
+int mkfifoat(int fd, const char *path, mode_t mode);
+mode参数的类型和open函数mode参数的类型一致
+创建了管道之后，就像一个文件一般，多个进程相互读写，就实现了进程间的通信
+注意：write之前要open(path)一下，若write一个尚无进程为读打开的FIFO，则产生SIGPIPE信号。
+【消息队列（可用FIFO替代）】
+【共享存储段】：（高地址->低地址：栈，共享存储，堆，未初始化数据，已初始化数据，正文）
+【信号量】
+sem_t *sem_open(const char *name, int oflag, ... /* mode_t mode, unsigned int value */ );
+name为信号量名字，oflag为O_CREAT标志集时，如果name信号量不存在，则创建一个新的
+mode为用户、组读写权限这些，value指定信号量的初始值
+int sem_close(sem_t *sem);			//释放信号量相关的资源
+进程退出会自动关闭打开的信号量，但这不会改变信号量的值，sem_close也不会影响值
+int sem_unlink(const char *name);		// 销毁一个信号量，如果信号量时是打开状态，等到关闭时，会销毁
+信号量使用（调用时，信号量为0，则阻塞）
+int sem_trywait(sem_t *sem);
+int sem_wait(sem_t *sem);
+int sem_timedwait(sem_t *restrict sem, const struct timespec *restrict tsptr);
+信号量释放
+int sem_post(sem_t *sem);
+
+27.【☆高级进程间通信☆】
+【UNIX域套接字】（socket和pipe的结合，全双工）
+int socketpair(int domain, int type, int protocol, int sockfd[2]);。
+socketpair对两个文件描述符中的任何一个都可读和可写，而pipe是一个读，一个写。
+【命名域套接字】
+使用方式和socket一样，不过bind的地址不是ip，而是目录名，再做类型转换（服务端客户端，都要调用bind，来生成一个socket文件）
+struct sockaddr_un
+{
+	sa_family_t sun_family;		/* AF_UNIX */
+	char sun_path[108];			/* pathname */
+};
+fd = socket(AF_UNIX, SOCK_STREAM, 0);
+struct sockaddr_un un;
+un.sun_family = AF_UNIX;
+strcpy(un.sun_path, "foo.socket");
+size = offsetof(struct sockaddr_un, sun_path) + strlen(un.sun_path);
+// #define offsetof(TYPE,MEMBER) ((int)&((TYPE *)0)->MEMBER) 假定地址从0开始，这样子就可以得到前面部分的长度
+bind(fd, (struct * sockaddr *)&un, size);	// 执行完后会在当前目录生成foo.socket文件，退出程序，不会删除，需要写代码
+bind函数的第三参数是，第二参数整个结构的大小
+
+26.【☆网络IPC：套接字☆】
+【套接字描述符】
+int socket(int domain, int type, int protocal);			// 客户端、服务器端都要调用
+domain=AF_INET（IPv4因特网域）、AF_INET6（IPv6因特网域）、AF_UNIX（UNIX域）、AF_UPSPEC（未指定）
+type=SOCK_DGRAM（固定长度的、无连接的、不可靠的报文传递）、SOCK_RAW（IP协议的数据报接口）
+SOCK_SEQPACKET（固定长度的、有序的、可靠的、面向连接的报文传递）、SOCK_STREAM（有序的、可靠的、双向的、面向连接）
+protocal通常为0，表示为给定的域和套接字类型选择默认协议（IPPROTO_CP、IPPROTO_UDP、IPPROTO_SCTP）
+【字节序】
+处理器字节序（一般小端的）、网络字节序（一般大端的）
+大端（big-endian）字节序：最大字节地址出现在最低有效字节（Least Significant Byte，LSB）
+小端（little-endian）字节序：最低有效字节包含最小字节地址（Linux是小端字节序的）
+大端字节序是指一个整数的高位字节（32-31bit）存储在内存的低地址处，低位字节（0-7bit）存储在内存的高地址处。
+小端字节序是指一个整数的高位字节（32-31bit）存储在内存的高地址处，低位字节（0-7bit）存储在内存的低地址处
+uint32_t htonl(uint32_t hostint32);			// 主机字节序 转 网络字节序 32位
+uint16_t htons(uint16_t hostint16);			// 主机字节序 转 网络字节序 16位
+uint32_t ntohl(uint32_t netint32);			// 网络字节序 转 主机字节序 32位
+uint16_t ntohs(uint16_t netint16);			// 网络字节序 转 主机字节序 16位
+【网络地址转换函数】
+这两个函数是随IPv6出现的函数，对于IPv4地址和IPv6地址都适用，函数中p和n分别代表表达（presentation)和数值（numeric)。
+地址的表达格式通常是ASCII字符串，数值格式则是存放到套接字地址结构的二进制值。
+int inet_pton(int domain, const char *str, void *addr);     //将点分十进制的ip地址转化为用于网络传输的数值格式
+返回值：若成功则为1，若输入不是有效的表达式则为0，若出错则为-1
+const char* inet_ntop(int domain, const void* addr, char *str, size_t size);  //将数值格式转化为点分十进制的ip地址格式
+返回值：若成功则为指向结构的指针，若出错则为NULL
+注意：domain参数既可以是AF_INET（ipv4）也可以是AF_INET6（ipv6）
+【域名和IP地址互转】
+struct addrinfo {
+    int ai_flags;   /* AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST */
+    int ai_family;  /* PF_xxx */
+    int ai_socktype;    /* SOCK_xxx */
+    int ai_protocol;    /* 0 or IPPROTO_xxx for IPv4 and IPv6 */
+    socklen_t ai_addrlen;   /* length of ai_addr */
+    char    *ai_canonname;  /* canonical name for hostname */
+    struct  sockaddr *ai_addr;  /* binary address */
+    struct  addrinfo *ai_next;  /* next structure in linked list */
+};
+int getaddrinfo(const char *restrict host, const char *restrict service, 
+				const struct addrinfo *restrict hint, struct addrinfo **restrict res);
+int getnameinfo(const struct sockaddr *restrict addr, socklen_t alen,
+				char *restrict host, socklen_t hostlen,
+				char *restrict service, socklen_t servlen, int flags);
+“Servname not supported for ai_socktype”解决办法：vim /etc/services，最后一行加入 ruptime 39001/tcp配置，服务的端口号
+【套接字与地址关联（服务器端调用）】
+int bind(int sockfd, const struct sockaddr *addr, socklen_t len);						// 将套接字绑定到一个地址上
+【*】bind地址的意义在于，可以提前确定端口号
+getsockname(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict alenp);		// 获取绑定到套接字上的地址
+int getpeername(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict alenp);	// 如果和对方连接上，用来找到对方
+【请求连接（客户端调用）】
+int connect(int sockfd, const struct sockaddr *addr, socklen_t len);
+【监听和接受连接请求（服务器调用）】
+int listen(int sockfd, int backlog);  //backlog表示，接受请求最多个数
+int accept(int sockfd, struct sockaddr *restrict addr, socklen_t *restrict len);		// 可以阻塞/不阻塞
+// 返回一个sockfd用于和客户端通信，原始sockfd，用来接受其他连接请求
+// addr,len用来填充客户端的地址和地址长度。
+【发送函数（类似write和writev），flags一般设置为0】
+ssize_t send(int sockfd, const void *buf, size_t nbytes, int flags);		// 面向连接的数据
+// sendto发送无连接的数据
+ssize_t sendto(int sockfd, const void *buf, size_t nbytes, int flags, const struct sockaddr *destaddr, socklen_t destlen);
+ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags);
+【数据接收（类似read和readv），flags一般设置为0】
+ssize_t recv(int sockfd, void *buf, size_t nbytes, int flags);		// 面向连接数据
+ssize_t recvfrom(int sockfd, void *restrict buf, size_t len, int flags,
+				struct sockaddr *restrict addr, socklen_t *restrict addrlen);		// 面向无连接数据
+ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
+【*】发送UDP时，无须connect，accept，直接只要bind，listen，然后sendto，recvfrom

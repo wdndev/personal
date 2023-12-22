@@ -1,0 +1,61 @@
+-- git设置用户名和邮箱名
+git config --global  user.name "Username"
+git config --global  user.email "Username@example.com"
+
+-- 创建git管理配置文件
+进入目录，执行git init
+
+-- 查看当前修改，可以看到哪些文件变化了（增加了？修改了？删除了？）
+git status
+
+-- 添加要管理的文件
+git add [文件名]
+
+-- 接受现有的文件结构，存储一版
+git commit -m "Started project"   （-m 表示增加提交注释）
+
+-- 查看存储日志
+git log
+git log --pretty=oneline   //只看第一行记录号，不看注释
+
+-- 重新检出文件
+git checkout .     //检出最新的一般，等同于把当前修改全部撤销了
+git checkout 5d6cec    // git log的第一行有编号，直接检出该编号时的文件结构
+
+-- 添加远程主机
+git remote add origin https://github.com/gunzigun/gitlearn.git
+
+-- 将库上的文件检出到本地
+git pull --rebase origin[之前添加的远程主机] master
+
+-- 将本地文件上传到库上
+git push origin[之前添加的远程主机] master
+
+-- git pull 的常用选项解释
+①git pull = git fetch + git merge
+A<-B<-C<-D<-M
+	   <-E<-M
+小明在C处，改成了D，已经提交了，但是小李，也重C处，改成了E，这样子提交会冲突
+git merge会把D，E版本合并成M版本，并提交上去，很容易错误
+②git pull --rebase = git fetch + git rebase
+A<-B<-C<-D
+		  <-E（小李不产生E版本，自行合并解决冲突）<-R（以R版本提交，还是线性提交记录）
+-------------------------------------------------------------------------------------------------
+在rebase的过程中，有时也会有conflict，这时Git会停止rebase并让用户去解决冲突，解决完冲突后，用git add命令去更新这些内容，然后不用执行git-commit,直接执行git rebase --continue,这样git会继续apply余下的补丁。
+
+-- 不配置远程主机，也可以check out下来
+git pull --rebase origin[之前添加的远程主机] master
+git push origin[之前添加的远程主机] master
+
+-- 不删除物理文件，仅将该文件从缓存中删除
+git rm --cached “文件路径”
+
+-- 删除某条提交记录，然后强制更新到库上
+git rebase -i 21a254a2b7^
+git push origin master -f
+
+-- 只下载github库上的某个目录
+git init
+git config core.sparseCheckout true
+echo "面试题1" >> .git/info/sparse-checkout
+git pull https://github.com/gunzigun/CodingInterviews.git master

@@ -1,0 +1,931 @@
+make之前，chmod 777 mkreleasehdr.sh，会生成下列文件
+redis-benchmark		// 性能测试工具
+redis-check-aof		// AOF文件修复工具
+redis-check-rdb		// RDB文件检查工具（快照持久化文件）
+redis-cli			// 命令行客户端
+redis-server		// redis服务器启动命令
+
+./redis-server ***.conf				指定配置打开一个redis服务
+./redis-server --port 6666 			指定端口号打开一个redis服务
+./redis-cli -h 主机IP -p 端口号		连接指定的redis服务器
+
+第一部分、数据结构与对象
+(1)简单动态字符串
+redis自己构建了一种名为简单动态字符串SDS的抽象类型，key就是这种类型
+SET msg "hello world" : key是一个保存着"msg"的SDS对象，value是一个保存着"hello world"的SDS对象
+RPUSH fruits "apple" "banana" "cherry" : key是一个保存着"fruits"的SDS对象，value保存着一个列表对象，内含三个SDS
+此外，SDS还用做AOF中的缓冲区
+struct sdshdr {
+    int len;	 // buf 中已占用空间的长度，不包括'\0'
+    int free;    // buf 中剩余可用空间的长度
+    char buf[];  // 数据空间（字节数组，是二进制数据，不由'\0'来判断结束）
+};
+1.该结构的优点：
+获取字符串长度O(1),而C数组获取字符串长度O(N)
+字符串操作前，只要检测free和lenth就知道，缓冲区是否足够，这样子可以避免缓冲区溢出
+由于free区的存在，整个SDS，不用反复的对数组空间进行分配、释放
+内存的扩充策略：小于SDS_MAX_PREALLOC (1024*1024)，则翻倍+1，需要长度加上SDS_MAX_PREALLOC+1，+1是给"\0"的
+惰性空间释放策略：因为字符串缩减后，保留着，用free记录
+---------------------------------------------------------------------------------------------------------
+(2)链表
+1.LLEN key 							// 返回列表key的长度
+2.RPUSH/LPUSH key [value...]		// 在列表的右边|左边加入元素
+3.LRANGE key index-start index-end	// 返回列表key[index-start]~key[index-end]的所有元素
+typedef struct listNode {
+    struct listNode *prev;	// 前置节点
+    struct listNode *next;	// 后置节点 
+    void *value;			// 节点的值
+} listNode;
+typedef struct list {
+	// 双端无环
+    listNode *head;							// 表头节点
+    listNode *tail;							// 表尾节点
+	// 三个函数指针，用以实现多态，设定特定函数
+    void *(*dup)(void *ptr);				// 节点值复制函数
+    void (*free)(void *ptr);				// 节点值释放函数
+    int (*match)(void *ptr, void *key);		// 节点值对比函数
+    unsigned long len;						// 链表所包含的节点数量
+} list;
+--------------------------------------------------------------------------------------------------------------
+(3)字典（符号表、关联数组、映射）：一种用于保存键值对的抽象数据结构
+1.HLEN key 				// 获取一个哈希表的键值对个数
+2.HGETALL key			// 获取一个哈希表中的所有键值
+typedef struct dictEntry {
+    void *key;							// 键
+    union {
+        void *val;
+        uint64_t u64;
+        int64_t s64;
+    } v;								// 值
+    struct dictEntry *next;				// 指向下个哈希表节点，形成链表
+} dictEntry;
+typedef struct dictht {
+    dictEntry **table;					// 哈希表数组
+    unsigned long size;					// 哈希表大小
+    unsigned long sizemask;				// 哈希表大小掩码，用于计算索引值，总是等于size - 1
+    unsigned long used;					// 该哈希表已有节点的数量
+} dictht;
+typedef struct dictType {
+    unsigned int (*hashFunction)(const void *key);							// 计算哈希值的函数
+    void *(*keyDup)(void *privdata, const void *key);						// 复制键的函数
+    void *(*valDup)(void *privdata, const void *obj);						// 复制值的函数
+    int (*keyCompare)(void *privdata, const void *key1, const void *key2);	// 对比键的函数
+    void (*keyDestructor)(void *privdata, void *key);						// 销毁键的函数
+    void (*valDestructor)(void *privdata, void *obj);						// 销毁值的函数
+} dictType;
+typedef struct dict {
+    dictType *type;				// 类型特定函数
+    void *privdata;				// 私有数据
+    dictht ht[2];				// 哈希表ht[0]被使用，ht[1]在rehash时使用
+    int rehashidx;  			// rehash 索引，当 rehash 不在进行时，值为 -1
+    int iterators; 				// 目前正在运行的安全迭代器的数量
+} dict;
+hash = dict->type->hashFunction(k0);
+index = hash & dict->ht[0].sizemask;  // 采用链地址发法，解决键冲突
+3.rehash策略
+收缩、扩展原则，都是：ht[1]大小为第一个大于或等于ht[0].used*2的（2的n次方幂）
+然后ht[0]上的所有键值对，rehash到ht[1]上
+释放ht[0],将ht[1]设置为ht[0]，并在ht[1]新创建一个空白哈希表，为下次rehash做准备
+4.何时收缩或扩展
+负载因子load_factor = ht[0].used / ht[0].size
+①未执行BGSAVE或者BGREWRITEAOF，负载因子>=1，扩展
+②正在执行BGSAVE或者BGREWRITEAOF，负载因子>=5，扩展
+③负载因子<0.1，收缩
+5.rehash是渐进式的，数据很多时，一次性操作十分耗时，分摊到对字典的每个添加、删除、查找操作上，
+------------------------------------------------------------------------------------------------------------
+(4)跳跃表
+ZADD salary 2000 tom
+ZADD salary 5000 jack		// 有序集合中添加两个成员，各自具有一个价值
+ZCARD salary				// 有序集合的元素个数
+ZRANGE salary index-start index-end [WITHSCORES]	// 输出有序集合的index-start到index-end，带有价值
+在同一个跳跃表中，各个节点保存的成员对象必须是唯一的，但是多个节点保存的分值却可以是相同的。
+typedef struct zskiplistNode {
+    robj *obj;							// 成员对象
+    double score;						// 分值
+    struct zskiplistNode *backward;		// 后退指针
+    struct zskiplistLevel {				
+        struct zskiplistNode *forward;	// 前进指针
+        unsigned int span;				// 跨度
+    } level[];							// 层(1-32的随机数)
+} zskiplistNode;
+typedef struct zskiplist {
+    struct zskiplistNode *header, *tail;	// 表头节点和表尾节点
+    unsigned long length;					// 表中节点的数量
+    int level;								// 表中层数最大的节点的层数
+} zskiplist;								
+---------------------------------------------------------------------------------------------------------------
+(5)整数集合
+SADD numbers 1 3 5 7 9			// 创建一个集合，有5个元素
+typedef struct intset {
+    uint32_t encoding;		// 编码方式
+    uint32_t length;		// 集合包含的元素数量
+    int8_t contents[];		// 保存元素的数组
+} intset;
+虽然intset结构将contents属性声明为int8_t，实际上其类型由encoding决定
+encoding=INTSET_ENC_INT16、INTSET_ENC_INT32、INTSET_ENC_INT64，对应int16_t、int32_t、int64_t
+存在升级操作，当一个新加入数是int64_t，其它数据也被升级到int64_t（节约内存），但是不再降级
+该新加入元素，小于所有现有元素，放开头；新加入元素，大于所有现有元素，放结尾
+--------------------------------------------------------------------------------------------------------------
+(6)压缩列表（ziplist）
+当一个列表键只包含少量列表项，并且每个列表要么就是小整数值，要么就是长度较短的字符串，那么就使用压缩列表来实现
+RPUSH lst 1 3 5 10086 "hello" "world"
+HMSET profile "name" "Jack" "age" 28 "job" "Programmer"		// 往一个列表中加入多个键值对
+非空 ziplist 示例图
+
+area        |<---- ziplist header ---->|<----------- entries ------------->|<-end->|
+
+size          4 bytes  4 bytes  2 bytes    ?        ?        ?        ?     1 byte
+            +---------+--------+-------+--------+--------+--------+--------+-------+
+component   | zlbytes | zltail | zllen | entry1 | entry2 |  ...   | entryN | zlend |
+            +---------+--------+-------+--------+--------+--------+--------+-------+
+                                       ^                          ^        ^
+address                                |                          |        |
+                                ZIPLIST_ENTRY_HEAD                |   ZIPLIST_ENTRY_END
+                                                                  |
+                                                        ZIPLIST_ENTRY_TAIL
+*/
+typedef struct zlentry {
+    // prevrawlen ：前置节点的长度; prevrawlensize ：编码 prevrawlen 所需的字节大小
+    unsigned int prevrawlensize, prevrawlen;
+    unsigned int lensize, len;			// len ：当前节点值的长度; lensize ：编码 len 所需的字节大小
+    unsigned int headersize;			// 当前节点 header 的大小; 等于 prevrawlensize + lensize
+    unsigned char encoding;				// 当前节点值所使用的编码类型
+    unsigned char *p;					// 指向当前节点的指针
+} zlentry;
+上述紧凑的结构，对压缩链表的增加元素、删除元素，将引发连锁更新
+--------------------------------------------------------------------------------------------------------------
+(7)对象
+Redis并没有直接使用(1)-(6)的数据结构来实现键值对数据库，而是基于这些数据结构，创建了一个对象系统。
+其中包含对象有：字符串对象、列表对象、哈希对象、集合对象、有序集合对象
+此外，Redis对象系统还实现了，基于引用计数的内存回收机制，当程序不再使用某个对象时，对象所占用的内存会被自动释放
+typedef struct redisObject {
+    unsigned type:4;				// 类型
+    unsigned encoding:4;			// 编码
+    unsigned lru:REDIS_LRU_BITS; 	// 对象最后一次被访问的时间
+    int refcount;					// 引用计数
+    void *ptr;						// 指向实际值的指针
+} robj;
+对于数据库保存的键值对来说，键总是一个字符串对象，而值可以是字符串对象、列表对象、哈希对象、集合对象、有序集合对象
+type = REDIS_STRING、REDIS_LIST、REDIS_HASH、REDIS_SET、REDIS_ZSET
+TYPE msg		// 指令返回msg键，对应值的对象类型（string、list、hash、set、zset）
+encoding 类型定义如下
+#define REDIS_ENCODING_RAW 0     /* Raw representation 简单动态字符串*/		<->REDIS_STRING
+#define REDIS_ENCODING_INT 1     /* Encoded as integer long类型整数*/	<->REDIS_STRING
+#define REDIS_ENCODING_HT 2      /* Encoded as hash table 字典*/	<->REDIS_HASH、REDIS_SET
+#define REDIS_ENCODING_ZIPMAP 3  /* Encoded as zipmap 其实质是用一个字符串数组来依次保存key和value*/
+#define REDIS_ENCODING_LINKEDLIST 4 /* Encoded as regular linked list 双端链表*/	<->REDIS_LIST
+#define REDIS_ENCODING_ZIPLIST 5 /* Encoded as ziplist 压缩列表*/	<->REDIS_LIST、REDIS_HASH、REDIS_ZSET
+#define REDIS_ENCODING_INTSET 6  /* Encoded as intset 整数集合*/	<->REDIS_SET
+#define REDIS_ENCODING_SKIPLIST 7  /* Encoded as skiplist 跳跃表和字典*/	<->REDIS_ZSET
+#define REDIS_ENCODING_EMBSTR 8  /* Embedded sds string encoding embstr编码的简单动态字符串*/	<->REDIS_STRING
+OBJECT ENCODING msg	
+//指令返回msg键，对应值的编码类型（int、embstr、raw、hashtable、linkedlist、ziplist、intset、skiplist）
+//以上type和encoding的实现，极大地提升了Redis的灵活性和效率
+OBJECT REFCOUNT msg		// 返回对象的引用计数
+OBJECT IDLETIME	msg		// 返回对象有多久没被使用过了
+1.字符串对象（string）：可以使用int，raw，embstr来实现
+embstr实现将raw实现的中两次分配操作（redisObject和sdshdr），合并为一次，内存是连续的，提高了效率
+对embstr字符串执行任何修改命令时，程序会先将对象编码从embstr->raw
+SET、GET、APPEND、INCRBYFLOAT、INCRBY、DECRBY、STRLEN、
+SETRANGE key offset value、GETRANGE key start end
+2.列表对象（list）：可以使用ziplist或者linkedlist来实现
+①列表对象保存的所有字符串元素的长度都小于64字节  &  ②列表对象保存的元素数量小于512，才使用ziplist实现
+上限值可修改，在list-max-ziplist-value和list-max-ziplist-entries
+当加入元素后，不满足①②条件，则转换成linkedlist编码
+LPUSH、RPUSH、LPOP、RPOP、LINDEX key index、LLEN、LINSERT key BEFORE|AFTER pivot(轴元素) value、
+LREM key count value、LTRIM key start stop、LSET
+3.哈希对象（hash）：可以使用ziplist或者hashtable来实现
+如果以ziplist编码：调用三次HSET，加入3个键值对后，压缩链表内key1,value1,key2,value2,key3,value3保存了6个元素
+①哈希对象保存的所有键值对的键和值的长度都小于64字节  &  ②哈希对象保存的键值对数量小于512，才使用ziplist实现
+上限值可修改，在hash-max-ziplist-value和hash-max-ziplist-entries
+当加入元素后，不满足①②条件，则转换成hashtable编码
+HSET hash field value、HGET hash field、HEXISTS hash field、HDEL hash field [field …]、HLEN、HGETALL
+4.集合对象（set）：可以使用intset或者hashtable来实现
+①集合对象保存的所有元素都是整数值	& ②集合对象保存的元素数量不超过512个， 才使用intset实现
+上限值可修改，set-max-intset-entries
+当加入元素后，不满足①②条件，则转换成hashtable编码
+SADD、SCARD（返回元素数量）、SISMEMBER、SMEMBERS、SRANDMEMBER、SPOP（随机删除一个元素并返回）、SREM key member
+5.有序集合对象（zset）：可以使用ziplist或者skiplist来实现
+如果使用ziplist编码：压缩链表保存成员1，分值1，成员2，分值2
+如果使用skiplist编码
+typedef struct zset {
+	zskiplist *zsl;
+	dict *dict;			//保存成员到分值的映射
+} zset;
+虽然既有跳跃表，又有字典，但是数据不重复，因为通过指针共享相同的成员和分值
+①有序集合保存的元素数量小于128个 & ②有序集合保存的所有元素成员的长度都小于64字节，才使用ziplist实现
+上限值可修改，在zset-max-ziplist-value和zset-max-ziplist-entries
+当加入元素后，不满足①②条件，则转换成skiplist编码
+ZADD key score member [[score member] [score member] …]、ZCARD key（返回元素数量）、ZCOUNT key min max（值范围内元素）、
+ZRANGE key start stop [WITHSCORES]（index范围内递增）、ZREVRANGE key start stop [WITHSCORES]（index范围内递减）、
+ZRANK key member（成员的正向排名）、ZREVRANK key member（成员的逆向排名）、
+ZREM key member、ZSCORE key member
+-----------------------------------------------------------------------------------------------------------------
+(8)对象的使用
+1.Redis中用于操作键的命令基本上可以分为两种类型：
+①可对任何键
+DEL删除、EXPIRE key seconds设置自动过期时间、RENAME重命名、TYPE类型、OBJECT命令等
+②只能对特定类型的键：见（7）中描述，Redis在执行前会先做类型检查
+2.内存回收
+typedef struct redisObject {
+	...
+    int refcount;					// 引用计数
+} robj;
+创建一个新对象时，引用refcount初始化为1，被新程序使用+1，不在被一个程序使用-1，变为0时，释放
+3.对象共享（只对包含整数值的字符串对象进行共享0-9999，不然判断相同太耗时了）
+将数据库键的值指针指向一个现有的值对象，被共享的值对象的引用计数+1
+创建共享字符串对象的数量可以通过修改redis.h/REDIS_SHARED_INTEGERS常量来修改
+-----------------------------------------------------------------------------------------------------------------
+第二部分、单机数据库的实现
+(1)数据库
+1.Redis服务器将所有数据库都保存在服务器状态redis.h/redisServer结构的db数组中，每一项都是redis.h/redisDb结构
+struct redisServer{
+	// ...
+	redisDb *db;			// 保存着服务器中所有数据库的数组
+	int	dbnum;				// 服务器的数据库数量，由配置的databases选项决定
+	// ...
+};
+2.切换数据库 SELECT index（0~databases-1）
+在服务器内部，客户端状态redisClient结构的db属性记录了客户端当前的目标数据库
+typedef struct redisClient{
+	// ...
+	redisDb *db;		// 指向当前select的数据库
+	// ...
+} redisClient;
+为了避免对数据库进行误操作，在执行Redis命令特别是像FLUSHDB（清空）这样危险命令之前，最好先执行一个SELECT命令，显示切换一下
+3.数据库键空间
+typedef struc redisDb{
+	// ...
+	dict *dict;	// 数据库键空间，保存着数据库中的所有键值对
+	// ...
+} redisDb;
+RANDOMKEY			// 随机返回一个key
+KEYS pattern(*)		// 按照某种模式返回keys
+INFO stats			// 查看数据库的属性
+4.设置键的过期时间
+TIME								// 获取UNIX时间戳
+EXPIRE/PEXPIRE key seconds 			// 以秒/毫秒设置过期时间。seconds是多少时间后过期
+EXPIREAT/PEXPIREAT key timestamp	// 命令用于将键key的过期时间设置为timestamp（秒级/毫秒级）
+TTL/PTTL							// 以秒/毫秒返回键的过期时间
+redisDb结构的expires字典保存了数据库中所有键的过期时间，我们称这个字典为过期字典
+typedef struct redisDb{
+	// ...
+	dict *expires;			// 过期字典，保存着键的过期时间
+	// ...
+} redisDb;
+过期字典的键是一个指针，指向键空间中的某个键对象（数据库键）
+过期字典的值是一个long long类型的整数，这个整数保存了键所指向的数据库键的过期时间，一个毫秒精度的时间戳
+PERSIST				// 消除一个键的过期时间
+5.过期键删除策略
+被动删除：
+【①惰性删除】，放任不管，每次从键空间取键时，检查键是否过期，过期就删除
+缺点：对内存不友好，键已经过期了，仍然保留，又没有被访问的化，就会一直残留着，可以视为一种“内存泄漏”
+主动删除：
+②定时删除，设置过期时间时，创建一个定时器（timer），让定时器在键过期时间来临时，立即执行对键的删除操作
+缺点：对CPU不友好，如果过期键比较多的话，要占用很长时间的CPU，在内存不紧张，CPU紧张时，对吞吐量造成很大影响
+同时，还需要创建大量的定时器，【现阶段不现实】
+【③定期删除】，每隔一段时间，程序对数据库进行一次检测，删除过期键
+是①和②的折中，难点在于如何确定删除操作的时长和频率
+太频繁，执行时间太长，退化为定时删除；执行太少，执行时间太短，退化为定时删除
+6.过期键删除的实现：
+【①惰性删除】：db.c/expireIfNeeded函数实现
+每次数据库读写时，都会调用expireIfNeeded函数对键进行检查，过期删除，未过期不做动作
+【③定期删除】：redis.c/activeExpireCycle函数实现
+每当Redis服务周期性操作，redis.c/serverCron函数执行时，activeExpireCycle函数就会被调用
+在规定时间内，分多次遍历服务器中的各个数据库，随机检查并删除过期键
+期间若果返回了，全局变量保存当前检查到的数据库[0]，下次调用activeExpireCycle接着从这个数据库[0]删
+若检查到了数据库个数上限[15]，那么返回数据库[0]中删键
+7.RDB持久化、AOF持久化和复制功能对过期键的处理
+①RDB持久化中：
+SAVE或者BGSAVE时，创建新的RDB文件，过期的键不会被保存
+RDB载入时：服务器以主服务器模式运行，过期键会被忽略，不载入，以从服务器模式运行时，都会被载入，不过主从同步时，问题会消除，没影响
+②AOF持久化中：
+当过期键被惰性删除或者定期删除后，程序会向AOF文件追加一条，DEL命令，来显示的记录该键已被删除
+生成AOF文件时，与生成RDB文件类似，过期键不会被保存
+③复制模式：
+服务器此模式下运行时，从服务器的过期键删除动作由主服务器控制。
+保证数据一致性，就算从服务器有cli访问过期键，也不删除，必须等主服务器来同步。
+8.数据库通知和订阅
+redis> subscribe msg chat_room
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"       # 返回值的类型：显示订阅成功
+2) "msg"             # 订阅的频道名字
+3) (integer) 1       # 目前已订阅的频道数量
+##############################################
+1) "subscribe"
+2) "chat_room"
+3) (integer) 2
+##############################################
+1) "message"         # 返回值的类型：信息
+2) "msg"             # 来源(从那个频道发送过来)
+3) "hello moto"      # 信息内容
+##############################################
+1) "message"
+2) "chat_room"
+3) "testing...haha"
+此外，
+“某个键执行了什么命令”：键空间通知（key-space notification） SUBSCRIBE __keyspace@0__:message
+“某个命令被什么键执行了”：键事件通知（key-event notification） SUBSCRIBE __keyevent@0__:del
+发送通知，在notifiy.c/notifyKeyspaceEvent函数实现
+----------------------------------------------------------------------------------------------------------------
+(2)RDB持久化
+SAVE	// 会阻塞Redis服务器进程，直到RDB文件创建完毕为止
+BGSAVE	// 会fork一个子进程，然后由子进程负责RDB文件的创建，父进程继续处理命令请求
+1.RDB文件的创建和写入
+创建RDB文件，由rdb.c/rdbSave函数完成
+AOF文件的更新频率比RDB文件的更新频率高，如果开启了AOF持久化功能，会优先使用AOF文件来还原文件
+载入RDB文件，由rdb.c/rdbLoad函数完成
+struct redisServer{
+	// ...
+	struct saveparam *saveparams;		// 记录了保存条件的数组，由conf文件配置
+	long long dirty;					// 修改计数器（距离上次保存，进行了多少次修改）
+	time_t lastsave;					// 上一次执行保存的时间
+	// ...
+};
+struct saveparam{
+	time_t seconds;		// 秒数
+	int changes;		// 修改数
+};										// seconds秒内，修改了changes次，则保存，调用BGSAVE
+Redis的服务器周期性操作函数serverCron默认每隔100毫秒就会执行一次，查看条件是否满足，满足就BGSAVE
+RDB文件结构
+REDIS|db_version|【SELECTDB|0|pairs】|【SELECTDB|3|pairs】|EOF|check_sum
+pairs中的一个: [EXPIRETIME_MS|ms] （有过期时间的键，可选）| 【TYPE|key|value】
+2.查看RDB文件，od -c dump.rdb 
+-----------------------------------------------------------------------------------------------------------------
+(3)AOF持久化(Append Only File)
+通过保存Redis服务器所执行的写命令来记录数据库状态的，即AOF文件里保存的是一条条指令
+三个步骤：配置 appendonly yes
+struct redisServer{
+	// ...
+	sds aof_buf;		// AOF缓冲区
+	// ...
+};
+1.命令追加
+SET key value，之后，在aof_buf缓冲区，追加内容：*3\r\n$3\r\nSET\r\n$3\r\nkey\r\n$5\r\nvlaue\r\n
+2.文件写入 和 3.文件同步   flushAppendOnlyFile函数，行为由appendfsync配置决定
+appendfsync always			// aof_buf所有内容写入，并同步到AOF文件，安全性最高，但是效率最慢，最多丢失一个命令数据
+appendfsync everysec		// aof_buf所有内容写入，距离上次同步，必须超过一秒钟，才能同步，最多丢失一秒数据
+appendfsync no				// aof_buf所有内容写入，并不同步，何时同步，由系统决定，容易丢失数据
+// 以上所说的同步，是指系统缓存内容真正写入到磁盘中
+// Redis的服务器周期性操作函数serverCron默认每隔100毫秒就会执行一次，如果aof_buf有数据，会写入AOF文件
+4.启动之前，建立一个伪客户端，逐条执行保存下来的指令即可，还原回之前的状态
+5.AOF文件的大小很容易膨胀：【解决办法-AOF文件重写】【BGREWRITEAOF】
+BGREWRITEAOF，并不读原来的AOF文件，直接分析当前DB的状态，然后简化为一条新的命令，代替原来AOF中的多条命令
+重写子进程在后台运行，这时候主进程可能还有收到写命令，这些命令需要同时加入到AOF重写缓冲区、AOF缓冲区
+重写完毕，子进程告知父进程，父进程将重写缓冲区的内容写到新AOF文件中，然后把旧的AOF文件覆盖掉
+-----------------------------------------------------------------------------------------------------------------
+(4)事件
+Reids服务器是一个事件驱动程序，主要有两类事件：【文件事件】、【时间事件】
+1.文件事件：套接字、I/O多路复用程序、文件事件分派器、事件处理器（函数）
+多路复用的代码，ae.h、ae.c、ae_epoll.c、ae_evport.c、ae_kqueue.c、ae_select.c
+事件类型：AE_READABLE和AE_WRITABLE，优先处理可读事件
+事件处理器（networking.c）：
+连接应答处理器(acceptTcpHandler)、命令请求处理器(readQueryFromClient)、命令回复处理器(sendReplyToClient)
+2.时间事件（id，when，timeProc）：定时事件（目前版本没有）、周期性事件
+持续运行的Redis服务器需要定期对自身的资源和状态进行检查和调整，从而确保服务器可以长期、稳定的运行（serverCron函数）
+serverCron函数，每间隔100毫秒运行一次（默认）。修改redis.conf中的hz选项来修改（每秒运行次数）
+-----------------------------------------------------------------------------------------------------------------
+(5)客户端
+遍历clients链表来找到某个连接在服务器上的客户端
+struct redisServer{
+	// ...
+	list *clients;		// 一个链表，保存了所有客户端状态（redisClient）
+	// ...
+};
+typedef struct redisClient{
+	// ...
+	int fd;			// 文件描述符
+	robj *name;		// 客户端名字
+	int flags;		// 客户端类型、状态
+	// ...	
+} redisClient;	
+【伪客户端】：fd的属性值为-1，伪客户端的命令请求来源于AOF文件或者Lua脚本，而不是网络
+【普通客户端】：fd为大于-1的整数，用来与服务器通信。
+CLIENT list查看连接到服务器上的客户端信息。
+CLIENT setname xuguanglong 设置客户端的名称。
+2.客户端请求命令，命令参数
+typedef struct redisClient{
+	// ...
+	sds querybuf;	// 保存客户端发送的命令请求
+	robj **argv;	// 是一个数组，数组中每一项是一个字符串对象，argv[0]是要执行的命令，之后的命令参数
+	int argc;		// 记录argv的长度
+	struct redisCommand *cmd;		// 见下面解释
+	// ...	
+} redisClient;
+系统保存了一份命令表，键是一个SDS结构，保存了命令的名字，值是命令所对应的redisCommand结构，根据argv[0]找到对应的结构，让cmd指向之
+3.输出缓冲区（指令的执行结果，保存在其中）
+有两个缓冲区：
+一个缓冲区大小固定（保存OK，简短字符串值等较小的回复）
+typedef struct redisClient{
+	// ...
+	char buf[REDIS_REPLY_CHUNK_BYTES];			// 字节数组
+	int bufpos;									// 保存buf数组目前已使用的字节数量
+	// ...
+} redisClient;
+另一个缓冲区大小是可变的（如下），由reply链表和一个或多个字符串对象组成
+typedef struct redisClient{
+	// ...
+	list *reply;				// 一个又一个StringObject，连接起来		
+	// ...
+} redisClient;
+4.身份验证，上述结构中，还有一个int authenticated;字段  0表示未通过验证，1表示通过了验证
+5.时间相关的属性
+typedef struct redisClient{
+	// ...
+	time_t ctime;							// 记录了创建客户端的时间
+	time_t lastinteraction;					// 记录了客户端与服务器最后一次进行互动（interaction）的时间
+	time_t obuf_soft_limit_reached_time;	// 记录了输出缓冲区第一次到达软性限制（soft limit）的时间
+	// ...
+} redisClient;
+6.配置项
+硬性限制：如果输出缓冲区大小超过了硬性限制所设置的大小，那么立刻关闭客户端
+软性限制：如果输出缓冲区大小超过了软性性限制所设置的大小，服务器，记录下该客户端达到软性限制的起始时间，如果在设置time范围内降下来了，就不关，并且obuf_soft_limit_reached_time也会被清零，从新计算。
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+第一行设置普通客户端的硬性限制和软性限制都为0，表示不限制客户端的输出缓冲区大小
+第二行设置将从服务器客户端的硬性限制设置为256MB，软性限制设置为64MB，软性限制时长60秒
+第三行设置将从服务器客户端的硬性限制设置为32MB，软性限制设置为8MB，软性限制时长60秒
+-----------------------------------------------------------------------------------------------------------------
+(6)服务器
+1.命令请求的执行过程
+①数据的传输和指令的查询
+客户端键入 set key value，转为协议内容，发往服务器：*3\r\n$3\r\nSET\r\n$3\r\nkey\r\n$5\r\nvlaue\r\n
+服务器将此内容保存到redisClient.querybuf，然后进行分析，提取出指令和参数argv、argc
+根据argv[0]，查找命令表commandtable，将找的redisCommand保存到，redisClient.cmd
+②执行预备操作
+检查cmd指针是否指向NULL，说明没这么个执行，向客户端返回一个错误
+查看cmd指向的redisCommand结构arity，检查命令请求所给定的参数个数是否满足
+查看是否通过了身份验证，redisClient.authenticated为0是，只能执行AUTH指令
+如果服务器打开了maxmemory功能，那么在执行命令之前，先检查内存占用情况。。。。。等等一些判定指令的动作
+③函数调用，执行指令
+返回的回复，被加入到redisClient.buf或者redisClient.reply中
+④执行后续工作
+如果有日志功能，写日志
+更新redisCommand关于指令执行时间，指令执行次数的计数值
+如果开启了AOF功能，会有AOF持久化动作，写入AOF缓冲区
+如果有其他从服务器在复制这个服务器，那么服务器会将刚刚执行的命令传播给所有从服务器
+⑤将redisClient.buf或者redisClient.reply中的缓冲数据，发送给客户端，并清空，以备下一个指令
+⑥客户端将返回的数据，在界面上进行展示
+2.serverCron函数
+①更新服务器时间缓存
+struct redisServer{
+	time_t unixtime;		// 保存了秒级精度的系统当前UNIX时间戳，serverCron函数每100毫秒更新一次
+	long long mstime;		// 保存了毫秒级精度的系统当前UNIX时间戳，serverCron函数每100毫秒更新一次
+	unsigned lruclock:22;	// 时钟值，serverCron函数每10秒更新一次
+};
+lruclock-对象中的lru，就是键的空闲时间，但是10秒更新一次的时钟，不是实时的
+②更新服务器每秒执行命令次数
+INFO status命令的instantaneous_ops_per_sec域查看
+struct redisServer{
+    long long ops_sec_last_sample_time; 				// 最后一次进行抽样的时间 
+    long long ops_sec_last_sample_ops; 					// 最后一次抽样时，服务器已执行命令的数量
+    long long ops_sec_samples[REDIS_OPS_SEC_SAMPLES];	// 抽样结果		
+    int ops_sec_idx;									// 数组索引，用于保存抽样结果，并在需要时回绕到 0
+};
+serverCron中的traceOperationsPerSecond函数每100毫秒运行一次，计算前两个字段的插值，计算1秒执行多少指令
+这个估计值被放在ops_sec_samples数组中，并且由ops_sec_idx所指向
+③redisServer.stat_peak_memory			// 记录了服务器内存峰值大小，每次serverCron都会回去当前内存，然后更新一次
+INFO memory命令的used_memory_peak、used_memory_peak_human域查看
+④Redis的SIGTERM信号处理函数sigtermHandler，在接收到信号后，会设redisServer.shutdown_asap
+每次serverCron，检查这个标识，如果是1，则关闭服务器
+⑤redisServer.aof_rewrite_scheduled			// BGSAVE会延迟BGREWRITEAOF，调用serverCron时，这个标志为1，则执行被推后的指令
+redisServer.rdb_child_pid
+redisServer.aof_child_pid					// 如果为>-1的整数，说明有BGSAVE或BGREWRITEAOF在执行
+⑥serverCron函数每次执行，都会调用clientsCron函数，检查：
+如果客户端与服务器连接已超时，释放该客户端，
+如果客户端上一次命令请求，输入缓冲区超过了一定长度，释放，重新创建一个默认大小缓冲区
+⑦serverCron函数每次执行，都会调用databasesCron函数，删除过期键
+⑧redisServer.cronloops				// 记录了serverCron函数执行的次数
+3.初始化服务器
+①初始化服务器状态结构 reids.c/initServerConfig
+void initServerConfig() {
+	// 设置服务器的运行 ID
+    getRandomHexChars(server.runid,REDIS_RUN_ID_SIZE);
+    // 设置默认配置文件路径
+    server.configfile = NULL;
+    // 设置默认服务器频率
+    server.hz = REDIS_DEFAULT_HZ;
+    // 为运行 ID 加上结尾字符
+    server.runid[REDIS_RUN_ID_SIZE] = '\0';
+    // 设置服务器的运行架构
+    server.arch_bits = (sizeof(long) == 8) ? 64 : 32;
+    // 设置默认服务器端口号
+    server.port = REDIS_SERVERPORT;
+	...
+	// 加载命令表
+}
+②载入配置选项  --port redis.conf等
+③初始化除命令表之外的数据结构
+server.clients链表，server.db数组，保存订阅信息的server.pubsub_channels字典、server.pubsub_patterns链表
+执行Lua脚本的Lua环境server.lua，server.slowlogs（保存慢查询日志）
+④其它操作
+为服务器设置信号处理器、创建共享对象、打开服务器监听端口、为serverCron创建时间时间
+AOF功能打开时，创建并打开一个AOF文件。。。【打印版本信息】redis图
+⑤还原数据库
+载入RDB、AOF持久化文件等等。
+至此圆满完成，输出可以等待客户端连接了。
+-----------------------------------------------------------------------------------------------------------------
+第三部分、多机数据库的实现
+(1)复制
+假设有两个Redis服务器，地址分别为127.0.0.1:6379、127.0.0.1:12345，
+向服务器127.0.0.1:12345发送命令：SLAVEOF 127.0.0.1 6379，本服务器就变成了从服务器，指定对象成为主服务器
+主服务器的数据会同步到从服务器之上，两者保持着数据一致性
+ROLE			// 查看服务器角色的命令
+1.旧版复制功能的实现
+①同步操作：用于将从服务器的数据库状态更新至主服务器当前所处的数据库状态
+从服务器向主服务器发送SYNC命令
+收到SYNC命令的主服务器执行BGSAVE命令，在后台生成一个RDB文件，使用一个缓冲区记录从现在开始执行的所有写命令
+当主服务器BGSAVE命令执行完毕时，主服务器将生成RDB发送给从服务器，从服务器接收并载入这个RDB文件，更新从服务器状态
+主服务器将缓冲区的写指令，发送给从服务器，从服务器执行这些写指令
+②命令传播操作：主服务器状态被修改，导致主从不一致时，使其重新一致
+每次主服务器执行写指令时，就往从服务器，发送该指令，使从服务器执行该指令
+【缺点】：从服务器断线重连，要重新把主服务器的所有数据同步回来，其中很多是之前已经保持同步的重复数据，低效
+2.新版本复制功能的实现
+PSYNC命令具有完整重同步和部分重同步两种模式（用于断线重连时复制）
+【部分重同步的实现细节】
+①主服务器的复制偏移量和从服务器的复制偏移量（replication offset）
+主服务器每次向从服务器传播N个字节的数据时，就将自己的复制偏移量的值加上N
+从服务器每次收到主服务器传播来的N个字节的数据时，就将自己的复制偏移量的值加上N
+主、从服务器的复制偏移量不相同，则不一致，相同，则是一致状态
+②主服务器的复制积压缓冲区（replication backlog）
+主服务器执行完一条写命令后，不仅发往从服务器，同时也会加入到复制积压缓冲区中
+从服务器重连后，PSYNC命令会将自己的复制偏移量，传递给主服务器
+如果offset之后的数据还在缓冲区中，那么执行传送，部分同步，如果布不在，那就只能完全同步了
+③服务器的运行ID（run ID）
+从服务器初次复制时，要保存主服务器的运行ID，这样子，断线重连主服器，校验一下，以防之前连接的不是此主服务器。同步错误。
+PSYNC master_run_id offset
+3.复制的实现
+SLAVEOF master_ip master_port之后，保存如下信息
+struct redisServer{
+	// ...
+	char *masterhost;			//主服务器地址
+	int masterport;				//主服务器的端口
+	// ...
+};
+建立连接套接字
+主服务器接受从服务器的连接之后，把从服务器视为一个客户端对待，从服务器发送SYNC，PSYNC请求同步
+传输之前，先发一个PING，如果超时，则网络不佳，那么断开重连，重建套接字
+身份验证：视从服务器是否设置了masterauth选项来定，主服务器的requirepass选项设置了密码
+4.此外，从服务器默认以每秒一次的频率，向主服务发送心跳检测。确保网络连接正常，以防数据丢失。
+------------------------------------------------------------------------------------------------------------------
+(2)Sentinel（一个特殊的Redis服务器）
+Sentinel（哨岗、哨兵）是Redis的高可用性解决方案，监视多个主服务器，及其从服务器
+某个主服务下线时，使其随机一个从服务器升级为主服务器（slaveof no one），其余从服务器成为新主服务器的从服务器
+1.启动并初始化Sentinel
+redis-sentinel sentinel.conf
+redis-server sentinel.conf --sentinel（跟上一条指令效果一样）
+①初始化服务器
+普通服务器，要载入RDB、AOF文件，Sentinel不用，还有数据库和键值对指令等也都不用，因为Sentinel就是用来监控用的
+②将普通服务器使用的代码替换成Sentinel专用代码
+端口号和普通服务器不同，指令表也不同
+③初始化Sentinel状态
+④根据配置文件，监视主服务器。连接主服务器
+sentinel monitor mymaster 127.0.0.1 6666 2			// 要监视的主服务器，2表示quorum，表示当有2个sentinel认为下线之后，就客观认为下线
+sentinel down-after-milliseconds mymaster 30000		// 主服务器失联多久认为是主观下线
+sentinel parallel-syncs mymaster 1					// 选项指定了在执行故障转移时，最多可以有多少个从服务器同时对新的主服务器进行同步 
+sentinel failover-timeout mymaster 180000			// 
+Sentinel与主服务创建两个异步连接，命令连接、订阅连接
+2.Redis 的 Sentinel 中关于下线（down）有两个不同的概念：
+主观下线（Subjectively Down， 简称 SDOWN）指的是单个 Sentinel 实例对服务器做出的下线判断。
+客观下线（Objectively Down， 简称 ODOWN）指的是多个 Sentinel 实例在对同一个服务器做出 SDOWN 判断,
+并且通过 SENTINEL is-master-down-by-addr 命令互相交流之后， 得出的服务器下线判断。 
+（一个 Sentinel 可以通过向另一个 Sentinel 发送 SENTINEL is-master-down-by-addr 命令来询问对方是否认为给定的服务器已下线。）
+3.启动redis-cli，指定sentinel服务器的IP和端口。执行下列指令
+SENTINEL masters ：列出所有被监视的主服务器，以及这些主服务器的当前状态；
+SENTINEL slaves <master name> ：列出给定主服务器的所有从服务器，以及这些从服务器的当前状态；
+SENTINEL get-master-addr-by-name <master name> ： 返回给定名字的主服务器的 IP 地址和端口号。 如果这个主服务器正在执行故障转移操作， 或者针对这个主服务器的故障转移操作已经完成， 那么这个命令返回新的主服务器的 IP 地址和端口号；
+SENTINEL reset <pattern> ： 重置所有名字和给定模式 pattern 相匹配的主服务器。 pattern 参数是一个 Glob 风格的模式。 重置操作清楚主服务器目前的所有状态， 包括正在执行中的故障转移， 并移除目前已经发现和关联的， 主服务器的所有从服务器和 Sentinel ；
+SENTINEL failover <master name> ： 当主服务器失效时， 在不询问其他 Sentinel 意见的情况下， 强制开始一次自动故障迁移。
+-------------------------------------------------------------------------------------------------------------------
+(3)集群(需要在redis.conf文件中配置，cluster-enabled yes)
+CLUSTER NODES					// 查看集群节点，就是clusterNode（见下面解释）的信息
+CLUSTER MEET [ipaddr port]		// 集群加入节点
+CLUSTER INFO 					// 查看集群信息
+一个节点加入集群后，通过Gossip协议，集群中的所有节点，都会知晓这个新加入的节点
+1.集群的数据结构
+cluster.h/clusterNode
+保存了一个节点的当前状态（创建时间，名字，IP地址和端口号），每个节点除了保存自己的节点信息，还会保存集群中其它节点的信息
+cluster.h/clusterLink
+保存了节点之间的连接信息，包括连接时间，套接字描述符，输入缓冲区，输出缓冲区
+cluster.h/clusterState
+保存了当前节点视角下，集群目前所处状态，例如集群是在线还是下线，集群包含多少个节点，集群当前的配置纪元
+2.槽指派
+Redis集群通过分片的方式来保存数据库中的键值对：
+集群的整个数据库被分为16384个槽（slot），数据库中的每个键都属于这16384个槽中的一个，每个节点可以处理0-16384个槽
+如果集群的16384个槽，都有节点处理时，称集群处于“上线状态”
+CLUSTER ADDSLOTS 5...5000
+redis-cli -h 服务器IP -p 端口号 cluster addslots {0..5460}
+struct clusterNode{
+	// ...
+	unsigned char slots[16384/8];		// 2048个字节元素，每个元素表示8位，一共表示16384位，记录每个节点分配的槽
+	int numslots;
+	// ...
+};
+typedef struct clusterState{
+	// ...
+	clusterNode *slots[16384];			// 表明各个槽分配了哪个节点
+	// ...
+};
+分配好槽之后，集群就被激活了，可以使用了，这样一来，各个节点处理各自的槽
+3.计算键属于哪个槽
+CLUSTER KETSLOT "date"				// 查看某个键属于哪个槽
+如果键对应槽，不由当前节点处理，则转给集群中的其它节点处理   MOVED <slot>(键所在槽) <ip>:<port>	
+4.节点数据库的实现
+节点和单机数据库的一大区别，节点只能使用0号数据库
+clusterState里用一个跳跃表（zskiplist * slots_to_keys），保存了槽和键的对应关系，分值就是槽号
+5.redis-trib程序用来给，集群的槽重新分配
+6.设置从节点
+CLUSTER REPLICATE <node_id>	
+-------------------------------------------------------------------------------------------------------------------
+第四部分、独立功能的实现
+(1)发布与订阅
+PUBLISH "news.it" "hello"			// 往频道发送消息
+SUBSCRIBE "news.it"					// 订阅某个频道
+UNSUBSCRIBE "news.it"				// 取消订阅某个频道
+PSUBSCRIBE "news.[ie]t" 		 	// 订阅满足某模式的多个频道
+PUNSUBSCRIBE "news.[ie]t"			// 取消订阅满足某模式的多个频道
+1.频道的订阅与退订
+struct redisSever{
+	// ...
+	dict *pubsub_channels			// 订阅信息，字典键是频道，值是一个链表，记录了所有订阅这个频道的客户端
+									// 字典中保存了很多条频道的订阅消息
+	// ...
+}; 
+2.模式的订阅与退订
+struct redisSever{
+	// ...
+	list *pubsub_patterns			// 链表中的每个节点都包含着一个pubsubPattern结构
+									// 链表中保存了很多条模式的订阅消息
+	// ...
+}; 
+typedef struct pubsubPattern
+{
+	redisClient *client;			// 订阅模式的客户端
+	robj *pattern;					// 被订阅的模式，如"news.*"
+};
+3.发送消息
+将消息发送给频道的订阅者，如果有一个模式或多个模式与频道相匹配，那么消息也将发送给pattern模式的订阅者
+4.查看订阅情况
+PUBSUB CHANNELS [pattern]
+不带pattern参数，那么命令返回服务器当前被订阅的所有频道
+带pattern参数，那么命令返回服务器当前被订阅的频道中，那些与模式想匹配的频道
+PUBSUB NUMSUB [channel-1 channel-2 ... channel-n] 	// 返回各个频道的被订阅数量
+PUBSUB NUMPAT 										// 返回服务器当前被订阅模式的数量
+--------------------------------------------------------------------------------------------------------------------
+(2)事务
+1.使用MULTI指令，客户端进入事务状态，client.flags |= REDIS_MULTI，表示后续指令都不断加入队列
+使用EXEC指令，执行加入队列的一系列指令，并返回结果
+typedef struct redisClient{
+	// ...
+	multiState mstate;		// 事务状态，MULTI/EXEC
+	// ...
+} redisClient;
+typedef struct multiState{
+	multiCmd *commands;		// 事务队列，FIFO顺序
+	int count;				// 已入对命令计数
+} multiState;
+typedef struct multiCmd{
+	robj **argv;				// 参数
+	int argc;					// 参数数量
+	struct redisCommand	*cmd;	// 命令指针		
+} multiCmd;
+2.WATCH命令（乐观锁，optimistic locking）
+在执行EXEC命令之前，监视任意数量的数据库键，并在EXEC执行时，检查被监视的键是否至少有一个已经被修改过了
+如果是的话，服务器将拒绝执行事务，返回失败
+A客户端：WATCH "name";MULTI;SET "name" "peter";		  			  ;EXEC（失败）
+B客户端：									    SET "name" "john"
+typedef struct redisDb{
+	// ...
+	dict *watched_keys;		// 正在被WATCH命令监视的键
+	// ...
+} redisDb;
+watched_keys字典的键是，被监视的键，值是，一个链表，表示监视该键的客户端
+每当有键被修改，那么遍历watched_keys字典，找到监视该键的客户端，client.flags |= REDIS_DIRTY_CAS，告知客户端，该键已修改
+3.事务的ACID性质
+①原子性Atomicity ②一致性Consistency
+MULTI之后，命令入队（参数错误）失败，那么EXEC是失败报错的，必须保证所有指令都正确，不然就是错误的
+但是如果是某指令执行错误，那么不影响其它指令的执行
+③隔离性Isolation
+数据库中有多个事务并发的执行，各个事务之间不会相互影响
+并且，在并发状态下执行的事务和串行执行的事务产生的结果完全相同（因为单线程，通过队列控制）
+④耐久性Durability
+RDB模式下时，隔一段时间，满足条件才会BGSAVE一次，不具备耐久性
+AOF模式下，appendfsync always时，真正的具有耐久性；appendfsync everysec时，每秒才真正存盘，不具有耐久性
+---------------------------------------------------------------------------------------------------------------------
+(3)Lua脚本
+EVAL "return 'hello world'" 0
+SCRIPT LOAD "return 2*2"		// 返回"231jhada1edadad1d2eqddd"校验和
+EVALSHA "231jhada1edadad1d2eqddd" 0		// 等同于执行EVAL "return 2*2" 0
+EVAL script numkeys key [key …] arg [arg …]
+EVAL "return redis.call('SET', KEYS[1], ARGV[1])" 1 "msg" "hello" 		// 1表明后面只有一个key其它是argv
+1.创建并修改Lua环境
+①服务器调用Lua的C-API:lua_open，创建一个新的Lua环境，但是为了满足redis要求，还要做修改
+②载入函数库
+基础库：Lua的核心函数，assert、error、pairs、tostring、pcall等，为了防止用户外部引入，loadfile函数被删除了
+表格库：table.concat、table.insert、table.remove、table.sort等
+字符串库：string.find、string.format、string.len、string.reverse等
+数学库：math.abs、math.max、mat.min、math.sqrt、math.log等
+调试库：debug.sethook、debug.gethook等
+CJSON库：cjson.decode将一个JSON格式字符串转换为一个Lua值，cjson.encode函数将一个Lua值序列化为JSON格式字符串
+Struct库：用于在Lua值和C结构之间进行转换，struct.pack、struct.unpack
+③创建redis全局表格
+就是在Lua环境中，创建一个redis调用表
+【redis.call、redis.pcall】、redis.log、redis.sha1hex、redis.error_reply、redis.status_reply
+EVAL "return redis.call('PING')" 0				// 返回PONG
+④使用Redis自制的随机数函数来替换Lua原有的随机函数
+因为：Redis要求所有传入服务器的Lua脚本，以及Lua函数，无副作用
+redis.pcall函数调用不正确的指令时，会返回错误，发生在脚本的位置
+⑤保护Lua的全局环境
+服务器将对Lua环境中的全局环境进行保护，确保传入服务器的脚本不会因为忘记使用local关键字而添加全局变量到lua环境中
+⑥将redisServer.lua指向创建好的lua环境
+2.Lua环境协作组件
+①应为Lua环境中，有redis.call和redis.pcall，执行redis指令，但是执行Redis指令，需要客户端，所以建立一个【伪客户端】
+②lua_scripts字典
+struct redisServer
+{
+	dict *lua_scripts;		// 键是某个Lua脚本的SHA1校验和，值为对应的Lua脚本
+};
+3.Redis中与Lua脚本有关的命令
+SCRIPT FLUSH 用于清除服务器中所有和Lua脚本有关的信息，这个命令会释放并重建lua_scripts字典，关闭Lua环境，重建一个Lua环境
+SCRIPT EXISTS 通过检查给定的校验和是否存在于lua_scripts字典
+SCRIPT LOAD	类似于EVAL，用于加载脚本
+SCRIPT KILL	停止某一个脚本
+4.脚本复制
+EVAL、SCRIPT FLUSH、SCRIPT LOAD、都会被发往从服务器执行
+---------------------------------------------------------------------------------------------------------------------
+(4)排序
+Redis的SORT命令可以对列表键、集合键、有序集合键的值进行排序
+①SORT key [ALPHA]		//[ALPHA表示是否按字母排序]
+②SORT key [ASC|DESC]		//升序排列（默认）或者降序排列
+③SORT key [BY pattern]
+比如MSET apple-price 8 banana-price 5.5 cherry-price 7，SADD fruits "apple" "banana" "cherry" 
+SORT fruits BY *-price，之后bananaπ第一个
+④SORT key [LIMIT offset count]	// 排序之后跳过offset数量开始，返回count数量
+⑤SORT key [GET pattern]
+SADD students "peter" "jack" "tom"
+SET peter-name "Peter White", SET jack-name "Jack Snow", SET tom-name "Tom Smith"
+SET peter-birth	1995-6-7, SET tom-birth 1995-8-16, SET jack-birth 1995-5-24
+SORT students ALPHA GET *-name GET *-birth，之后返回各个人的全名和出生日期
+⑥SORT key [STORE key2]			// 将键排序，然后保存到新的键中
+【综合】
+SORT <key> ALPHA DESC BY <by-pattern> LIMIT <offset> <count> GET <get-pattern> STORE <store_key>
+---------------------------------------------------------------------------------------------------------------------
+(5)二进制位数组（通过SDS来实现，SDS的一个字节元素，表示8位）
+SETBIT key position value			// 第position位设置为value
+GETBIT key position					// 返回第position位的值
+BITCOUNT key 						// 统计位数组里面，值为1的二进制位数量
+BITOP AND and-result key1 key2 		// 与操作
+BITOP OR or-result key1 key2 		// 并操作
+BITOP XOR xor-result key1 key2 		// 异或操作
+BITOP NOT and-result key1 key2 		// 非操作
+---------------------------------------------------------------------------------------------------------------------
+(6)慢查询日志
+两个服务器配置：
+slowlog-log-slower-than 指定执行时间超过多少微秒的命令请求会被记录到日志上
+slowlog-max-len			指定服务器最多保存多少条慢查询日志
+CONFIG SET slowlog-log-slower-than 0
+CONFIG SET slowlog-max-len 5
+SLOWLOG GET 
+1) 1) (integer) 4				#日志的唯一标识符（uid）
+   2) (integer) 1378781447		#命令执行是的UNIX时间戳
+   3) (integer) 13				#命令执行的时长，以微秒计算
+   4) 1) "SET"					#命令以及命令参数
+	  2) "database"
+	  3) "Redis"
+SLOWLOG LEN				// 获取日志长度
+SLOWLOG RESET			// 清空日志
+---------------------------------------------------------------------------------------------------------------------
+(7)监视器
+MONITOR指令，使得一个客户端变成一个监视器，实时接收并打印出服务器当前处理的命令请求信息
+每当一个客户端向服务器发送一条命令请求时，服务器除了处理还会，发送消息给监视器
+监视器的客户端client.flags |= REDIS_MONITOR
+redisSever.monitor是一个链表，保存了成为监视器的各个客户端
+
+
+《高频遗忘》
+1.redis的数据结构：①简单动态字符串，②链表，③字典（开链的hashtable），④跳跃表，⑤整数集合，⑥压缩列表
+
+2.redis的对象：字符串对象、列表对象、哈希对象、集合对象、有序集合对象
+【字符串对象（string）】
+SET、GET、APPEND、INCRBYFLOAT、INCRBY、DECRBY、STRLEN、SETRANGE key offset value、GETRANGE key start end
+【列表对象（list）】
+LPUSH、RPUSH、LPOP、RPOP、LINDEX key index、LLEN、LINSERT key BEFORE|AFTER pivot(轴元素) value、
+LREM key count value、LTRIM key start stop、LSET
+【哈希对象（hash）】
+HSET hash field value、HGET hash field、HEXISTS hash field、HDEL hash field [field …]、HLEN、HGETALL
+【集合对象（set）】
+SADD、SCARD（返回元素数量）、SISMEMBER、SMEMBERS、SRANDMEMBER、SPOP（随机删除一个元素并返回）、SREM key member
+【有序集合对象（zset）】
+ZADD key score member [[score member] [score member] …]、ZCARD key（返回元素数量）、ZCOUNT key min max（值范围内元素）、
+ZRANGE key start stop [WITHSCORES]（index范围内递增）、ZREVRANGE key start stop [WITHSCORES]（index范围内递减）、
+ZRANK key member（成员的正向排名）、ZREVRANK key member（成员的逆向排名）、
+ZREM key member、ZSCORE key member
+
+3.单机数据库实现
+SELECT index（0~databases-1）		//切换数据库 
+KEYS pattern(*)		// 按照某种模式返回keys
+INFO stats			// 查看数据库的属性
+TIME								// 获取UNIX时间戳
+EXPIRE/PEXPIRE key seconds 			// 以秒/毫秒设置过期时间。seconds是多少时间后过期
+EXPIREAT/PEXPIREAT key timestamp	// 命令用于将键key的过期时间设置为timestamp（秒级/毫秒级）
+PERSIST								// 消除一个键的过期时间
+
+4.【☆RDB持久化☆】
+SAVE	// 会阻塞Redis服务器进程，直到RDB文件创建完毕为止
+BGSAVE	// 会fork一个子进程，然后由子进程负责RDB文件的创建，父进程继续处理命令请求
+【RDB文件的创建和写入】
+创建RDB文件，由rdb.c/rdbSave函数完成
+AOF文件的更新频率比RDB文件的更新频率高，如果开启了AOF持久化功能，会优先使用AOF文件来还原文件
+载入RDB文件，由rdb.c/rdbLoad函数完成
+struct redisServer{
+	// ...
+	struct saveparam *saveparams;		// 记录了保存条件的数组，由conf文件配置
+	long long dirty;					// 修改计数器（距离上次保存，进行了多少次修改）
+	time_t lastsave;					// 上一次执行保存的时间
+	// ...
+};
+struct saveparam{
+	time_t seconds;		// 秒数
+	int changes;		// 修改数
+};										// seconds秒内，修改了changes次，则保存，调用BGSAVE
+Redis的服务器周期性操作函数serverCron默认每隔100毫秒就会执行一次，查看条件是否满足，满足就BGSAVE
+RDB文件结构
+REDIS|db_version|【SELECTDB|0|pairs】|【SELECTDB|3|pairs】|EOF|check_sum
+pairs中的一个: [EXPIRETIME_MS|ms] （有过期时间的键，可选）| 【TYPE|key|value】
+【查看RDB文件，od -c dump.rdb】
+
+5.【☆AOF持久化(Append Only File)☆】
+通过保存Redis服务器所执行的写命令来记录数据库状态的，即AOF文件里保存的是一条条指令
+三个步骤：配置 appendonly yes
+struct redisServer{
+	// ...
+	sds aof_buf;		// AOF缓冲区
+	// ...
+};
+【命令追加】
+SET key value，之后，在aof_buf缓冲区，追加内容：*3\r\n$3\r\nSET\r\n$3\r\nkey\r\n$5\r\nvlaue\r\n
+【文件写入】 和 【文件同步】   flushAppendOnlyFile函数，行为由appendfsync配置决定
+appendfsync always			// aof_buf所有内容写入，并同步到AOF文件，安全性最高，但是效率最慢，最多丢失一个命令数据
+appendfsync everysec		// aof_buf所有内容写入，距离上次同步，必须超过一秒钟，才能同步，最多丢失一秒数据
+appendfsync no				// aof_buf所有内容写入，并不同步，何时同步，由系统决定，容易丢失数据
+// 以上所说的同步，是指系统缓存内容真正写入到磁盘中
+// Redis的服务器周期性操作函数serverCron默认每隔100毫秒就会执行一次，如果aof_buf有数据，会写入AOF文件
+【*】启动之前，建立一个伪客户端，逐条执行保存下来的指令即可，还原回之前的状态
+【AOF文件的大小很容易膨胀】【解决办法-AOF文件重写】【BGREWRITEAOF】
+BGREWRITEAOF，并不读原来的AOF文件，直接分析当前DB的状态，然后简化为一条新的命令，代替原来AOF中的多条命令
+重写子进程在后台运行，这时候主进程可能还有收到写命令，这些命令需要同时加入到AOF重写缓冲区、AOF缓冲区
+重写完毕，子进程告知父进程，父进程将重写缓冲区的内容写到新AOF文件中，然后把旧的AOF文件覆盖掉
+
+6.过期键删除策略
+被动删除：
+【①惰性删除】，放任不管，每次从键空间取键时，检查键是否过期，过期就删除
+缺点：对内存不友好，键已经过期了，仍然保留，又没有被访问的化，就会一直残留着，可以视为一种“内存泄漏”
+主动删除：
+②定时删除，设置过期时间时，创建一个定时器（timer），让定时器在键过期时间来临时，立即执行对键的删除操作
+缺点：对CPU不友好，如果过期键比较多的话，要占用很长时间的CPU，在内存不紧张，CPU紧张时，对吞吐量造成很大影响
+同时，还需要创建大量的定时器，【现阶段不现实】
+【③定期删除】，每隔一段时间，程序对数据库进行一次检测，删除过期键
+是①和②的折中，难点在于如何确定删除操作的时长和频率
+太频繁，执行时间太长，退化为定时删除；执行太少，执行时间太短，退化为定时删除
+
+7.RDB持久化、AOF持久化和复制功能对过期键的处理
+①RDB持久化中：
+SAVE或者BGSAVE时，创建新的RDB文件，过期的键不会被保存
+RDB载入时：服务器以主服务器模式运行，过期键会被忽略，不载入，以从服务器模式运行时，都会被载入，不过主从同步时，问题会消除，没影响
+②AOF持久化中：
+当过期键被惰性删除或者定期删除后，程序会向AOF文件追加一条，DEL命令，来显示的记录该键已被删除
+生成AOF文件时，与生成RDB文件类似，过期键不会被保存
+③复制模式：
+服务器此模式下运行时，从服务器的过期键删除动作由主服务器控制。
+保证数据一致性，就算从服务器有cli访问过期键，也不删除，必须等主服务器来同步。
+
+8.多机数据库
+（1）【复制】
+假设有两个Redis服务器，地址分别为127.0.0.1:6379、127.0.0.1:12345，
+向服务器127.0.0.1:12345发送命令：SLAVEOF 127.0.0.1 6379，本服务器就变成了从服务器，指定对象成为主服务器
+主服务器的数据会同步到从服务器之上，两者保持着数据一致性
+ROLE			// 查看服务器角色的命令
+（2）【旧版复制功能的实现】
+①同步操作：用于将从服务器的数据库状态更新至主服务器当前所处的数据库状态
+从服务器向主服务器发送SYNC命令
+收到SYNC命令的主服务器执行BGSAVE命令，在后台生成一个RDB文件，使用一个缓冲区记录从现在开始执行的所有写命令
+当主服务器BGSAVE命令执行完毕时，主服务器将生成RDB发送给从服务器，从服务器接收并载入这个RDB文件，更新从服务器状态
+主服务器将缓冲区的写指令，发送给从服务器，从服务器执行这些写指令
+②命令传播操作：主服务器状态被修改，导致主从不一致时，使其重新一致
+每次主服务器执行写指令时，就往从服务器，发送该指令，使从服务器执行该指令
+【缺点】：从服务器断线重连，要重新把主服务器的所有数据同步回来，其中很多是之前已经保持同步的重复数据，低效
+（3）【新版本复制功能的实现】
+PSYNC命令具有完整重同步和部分重同步两种模式（用于断线重连时复制）
+【部分重同步的实现细节】
+①主服务器的复制偏移量和从服务器的复制偏移量（replication offset）
+主服务器每次向从服务器传播N个字节的数据时，就将自己的复制偏移量的值加上N
+从服务器每次收到主服务器传播来的N个字节的数据时，就将自己的复制偏移量的值加上N
+主、从服务器的复制偏移量不相同，则不一致，相同，则是一致状态
+②主服务器的复制积压缓冲区（replication backlog）
+主服务器执行完一条写命令后，不仅发往从服务器，同时也会加入到复制积压缓冲区中
+从服务器重连后，PSYNC命令会将自己的复制偏移量，传递给主服务器
+如果offset之后的数据还在缓冲区中，那么执行传送，部分同步，如果布不在，那就只能完全同步了
+③服务器的运行ID（run ID）
+从服务器初次复制时，要保存主服务器的运行ID，这样子，断线重连主服器，校验一下，以防之前连接的不是此主服务器。同步错误。
+PSYNC master_run_id offset

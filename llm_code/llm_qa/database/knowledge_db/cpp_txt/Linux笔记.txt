@@ -1,0 +1,235 @@
+目录结构查看
+ls -a/-l/-h		 -a表示所有，-l表示显示链接，-h表示优化显示
+pwd
+tree -d
+cd ~/-/./..
+clear
+ctrl、shift、=   放大字体
+ctrl、-          缩小字体
+
+命令帮助
+command --help
+man command
+
+文件/目录 操作
+cp -f/-i/-r
+rm -f/-i/-r
+mv -i/-r
+mkdir -p
+
+文件创建查看
+touch
+cat -b/-n
+more 
+grep -n/-v/-i  ^a/a$ 
+echo
+> 和 >>
+|    管道，表示将上一条指令的输出，作为下一条指令的输入
+\ 	 换行输入
+
+字符匹配（正则表达式）
+* 代表任意个数个字符
+? 代表任意一个字符，至少一个
+[] 表示可以匹配字符数组的任意一个
+[abc] 匹配a、b、c中的任意一个
+[a-f] 匹配a-f中的任意一个
+
+more（查看内容时）
+Space 显示手册页的下一屏
+Enter 一次滚动手册页的一行
+b 回滚一屏
+f 前滚一屏
+q 退出
+/word 搜索word字符
+
+关机重启
+shutdown -r 时间[now/20:25/不加则一分钟后]
+shutdown -c
+
+查看网络
+ifconfig | grep inet
+ping
+
+远程登录/传输
+ssh [-p port] 用户名@ip
+scp -r [-P port] 用户名@ip:文件名或路径 用户名@ip:文件名或路径
+
+ssh免密码登录
+在ssh客户端执行ssh-keygen生成ssh公钥、ssh私钥
+让远程服务器记住公钥ssh-copy-id -p port user@remote
+
+ssh配置别名
+在~/.ssh/config里面追加
+Host ubuntu
+	HostName ip地址
+	User xuguanglong
+	Port 22
+直接ssh ubuntu 就可以远程了
+
+which 命令
+/bin 		二进制执行文件目录
+/sbin 		系统的bin
+/usr/bin 	后期安装的软件
+/usr/sbin 	超级用户的一些管理程序
+
+usermod -g（主组） 组 用户名
+usermod -G（附加组） 组（例：sudo） 用户名
+usermod -s /bin/bash
+
+组管理，都需要sudo权限
+groupadd 组名
+groupdel 组名
+cat /etc/group 					里面有主组信息
+
+用户管理，都需要sudo权限
+useradd -m（建立家目录） -g 组 新建用户名
+passwd 用户名
+userdel -r（删除家目录）用户名
+cat /etc/passwd | grep 用户名	里面有附加组信息
+
+切换用户
+su -（加上则到家目录） 用户名
+exit
+
+修改文件权限
+chgrp -R 组名 文件/目录名
+chmod -R +/-rwx(或者755) 文件名|目录名
+chown 用户名 文件名|目录名
+chmod u/g/o+r/w/x/s/t   
+s表示：打开设置用户ID位，启动此文件的进程，拥有此文件所有者的权限
+t表示：粘滞位，防止其他用户随意删除自己所建的文件，只有此文件拥有者，此目录拥有者，超级用户，可以
+
+查看用户信息
+id [用户名]
+who
+whoami
+
+时间日期
+date
+cal -y
+
+磁盘和目录空间
+df -h			//disk free
+du -h [目录名]  //disk usage
+
+进程信息
+ps -ef
+ps auxjef 	// a所有用户的进程 u详细信息 x显示没有控制终端的进程 j显示与作业有关的信息 -e 显示所有进程 -f 全格式
+ps -o pid,ppid,pgid,sid,tpgid,comm		// -o表示显示的选项
+top 
+kill [-9](强制终止) 进程代号   // 其实kill（杀死）是不恰当的，相当于kill （SIGTERM） 进程号，只是发送了终止信号而已
+kill -USR1 进程号		// 向该进程发送SIGUSR1
+
+其它命令
+find [路径] -name "*.py"
+ln -s 被链接的源文件 链接名  
+-s为软链接选项，一般不会建硬链接，软链接相当于快捷方式，硬链接相当于别名，建立链接用绝对路径
+linux中文件名和文件数据是分开保存的
+tar -cvf 打包文件.tar 被打包的文件/路径...
+tar -xvf 打包文件.tar
+gzip 压缩文件.tar.gz 打包文件.tar
+tar -zcvf 压缩文件.tar.gz  被压缩的文件/路径...
+tar -zxvf 压缩文件.tar.gz
+tar -zxvf 压缩文件.tar.gz -C 目标路径    // 解压到指定路径，目标路径必须存在
+sudo apt install 软件包
+sudo apt remove 软件名
+sudo apt update
+
+1.
+  d     rwx      r-x          r-x           2      xuguanglong   xuguanglong     4.0K    11月 22 11:34     桌面
+目录 属主权限 组成员权限  其它成员权限  引用计数    文件属主   文件属主所在组  文件大小   上次修改时间    文件名
+
+2.
+添加环境变量  export MYVAR = 'Hello  world'
+显示环境变量  echo $MYVAR
+
+3.
+使用单字节八进制解释进行输出，注意左侧的默认地址格式为八字节:
+od -c file.hole
+0000000   a   b   c   d   e   f   g   h   i   j  \0  \0  \0  \0  \0  \0
+0000020  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+
+4.
+umask   观察文件模式创建屏蔽字
+umask 0027 （0 0-u 2-g 4+2+1-o） 4读，2写，1执行
+umask -S	打印符号格式
+
+5.
+                  【i节点数组】                     
+【节点0】【节点1267->指向目录a】【节点XX->指向数据a】【节点2549->指向目录b】       
+			   【目录块和数据块】
+【目录a】（.|节点2549、..|节点1267）、【数据a】、【目录b】（.|1267、..|XX、testdir|节点2549）
+
+6.
+finger -p：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状态，
+/etc/passwd,/etc/group,/etc/shadow,
+/etc/hosts(主机),/etc/networks(网络),/etc/protocols(协议),/etc/services(服务)
+
+7.
+size /usr/bin/cc 		查看正文段，数据段，bss段(全局变量、静态变量)的长度
+ text	data	bss	    dec	    hex	     filename
+988773  15120  10600  1014493  f7add   /usr/bin/cc
+
+8.
+export PATH=$PATH:/opt/software/node-v8.9.3-linux-x64/bin/node
+PATH=$PATH:路径1:路径2:路径n; $PATH为系统变量,表示之前所有设置的路径，如果不加则之前所有的路径都失效。所以必须加上。
+
+9.
+jobs 查看当前shell环境中已启动的任务状态
+bg 将进程搬到后台运行
+fg 将进程搬到前台运行
+tar czf /data/backup.tgz /data/backup &   末尾的&表示在后台执行
+
+10.
+$ ed              <- 激活 ed 命令 
+a                 <- 告诉 ed 我要编辑新文件 
+My name is Titan. <- 输入第一行内容 
+And I love Perl very much. <- 输入第二行内容 
+.                 <- 返回 ed 的命令行状态 
+i                 <- 告诉 ed 我要在最后一行之前插入内容 
+I am 24.          <- 将“I am 24.”插入“My name is Titan.”和“And I love Perl very much.”之间 
+.                 <- 返回 ed 的命令行状态 
+c                 <- 告诉 ed 我要替换最后一行输入内容 
+I am 24 years old. <- 将“I am 24.”替换成“I am 24 years old.”（注意：这里替换的是最后输的内容） 
+.                 <- 返回 ed 的命令行状态 
+w readme.text     <- 将文件命名为“readme.text”并保存（注意：如果是编辑已经存在的文件，只需要敲入 w 即可） 
+q                 <- 完全退出 ed 编辑器 
+
+11.
+ipcs -l    显示系统关于 ipcs的限制
+
+12.
+stty -a    显示终端的所有选项
+
+13.
+netstat -ni		检查网口
+ifconfig eth0 	查看某网口的信息	
+netstat -nr		检查路由
+netstat -a		查看本机连接信息
+host www.baidu.com	查看网址的IP地址
+netstat -s -p udp	查看数据报接收情况
+
+14.Windows自带的powershell进行ssh远程登录
+安装Chocolatey：
+Set-ExecutionPolicy AllSigned		//以管理员权限打开PowerShell运行以下命令,一行行的运行
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))		
+安装SSH软件
+choco install openssh
+之后便可在windows上，使用ssh进行远程超控了
+
+15.
+DNS服务器主配置文件：  /etc/named.conf
+
+16.
+Linux系统中的wc (Word Count) 命令的功能为统计指定文件中的字节数、字数、行数，并将统计结果显示输出。
+-c 统计字节数。
+-l 统计行数。
+-m 统计字符数。这个标志不能与 -c 标志一起使用。
+-w 统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。
+-L 打印最长行的长度。
+-help 显示帮助信息
+--version 显示版本信息
+
+17.
+mkfs opt 格式化分区
+parted 进行分区

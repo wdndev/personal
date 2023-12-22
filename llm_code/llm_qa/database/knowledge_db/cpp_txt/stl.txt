@@ -1,0 +1,692 @@
+stl_config.h、stl_construct.h、stl_alloc.h、stl_uninitialized.h、stl_function.h、
+stl_iterator.h、type_traits.h、
+stl_vector.h、stl_list.h、stl_deque.h、stl_stack.h、stl_queue.h、stl_heap.h、stl_slist.h、
+stl_tree.h、stl_set.h、stl_pair.h、stl_map.h、stl_multiset.h、stl_multimap.h
+stl_hashtable.h、stl_hash_fun.h、stl_hash_set.h、stl_hash_map.h
+stl_algobase.h、stl_algo.h、
+stl_numeric.h、
+
+
+1.STL的六大组件
+①容器（containers）：各种数据结构，如vector，list，deque，set，map等
+②算法（algorithms）：各种常用算法，如sort，search，copy，erase等
+③迭代器（iterators）：泛型指针，将operator*，operator->，operator++，operator--等相关操作重载的class template
+④仿函数（functors）：行为类似函数，可作为算法的某种策略，重载了operator()的class或class template
+⑤配接器（adapters）：用来修饰容器（containers）的adapters，仿函数（functors）的adapters，迭代器（iterators）的adapters
+例如：queue和stack，虽然开始容器，其实是一种容器配接器，底层通过容器deque实现
+⑥配置器（allocators）：负责空间配置与管理，实现动态空间配置、空间管理、空间释放的class template
+
+算法->迭代器->容器：算法通过迭代器获取容器中的数据，进而对容器中的数据进行操作
+适配器->容器：在容器上适配器，就限制了容器的某些特性。例如用栈，只能后进先出，用队列，先进先出。
+容器->配置器->数据存储：容器可以通过是配置器来获取数据的储存空间
+算法->仿函数:算法依靠仿函数选择某种策略，例如默认小于比较或用户自定义比较等等。
+
+2.
+#if的使用说明
+#if的后面接的是表达式
+#if (MAX==10)||(MAX==20)
+	code...
+#endif
+它的作用是：如果(MAX==10)||(MAX==20)成立，那么编译器就会把其中的#if 与 #endif之间的代码编译进去（注意：是编译进去，不是执行！！）
+
+#if defined的使用
+#if后面接的是一个宏。
+#if defined (x)
+    ...code...
+#endif
+这个#if defined，它不管里面的“x”的逻辑是“真”还是“假”
+它只管这个程序的前面的宏定义里面有没有定义“x”这个宏
+如果定义了x这个宏，那么，编译器会编译中间的…code…否则不直接忽视中间的…code…代码。
+另外 #if defined(x)也可以取反，也就用 #if !defined(x)
+
+#ifdef的使用
+#ifdef的使用和#if defined()的用法一致
+#ifndef又和#if !defined()的用法一致
+
+3.
+class alloc {};
+template <class T, class Alloc = alloc>
+class vector 
+{
+public:
+    typedef T value_type;
+    typedef value_type* iterator;
+    template <class I>
+    void insert(iterator position, I first, I last)
+    {
+        cout << "insert()" << endl; 
+    }    
+};
+这么定义完后，便可以这般声明了 vector<int> x;  vector<int>::iterator ite;
+
+4.
+STL的迭代空间表示的是一个前闭后开区间 [first, last), 元素从first 开始，到 last-1 结束
+
+5.
+由于C语言中的函数指针，作为参数的不便性
+产生了仿函数functor的概念，需要对某个class进行operator()重载了
+
+6.
+new运算符 和 operator new()
+new运算符：指我们在C++里通常用到的运算符，比如A* a = new A;  对于new来说，有new和::new之分，前者位于std
+operator new()：指对new的重载形式，它是一个函数，并不是运算符。
+对于operator new来说，分为全局重载和类重载，全局重载是void* ::operator new(size_t size)
+在类中重载形式 void* A::operator new(size_t size)
+还要注意的是这里的operator new()完成的操作一般只是分配内存，
+事实上系统默认的全局::operator new(size_t size)也只是调用malloc分配内存，并且返回一个void*指针。
+而构造函数的调用(如果需要)是在new运算符中完成的
+
+7.
+new(p) T1(value);  // placement new, 空间再分配
+//在p指向的内存空间分配T1的对象，并调用T1(T2)的构造函数
+
+8.
+<memory> STL规定的配置器(allocator)定义于此
+	<stl_construct.h>
+	这里定义了全局函数construct()和destory()，负责对象的构造和析构，它们隶属于STL标准规范
+	<stl_alloc.h>
+	这里定义了一、二级配置器彼此合作。配置器名为alloc
+	<stl_uninitialized.h>
+	这里定义了一些全局函数，用来填充（fill）或复制（copy）大块内存数据，它们也都隶属于STL标准规范
+	un_initialized_copy()、un_initialized_fill()、un_initialized_fill_n()
+	这些函数虽不属于配置器范畴，但与对象初值设置有关，对于容器的大规模元素初值设置很有帮助，十分考虑效率
+	最差情况会调用<stl_construct.h>中的construct()
+	最佳情况会使用C标准函数memmove()直接进行内存数据移动
+	
+9.
+// 利用value_type()函数提取处迭代器所指向的类型，这个函数返回类型是T*  template<class T,...> 最后 return T*(0)
+// 并用其类型产生一个临时对象，利用编译器的类型推导，
+// 获取迭代器指向类型，以便后面萃取其相关属性
+__destroy(first, last, value_type(first));
+
+10.
+// 利用__type_traits萃取处T类型的析构析构函数的否是trivial，
+// 并利用其has_trivial_destructor的定义类型，产生一个临时对象
+// 利用其进行重载
+// 不加typename的话，在模板实例化之前，编译器不知道__type_traits<T>::has_trivial_destructor是啥
+// 可能是静态数据成员、静态成员函数、嵌套类型，加上之后就知道了，是嵌套类型
+typedef typename __type_traits<T>::has_trivial_destructor trivial_destructor;
+return __destroy_aux(first, last, trivial_destructor());
+
+11.
+SGI对内存分配stl_alloc.h的设计原则
+向system heap要求空间
+考虑多线程（multi-threads）状态
+考虑内存不足时的应变措施
+考虑过多"小型区块"可能造成的内存碎片（fragment）问题
+
+12.
+SGI 双层级配置器 (未定义__USE_MALLOC)
+第一级配置器直接使用 malloc() 和 free()，模拟C++的set_new_handler()以处理内存不足的状况
+第二级配置器时情况不同做调整
+配置区超过128bytes时，视之为"足够大"，调用一级配置器
+配置区小于128bytes时，视之为"过小"，为了降低负担，采用复杂的memory pool整理方式
+# ifdef __USE_MALLOC
+...
+typedef __malloc_alloc_template<0> malloc_alloc;
+typedef malloc_alloc alloc;
+# else
+...
+// 令alloc为第二级配置器
+typedef __default_alloc_template<__NODE_ALLOCATOR_THREADS, 0> alloc;
+# endif /* __USE_MALLOC */
+
+13.
+alloc不接受任何template型别参数，但是会包装一个接口
+template<class T, class Alloc>
+class simple_alloc {
+public:
+	static T* allocate(size_t);
+	static T* allocate(void);
+	static void deallocate(T*, size_t);
+	static void deallocate(T*);
+}
+
+14.
+// 1.以下仿真C++的set_new_handler()，换句话说，你可以通过它指定你自己的out-of-memory handler
+// 2.void (*f)() 是函数 set_malloc_handler 的参数，void (*)() 是返回类型
+// 3.可以改写成
+// typedef void (*PF)();
+// static PF set_malloc_handler(PF f)
+//{
+//    PF old = __malloc_alloc_oom_handler;
+//    __malloc_alloc_oom_handler = f;
+//    return (old);
+//}
+static void (* set_malloc_handler( void (*f)() ))()
+{
+    void (* old)() = __malloc_alloc_oom_handler;
+    __malloc_alloc_oom_handler = f;
+    return(old);
+}
+设计、设定“内存不足处理例程”都是客户端，也即使用者的责任
+
+15.
+union obj
+{
+	union obj * free_list_link;
+	char client_data[1];
+}
+因为是union，
+从第一字段观之，obj可视为一个指针，指向相同形式的另一个obj
+从第二字段观之，obj可视为一个指针，指向实际区块
+char mem[100] = { 'c' };  
+char mem1[100] = { 'a' }; 
+union obj *p1 = (union obj *)mem;  // p1指向mem所在位置，并转换成union obj类型指针   
+union obj *p2 = (union obj *)mem1; // p2指向mem1所在位置，并转换成union obj类型指针
+p1->free_list_link = p2;
+//可以看到mem和client_data 两个指针值是一致的
+cout << "mem                  = " << (void *)mem << endl;
+cout << "p1->client_data      = " << (void *)p1->client_data << endl;
+//可以看到mem1和free_list_link 两个指针值是一致的
+cout << "mem1                 = " << (void *)mem1 << endl;
+cout << "p1->free_list_link   = " << (void *)p1->free_list_link << endl;
+	
+16.
+// ROUND_UP将bytes上调至8的倍数
+// bytes + __ALIGN - 1 之后，变成了一个比byte大的数，大于 ceil(bytes/__ALIGN)*__ALIGN
+// 这个数和  ~(__ALIGN - 1) 相与&之后，后三位被置0，被归整到，等于 ceil(bytes/__ALIGN)*__ALIGN
+static size_t ROUND_UP(size_t bytes) {
+    return (((bytes) + __ALIGN-1) & ~(__ALIGN - 1));
+}
+	
+17.
+volatile 影响编译器编译的结果,volatile指出 变量是随时可能发生变化的，与volatile变量有关的运算，不要进行编译优化，以免出错
+
+18.
+STL定义了五个全局函数，
+construct()、
+------------------------------------------------
+destory()、
+------------------------------------------------
+uninitialized_copy(InIter first, InIter last, OutIter result)、		//调用construct(&*(result+(i-first)),*i)
+将result开始的元素，填充为first-last的元素
+容器的全区间构造函数（range constructor）由以下两个步骤完成
+①配置内存区块，足以包含范围内的所有元素
+②使用uninitialized_copy()，在该内存区块上构造元素
+------------------------------------------------
+uninitialized_fill(OutIter first, OutIter last, const T& x)、  //调用construct(&*i,x)						
+将first-last的每一个元素，设置成x
+------------------------------------------------
+uninitialized_fill_n(OutIter first, Size n, const T& x)
+将first开始的n个元素，设置成x
+------------------------------------------------			//调用construct(&*i,x)
+作用于未初始化的空间上，对于容器的实现很有帮助
+uninitialized_copy()、uninitialized_fill()、uninitialized_fill_n()按照C++标准，具有"commit or rollback"语意
+
+19.
+STL的中心思想在于：将数据容器（containers）和算法（algorithms）分开，彼此独立设计，最后以一帖胶着剂将其撮合
+通过 class templates 和 function template 可分别达成目标，而迭代器（iterator）就是这一贴胶着剂
+
+20.
+智能指针的用法，和原生指针一模一样
+void func()
+{
+	auto_ptr<string> ps(new string("jjhou"));
+	cout << *ps << endl;				//输出：jjhou
+	cout << ps->size() << endl;			//输出：5
+	// 离开前不需delete，auto_ptr会自动释放内存
+}
+string.find() 没找到时返回-1，即string.npos
+
+21.
+template的参数推导机制，可以实现typeof()的函数功能
+但是只能推导出参数的型别，而不能推导出返回值的型别
+
+22.
+内嵌型别也可以实现，可以实现返回值的型别
+但是这么做，如果不是class type，那么就无法定义内嵌型别
+
+23.
+22.中的缺陷可以通过 template partial specialization（模板偏特化）来实现
+
+24.
+根据经验，最常用到的迭代器相应型别有5种：value_type，difference_type，pointer，reference，iterator_catagory
+25-28是这五个型别的例子
+value_type，是指迭代器所指向的型别
+difference_type，用来表示两个迭代器之间的距离，因此也可以用来表示容器的最大容量
+pointer，传回一个指针，指向迭代器所指之物
+reference，C++中函数要传回左值，都是以 by reference 的方式进行 
+iterator_catagory，迭代器的类别，5类
+①Input Iterator：只读
+②Output Iterator：只写
+③Forward Iterator：读写
+④Bidirectional Iterator：双向移动
+⑤Random Access Iterator：前4种，只供应一部分指针算术能力（前三种支持operator++，第四种再加上operator--）
+第5种，则涵盖所有指针算术能力，包括p+n，p-n，p[n]，p1-p2，p1<p2
+
+25.
+泛型
+template <class I>
+struct iterator_traits	//traits意为“特性”
+{
+	typedef typename I::value_type value_type;
+};
+原生指针，偏特化
+template <class T>
+struct iterator_traits<T*>	//迭代器是一个原生指针
+{
+	typedef T value_type;
+};
+const的原生指针，偏特化
+template <class T>
+struct iterator_traits<const T*>	//迭代器是一个const的原生指针
+{
+	typedef T value_type;			//萃取出来的型别应该是T，而不应该是const T
+};
+类型萃取器,使用方法
+template <class I>
+typename iterator_traits<I>::value_type // 这一整行是函数回返型别
+func(I iter)
+{
+	return *iter;
+}
+注意：每一个迭代器，都需要遵循上述traits的特点，自行以内嵌型别定义（nested typedef）的方式定义出相应型别
+
+26.
+template <class I>
+struct iterator_traits
+{
+	typedef typename I::difference_type difference_type;
+};
+template <class T>
+struct iterator_traits<T*>
+{
+	typedef ptrdiff_t difference_type;
+};
+template <class T>
+struct iterator_traits<const T*>
+{
+	typedef ptrdiff_t difference_type;
+};
+使用方法
+template <classI, class T>
+typename iterator_traits<I>::difference_type
+cout(I first, I last, const T& value)
+{
+	typename iterator_traits<I>::difference_type n = 0;
+	for ( ; first != last; ++first)
+	{
+		if (*first == value) ++n;
+	}
+	return n;
+}
+
+27.
+template <class I>
+struct iterator_traits
+{
+	typedef typename I::pointer pointer;
+	typedef typename I::reference reference;
+};
+template <class T>
+struct iterator_traits<T*>
+{
+	typedef T* pointer;
+	typeded T& reference;
+};
+template <class T>
+struct iterator_traits<const T*>
+{
+	typedef T* pointer;
+	typeded T& reference;
+};
+
+28.
+定义5个作为标记用的型别（tag types）
+struct input_iterator_tag {};
+struct output_iterator_tag {};
+struct forward_iterator_tag : public input_iterator_tag {};
+struct bidirectional_iterator_tag : public forward_iterator_tag {};
+struct random_access_iterator_tag : public bidirectional_iterator_tag {};
+这些classes 只作为标记使用，所以不需要任何成员，在函数中加些这写class参数，实现重载
+
+template <class I>
+struct iterator_traits
+{
+	typedef typename I::iterator_catagory iterator_catagory;
+};
+template <class T>
+struct iterator_traits<T*>
+{
+	typedef random_access_iterator_tag iterator_catagory;
+};
+template <class T>
+struct iterator_traits<const T*>
+{
+	typedef random_access_iterator_tag iterator_catagory;
+};
+使用方法
+template <class I>
+inline typename iterator_traits<I>::iterator_catagory
+iterator_catagory(const I&)
+{
+	typedef typename iterator_traits<I>::iterator_catagory category;
+	return category();
+}
+template <class InputIterator, class Distance>
+inline void advance(InputIterator& i, Distance n)
+{
+	__advance(i,n,iterator_catagory(i)) // 不同iterator category的重载函数
+}
+
+29.
+设计适当的型别，是迭代器的责任，设计适当的迭代器，是容器的责任
+唯容器本身，知道应该设计出怎么样迭代器来遍历自己，并执行迭代器的各种行为
+算法完全可以独立于容器和迭代器之外，只要设计时以迭代器为对外接口就行
+
+30.
+序列式容器：array，vector(heap(priority-queue))，list，slist，deque(stack，queue)
+关联式容器：RB-tree(set，map，multiset，multimap)，hashtable(hash_set，hash_map，hash_multiset，hash_multimap)
+
+31.
+对vector的任何操作，一旦引起空间重新配置，指向原vector的所有迭代器就都失效了。
+这是程序员容易犯的一个错误，务必小心。
+
+32.
+list有一个重要性质：插入操作（insert）和接合操作（splice）都不会造成原有的list迭代器失效。
+这在vector是不成立的，因为vector的插入操作可能造成记忆体重新配置，导致原有的迭代器全部失效。
+
+33.
+deque和vector的最大差异，
+一在于deque允许于常数时间内对起头端进行元素的插入或移除操作
+二在于deque没有所谓容量（capacity）观念，因为它是动态的分段连续空间组合而成
+
+34.
+deque的最大任务，便是在这些分段的定量连续空间上，维护其整体连续的假象（又迭代器的operator++和operator--实现）
+并提供了随机存取的接口，避开了“重新配置、复制、释放”的轮回，代价这是复杂的迭代器架构
+
+35.
+deque维护一个指向map（中控区）的指针，以及，
+start、finish两个迭代器，分别指向第一个缓冲区的第一个元素，最后一个缓冲区的最后一个元素（的下一个位置）
+protected:                      // Data members
+  iterator start;               // 表现第一个节点
+  iterator finish;              // 表现最后一个节点
+  map_pointer map;              // 指向map，map是块连续空间，其内的每个元素
+                                // 都是一个指针（称为节点），指向一块缓冲区
+  size_type map_size;           // map内可容纳多少指针
+  
+36.
+stack所有的元素的进出都必须符合“先进后出”，所以不能提供走访功能，不能提供迭代器，所以不提供find函数
+queue所有的元素的进出都必须符合“先进先出”，所以不能提供走访功能，不能提供迭代器，所以不提供find函数
+stack和queue要进行查找，需要定义辅助stack或queue，边旧出边新进，实现遍历。
+heap所有的元素必须遵循完全二叉树规则，所以不能提供走访功能，不能提供迭代器
+priority_queue所有的元素只有最顶端的元素（权值最高者），才有机会被外界取用，所以不能提供走访功能，不能提供迭代器
+
+37.
+隐式表达法：
+完全二叉树没有任何节点漏洞，带来一个极大的好处，可以利用array来存储所有节点。
+将#0元素保留（设为无限大或者无限小）
+那么第i个节点的左孩子是2i，右孩子是2i+1，父节点在i/2处
+
+38.
+对于大根堆，每次pop_heap，将最大值，放到底部，
+每次缩减一个范围，那么最终，这个隐式表达的大根堆，就排好了序
+
+39.
+单向链表slist，没有任何方便的办法可以回头定出前面一个位置，因此它必须从头找起
+换句话说，除了slist起点处附近的区域之外，在其它位置上采用insert或erase操作函数，都属不智之举
+为此，slist特别提供了insert_after()和erase_after()供灵活运用
+
+40.
+基于同样的效率考虑，slist不提供push_back()，只提供push_front()，因此slist的元素次序会和元素插入进来的次序相反
+
+41.
+AVL(Adelson-Velsky-Landis)Tree 平衡二叉搜索树
+RB(Red-Black)Tree			   红黑树
+AA(Arne-Andersson)Tree		   红黑树的变种
+
+42.
+AVL树的平衡调整
+只要调整“插入点至根节点”路径上，平衡状态被破坏之各节点中最深的那一个，便可使整棵数重新获得平衡
+假设该最深节点为X，分为4种情况
+①插入点位于X左节点的左子树
+②插入点位于X右节点的右子树			①②为外侧插入，单旋调整		
+③插入点位于X左节点的右子树
+④插入点位于X右节点的左子树			③④为内侧插入，双旋调整
+
+43.
+红黑树规则
+①每个节点不是红色就是黑色
+②根节点为黑色
+③如果节点为红色，其子节点必须为黑色
+④任一节点至NULL(树尾端)的任何路径，所含之黑节点数必须相同
+根据规则④，新增节点必须为红，根据规则③，新增节点之父节点必须为黑
+注：新节点为X，父节点为P，祖父节点为G、伯父节点为S、曾祖父节点GG
+status1：S为黑且X为外侧插入，先对P,G做一次单旋，再更改P,G颜色
+status2：S为黑且X为内侧插入，先对P,X做一次单旋，再更改G,X颜色，再将结果对G做一次单旋
+status3：S为红且X为外侧插入，先对P,G做一次单旋，再改变X颜色，此时，若GG为黑，则搞定，若GG为红，见status4
+status4：重复status3，持续网上做，知道不再有父子连续为红的情况
+status4：特殊处理：（1）重开始节点到新增点X的路径上，某节点两个节点都为红色，就把该节点改为红色，两个节点改成黑色
+				   （2）如果还有两个父子同红，按着status1，做一次单旋
+				   （3）要么直接插入，要么插入后做一次单旋
+
+44.
+树状结构的各种操作，最需要注意的就是边界情况的发生，也就是走到根节点时要有特殊的处理
+为了简化处理，SGI STL特别为根节点再设计一个父节点，名为header来解决
+
+45.
+算法分为
+（1）质变算法 mutating algorithms -- 会改变操作对象之值
+如：拷贝（copy）、互换（swap）、替换（replace）、填写（fill）、删除（remove）、排列组合（permutation）、
+分割（partition）、随机重排（random shuffling）、排序（sort）等
+注意：一般提供XXX()、XXX_copy()两个版本，第二个版本会拷贝一份副本，然后在副本上修改，并返回该副本
+（2）非质变算法 nonmutating algorithms -- 不改变操作对象之值
+如：查找（find）、匹配（search）、计数（count）、巡防（for_each）、比较（equal、mismatch）、寻找极值（max、min）等
+
+46.
+adjacent_difference和partial_sum互为逆运算
+
+47.
+copy函数的使用陷阱
+copy()
+	copy()的完全泛化版本，调用 <InputIterator, InputIterator> __copy_dispatch()
+		// 以迭代器等同于否，决定循环是否继续，速度慢
+		__copy_dispatch()的完全泛化版本，调用 <InputIterator, InputIterator> __copy()  
+			// 以n（原串长度）决定循环执行次数，速度快
+			<RandomAccessIterator, RandomAccessIterator>  __copy_d()
+		__copy_dispatch()的特化版本（1），调用 <T*, T*> 				   __copy_t()	
+			T has trivial operator= memmove()
+			T has non-trivial operator= __copy_d()
+		__copy_dispatch()的特化版本（2），调用 <const T*, T*> 			   __copy_t()
+			T has trivial operator= memmove()
+			T has non-trivial operator= __copy_d()
+	copy()的特化版本（1），调用 (const char*, const char*)			   memmove()
+	copy()的特化版本（2），调用 (const wchar_t*, const wchar_t*)       memmove()
+copy_backward()	的细节和copy很像不过拷贝反向是反的
+
+48.
+// 6 8 10 3 4 5 6 6 6 7 8
+//删除（但不删除）元素6，尾端可能有残余数据（可另以容器之erase函数去除之）
+remove(iv.begin(),iv.end(),6);        // 6 [8 10 3 4 5 6 | 6 6 7 8] -> [8 10 3 4 5 7 8] (6 6 7 8)
+for_each(iv.begin(),iv.end(),display<int>());  
+cout<<endl; // 8 10 3 4 5 7 8 6 6 7 8 (最后四个是残留数据)   
+       
+vector<int> iv3(12);//重新申请空间  
+//遍历所有元素，把不等于6的元素，拷贝到iv3
+remove_copy(iv.begin(),iv.end(),iv3.begin(),6);  
+for_each(iv3.begin(),iv3.end(),display<int>());   
+cout<<endl; //8 10 3 4 5 7 8 7 8 (0 0 0)（最后三个是残留元素）   
+    
+//将小于6的元素 "删除" iv 此时为 8 10 3 4 5 7 8 6 6 7 8  =  8 10 (3 4 5) [7 8 6 | 6 7 8]
+remove_if(iv.begin(),iv.end(),bind2nd(less<int>,6));   // 8 10 [7 8 6 6 7 8] (6 7 8) (最后三个是残留元素) 
+for_each(iv.begin(),iv.end(),display<int>());    
+cout<<endl;  
+    
+//将小于7的元素 "删除" ,此时iv： 8 10 7 8 6 6 7 8 6 7 8 -> [8 10 7 8 7 8 7 8]
+// iv3: [8 10 3 4 5 7 8 7] (8 0 0 0) 
+remove_copy_if(iv.begin(),iv.end(),iv3.begin(),bind2nd(less<int>,7));  
+for_each(iv3.begin(),iv3.end(),display<int>());   //  [8 10 7 8 7 8 7 8] (8 0 0 0) (最后4个是残余数据)
+cout<<endl;
+
+49.
+算法查找的是“最后一次出现地点”，如果我们有能力逆向查找，题目就变成了“首次出现地点”
+因此SGI将算法设计为双层架构，一般称呼此种上层函数为dispatch function（分派函数、派送函数）
+
+50.
+find_first_of的陷阱
+[first1,last1) = {1,2,4,5,6}
+[first2,last2) = {5,6,8}
+find_first_of([first1,last1), [first2,last2))是可以查找成功的
+因为，是查找5或6或8，在第一个序列中第一次出现的位置，而不是整个[5,6,8)出现的位置
+
+51.
+// 辗转相除法，求最大公因子
+template <class EuclideanRingElement>
+EuclideanRingElement __gcd(EuclideanRingElement m, EuclideanRingElement n)
+{
+  while (n != 0) {
+    EuclideanRingElement t = m % n;
+    m = n;
+    n = t;
+  }
+  return m;
+}
+m   n   余
+5 % 3 = 2
+3 % 2 = 1
+2 % 1 = 0
+1 % 0 = 停止，返回m 
+
+52.
+int ia[] = {12,17,20,22,23,30,33,40};  
+vector<int> iv(ia,ia+sizeof(ia)/sizeof(int));  
+// 在不破坏排序状态的原则下，可插入value的第一个位置    
+cout << *lower_bound(iv.begin(),iv.end(), 22) << endl; //22
+// 在不破坏排序状态的原则下，可插入value的最后一个位置           
+cout << *upper_bound(iv.begin(),iv.end(), 22) << endl; //23 
+
+53.
+如何打乱一个序列
+template <class RandomAccessIterator, class RandomNumberGenerator>
+void random_shuffle(RandomAccessIterator first, RandomAccessIterator last,
+                    RandomNumberGenerator& rand) {
+  if (first == last) return;
+  for (RandomAccessIterator i = first + 1; i != last; ++i)
+    iter_swap(i, first + rand((i - first) + 1));			// rand(300) 产生0-299的一个随机数
+}
+随机数是伪随机
+srand(1);
+int i;
+for (i = 0; i < 10; i++)
+   printf("%d, ", rand()%11); 	// 执行多少都一样，不会变
+srand(time(NULL));
+int i;
+for (i = 0; i < 10; i++)
+   printf("%d, ", rand()%11);	// time(NULL)时刻在变，会不断变化
+   
+54.
+序列式容器中，vector和deque的迭代器属于RandomAccessIterators。适合sort算法
+list属于BidirectionalIterators，slist属于ForwardIterators都不适合sort算法
+
+55.
+①在快速排序时，任何位置都可以作为枢轴。
+为了避免“元素当初输入是不够随机”所带来的恶化效应
+最理想的方式，median-of-three法找枢轴，头、尾、中三位置元素值的中间值作为枢轴。
+②在数据很大块时，快速排序
+在细分为小块时，使用插入排序
+以及，数据基本排序时，使用插入排序，会有较好的效果
+
+56.
+仿函数的使用方法
+greater<int> ig;
+cout << ig(4,6);					// false
+cout << greater<int>()(6,4);		// true
+
+57.
+仿函数
+根据操作数（operand）个数划分：一元仿函数、二元仿函数
+根据功能划分：
+算术运算仿函数（Arithmetic）: plus<T>、minus<T>、multiplies<T>、divides<T>、取模modulus<T>、取反negate<T>
+关系运算仿函数（Rational）: equal_to<T>、not_equal_to<T>、greater<T>、greater_equal<T>、less<T>、less_equal<T>
+逻辑运算（Logical）:logical_and<T>、logical_or<T>、logical_not<T>
+想要使用STL的仿函数需要#include <functional>
+
+58.
+其它仿函数
+证同函数：identity
+选择函数：select1st、select2nd
+投射函数：project1st、project2nd
+
+59.
+迭代器的配接器（1）
+back_inserter(Container& x) 返回 back_insert_iterator<Container>(x);
+front_inserter(Container& x) 返回 front_insert_iterator<Container>(x);
+inserter(Container& x, Iterator i) 返回 insert_iterator<Container>(x, Container::iterator(i));
+insert iterators的前进、后退、取值、成员取用等操作都被禁止
+
+60.
+迭代器的配接器（2）
+reverse_iterator<int> reite;					// 逆向迭代器
+ostream_iterator<int> outite(cout, " ");		// 输出迭代器
+istream_iterator<int> inite(cin);				// 输入迭代器
+
+61.
+仿函数的配接器
+系结(bind)、否定(negate)、组合（compose）
+not1(bind2nd(less<int>(),12))   形成了不小于12的一个仿函数类
+compose1(bind2nd(multiplies<int>(),3), bind2nd(plus<int>(),2))		// 形成了单操作数的仿函数(v+2)*3
+
+62.
+函数指针的配接器 ptr_fun(print)  
+成员函数的配接器 mem_fun_ref(&Int::print1)
+ptr_fun，mem_fun_ref都是函数，返回仿函数类
+
+63.
+begin() 				 end()
+  |->                     |->
+   [] [] [] [] [] [] [] []
+<-|                     <-|
+rend()	               rbegin()							
+逆转迭代器之后，虽然指向位置不变，但是取值方向确改变了，这点特别需要注意
+
+64.
+重载operator->的一种方式
+T* operator->() const { return &(operator*()); }
+
+65.
+虽然多态（polymorphism）可以对pointer或reference起作用，但很可惜的是，
+STL容器只支持“实值语意”（value semantic），不支持“引用语意”（reference semanctics）
+所以 vector<Shape&> V;    无法编译通过
+
+
+《高频遗忘》
+6.重载operator new
+7.new(p) T1(T2);	//placement new，p空间重新指向T1(T2)创建的对象  
+10.type_traits.h萃取器
+12-17.stl_alloc.h关于内存分配
+24-28.stl_iterator.h关于迭代器的配置
+30.各个容器之间的关系
+31.vector的使用陷阱，对vector操作引起重新分配，之前的迭代器就失效了
+32-38.序列式容器的要点
+stl_vector.h（152页）、
+stl_list.h（165页）、stl_slist.h（226页）、
+stl_deque.h（188页）、
+stl_heap.h（push_heap-207页、pop_heap-209页）、
+stl_stack.h（基于deque）、stl_queue.h（基于deque、priority_queue基于heap，只弹出最大值）
+40.slist不提供push_back()，只提供push_front()，因此slist的元素次序会和元素插入进来的次序相反
+42.AVL树调整：外侧单旋（238页）、内侧双旋（240页）
+43.红黑树规则
+41.关联式容器的要点
+stl_tree.h（实现了rb-tree）、
+stl_set.h、stl_pair.h、stl_map.h、stl_multiset.h、stl_multimap.h（全都是基于rb-tree实现的）、
+stl_hashtable.h（实现了hashtable，286页，开链法）、stl_hash_fun.h、
+stl_hash_set.h、stl_hash_map.h
+48-50.remove和find_first_of陷阱
+51.求公因子的辗转相除法
+53.真伪随机数
+STL案例：第4章（序列式容器案例）、第5章（关联式容器案例）、第7章（算法案例）
+
+
+1.变颜色情况：当前节点的父亲是红的，而且他的伯父节点也是红的
+（1）把父节点设置为黑色
+（2）伯父节点也设为黑色
+（3）爷爷节点设为红色
+（4）指针定义到爷爷节点，继续判断
+2.左旋：当前节点的父亲是红的，伯父节点是黑的，且当前节点在右子树
+（1）以父节点左旋
+3.右旋：当前节点的父亲是红的，伯父节点是黑的，且当前节点在左子树
+（1）把父节点变黑
+（2）爷爷变红
+（3）以爷爷节右旋
+https://www.bilibili.com/video/av76004937/  红黑树

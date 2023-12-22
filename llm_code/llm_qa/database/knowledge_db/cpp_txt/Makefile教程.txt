@@ -1,0 +1,179 @@
+1.
+在此，我想多说关于程序编译的一些规范和方法，一般来说，无论是C、C++首先要把源文件编译成中间代码文件
+在Windows下也就是 .obj 文件，UNIX下是 .o 文件，即 Object File，这个动作叫做编译（compile）。
+然后再把大量的Object File合成执行文件，这个动作叫作链接（link）。        
+【编译时】编译器需要的是语法的正确，函数与变量的声明的正确。
+对于后者，通常是你需要告诉编译器头文件的所在位置（头文件中应该只是声明，而定义应该放在C/C++文件中），
+只要所有的语法正确，编译器就可以编译出中间目标文件。一般来说，每个源文件都应该对应于一个中间目标文件（O文件或是OBJ文件）。 
+【链接时】主要是链接函数和全局变量，所以，我们可以使用这些中间目标文件（O文件或是OBJ文件）来链接我们的应用程序。
+链接器并不管函数所在的源文件，只管函数的中间目标文件（ObjectFile），
+在大多数时候，由于源文件太多，编译生成的中间目标文件太多，而在链接时需要明显地指出中间目标文件名，这对于编译很不方便，
+所以，我们要给中间目标文件打个包，在Windows下这种包叫“库文件”（Library File)，也就是 .lib 文件，在UNIX下，是Archive File，也就是 .a 文件。
+
+2.
+target... : prerequisites ...
+	command
+target也就是一个目标文件，可以是ObjectFile，也可以是执行文件。还可以是一个标签（Label），对于标签这种特性，在后续的“伪目标”章节中会有叙述。
+prerequisites就是，要生成那个target所需要的文件或是目标。
+command也就是make需要执行的命令。（任意的Shell命令）,[Tab]键打头
+指令太长，一行写不下，'\'作为换行符
+
+3.
+在看别人写的Makefile文件时，你可能会碰到以下三个变量：$@，$^，$<代表的意义分别是： 
+$@：目标文件，$^：所有的依赖文件，$<：第一个依赖文件。
+
+4.
+edit : main.o kbd.o command.o display.o insert.o search.o files.o utils.o
+	cc -o edit main.o kbd.o command.o display.o insert.o search.o files.o utils.o
+main.o : main.c defs.h 
+	cc -c main.c
+kbd.o : kbd.c defs.h command.h
+	cc -c kbd.c
+command.o : command.c defs.h command.h
+	cc -c command.c
+display.o : display.c defs.h buffer.h
+	cc -c display.c
+insert.o : insert.c defs.h buffer.h
+	cc -c insert.c
+search.o : search.c defs.h buffer.h
+	cc -c search.c
+files.o : files.c defs.h buffer.h command.h
+	cc -c files.c
+utils.o : utils.c defs.h
+	cc -c utils.c
+clean :
+	rm edit main.o kbd.o command.o display.o insert.o search.o files.o utils.o
+【执行make进行编译】、【执行make clean执行清理】
+依赖项文件有被修改过的化，那么执行make就会将该部分重新编译
+
+5.可以声明一个变量来替代一大串重复的内容
+objects = main.o kbd.o command.o display.o insert.o search.o files.o utils.o
+edit : $(objects)
+	cc -o edit $(objects)
+
+6.GNU的make有自动推导能力，要生成whatever.o，那么必然要依赖whatever.c
+main.o : defs.h
+kbd.o : defs.h command.h
+command.o : defs.h command.h
+display.o : defs.h buffer.h
+insert.o : defs.h buffer.h
+search.o : defs.h buffer.h
+files.o : defs.h buffer.h command.h
+utils.o : defs.h
+
+7. .PHONY表示，clean是个伪目标文件
+.PHONY : clean
+clean :
+    -rm edit $(objects)
+而在rm命令前面加了一个小减号的意思就是，也许某些文件出现问题，但不要管，继续做后面的事
+	
+8.我们看到多个.o文件都依赖同一个defs.h文件，可以再进行简化
+$objects : defs.h
+kdb.o command.o file.o : command.h
+display.o insert.o search.o files.o : buffer.h
+文件变得简答，但是依赖关系不是那么明显了，鱼和熊掌不可兼得啊
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+1.make的工作方式
+①读入所有的Makefile。
+②读入被include的其它Makefile。
+③初始化文件中的变量。
+④推导隐晦规则，并分析所有规则。
+⑤为所有的目标文件创建依赖关系链。
+⑥根据依赖关系，决定哪些目标要重新生成。
+⑦执行生成命令。
+
+2.一般来说，定义在Makefile中的目标可能会有很多，但是第一条规则中的目标将被确立为最终的目标。
+如果第一条规则中的目标有很多个，那么，第一个目标会成为最终的目标。make所完成的也就是这个目标。
+
+3.通配符：make支持三各通配符："*"，"?" 和 "[...]"
+*指代一串，?指代一个字符，[...]指代指定字符集中的某一个
+
+4.VPATH
+VPATH = src:../headers						// 添加文件查找目录
+VPATH = %.h src:../headers					// 添加目录中的.h文件，"%"的意思是匹配零或若干字符
+
+5.如果想一口气生成多个可执行文件，利用伪目标的特殊性质
+all : prog1 prog2 prog3
+.PHONY : all
+
+.PHONY : cleanall cleanobj cleandiff
+cleanall : cleanobj cleandiff
+	rm program
+cleanobj : 
+	rm *.o
+cleandiff :
+	rm *.diff
+
+6.多目标
+bigoutput littleoutput : text.g
+	generate text.g -$(subst output,,$@) > $@
+等同于
+bigoutput : text.g
+	generate text.g -big > bigoutput
+littleoutput : text.g
+	generate text.g -little > littleoutput
+
+7.为一系列.c文件生成.o文件
+object = foo.o bar.o
+all : $(objects)
+$(objects):%.o:%.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+8.
+gcc -MM main.c
+等同于main.o : mian.c defs.h
+使用#表示注释
+
+9.
+	@command
+加上@只会输出命令结果，不加@的化，执行的指令也会输出出来	
+两条command要么分行（分开执行），要么用;分隔开来（连续执行，第二条指令依赖前一条时）
+
+10.总控Makefile
+subsystem:
+	cd subdir && $(MAKE)	进入subdir执行MAKE命令
+总控Makefile的变量可以传递到下级Makefile中，但是不覆盖Makefile中所定义的变量 
+通过指定 export variable = value ，不传递设置unexport，单独一个export表示传递所有变量
+通过指定 override variable = value，指定一个变量不能被修改重新赋值
+
+11.定义命令包 define XX ... endef
+define run-yacc
+yacc $(firstword $^)
+mv y.tab.c $@
+endef
+
+12.变量的高级用法
+①
+是“$(var:a=b)”或是“${var:a=b}”
+其意思是，把变量“var”中所有以“a”字串“结尾”的“a”替换成“b”字串。这里的“结尾”意思是“空格”或是“结束符”
+例子：foo = a.o b.o c.o
+bar = $(foo:.o=.c)	 -->  bar = a.c b.c c.c
+②
+first_second = Hello
+a = first 
+b = second
+all = $($a_$b)
+所以$(all)的值，就变成了"Hello"
+
+13.系统的环境变量，和Makefile中变量同名时，会被覆盖掉
+
+14.条件表达式
+ifeq/ifneq (表达式)
+	command1
+else
+	command2
+endif
+
+15.
+脚本名称叫test.sh 入参三个: 1 2 3
+运行test.sh 1 2 3后
+$*为"1 2 3"（一起被引号包住）
+$@为"1" "2" "3"（分别被包住）
+$#为3（参数数量）
+$1为第一个参数，${10}为第十个参数
+
+16.
+${file:-my.file.txt} ：file为空时，返回my.file.txt
+${file:+my.file.txt} ：file不空时，返回my.file.txt
