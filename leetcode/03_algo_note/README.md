@@ -20,12 +20,21 @@
 - [螺旋矩阵](01_algo_array/1.2_array/54.螺旋矩阵.cpp)
 - [对角线遍历](01_algo_array/1.2_array/498.对角线遍历.cpp)
 
-### 1.3 数组排序
+### 1.3 [数组排序](01_algo_array/1.3_sort/README.md)
 
+- [破解闯关密码](01_algo_array/1.3_sort/lcr164.破解闯关密码.cpp)
+- [移动零](01_algo_array/1.3_sort/283.移动零.cpp)
+- [排序数组](01_algo_array/1.3_sort/912.排序数组.cpp)
+- [相对名次](01_algo_array/1.3_sort/506.相对名次.cpp)
+- [合并两个有序数组](01_algo_array/1.3_sort/88.合并两个有序数组.cpp)
+- [交易逆序对总数](01_algo_array/1.3_sort/lcr170.交易逆序对总数.cpp)
 - []()
 - []()
 
 ### 1.4 数组二分查找
+
+- []()
+- []()
 
 ### 1.5 数组双指针、滑动窗口
 
