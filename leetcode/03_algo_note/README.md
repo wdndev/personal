@@ -28,8 +28,12 @@
 - [相对名次](01_algo_array/1.3_sort/506.相对名次.cpp)
 - [合并两个有序数组](01_algo_array/1.3_sort/88.合并两个有序数组.cpp)
 - [交易逆序对总数](01_algo_array/1.3_sort/lcr170.交易逆序对总数.cpp)
-- []()
-- []()
+- [颜色分类](01_algo_array/1.3_sort/75.颜色分类.cpp)
+- [数组中的第k个最大元素](01_algo_array/1.3_sort/215.数组中的第k个最大元素.cpp)
+- [库存管理iii](01_algo_array/1.3_sort/lcr159.库存管理-iii.cpp)
+- [数组的相对排序](01_algo_array/1.3_sort/1122.数组的相对排序.cpp)
+- [存在重复元素iii](01_algo_array/1.3_sort/220.存在重复元素-iii.cpp)
+- [最大间距](01_algo_array/1.3_sort/164.最大间距.cpp)
 
 ### 1.4 数组二分查找
 
