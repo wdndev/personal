@@ -35,7 +35,7 @@
 - [存在重复元素iii](01_algo_array/1.3_sort/220.存在重复元素-iii.cpp)
 - [最大间距](01_algo_array/1.3_sort/164.最大间距.cpp)
 
-### 1.4 数组二分查找
+### 1.4 [数组二分查找](01_algo_array/1.4_bin_search/README.md)
 
 - [二分查找](01_algo_array/1.4_bin_search/704.二分查找.cpp)
 - [搜索插入位置](01_algo_array/1.4_bin_search/35.搜索插入位置.cpp)
@@ -43,12 +43,10 @@
 - [x-的平方根](01_algo_array/1.4_bin_search/69.x-的平方根.cpp)
 - [两数之和-ii-输入有序数组](01_algo_array/1.4_bin_search/167.两数之和-ii-输入有序数组.cpp)
 - [在-d-天内送达包裹的能力](01_algo_array/1.4_bin_search/1011.在-d-天内送达包裹的能力.cpp)
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
+- [第一个错误的版本](01_algo_array/1.4_bin_search/278.第一个错误的版本.cpp)
+- [搜索旋转排序数组](01_algo_array/1.4_bin_search/33.搜索旋转排序数组.cpp)
+- [寻找旋转排序数组中的最小值](01_algo_array/1.4_bin_search/153.寻找旋转排序数组中的最小值.cpp)
+
 
 ### 1.5 数组双指针、滑动窗口
 
