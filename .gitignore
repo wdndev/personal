@@ -14,9 +14,9 @@ dl_algo/vision_transformer/data
 dl_algo/vision_transformer/model
 dl_algo/vision_transformer/runs
 
-dl_algo/swim_transformer/data
-dl_algo/swim_transformer/model
-dl_algo/swim_transformer/runs
+dl_algo/swin_transformer/data
+dl_algo/swin_transformer/model
+dl_algo/swin_transformer/runs
 
 dl_algo/mixture_of_experts/data
 dl_algo/mixture_of_experts/model
