@@ -48,7 +48,18 @@
 - [寻找旋转排序数组中的最小值](01_algo_array/1.4_bin_search/153.寻找旋转排序数组中的最小值.cpp)
 
 
-### 1.5 数组双指针、滑动窗口
+### 1.5 数组双指针
+
+- [两数之和-ii-输入有序数组](01_algo_array/1.5_double_pointer/167.两数之和-ii-输入有序数组.cpp)
+- [验证回文串](01_algo_array/1.5_double_pointer/125.验证回文串.cpp)
+- [盛最多水的容器](01_algo_array/1.5_double_pointer/11.盛最多水的容器.cpp)
+- [删除有序数组中的重复项](01_algo_array/1.5_double_pointer/26.删除有序数组中的重复项.cpp)
+- [两个数组的交集](01_algo_array/1.5_double_pointer/349.两个数组的交集.cpp)
+- []()
+
+
+
+### 1.6 滑动窗口
 
 - []()
 - []()
