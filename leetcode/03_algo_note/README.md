@@ -63,14 +63,22 @@
 - [长按键入](01_algo_array/1.5_double_pointer/925.长按键入.cpp)
 
 
-### 1.6 滑动窗口
+### 1.6 [滑动窗口](01_algo_array/1.6_slide_window/README.md)
 
-- []()
-- []()
+- [大小为-k-且平均值大于等于阈值的子数组数目](01_algo_array/1.6_slide_window/1343.大小为-k-且平均值大于等于阈值的子数组数目.cpp)
+- [无重复字符的最长子串](01_algo_array/1.6_slide_window/3.无重复字符的最长子串.cpp)
+- [长度最小的子数组](01_algo_array/1.6_slide_window/209.长度最小的子数组.cpp)
+- [乘积小于-k-的子数组](01_algo_array/1.6_slide_window/713.乘积小于-k-的子数组.cpp)
+- [子数组最大平均数](01_algo_array/1.6_slide_window/643.子数组最大平均数-i.cpp)
+- [最长连续递增序列](01_algo_array/1.6_slide_window/674.最长连续递增序列.cpp)
+- [最大连续-1-的个数-iii](01_algo_array/1.6_slide_window/1004.最大连续-1-的个数-iii.cpp)
+
 
 ## 2.基础数据结构
 
 链表
+
+- []()
 
 堆栈与单调栈
 
