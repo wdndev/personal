@@ -85,6 +85,11 @@
 - [回文链表](02_basic_ds/2.1_list_basic/234.回文链表.cpp)
 - [随机链表的复制](02_basic_ds/2.1_list_basic/138.随机链表的复制.cpp)
 
+### 2.2 [链表排序](02_basic_ds/2.2_list_sort/README.md)
+
+- [排序链表](02_basic_ds/2.2_list_sort/148.排序链表.py)
+- [对链表进行插入排序](02_basic_ds/2.2_list_sort/147.对链表进行插入排序.cpp)
+- [合并两个有序链表](02_basic_ds/2.2_list_sort/21.合并两个有序链表.cpp)
 
 堆栈与单调栈
 
