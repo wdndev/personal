@@ -99,7 +99,18 @@
 - [环形链表-ii](02_basic_ds/2.3_list_double_pointer/142.环形链表-ii.cpp)
 - [合并两个有序链表](02_basic_ds/2.3_list_double_pointer/21.合并两个有序链表.cpp)
 
-堆栈与单调栈
+### 2.4 [堆栈](02_basic_ds/2.4_stack/README.md)
+
+- [顺序栈实现](02_basic_ds/2.4_stack/array_stack.py)
+- [链式栈实现](02_basic_ds/2.4_stack/list_stack.py)
+- [有效的括号](02_basic_ds/2.4_stack/20.有效的括号.cpp)
+- [基本计算器-ii](02_basic_ds/2.4_stack/227.基本计算器-ii.cpp)
+- [最小栈](02_basic_ds/2.4_stack/155.最小栈.cpp)
+- [逆波兰表达式求值](02_basic_ds/2.4_stack/150.逆波兰表达式求值.cpp)
+- [字符串解码](02_basic_ds/2.4_stack/394.字符串解码.cpp)
+- [验证栈序列](02_basic_ds/2.4_stack/946.验证栈序列.cpp)
+
+单调栈
 
 - []()
 
