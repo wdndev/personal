@@ -110,11 +110,15 @@
 - [字符串解码](02_basic_ds/2.4_stack/394.字符串解码.cpp)
 - [验证栈序列](02_basic_ds/2.4_stack/946.验证栈序列.cpp)
 
-单调栈
+### 2.5 [单调栈](02_basic_ds/2.5_mono_stack/README.md)
 
-- []()
+- [下一个更大元素-i](02_basic_ds/2.5_mono_stack/496.下一个更大元素-i.cpp)
+- [每日温度](02_basic_ds/2.5_mono_stack/739.每日温度.cpp)
+- [去除重复字母](02_basic_ds/2.5_mono_stack/316.去除重复字母.cpp)
 
 深度优先搜索
+
+- []()
 
 队列与优先队列
 
