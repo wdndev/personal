@@ -128,7 +128,17 @@
 - [飞地的数量](02_basic_ds/2.6_dfs/1020.飞地的数量.cpp)
 - [统计封闭岛屿的数目](02_basic_ds/2.6_dfs/1254.统计封闭岛屿的数目.cpp)
 
-队列与优先队列
+### 2.7 [队列](02_basic_ds/2.7_queue/README.md)
+
+- [顺序队列](02_basic_ds/2.7_queue/array_queue.py)
+- [顺序循环队列](02_basic_ds/2.7_queue/array_recu_queue.py)
+- [链式队列](02_basic_ds/2.7_queue/list_queue.py)
+- [设计循环队列](02_basic_ds/2.7_queue/622.设计循环队列.cpp)
+- [数据流中的移动平均值](02_basic_ds/2.7_queue/lcr041.数据流中的移动平均值.cpp)
+- [用队列实现栈](02_basic_ds/2.7_queue/225.用队列实现栈.cpp)
+
+
+优先队列
 
 广度优先搜索
 
