@@ -138,7 +138,11 @@
 - [用队列实现栈](02_basic_ds/2.7_queue/225.用队列实现栈.cpp)
 
 
-优先队列
+### 2.8 [优先队列](02_basic_ds/2.8_priority_queue/README.md)
+
+- [滑动窗口最大值](02_basic_ds/2.8_priority_queue/239.滑动窗口最大值.cpp)
+- [前-k-个高频元素](02_basic_ds/2.8_priority_queue/347.前-k-个高频元素.cpp)
+- [根据字符出现频率排序](02_basic_ds/2.8_priority_queue/451.根据字符出现频率排序.cpp)
 
 广度优先搜索
 
