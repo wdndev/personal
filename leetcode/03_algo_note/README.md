@@ -144,7 +144,15 @@
 - [前-k-个高频元素](02_basic_ds/2.8_priority_queue/347.前-k-个高频元素.cpp)
 - [根据字符出现频率排序](02_basic_ds/2.8_priority_queue/451.根据字符出现频率排序.cpp)
 
-广度优先搜索
+### 2.9 [广度优先搜索](02_basic_ds/2.9_bfs/README.md)
+
+- [克隆图](02_basic_ds/2.9_bfs/133.克隆图.cpp)
+- [岛屿的周长](02_basic_ds/2.9_bfs/463.岛屿的周长.cpp)
+- [打开转盘锁](02_basic_ds/2.9_bfs/752.打开转盘锁.cpp)
+- [完全平方数](02_basic_ds/2.9_bfs/279.完全平方数.cpp)
+- [01-矩阵](02_basic_ds/2.9_bfs/542.01-矩阵.cpp)
+- [衣橱整理](02_basic_ds/2.9_bfs/lcr130.衣橱整理.cpp)
+
 
 拓扑排序
 
