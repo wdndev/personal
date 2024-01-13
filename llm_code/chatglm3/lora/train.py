@@ -64,6 +64,7 @@ if "__main__" == __name__:
     config = LoraConfig(task_type=TaskType.CAUSAL_LM,       # 模型类型
                         target_modules={"query_key_value"}, # 需要训练的模型层的名字，主要就是`attention`部分的层，不同的模型对应的层的名字不同，可以传入数组，也可以字符串，也可以正则表达式。
                         r=8,                                # lora 的秩
+                        # 归一化超参数，lora参数ΔW会被以 alpha/r 归一化，以便减少改变r时需要重新训练的计算量
                         lora_alpha=32,                      # Lora alaph
                         lora_dropout=0.1                    # Dropout 比例
                         )
