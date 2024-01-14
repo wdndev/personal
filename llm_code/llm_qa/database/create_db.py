@@ -124,3 +124,5 @@ def load_knowledge_db(path, embeddings):
 
 if __name__ == "__main__":
     create_db(embeddings="zhipuai")
+    # vectordb = load_knowledge_db("database/vector_zhipuai_db", embeddings="zhipuai")
+    # print(f"向量库中存储的数量：{vectordb._collection.count()}")
