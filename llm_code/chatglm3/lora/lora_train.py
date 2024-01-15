@@ -66,7 +66,7 @@ if "__main__" == __name__:
                         r=8,                                # lora 的秩
                         # 归一化超参数，lora参数ΔW会被以 alpha/r 归一化，以便减少改变r时需要重新训练的计算量
                         lora_alpha=32,                      # Lora alaph
-                        lora_dropout=0.1                    # Dropout 比例
+                        lora_dropout=0.0                    # Dropout 比例
                         )
 
     # 模型合并
