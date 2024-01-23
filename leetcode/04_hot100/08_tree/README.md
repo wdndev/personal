@@ -597,6 +597,7 @@ int length = rootIndex - inStartIndex;
 -   中序序列：左，根，右
 -   后序序列：左，右，根
 
+
 表示子树不存在：
 
 -   序列长度为零，代表子树不存在
