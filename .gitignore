@@ -23,6 +23,6 @@ dl_algo/mixture_of_experts/model
 
 llm_code/database/knowledge_db
 llm_code/database/vector_zhipuai_db
-llm_code/.env
+llm_code/llm_qa/.env
 llm_code/chatglm3/lora/model/chatglm3-6b
 
