@@ -73,7 +73,7 @@ public:
     // 每递归到一个节点 B，计算 max(|mn - B.val|, |mx - B.val|)
     // 可以简化为 max(B.val - mn, mx - B.val)
     int maxAncestorDiff(TreeNode* root) {
-        this->dfs(root, root->val, root->val);
+        this->dfs_opti(root, root->val, root->val);
 
         return m_ans;
     }
@@ -91,6 +91,25 @@ private:
         mn = std::min(mn, node->val);
         mx = std::max(mx, node->val);
         m_ans = std::max(m_ans, std::max(node->val - mn, mx - node->val));
+        this->dfs(node->left, mn, mx);
+        this->dfs(node->right, mn, mx);
+    }
+
+    // 优化
+    // 对于一条从根出发的向下的路径，要计算是这条路径上任意两点的最大差值
+    // 递归到空结点时，mx是从根节点到叶子节点的路径上的最大值，mn 是从跟到叶子的路径上的最小值，
+    // 所以 mx - mn就是从根节点到叶子路径上任意两点的最大差值
+    // 所以，无需每个节点都去更新答案，而是再递归到空节点时才去更新答案
+    void dfs_opti(TreeNode* node, int mn, int mx) {
+        if (node == nullptr) {
+            m_ans = std::max(m_ans, mx - mn);
+            return;
+        }
+        // 相同节点差值为0，不影响最大差值
+        // 所以，先更新 mn 和 mx， 再计算差值也是可以的
+        // 再这种情况下，一定满足 mn <= node.val <= mx
+        mn = std::min(mn, node->val);
+        mx = std::max(mx, node->val);
         this->dfs(node->left, mn, mx);
         this->dfs(node->right, mn, mx);
     }
