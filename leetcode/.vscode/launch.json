@@ -23,7 +23,7 @@
             "environment": [],
             "externalConsole": false,							    // 调试时是否显示控制台窗口
             "MIMode": "gdb",
-            "miDebuggerPath": "D:/Library/mingw64/bin/gdb.exe",       // 修改为刚安装的MinGW/bin/gdb.exe路径
+            "miDebuggerPath": "D:/library/mingw64/bin/gdb.exe",       // 修改为刚安装的MinGW/bin/gdb.exe路径
             "preLaunchTask": "g++",
             "setupCommands": [
                 {
