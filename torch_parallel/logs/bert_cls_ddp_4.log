@@ -1,0 +1,675 @@
+nohup: 忽略输入
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/distributed/launch.py:181: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use-env is set by default in torchrun.
+If your script expects `--local-rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+[2024-03-05 18:25:11,262] torch.distributed.run: [WARNING] 
+[2024-03-05 18:25:11,262] torch.distributed.run: [WARNING] *****************************************
+[2024-03-05 18:25:11,262] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2024-03-05 18:25:11,262] torch.distributed.run: [WARNING] *****************************************
+[W socket.cpp:436] [c10d] The server socket cannot be initialized on [::]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:29500 (errno: 97 - Address family not supported by protocol).
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+MASTER_ADDR 127.0.0.1MASTER_ADDR
+ MASTER_PORT127.0.0.1 
+29500MASTER_PORT
+ RANK29500 
+0RANK
+ WORLD_SIZE3 
+4WORLD_SIZE
+ LOCAL_RANK4 
+0LOCAL_RANK
+ 3
+[383575] Initializing process group with: {'MASTER_ADDR': '127.0.0.1', 'MASTER_PORT': '29500', 'RANK': '0', 'WORLD_SIZE': '4', 'LOCAL_RANK': '0'}
+[383583] Initializing process group with: {'MASTER_ADDR': '127.0.0.1', 'MASTER_PORT': '29500', 'RANK': '3', 'WORLD_SIZE': '4', 'LOCAL_RANK': '3'}
+MASTER_ADDR 127.0.0.1
+MASTER_PORT 29500
+RANK 2
+WORLD_SIZE 4
+LOCAL_RANK 2
+[383582] Initializing process group with: {'MASTER_ADDR': '127.0.0.1', 'MASTER_PORT': '29500', 'RANK': '2', 'WORLD_SIZE': '4', 'LOCAL_RANK': '2'}
+MASTER_ADDR 127.0.0.1
+MASTER_PORT 29500
+RANK 1
+WORLD_SIZE 4
+LOCAL_RANK 1
+[383577] Initializing process group with: {'MASTER_ADDR': '127.0.0.1', 'MASTER_PORT': '29500', 'RANK': '1', 'WORLD_SIZE': '4', 'LOCAL_RANK': '1'}
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:29500 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:29500 (errno: 97 - Address family not supported by protocol).
+[383575] rank = 0, world_size = 4, n = 2, device_ids = [0] 
+[383583] rank = 3, world_size = 4, n = 2, device_ids = [3] 
+[383582] rank = 2, world_size = 4, n = 2, device_ids = [2] 
+[383577] rank = 1, world_size = 4, n = 2, device_ids = [1] 
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+lilin3-a800-dev-7-m-0:383575:383575 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383575:383575 [0] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383575:383575 [0] NCCL INFO cudaDriverVersion 12020
+NCCL version 2.18.1+cuda12.1
+lilin3-a800-dev-7-m-0:383582:383582 [2] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:383582:383582 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383582:383582 [2] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383577:383577 [1] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:383577:383577 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383577:383577 [1] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383583:383583 [3] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:383583:383583 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383583:383583 [3] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Setting affinity for GPU 3 to ffff0000,00000000,00000000,00000000,ffff0000
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO NVLS multicast support is not available on dev 3
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Setting affinity for GPU 2 to ffff0000,00000000,00000000,00000000,ffff0000
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Setting affinity for GPU 0 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO NVLS multicast support is not available on dev 0
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO NVLS multicast support is not available on dev 2
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Setting affinity for GPU 1 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO NVLS multicast support is not available on dev 1
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 00/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 01/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 02/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 03/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 04/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 05/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Trees [0] -1/-1/-1->3->2 [1] -1/-1/-1->3->2 [2] -1/-1/-1->3->2 [3] -1/-1/-1->3->2 [4] -1/-1/-1->3->2 [5] -1/-1/-1->3->2 [6] -1/-1/-1->3->2 [7] -1/-1/-1->3->2 [8] -1/-1/-1->3->2 [9] -1/-1/-1->3->2 [10] -1/-1/-1->3->2 [11] -1/-1/-1->3->2 [12] -1/-1/-1->3->2 [13] -1/-1/-1->3->2 [14] -1/-1/-1->3->2 [15] -1/-1/-1->3->2
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1 [2] 3/-1/-1->2->1 [3] 3/-1/-1->2->1 [4] 3/-1/-1->2->1 [5] 3/-1/-1->2->1 [6] 3/-1/-1->2->1 [7] 3/-1/-1->2->1 [8] 3/-1/-1->2->1 [9] 3/-1/-1->2->1 [10] 3/-1/-1->2->1 [11] 3/-1/-1->2->1 [12] 3/-1/-1->2->1 [13] 3/-1/-1->2->1 [14] 3/-1/-1->2->1 [15] 3/-1/-1->2->1
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 06/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0 [2] 2/-1/-1->1->0 [3] 2/-1/-1->1->0 [4] 2/-1/-1->1->0 [5] 2/-1/-1->1->0 [6] 2/-1/-1->1->0 [7] 2/-1/-1->1->0 [8] 2/-1/-1->1->0 [9] 2/-1/-1->1->0 [10] 2/-1/-1->1->0 [11] 2/-1/-1->1->0 [12] 2/-1/-1->1->0 [13] 2/-1/-1->1->0 [14] 2/-1/-1->1->0 [15] 2/-1/-1->1->0
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 07/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 08/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 09/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 10/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 11/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 12/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 13/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 14/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 15/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] 1/-1/-1->0->-1 [7] 1/-1/-1->0->-1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 00/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 00/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 01/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 01/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 02/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 02/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 03/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 03/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 04/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 04/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 05/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 05/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 06/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 06/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 07/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 07/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 08/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 08/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 09/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 09/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 10/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 10/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 11/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 11/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 12/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 12/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 13/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 13/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 00/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 01/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 00/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 02/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 01/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 03/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 02/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 04/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 03/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 04/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 05/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 06/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 07/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 08/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 09/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 10/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 11/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 12/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 13/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 14/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 15/0 : 1[13000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 14/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 14/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 15/0 : 3[4f000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 15/0 : 2[49000] -> 3[4f000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 05/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 06/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 07/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 08/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 09/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 10/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 11/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 12/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 13/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 14/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Channel 15/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 00/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 01/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 02/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 03/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 04/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 05/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 06/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 00/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 01/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 02/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 03/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 04/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 05/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 06/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 07/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 08/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 09/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 10/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 07/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 08/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 09/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 10/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 11/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 12/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 13/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 14/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Channel 15/0 : 2[49000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 00/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 11/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 12/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 01/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 02/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 13/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 03/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 14/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 04/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Channel 15/0 : 3[4f000] -> 2[49000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 05/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 06/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 07/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 08/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 09/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 10/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 11/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 12/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 13/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 14/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Channel 15/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:383575:383839 [0] NCCL INFO comm 0x9785580 rank 0 nranks 4 cudaDev 0 busId e000 commId 0x1f5627e9a506280c - Init COMPLETE
+lilin3-a800-dev-7-m-0:383582:383843 [2] NCCL INFO comm 0x8cea2c0 rank 2 nranks 4 cudaDev 2 busId 49000 commId 0x1f5627e9a506280c - Init COMPLETE
+lilin3-a800-dev-7-m-0:383583:383845 [3] NCCL INFO comm 0x17e977c0 rank 3 nranks 4 cudaDev 3 busId 4f000 commId 0x1f5627e9a506280c - Init COMPLETE
+lilin3-a800-dev-7-m-0:383577:383844 [1] NCCL INFO comm 0x9847500 rank 1 nranks 4 cudaDev 1 busId 13000 commId 0x1f5627e9a506280c - Init COMPLETE
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+[train] epoch: 1/10 step：1/360 loss：1.951214
+[train] epoch: 1/10 step：2/360 loss：1.762146
+[train] epoch: 1/10 step：3/360 loss：1.719486
+[train] epoch: 1/10 step：4/360 loss：1.615462
+[train] epoch: 1/10 step：5/360 loss：1.711619
+[train] epoch: 1/10 step：6/360 loss：1.745002
+[train] epoch: 1/10 step：7/360 loss：1.635421
+[train] epoch: 1/10 step：8/360 loss：1.683772
+[train] epoch: 1/10 step：9/360 loss：1.653473
+[train] epoch: 1/10 step：10/360 loss：1.647317
+[train] epoch: 1/10 step：11/360 loss：1.595139
+[train] epoch: 1/10 step：12/360 loss：1.623810
+[train] epoch: 1/10 step：13/360 loss：1.601768
+[train] epoch: 1/10 step：14/360 loss：1.598289
+[train] epoch: 1/10 step：15/360 loss：1.602532
+[train] epoch: 1/10 step：16/360 loss：1.580524
+[train] epoch: 1/10 step：17/360 loss：1.589298
+[train] epoch: 1/10 step：18/360 loss：1.551823
+[train] epoch: 1/10 step：19/360 loss：1.511137
+[train] epoch: 1/10 step：20/360 loss：1.521109
+[train] epoch: 1/10 step：21/360 loss：1.488660
+[train] epoch: 1/10 step：22/360 loss：1.503385
+[train] epoch: 1/10 step：23/360 loss：1.504998
+[train] epoch: 1/10 step：24/360 loss：1.409860
+[train] epoch: 1/10 step：25/360 loss：1.402773
+[train] epoch: 1/10 step：26/360 loss：1.405643
+[train] epoch: 1/10 step：27/360 loss：1.384753
+[train] epoch: 1/10 step：28/360 loss：1.349789
+[train] epoch: 1/10 step：29/360 loss：1.341636
+[train] epoch: 1/10 step：30/360 loss：1.292390
+[train] epoch: 1/10 step：31/360 loss：1.300166
+[train] epoch: 1/10 step：32/360 loss：1.317083
+[train] epoch: 1/10 step：33/360 loss：1.203134
+[train] epoch: 1/10 step：34/360 loss：1.325323
+[train] epoch: 1/10 step：35/360 loss：1.241644
+[train] epoch: 1/10 step：36/360 loss：1.272328
+[train] epoch: 2/10 step：37/360 loss：1.167866
+[train] epoch: 2/10 step：38/360 loss：1.138016
+[train] epoch: 2/10 step：39/360 loss：1.185280
+[train] epoch: 2/10 step：40/360 loss：1.183345
+[train] epoch: 2/10 step：41/360 loss：1.160553
+[train] epoch: 2/10 step：42/360 loss：1.099220
+[train] epoch: 2/10 step：43/360 loss：1.138842
+[train] epoch: 2/10 step：44/360 loss：1.158429
+[train] epoch: 2/10 step：45/360 loss：1.286942
+[train] epoch: 2/10 step：46/360 loss：1.130942
+[train] epoch: 2/10 step：47/360 loss：1.224995
+[train] epoch: 2/10 step：48/360 loss：1.093074
+[train] epoch: 2/10 step：49/360 loss：1.158417
+[train] epoch: 2/10 step：50/360 loss：1.104178
+[train] epoch: 2/10 step：51/360 loss：1.167830
+[train] epoch: 2/10 step：52/360 loss：1.212904
+[train] epoch: 2/10 step：53/360 loss：1.040155
+[train] epoch: 2/10 step：54/360 loss：1.081313
+[train] epoch: 2/10 step：55/360 loss：1.098496
+[train] epoch: 2/10 step：56/360 loss：1.152931
+[train] epoch: 2/10 step：57/360 loss：1.171994
+[train] epoch: 2/10 step：58/360 loss：1.121356
+[train] epoch: 2/10 step：59/360 loss：1.247755
+[train] epoch: 2/10 step：60/360 loss：1.121577
+[train] epoch: 2/10 step：61/360 loss：1.172255
+[train] epoch: 2/10 step：62/360 loss：1.195037
+[train] epoch: 2/10 step：63/360 loss：1.229633
+[train] epoch: 2/10 step：64/360 loss：1.158464
+[train] epoch: 2/10 step：65/360 loss：1.173216
+[train] epoch: 2/10 step：66/360 loss：0.973047
+[train] epoch: 2/10 step：67/360 loss：1.012561
+[train] epoch: 2/10 step：68/360 loss：1.060690
+[train] epoch: 2/10 step：69/360 loss：1.072777
+[train] epoch: 2/10 step：70/360 loss：1.118821
+[train] epoch: 2/10 step：71/360 loss：1.014630
+[train] epoch: 2/10 step：72/360 loss：1.201872
+[train] epoch: 3/10 step：73/360 loss：0.964827
+[train] epoch: 3/10 step：74/360 loss：0.999235
+[train] epoch: 3/10 step：75/360 loss：0.989368
+[train] epoch: 3/10 step：76/360 loss：0.998781
+[train] epoch: 3/10 step：77/360 loss：1.005085
+[train] epoch: 3/10 step：78/360 loss：0.868022
+[train] epoch: 3/10 step：79/360 loss：1.018910
+[train] epoch: 3/10 step：80/360 loss：0.995569
+[train] epoch: 3/10 step：81/360 loss：0.921482
+[train] epoch: 3/10 step：82/360 loss：1.002279
+[train] epoch: 3/10 step：83/360 loss：0.938204
+[train] epoch: 3/10 step：84/360 loss：0.912163
+[train] epoch: 3/10 step：85/360 loss：0.960399
+[train] epoch: 3/10 step：86/360 loss：0.855333
+[train] epoch: 3/10 step：87/360 loss：0.961124
+[train] epoch: 3/10 step：88/360 loss：0.897711
+[train] epoch: 3/10 step：89/360 loss：0.849400
+[train] epoch: 3/10 step：90/360 loss：0.917342
+[train] epoch: 3/10 step：91/360 loss：1.054240
+[train] epoch: 3/10 step：92/360 loss：0.926859
+[train] epoch: 3/10 step：93/360 loss：0.846176
+[train] epoch: 3/10 step：94/360 loss：0.960211
+[train] epoch: 3/10 step：95/360 loss：1.150878
+[train] epoch: 3/10 step：96/360 loss：1.044655
+[train] epoch: 3/10 step：97/360 loss：1.041107
+[train] epoch: 3/10 step：98/360 loss：0.916639
+[train] epoch: 3/10 step：99/360 loss：0.885593
+[train] epoch: 3/10 step：100/360 loss：0.810408
+[train] epoch: 3/10 step：101/360 loss：1.017276
+[train] epoch: 3/10 step：102/360 loss：0.954215
+[train] epoch: 3/10 step：103/360 loss：1.000975
+[train] epoch: 3/10 step：104/360 loss：0.890603
+[train] epoch: 3/10 step：105/360 loss：0.902889
+[train] epoch: 3/10 step：106/360 loss：0.820174
+[train] epoch: 3/10 step：107/360 loss：0.871707
+[train] epoch: 3/10 step：108/360 loss：0.951127
+[train] epoch: 4/10 step：109/360 loss：0.783812
+[train] epoch: 4/10 step：110/360 loss：0.769219
+[train] epoch: 4/10 step：111/360 loss：0.868747
+[train] epoch: 4/10 step：112/360 loss：0.754831
+[train] epoch: 4/10 step：113/360 loss：0.833089
+[train] epoch: 4/10 step：114/360 loss：0.783093
+[train] epoch: 4/10 step：115/360 loss：0.796918
+[train] epoch: 4/10 step：116/360 loss：0.926861
+[train] epoch: 4/10 step：117/360 loss：0.752106
+[train] epoch: 4/10 step：118/360 loss：0.782839
+[train] epoch: 4/10 step：119/360 loss：0.782067
+[train] epoch: 4/10 step：120/360 loss：0.853119
+[train] epoch: 4/10 step：121/360 loss：0.761396
+[train] epoch: 4/10 step：122/360 loss：0.784404
+[train] epoch: 4/10 step：123/360 loss：0.740666
+[train] epoch: 4/10 step：124/360 loss：0.773035
+[train] epoch: 4/10 step：125/360 loss：0.669470
+[train] epoch: 4/10 step：126/360 loss：0.794092
+[train] epoch: 4/10 step：127/360 loss：0.763992
+[train] epoch: 4/10 step：128/360 loss：0.707845
+[train] epoch: 4/10 step：129/360 loss：0.725098
+[train] epoch: 4/10 step：130/360 loss：0.831430
+[train] epoch: 4/10 step：131/360 loss：0.778565
+[train] epoch: 4/10 step：132/360 loss：0.875497
+[train] epoch: 4/10 step：133/360 loss：0.808442
+[train] epoch: 4/10 step：134/360 loss：0.767532
+[train] epoch: 4/10 step：135/360 loss：0.684747
+[train] epoch: 4/10 step：136/360 loss：0.739987
+[train] epoch: 4/10 step：137/360 loss：0.700860
+[train] epoch: 4/10 step：138/360 loss：0.772188
+[train] epoch: 4/10 step：139/360 loss：0.824318
+[train] epoch: 4/10 step：140/360 loss：0.659898
+[train] epoch: 4/10 step：141/360 loss：0.749173
+[train] epoch: 4/10 step：142/360 loss：0.725677
+[train] epoch: 4/10 step：143/360 loss：0.904132
+[train] epoch: 4/10 step：144/360 loss：0.758602
+[train] epoch: 5/10 step：145/360 loss：0.676473
+[train] epoch: 5/10 step：146/360 loss：0.601867
+[train] epoch: 5/10 step：147/360 loss：0.736007
+[train] epoch: 5/10 step：148/360 loss：0.609776
+[train] epoch: 5/10 step：149/360 loss：0.598438
+[train] epoch: 5/10 step：150/360 loss：0.661056
+[train] epoch: 5/10 step：151/360 loss：0.547182
+[train] epoch: 5/10 step：152/360 loss：0.655987
+[train] epoch: 5/10 step：153/360 loss：0.575336
+[train] epoch: 5/10 step：154/360 loss：0.697281
+[train] epoch: 5/10 step：155/360 loss：0.619906
+[train] epoch: 5/10 step：156/360 loss：0.587759
+[train] epoch: 5/10 step：157/360 loss：0.642134
+[train] epoch: 5/10 step：158/360 loss：0.645701
+[train] epoch: 5/10 step：159/360 loss：0.567656
+[train] epoch: 5/10 step：160/360 loss：0.548860
+[train] epoch: 5/10 step：161/360 loss：0.550167
+[train] epoch: 5/10 step：162/360 loss：0.573088
+[train] epoch: 5/10 step：163/360 loss：0.542442
+[train] epoch: 5/10 step：164/360 loss：0.579683
+[train] epoch: 5/10 step：165/360 loss：0.520648
+[train] epoch: 5/10 step：166/360 loss：0.601816
+[train] epoch: 5/10 step：167/360 loss：0.649761
+[train] epoch: 5/10 step：168/360 loss：0.532647
+[train] epoch: 5/10 step：169/360 loss：0.479651
+[train] epoch: 5/10 step：170/360 loss：0.668604
+[train] epoch: 5/10 step：171/360 loss：0.589099
+[train] epoch: 5/10 step：172/360 loss：0.587414
+[train] epoch: 5/10 step：173/360 loss：0.601960
+[train] epoch: 5/10 step：174/360 loss：0.508605
+[train] epoch: 5/10 step：175/360 loss：0.701713
+[train] epoch: 5/10 step：176/360 loss：0.660803
+[train] epoch: 5/10 step：177/360 loss：0.660181
+[train] epoch: 5/10 step：178/360 loss：0.579975
+[train] epoch: 5/10 step：179/360 loss：0.639451
+[train] epoch: 5/10 step：180/360 loss：0.581433
+[train] epoch: 6/10 step：181/360 loss：0.493099
+[train] epoch: 6/10 step：182/360 loss：0.431650
+[train] epoch: 6/10 step：183/360 loss：0.409355
+[train] epoch: 6/10 step：184/360 loss：0.496956
+[train] epoch: 6/10 step：185/360 loss：0.413937
+[train] epoch: 6/10 step：186/360 loss：0.468670
+[train] epoch: 6/10 step：187/360 loss：0.411566
+[train] epoch: 6/10 step：188/360 loss：0.479889
+[train] epoch: 6/10 step：189/360 loss：0.412880
+[train] epoch: 6/10 step：190/360 loss：0.406276
+[train] epoch: 6/10 step：191/360 loss：0.428574
+[train] epoch: 6/10 step：192/360 loss：0.420178
+[train] epoch: 6/10 step：193/360 loss：0.418899
+[train] epoch: 6/10 step：194/360 loss：0.563350
+[train] epoch: 6/10 step：195/360 loss：0.470031
+[train] epoch: 6/10 step：196/360 loss：0.354927
+[train] epoch: 6/10 step：197/360 loss：0.534234
+[train] epoch: 6/10 step：198/360 loss：0.419135
+[train] epoch: 6/10 step：199/360 loss：0.479549
+[train] epoch: 6/10 step：200/360 loss：0.432653
+[train] epoch: 6/10 step：201/360 loss：0.482362
+[train] epoch: 6/10 step：202/360 loss：0.421899
+[train] epoch: 6/10 step：203/360 loss：0.486973
+[train] epoch: 6/10 step：204/360 loss：0.487056
+[train] epoch: 6/10 step：205/360 loss：0.447240
+[train] epoch: 6/10 step：206/360 loss：0.512232
+[train] epoch: 6/10 step：207/360 loss：0.452540
+[train] epoch: 6/10 step：208/360 loss：0.534489
+[train] epoch: 6/10 step：209/360 loss：0.463023
+[train] epoch: 6/10 step：210/360 loss：0.414250
+[train] epoch: 6/10 step：211/360 loss：0.488798
+[train] epoch: 6/10 step：212/360 loss：0.435552
+[train] epoch: 6/10 step：213/360 loss：0.533038
+[train] epoch: 6/10 step：214/360 loss：0.382566
+[train] epoch: 6/10 step：215/360 loss：0.280533
+[train] epoch: 6/10 step：216/360 loss：0.434341
+[train] epoch: 7/10 step：217/360 loss：0.384753
+[train] epoch: 7/10 step：218/360 loss：0.302596
+[train] epoch: 7/10 step：219/360 loss：0.305940
+[train] epoch: 7/10 step：220/360 loss：0.286869
+[train] epoch: 7/10 step：221/360 loss：0.324287
+[train] epoch: 7/10 step：222/360 loss：0.340391
+[train] epoch: 7/10 step：223/360 loss：0.239313
+[train] epoch: 7/10 step：224/360 loss：0.261774
+[train] epoch: 7/10 step：225/360 loss：0.258058
+[train] epoch: 7/10 step：226/360 loss：0.318771
+[train] epoch: 7/10 step：227/360 loss：0.387783
+[train] epoch: 7/10 step：228/360 loss：0.352921
+[train] epoch: 7/10 step：229/360 loss：0.325647
+[train] epoch: 7/10 step：230/360 loss：0.348979
+[train] epoch: 7/10 step：231/360 loss：0.315241
+[train] epoch: 7/10 step：232/360 loss：0.380307
+[train] epoch: 7/10 step：233/360 loss：0.346372
+[train] epoch: 7/10 step：234/360 loss：0.288503
+[train] epoch: 7/10 step：235/360 loss：0.307679
+[train] epoch: 7/10 step：236/360 loss：0.347483
+[train] epoch: 7/10 step：237/360 loss：0.247198
+[train] epoch: 7/10 step：238/360 loss：0.361455
+[train] epoch: 7/10 step：239/360 loss：0.270233
+[train] epoch: 7/10 step：240/360 loss：0.354284
+[train] epoch: 7/10 step：241/360 loss：0.291951
+[train] epoch: 7/10 step：242/360 loss：0.378459
+[train] epoch: 7/10 step：243/360 loss：0.296295
+[train] epoch: 7/10 step：244/360 loss：0.281373
+[train] epoch: 7/10 step：245/360 loss：0.354627
+[train] epoch: 7/10 step：246/360 loss：0.329298
+[train] epoch: 7/10 step：247/360 loss：0.377875
+[train] epoch: 7/10 step：248/360 loss：0.373326
+[train] epoch: 7/10 step：249/360 loss：0.286162
+[train] epoch: 7/10 step：250/360 loss：0.324665
+[train] epoch: 7/10 step：251/360 loss：0.286478
+[train] epoch: 7/10 step：252/360 loss：0.372212
+[train] epoch: 8/10 step：253/360 loss：0.208518
+[train] epoch: 8/10 step：254/360 loss：0.210460
+[train] epoch: 8/10 step：255/360 loss：0.247063
+[train] epoch: 8/10 step：256/360 loss：0.207149
+[train] epoch: 8/10 step：257/360 loss：0.267776
+[train] epoch: 8/10 step：258/360 loss：0.186096
+[train] epoch: 8/10 step：259/360 loss：0.271703
+[train] epoch: 8/10 step：260/360 loss：0.253958
+[train] epoch: 8/10 step：261/360 loss：0.213129
+[train] epoch: 8/10 step：262/360 loss：0.242070
+[train] epoch: 8/10 step：263/360 loss：0.244197
+[train] epoch: 8/10 step：264/360 loss：0.273619
+[train] epoch: 8/10 step：265/360 loss：0.218409
+[train] epoch: 8/10 step：266/360 loss：0.237415
+[train] epoch: 8/10 step：267/360 loss：0.255391
+[train] epoch: 8/10 step：268/360 loss：0.219564
+[train] epoch: 8/10 step：269/360 loss：0.292460
+[train] epoch: 8/10 step：270/360 loss：0.216767
+[train] epoch: 8/10 step：271/360 loss：0.349521
+[train] epoch: 8/10 step：272/360 loss：0.197746
+[train] epoch: 8/10 step：273/360 loss：0.196374
+[train] epoch: 8/10 step：274/360 loss：0.210363
+[train] epoch: 8/10 step：275/360 loss：0.266780
+[train] epoch: 8/10 step：276/360 loss：0.270587
+[train] epoch: 8/10 step：277/360 loss：0.242901
+[train] epoch: 8/10 step：278/360 loss：0.261723
+[train] epoch: 8/10 step：279/360 loss：0.213245
+[train] epoch: 8/10 step：280/360 loss：0.176756
+[train] epoch: 8/10 step：281/360 loss：0.207706
+[train] epoch: 8/10 step：282/360 loss：0.179375
+[train] epoch: 8/10 step：283/360 loss：0.244093
+[train] epoch: 8/10 step：284/360 loss：0.247377
+[train] epoch: 8/10 step：285/360 loss：0.249904
+[train] epoch: 8/10 step：286/360 loss：0.226750
+[train] epoch: 8/10 step：287/360 loss：0.227209
+[train] epoch: 8/10 step：288/360 loss：0.228875
+[train] epoch: 9/10 step：289/360 loss：0.153633
+[train] epoch: 9/10 step：290/360 loss：0.118285
+[train] epoch: 9/10 step：291/360 loss：0.174120
+[train] epoch: 9/10 step：292/360 loss：0.171600
+[train] epoch: 9/10 step：293/360 loss：0.149140
+[train] epoch: 9/10 step：294/360 loss：0.213084
+[train] epoch: 9/10 step：295/360 loss：0.171214
+[train] epoch: 9/10 step：296/360 loss：0.115014
+[train] epoch: 9/10 step：297/360 loss：0.143554
+[train] epoch: 9/10 step：298/360 loss：0.258448
+[train] epoch: 9/10 step：299/360 loss：0.187510
+[train] epoch: 9/10 step：300/360 loss：0.180937
+[train] epoch: 9/10 step：301/360 loss：0.182016
+[train] epoch: 9/10 step：302/360 loss：0.158981
+[train] epoch: 9/10 step：303/360 loss：0.171178
+[train] epoch: 9/10 step：304/360 loss：0.116841
+[train] epoch: 9/10 step：305/360 loss：0.164649
+[train] epoch: 9/10 step：306/360 loss：0.156190
+[train] epoch: 9/10 step：307/360 loss：0.192961
+[train] epoch: 9/10 step：308/360 loss：0.169370
+[train] epoch: 9/10 step：309/360 loss：0.223079
+[train] epoch: 9/10 step：310/360 loss：0.212841
+[train] epoch: 9/10 step：311/360 loss：0.135502
+[train] epoch: 9/10 step：312/360 loss：0.196160
+[train] epoch: 9/10 step：313/360 loss：0.126342
+[train] epoch: 9/10 step：314/360 loss：0.186818
+[train] epoch: 9/10 step：315/360 loss：0.164976
+[train] epoch: 9/10 step：316/360 loss：0.194615
+[train] epoch: 9/10 step：317/360 loss：0.197660
+[train] epoch: 9/10 step：318/360 loss：0.154181
+[train] epoch: 9/10 step：319/360 loss：0.087064
+[train] epoch: 9/10 step：320/360 loss：0.212617
+[train] epoch: 9/10 step：321/360 loss：0.171608
+[train] epoch: 9/10 step：322/360 loss：0.167190
+[train] epoch: 9/10 step：323/360 loss：0.185257
+[train] epoch: 9/10 step：324/360 loss：0.179632
+[train] epoch: 10/10 step：325/360 loss：0.104916
+[train] epoch: 10/10 step：326/360 loss：0.141202
+[train] epoch: 10/10 step：327/360 loss：0.050690
+[train] epoch: 10/10 step：328/360 loss：0.126709
+[train] epoch: 10/10 step：329/360 loss：0.120589
+[train] epoch: 10/10 step：330/360 loss：0.106664
+[train] epoch: 10/10 step：331/360 loss：0.142671
+[train] epoch: 10/10 step：332/360 loss：0.139556
+[train] epoch: 10/10 step：333/360 loss：0.103454
+[train] epoch: 10/10 step：334/360 loss：0.153064
+[train] epoch: 10/10 step：335/360 loss：0.197048
+[train] epoch: 10/10 step：336/360 loss：0.101046
+[train] epoch: 10/10 step：337/360 loss：0.117440
+[train] epoch: 10/10 step：338/360 loss：0.102571
+[train] epoch: 10/10 step：339/360 loss：0.144438
+[train] epoch: 10/10 step：340/360 loss：0.165775
+[train] epoch: 10/10 step：341/360 loss：0.202712
+[train] epoch: 10/10 step：342/360 loss：0.154404
+[train] epoch: 10/10 step：343/360 loss：0.120919
+[train] epoch: 10/10 step：344/360 loss：0.188486
+[train] epoch: 10/10 step：345/360 loss：0.213707
+[train] epoch: 10/10 step：346/360 loss：0.233695
+[train] epoch: 10/10 step：347/360 loss：0.165063
+[train] epoch: 10/10 step：348/360 loss：0.198767
+[train] epoch: 10/10 step：349/360 loss：0.137215
+[train] epoch: 10/10 step：350/360 loss：0.194156
+[train] epoch: 10/10 step：351/360 loss：0.136823
+[train] epoch: 10/10 step：352/360 loss：0.135037
+[train] epoch: 10/10 step：353/360 loss：0.129994
+[train] epoch: 10/10 step：354/360 loss：0.218684
+[train] epoch: 10/10 step：355/360 loss：0.131139
+[train] epoch: 10/10 step：356/360 loss：0.174684
+[train] epoch: 10/10 step：357/360 loss：0.148143
+[train] epoch: 10/10 step：358/360 loss：0.120149
+[train] epoch: 10/10 step：359/360 loss：0.177670
+[train] epoch: 10/10 step：360/360 loss：0.135627
+耗时：35.51630997657776秒
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+(800,) (800,)
+(800,) (800,)
+              precision    recall  f1-score   support
+
+          其他       0.66      0.63      0.64       291
+          喜好       0.61      0.54      0.57       133
+          悲伤       0.53      0.62      0.57       102
+          厌恶       0.42      0.48      0.45       113
+          愤怒       0.49      0.53      0.51        60
+          高兴       0.67      0.61      0.64       101
+
+    accuracy                           0.58       800
+   macro avg       0.56      0.57      0.56       800
+weighted avg       0.59      0.58      0.58       800
+
+===============end=====================
+===============end=====================
+(800,) (800,)
+(800,) (800,)
+===============end=====================
+===============end=====================
+lilin3-a800-dev-7-m-0:383575:383888 [0] NCCL INFO [Service thread] Connection closed by localRank 0
+lilin3-a800-dev-7-m-0:383582:383885 [2] NCCL INFO [Service thread] Connection closed by localRank 2
+lilin3-a800-dev-7-m-0:383577:383886 [1] NCCL INFO [Service thread] Connection closed by localRank 1
+lilin3-a800-dev-7-m-0:383583:383887 [3] NCCL INFO [Service thread] Connection closed by localRank 3
+lilin3-a800-dev-7-m-0:383575:383575 [0] NCCL INFO comm 0x9785580 rank 0 nranks 4 cudaDev 0 busId e000 - Abort COMPLETE
+lilin3-a800-dev-7-m-0:383582:383582 [2] NCCL INFO comm 0x8cea2c0 rank 2 nranks 4 cudaDev 2 busId 49000 - Abort COMPLETE
+lilin3-a800-dev-7-m-0:383583:383583 [3] NCCL INFO comm 0x17e977c0 rank 3 nranks 4 cudaDev 3 busId 4f000 - Abort COMPLETE
+lilin3-a800-dev-7-m-0:383577:383577 [1] NCCL INFO comm 0x9847500 rank 1 nranks 4 cudaDev 1 busId 13000 - Abort COMPLETE

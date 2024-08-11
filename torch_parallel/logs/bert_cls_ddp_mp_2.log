@@ -1,0 +1,943 @@
+nohup: 忽略输入
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:436] [c10d] The server socket cannot be initialized on [::]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+lilin3-a800-dev-7-m-0:406974:406974 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:406974:406974 [0] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:406974:406974 [0] NCCL INFO cudaDriverVersion 12020
+NCCL version 2.18.1+cuda12.1
+[406974] rank = 0, world_size = 2, n = 4, device_ids = [0] 
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+[406975] rank = 1, world_size = 2, n = 4, device_ids = [1] 
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+lilin3-a800-dev-7-m-0:406975:406975 [1] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:406975:406975 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:406975:406975 [1] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Setting affinity for GPU 1 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0 [2] -1/-1/-1->1->0 [3] -1/-1/-1->1->0 [4] 0/-1/-1->1->-1 [5] 0/-1/-1->1->-1 [6] 0/-1/-1->1->-1 [7] 0/-1/-1->1->-1 [8] -1/-1/-1->1->0 [9] -1/-1/-1->1->0 [10] -1/-1/-1->1->0 [11] -1/-1/-1->1->0 [12] 0/-1/-1->1->-1 [13] 0/-1/-1->1->-1 [14] 0/-1/-1->1->-1 [15] 0/-1/-1->1->-1
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 00/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 01/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 02/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 03/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 04/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 05/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 06/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 07/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 08/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 09/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 10/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 11/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 12/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 13/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 14/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Channel 15/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:406975:407646 [1] NCCL INFO comm 0xa8a3d00 rank 1 nranks 2 cudaDev 1 busId 13000 commId 0xbaa81005aa7b5de8 - Init COMPLETE
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Setting affinity for GPU 0 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 00/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 01/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 02/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 03/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 04/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 05/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 06/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 07/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 08/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 09/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 10/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 11/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 12/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 13/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 14/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 15/16 :    0   1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] -1/-1/-1->0->1 [5] -1/-1/-1->0->1 [6] -1/-1/-1->0->1 [7] -1/-1/-1->0->1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] -1/-1/-1->0->1 [13] -1/-1/-1->0->1 [14] -1/-1/-1->0->1 [15] -1/-1/-1->0->1
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 00/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 01/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 02/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 03/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 04/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 05/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 06/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 07/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 08/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 09/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 10/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 11/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 12/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 13/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 14/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Channel 15/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:406974:407644 [0] NCCL INFO comm 0x8aa5000 rank 0 nranks 2 cudaDev 0 busId e000 commId 0xbaa81005aa7b5de8 - Init COMPLETE
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 1/10 step：1/720 loss：1.916633
+[train] epoch: 1/10 step：2/720 loss：1.742175
+[train] epoch: 1/10 step：3/720 loss：1.726671
+[train] epoch: 1/10 step：4/720 loss：1.648801
+[train] epoch: 1/10 step：5/720 loss：1.711747
+[train] epoch: 1/10 step：6/720 loss：1.724598
+[train] epoch: 1/10 step：7/720 loss：1.664409
+[train] epoch: 1/10 step：8/720 loss：1.500954
+[train] epoch: 1/10 step：9/720 loss：1.678715
+[train] epoch: 1/10 step：10/720 loss：1.702997
+[train] epoch: 1/10 step：11/720 loss：1.726994
+[train] epoch: 1/10 step：12/720 loss：1.701517
+[train] epoch: 1/10 step：13/720 loss：1.655863
+[train] epoch: 1/10 step：14/720 loss：1.549581
+[train] epoch: 1/10 step：15/720 loss：1.600394
+[train] epoch: 1/10 step：16/720 loss：1.623752
+[train] epoch: 1/10 step：17/720 loss：1.514867
+[train] epoch: 1/10 step：18/720 loss：1.600454
+[train] epoch: 1/10 step：19/720 loss：1.521893
+[train] epoch: 1/10 step：20/720 loss：1.537450
+[train] epoch: 1/10 step：21/720 loss：1.470104
+[train] epoch: 1/10 step：22/720 loss：1.436844
+[train] epoch: 1/10 step：23/720 loss：1.506435
+[train] epoch: 1/10 step：24/720 loss：1.405830
+[train] epoch: 1/10 step：25/720 loss：1.393254
+[train] epoch: 1/10 step：26/720 loss：1.318275
+[train] epoch: 1/10 step：27/720 loss：1.384523
+[train] epoch: 1/10 step：28/720 loss：1.393651
+[train] epoch: 1/10 step：29/720 loss：1.278535
+[train] epoch: 1/10 step：30/720 loss：1.351229
+[train] epoch: 1/10 step：31/720 loss：1.254183
+[train] epoch: 1/10 step：32/720 loss：1.245064
+[train] epoch: 1/10 step：33/720 loss：1.299945
+[train] epoch: 1/10 step：34/720 loss：1.266267
+[train] epoch: 1/10 step：35/720 loss：1.345075
+[train] epoch: 1/10 step：36/720 loss：1.330535
+[train] epoch: 1/10 step：37/720 loss：1.372844
+[train] epoch: 1/10 step：38/720 loss：1.228885
+[train] epoch: 1/10 step：39/720 loss：1.283905
+[train] epoch: 1/10 step：40/720 loss：1.276545
+[train] epoch: 1/10 step：41/720 loss：1.236924
+[train] epoch: 1/10 step：42/720 loss：1.365836
+[train] epoch: 1/10 step：43/720 loss：1.419126
+[train] epoch: 1/10 step：44/720 loss：1.287050
+[train] epoch: 1/10 step：45/720 loss：1.386202
+[train] epoch: 1/10 step：46/720 loss：1.234160
+[train] epoch: 1/10 step：47/720 loss：1.228353
+[train] epoch: 1/10 step：48/720 loss：1.325393
+[train] epoch: 1/10 step：49/720 loss：1.299111
+[train] epoch: 1/10 step：50/720 loss：1.322669
+[train] epoch: 1/10 step：51/720 loss：1.223783
+[train] epoch: 1/10 step：52/720 loss：1.305340
+[train] epoch: 1/10 step：53/720 loss：1.294681
+[train] epoch: 1/10 step：54/720 loss：1.250314
+[train] epoch: 1/10 step：55/720 loss：1.214150
+[train] epoch: 1/10 step：56/720 loss：1.205208
+[train] epoch: 1/10 step：57/720 loss：1.234574
+[train] epoch: 1/10 step：58/720 loss：1.326829
+[train] epoch: 1/10 step：59/720 loss：1.195153
+[train] epoch: 1/10 step：60/720 loss：1.258802
+[train] epoch: 1/10 step：61/720 loss：1.148494
+[train] epoch: 1/10 step：62/720 loss：1.264160
+[train] epoch: 1/10 step：63/720 loss：1.100903
+[train] epoch: 1/10 step：64/720 loss：1.342031
+[train] epoch: 1/10 step：65/720 loss：1.047323
+[train] epoch: 1/10 step：66/720 loss：1.198030
+[train] epoch: 1/10 step：67/720 loss：1.343699
+[train] epoch: 1/10 step：68/720 loss：1.255639
+[train] epoch: 1/10 step：69/720 loss：1.194092
+[train] epoch: 1/10 step：70/720 loss：1.169263
+[train] epoch: 1/10 step：71/720 loss：1.112987
+[train] epoch: 1/10 step：72/720 loss：1.213078
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 2/10 step：73/720 loss：1.019763
+[train] epoch: 2/10 step：74/720 loss：1.147691
+[train] epoch: 2/10 step：75/720 loss：1.020930
+[train] epoch: 2/10 step：76/720 loss：1.094085
+[train] epoch: 2/10 step：77/720 loss：0.989367
+[train] epoch: 2/10 step：78/720 loss：1.082468
+[train] epoch: 2/10 step：79/720 loss：1.093891
+[train] epoch: 2/10 step：80/720 loss：0.990018
+[train] epoch: 2/10 step：81/720 loss：1.084575
+[train] epoch: 2/10 step：82/720 loss：1.030796
+[train] epoch: 2/10 step：83/720 loss：0.995491
+[train] epoch: 2/10 step：84/720 loss：1.050593
+[train] epoch: 2/10 step：85/720 loss：0.975475
+[train] epoch: 2/10 step：86/720 loss：1.035940
+[train] epoch: 2/10 step：87/720 loss：1.059927
+[train] epoch: 2/10 step：88/720 loss：1.010268
+[train] epoch: 2/10 step：89/720 loss：1.129406
+[train] epoch: 2/10 step：90/720 loss：1.191476
+[train] epoch: 2/10 step：91/720 loss：0.908173
+[train] epoch: 2/10 step：92/720 loss：0.987186
+[train] epoch: 2/10 step：93/720 loss：1.213631
+[train] epoch: 2/10 step：94/720 loss：1.143640
+[train] epoch: 2/10 step：95/720 loss：0.861974
+[train] epoch: 2/10 step：96/720 loss：1.074126
+[train] epoch: 2/10 step：97/720 loss：1.065207
+[train] epoch: 2/10 step：98/720 loss：0.996162
+[train] epoch: 2/10 step：99/720 loss：1.029822
+[train] epoch: 2/10 step：100/720 loss：1.083472
+[train] epoch: 2/10 step：101/720 loss：0.984146
+[train] epoch: 2/10 step：102/720 loss：1.087957
+[train] epoch: 2/10 step：103/720 loss：1.146870
+[train] epoch: 2/10 step：104/720 loss：1.170595
+[train] epoch: 2/10 step：105/720 loss：0.971626
+[train] epoch: 2/10 step：106/720 loss：0.898725
+[train] epoch: 2/10 step：107/720 loss：0.932867
+[train] epoch: 2/10 step：108/720 loss：0.972756
+[train] epoch: 2/10 step：109/720 loss：0.976852
+[train] epoch: 2/10 step：110/720 loss：1.102066
+[train] epoch: 2/10 step：111/720 loss：1.057902
+[train] epoch: 2/10 step：112/720 loss：1.125991
+[train] epoch: 2/10 step：113/720 loss：1.081111
+[train] epoch: 2/10 step：114/720 loss：1.040838
+[train] epoch: 2/10 step：115/720 loss：1.027794
+[train] epoch: 2/10 step：116/720 loss：1.123713
+[train] epoch: 2/10 step：117/720 loss：1.215431
+[train] epoch: 2/10 step：118/720 loss：0.986429
+[train] epoch: 2/10 step：119/720 loss：0.920484
+[train] epoch: 2/10 step：120/720 loss：0.988680
+[train] epoch: 2/10 step：121/720 loss：1.059926
+[train] epoch: 2/10 step：122/720 loss：1.028492
+[train] epoch: 2/10 step：123/720 loss：1.121653
+[train] epoch: 2/10 step：124/720 loss：1.048807
+[train] epoch: 2/10 step：125/720 loss：1.229611
+[train] epoch: 2/10 step：126/720 loss：1.031410
+[train] epoch: 2/10 step：127/720 loss：1.043967
+[train] epoch: 2/10 step：128/720 loss：1.106249
+[train] epoch: 2/10 step：129/720 loss：1.028824
+[train] epoch: 2/10 step：130/720 loss：1.082401
+[train] epoch: 2/10 step：131/720 loss：0.865003
+[train] epoch: 2/10 step：132/720 loss：0.959400
+[train] epoch: 2/10 step：133/720 loss：1.080669
+[train] epoch: 2/10 step：134/720 loss：1.074372
+[train] epoch: 2/10 step：135/720 loss：1.005221
+[train] epoch: 2/10 step：136/720 loss：1.018497
+[train] epoch: 2/10 step：137/720 loss：1.102747
+[train] epoch: 2/10 step：138/720 loss：0.921762
+[train] epoch: 2/10 step：139/720 loss：1.162858
+[train] epoch: 2/10 step：140/720 loss：1.009596
+[train] epoch: 2/10 step：141/720 loss：0.970556
+[train] epoch: 2/10 step：142/720 loss：0.946544
+[train] epoch: 2/10 step：143/720 loss：1.216176
+[train] epoch: 2/10 step：144/720 loss：1.014485
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 3/10 step：145/720 loss：0.894336
+[train] epoch: 3/10 step：146/720 loss：0.941153
+[train] epoch: 3/10 step：147/720 loss：0.913071
+[train] epoch: 3/10 step：148/720 loss：0.867842
+[train] epoch: 3/10 step：149/720 loss：0.933939
+[train] epoch: 3/10 step：150/720 loss：0.935755
+[train] epoch: 3/10 step：151/720 loss：0.829730
+[train] epoch: 3/10 step：152/720 loss：0.926458
+[train] epoch: 3/10 step：153/720 loss：0.878421
+[train] epoch: 3/10 step：154/720 loss：0.893556
+[train] epoch: 3/10 step：155/720 loss：0.687446
+[train] epoch: 3/10 step：156/720 loss：0.722437
+[train] epoch: 3/10 step：157/720 loss：0.867423
+[train] epoch: 3/10 step：158/720 loss：0.844062
+[train] epoch: 3/10 step：159/720 loss：0.924774
+[train] epoch: 3/10 step：160/720 loss：0.758237
+[train] epoch: 3/10 step：161/720 loss：0.868650
+[train] epoch: 3/10 step：162/720 loss：0.792045
+[train] epoch: 3/10 step：163/720 loss：0.890955
+[train] epoch: 3/10 step：164/720 loss：0.778576
+[train] epoch: 3/10 step：165/720 loss：0.701851
+[train] epoch: 3/10 step：166/720 loss：0.863097
+[train] epoch: 3/10 step：167/720 loss：0.825134
+[train] epoch: 3/10 step：168/720 loss：0.696493
+[train] epoch: 3/10 step：169/720 loss：0.803314
+[train] epoch: 3/10 step：170/720 loss：0.822321
+[train] epoch: 3/10 step：171/720 loss：0.769346
+[train] epoch: 3/10 step：172/720 loss：0.638008
+[train] epoch: 3/10 step：173/720 loss：0.739292
+[train] epoch: 3/10 step：174/720 loss：0.745446
+[train] epoch: 3/10 step：175/720 loss：0.828001
+[train] epoch: 3/10 step：176/720 loss：0.684825
+[train] epoch: 3/10 step：177/720 loss：0.752986
+[train] epoch: 3/10 step：178/720 loss：0.699537
+[train] epoch: 3/10 step：179/720 loss：0.787998
+[train] epoch: 3/10 step：180/720 loss：0.765253
+[train] epoch: 3/10 step：181/720 loss：0.885834
+[train] epoch: 3/10 step：182/720 loss：0.848842
+[train] epoch: 3/10 step：183/720 loss：0.818566
+[train] epoch: 3/10 step：184/720 loss：0.863760
+[train] epoch: 3/10 step：185/720 loss：0.887442
+[train] epoch: 3/10 step：186/720 loss：0.674780
+[train] epoch: 3/10 step：187/720 loss：0.841371
+[train] epoch: 3/10 step：188/720 loss：0.859000
+[train] epoch: 3/10 step：189/720 loss：1.055632
+[train] epoch: 3/10 step：190/720 loss：1.013048
+[train] epoch: 3/10 step：191/720 loss：1.009920
+[train] epoch: 3/10 step：192/720 loss：0.856802
+[train] epoch: 3/10 step：193/720 loss：0.945041
+[train] epoch: 3/10 step：194/720 loss：0.944134
+[train] epoch: 3/10 step：195/720 loss：0.834137
+[train] epoch: 3/10 step：196/720 loss：0.817075
+[train] epoch: 3/10 step：197/720 loss：0.846910
+[train] epoch: 3/10 step：198/720 loss：0.818785
+[train] epoch: 3/10 step：199/720 loss：0.767466
+[train] epoch: 3/10 step：200/720 loss：0.872437
+[train] epoch: 3/10 step：201/720 loss：0.869889
+[train] epoch: 3/10 step：202/720 loss：1.024875
+[train] epoch: 3/10 step：203/720 loss：0.798561
+[train] epoch: 3/10 step：204/720 loss：0.917121
+[train] epoch: 3/10 step：205/720 loss：0.890372
+[train] epoch: 3/10 step：206/720 loss：0.968958
+[train] epoch: 3/10 step：207/720 loss：0.880668
+[train] epoch: 3/10 step：208/720 loss：0.700192
+[train] epoch: 3/10 step：209/720 loss：0.837324
+[train] epoch: 3/10 step：210/720 loss：0.783602
+[train] epoch: 3/10 step：211/720 loss：0.832356
+[train] epoch: 3/10 step：212/720 loss：0.663687
+[train] epoch: 3/10 step：213/720 loss：0.933953
+[train] epoch: 3/10 step：214/720 loss：0.669312
+[train] epoch: 3/10 step：215/720 loss：0.686720
+[train] epoch: 3/10 step：216/720 loss：0.916497
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 4/10 step：217/720 loss：0.580669
+[train] epoch: 4/10 step：218/720 loss：0.667456
+[train] epoch: 4/10 step：219/720 loss：0.708550
+[train] epoch: 4/10 step：220/720 loss：0.651524
+[train] epoch: 4/10 step：221/720 loss：0.741172
+[train] epoch: 4/10 step：222/720 loss：0.553839
+[train] epoch: 4/10 step：223/720 loss：0.554563
+[train] epoch: 4/10 step：224/720 loss：0.634406
+[train] epoch: 4/10 step：225/720 loss：0.588201
+[train] epoch: 4/10 step：226/720 loss：0.604434
+[train] epoch: 4/10 step：227/720 loss：0.690356
+[train] epoch: 4/10 step：228/720 loss：0.592949
+[train] epoch: 4/10 step：229/720 loss：0.659684
+[train] epoch: 4/10 step：230/720 loss：0.661546
+[train] epoch: 4/10 step：231/720 loss：0.633001
+[train] epoch: 4/10 step：232/720 loss：0.655302
+[train] epoch: 4/10 step：233/720 loss：0.579182
+[train] epoch: 4/10 step：234/720 loss：0.608616
+[train] epoch: 4/10 step：235/720 loss：0.510865
+[train] epoch: 4/10 step：236/720 loss：0.565856
+[train] epoch: 4/10 step：237/720 loss：0.675731
+[train] epoch: 4/10 step：238/720 loss：0.588505
+[train] epoch: 4/10 step：239/720 loss：0.721587
+[train] epoch: 4/10 step：240/720 loss：0.603979
+[train] epoch: 4/10 step：241/720 loss：0.572607
+[train] epoch: 4/10 step：242/720 loss：0.553458
+[train] epoch: 4/10 step：243/720 loss：0.594928
+[train] epoch: 4/10 step：244/720 loss：0.739895
+[train] epoch: 4/10 step：245/720 loss：0.536756
+[train] epoch: 4/10 step：246/720 loss：0.616688
+[train] epoch: 4/10 step：247/720 loss：0.569080
+[train] epoch: 4/10 step：248/720 loss：0.683492
+[train] epoch: 4/10 step：249/720 loss：0.603624
+[train] epoch: 4/10 step：250/720 loss：0.491944
+[train] epoch: 4/10 step：251/720 loss：0.799145
+[train] epoch: 4/10 step：252/720 loss：0.647575
+[train] epoch: 4/10 step：253/720 loss：0.537023
+[train] epoch: 4/10 step：254/720 loss：0.614413
+[train] epoch: 4/10 step：255/720 loss：0.690098
+[train] epoch: 4/10 step：256/720 loss：0.538291
+[train] epoch: 4/10 step：257/720 loss：0.583340
+[train] epoch: 4/10 step：258/720 loss：0.631865
+[train] epoch: 4/10 step：259/720 loss：0.723680
+[train] epoch: 4/10 step：260/720 loss：0.771274
+[train] epoch: 4/10 step：261/720 loss：0.571955
+[train] epoch: 4/10 step：262/720 loss：0.682877
+[train] epoch: 4/10 step：263/720 loss：0.663341
+[train] epoch: 4/10 step：264/720 loss：0.733409
+[train] epoch: 4/10 step：265/720 loss：0.609285
+[train] epoch: 4/10 step：266/720 loss：0.643309
+[train] epoch: 4/10 step：267/720 loss：0.674269
+[train] epoch: 4/10 step：268/720 loss：0.722408
+[train] epoch: 4/10 step：269/720 loss：0.585642
+[train] epoch: 4/10 step：270/720 loss：0.561268
+[train] epoch: 4/10 step：271/720 loss：0.588075
+[train] epoch: 4/10 step：272/720 loss：0.543151
+[train] epoch: 4/10 step：273/720 loss：0.553811
+[train] epoch: 4/10 step：274/720 loss：0.577693
+[train] epoch: 4/10 step：275/720 loss：0.599523
+[train] epoch: 4/10 step：276/720 loss：0.560252
+[train] epoch: 4/10 step：277/720 loss：0.665469
+[train] epoch: 4/10 step：278/720 loss：0.560651
+[train] epoch: 4/10 step：279/720 loss：0.671060
+[train] epoch: 4/10 step：280/720 loss：0.650210
+[train] epoch: 4/10 step：281/720 loss：0.642474
+[train] epoch: 4/10 step：282/720 loss：0.622003
+[train] epoch: 4/10 step：283/720 loss：0.610831
+[train] epoch: 4/10 step：284/720 loss：0.650616
+[train] epoch: 4/10 step：285/720 loss：0.726109
+[train] epoch: 4/10 step：286/720 loss：0.608662
+[train] epoch: 4/10 step：287/720 loss：0.596192
+[train] epoch: 4/10 step：288/720 loss：0.562784
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 5/10 step：289/720 loss：0.503507
+[train] epoch: 5/10 step：290/720 loss：0.423405
+[train] epoch: 5/10 step：291/720 loss：0.397547
+[train] epoch: 5/10 step：292/720 loss：0.413763
+[train] epoch: 5/10 step：293/720 loss：0.490880
+[train] epoch: 5/10 step：294/720 loss：0.497933
+[train] epoch: 5/10 step：295/720 loss：0.531683
+[train] epoch: 5/10 step：296/720 loss：0.351469
+[train] epoch: 5/10 step：297/720 loss：0.461183
+[train] epoch: 5/10 step：298/720 loss：0.422962
+[train] epoch: 5/10 step：299/720 loss：0.340956
+[train] epoch: 5/10 step：300/720 loss：0.504981
+[train] epoch: 5/10 step：301/720 loss：0.338148
+[train] epoch: 5/10 step：302/720 loss：0.341856
+[train] epoch: 5/10 step：303/720 loss：0.455982
+[train] epoch: 5/10 step：304/720 loss：0.433884
+[train] epoch: 5/10 step：305/720 loss：0.483485
+[train] epoch: 5/10 step：306/720 loss：0.296895
+[train] epoch: 5/10 step：307/720 loss：0.522434
+[train] epoch: 5/10 step：308/720 loss：0.379054
+[train] epoch: 5/10 step：309/720 loss：0.387097
+[train] epoch: 5/10 step：310/720 loss：0.400518
+[train] epoch: 5/10 step：311/720 loss：0.420410
+[train] epoch: 5/10 step：312/720 loss：0.448721
+[train] epoch: 5/10 step：313/720 loss：0.402869
+[train] epoch: 5/10 step：314/720 loss：0.566691
+[train] epoch: 5/10 step：315/720 loss：0.458541
+[train] epoch: 5/10 step：316/720 loss：0.398264
+[train] epoch: 5/10 step：317/720 loss：0.275611
+[train] epoch: 5/10 step：318/720 loss：0.446606
+[train] epoch: 5/10 step：319/720 loss：0.392864
+[train] epoch: 5/10 step：320/720 loss：0.416262
+[train] epoch: 5/10 step：321/720 loss：0.437995
+[train] epoch: 5/10 step：322/720 loss：0.432402
+[train] epoch: 5/10 step：323/720 loss：0.387655
+[train] epoch: 5/10 step：324/720 loss：0.345935
+[train] epoch: 5/10 step：325/720 loss：0.466474
+[train] epoch: 5/10 step：326/720 loss：0.543579
+[train] epoch: 5/10 step：327/720 loss：0.646408
+[train] epoch: 5/10 step：328/720 loss：0.402317
+[train] epoch: 5/10 step：329/720 loss：0.469362
+[train] epoch: 5/10 step：330/720 loss：0.383515
+[train] epoch: 5/10 step：331/720 loss：0.366609
+[train] epoch: 5/10 step：332/720 loss：0.484312
+[train] epoch: 5/10 step：333/720 loss：0.600886
+[train] epoch: 5/10 step：334/720 loss：0.448089
+[train] epoch: 5/10 step：335/720 loss：0.343696
+[train] epoch: 5/10 step：336/720 loss：0.339294
+[train] epoch: 5/10 step：337/720 loss：0.360351
+[train] epoch: 5/10 step：338/720 loss：0.282142
+[train] epoch: 5/10 step：339/720 loss：0.350795
+[train] epoch: 5/10 step：340/720 loss：0.508470
+[train] epoch: 5/10 step：341/720 loss：0.416719
+[train] epoch: 5/10 step：342/720 loss：0.574700
+[train] epoch: 5/10 step：343/720 loss：0.533927
+[train] epoch: 5/10 step：344/720 loss：0.419302
+[train] epoch: 5/10 step：345/720 loss：0.520755
+[train] epoch: 5/10 step：346/720 loss：0.361231
+[train] epoch: 5/10 step：347/720 loss：0.353443
+[train] epoch: 5/10 step：348/720 loss：0.468481
+[train] epoch: 5/10 step：349/720 loss：0.479405
+[train] epoch: 5/10 step：350/720 loss：0.519604
+[train] epoch: 5/10 step：351/720 loss：0.431536
+[train] epoch: 5/10 step：352/720 loss：0.434709
+[train] epoch: 5/10 step：353/720 loss：0.413834
+[train] epoch: 5/10 step：354/720 loss：0.456736
+[train] epoch: 5/10 step：355/720 loss：0.371107
+[train] epoch: 5/10 step：356/720 loss：0.486849
+[train] epoch: 5/10 step：357/720 loss：0.470218
+[train] epoch: 5/10 step：358/720 loss：0.432224
+[train] epoch: 5/10 step：359/720 loss：0.443135
+[train] epoch: 5/10 step：360/720 loss：0.392989
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 6/10 step：361/720 loss：0.307102
+[train] epoch: 6/10 step：362/720 loss：0.312454
+[train] epoch: 6/10 step：363/720 loss：0.293494
+[train] epoch: 6/10 step：364/720 loss：0.245236
+[train] epoch: 6/10 step：365/720 loss：0.260728
+[train] epoch: 6/10 step：366/720 loss：0.314950
+[train] epoch: 6/10 step：367/720 loss：0.287387
+[train] epoch: 6/10 step：368/720 loss：0.269678
+[train] epoch: 6/10 step：369/720 loss：0.184283
+[train] epoch: 6/10 step：370/720 loss：0.274929
+[train] epoch: 6/10 step：371/720 loss：0.240863
+[train] epoch: 6/10 step：372/720 loss：0.422901
+[train] epoch: 6/10 step：373/720 loss：0.353675
+[train] epoch: 6/10 step：374/720 loss：0.261748
+[train] epoch: 6/10 step：375/720 loss：0.266541
+[train] epoch: 6/10 step：376/720 loss：0.369178
+[train] epoch: 6/10 step：377/720 loss：0.210431
+[train] epoch: 6/10 step：378/720 loss：0.278393
+[train] epoch: 6/10 step：379/720 loss：0.285841
+[train] epoch: 6/10 step：380/720 loss：0.214502
+[train] epoch: 6/10 step：381/720 loss：0.290171
+[train] epoch: 6/10 step：382/720 loss：0.207672
+[train] epoch: 6/10 step：383/720 loss：0.257246
+[train] epoch: 6/10 step：384/720 loss：0.317504
+[train] epoch: 6/10 step：385/720 loss：0.327387
+[train] epoch: 6/10 step：386/720 loss：0.279996
+[train] epoch: 6/10 step：387/720 loss：0.287590
+[train] epoch: 6/10 step：388/720 loss：0.433271
+[train] epoch: 6/10 step：389/720 loss：0.340094
+[train] epoch: 6/10 step：390/720 loss：0.352962
+[train] epoch: 6/10 step：391/720 loss：0.328034
+[train] epoch: 6/10 step：392/720 loss：0.265010
+[train] epoch: 6/10 step：393/720 loss：0.376097
+[train] epoch: 6/10 step：394/720 loss：0.454833
+[train] epoch: 6/10 step：395/720 loss：0.171750
+[train] epoch: 6/10 step：396/720 loss：0.200731
+[train] epoch: 6/10 step：397/720 loss：0.198444
+[train] epoch: 6/10 step：398/720 loss：0.333785
+[train] epoch: 6/10 step：399/720 loss：0.299144
+[train] epoch: 6/10 step：400/720 loss：0.313619
+[train] epoch: 6/10 step：401/720 loss：0.338258
+[train] epoch: 6/10 step：402/720 loss：0.318412
+[train] epoch: 6/10 step：403/720 loss：0.184789
+[train] epoch: 6/10 step：404/720 loss：0.359144
+[train] epoch: 6/10 step：405/720 loss：0.413303
+[train] epoch: 6/10 step：406/720 loss：0.306455
+[train] epoch: 6/10 step：407/720 loss：0.423034
+[train] epoch: 6/10 step：408/720 loss：0.303289
+[train] epoch: 6/10 step：409/720 loss：0.252101
+[train] epoch: 6/10 step：410/720 loss：0.318720
+[train] epoch: 6/10 step：411/720 loss：0.349198
+[train] epoch: 6/10 step：412/720 loss：0.399312
+[train] epoch: 6/10 step：413/720 loss：0.284413
+[train] epoch: 6/10 step：414/720 loss：0.356392
+[train] epoch: 6/10 step：415/720 loss：0.411426
+[train] epoch: 6/10 step：416/720 loss：0.358158
+[train] epoch: 6/10 step：417/720 loss：0.302734
+[train] epoch: 6/10 step：418/720 loss：0.378185
+[train] epoch: 6/10 step：419/720 loss：0.367274
+[train] epoch: 6/10 step：420/720 loss：0.347332
+[train] epoch: 6/10 step：421/720 loss：0.278801
+[train] epoch: 6/10 step：422/720 loss：0.428964
+[train] epoch: 6/10 step：423/720 loss：0.370978
+[train] epoch: 6/10 step：424/720 loss：0.343797
+[train] epoch: 6/10 step：425/720 loss：0.415767
+[train] epoch: 6/10 step：426/720 loss：0.302872
+[train] epoch: 6/10 step：427/720 loss：0.315806
+[train] epoch: 6/10 step：428/720 loss：0.299765
+[train] epoch: 6/10 step：429/720 loss：0.136213
+[train] epoch: 6/10 step：430/720 loss：0.242919
+[train] epoch: 6/10 step：431/720 loss：0.330896
+[train] epoch: 6/10 step：432/720 loss：0.264582
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 7/10 step：433/720 loss：0.244846
+[train] epoch: 7/10 step：434/720 loss：0.290902
+[train] epoch: 7/10 step：435/720 loss：0.118792
+[train] epoch: 7/10 step：436/720 loss：0.238521
+[train] epoch: 7/10 step：437/720 loss：0.196845
+[train] epoch: 7/10 step：438/720 loss：0.245851
+[train] epoch: 7/10 step：439/720 loss：0.233960
+[train] epoch: 7/10 step：440/720 loss：0.113972
+[train] epoch: 7/10 step：441/720 loss：0.172665
+[train] epoch: 7/10 step：442/720 loss：0.216143
+[train] epoch: 7/10 step：443/720 loss：0.328178
+[train] epoch: 7/10 step：444/720 loss：0.252693
+[train] epoch: 7/10 step：445/720 loss：0.103027
+[train] epoch: 7/10 step：446/720 loss：0.142371
+[train] epoch: 7/10 step：447/720 loss：0.115443
+[train] epoch: 7/10 step：448/720 loss：0.162327
+[train] epoch: 7/10 step：449/720 loss：0.157958
+[train] epoch: 7/10 step：450/720 loss：0.220213
+[train] epoch: 7/10 step：451/720 loss：0.177672
+[train] epoch: 7/10 step：452/720 loss：0.206922
+[train] epoch: 7/10 step：453/720 loss：0.229698
+[train] epoch: 7/10 step：454/720 loss：0.242501
+[train] epoch: 7/10 step：455/720 loss：0.109103
+[train] epoch: 7/10 step：456/720 loss：0.189860
+[train] epoch: 7/10 step：457/720 loss：0.262036
+[train] epoch: 7/10 step：458/720 loss：0.242606
+[train] epoch: 7/10 step：459/720 loss：0.302116
+[train] epoch: 7/10 step：460/720 loss：0.201632
+[train] epoch: 7/10 step：461/720 loss：0.294225
+[train] epoch: 7/10 step：462/720 loss：0.187132
+[train] epoch: 7/10 step：463/720 loss：0.227441
+[train] epoch: 7/10 step：464/720 loss：0.254922
+[train] epoch: 7/10 step：465/720 loss：0.270912
+[train] epoch: 7/10 step：466/720 loss：0.197382
+[train] epoch: 7/10 step：467/720 loss：0.139221
+[train] epoch: 7/10 step：468/720 loss：0.181462
+[train] epoch: 7/10 step：469/720 loss：0.171134
+[train] epoch: 7/10 step：470/720 loss：0.144408
+[train] epoch: 7/10 step：471/720 loss：0.195474
+[train] epoch: 7/10 step：472/720 loss：0.328967
+[train] epoch: 7/10 step：473/720 loss：0.139486
+[train] epoch: 7/10 step：474/720 loss：0.306586
+[train] epoch: 7/10 step：475/720 loss：0.303326
+[train] epoch: 7/10 step：476/720 loss：0.186127
+[train] epoch: 7/10 step：477/720 loss：0.338094
+[train] epoch: 7/10 step：478/720 loss：0.201860
+[train] epoch: 7/10 step：479/720 loss：0.222877
+[train] epoch: 7/10 step：480/720 loss：0.315581
+[train] epoch: 7/10 step：481/720 loss：0.310210
+[train] epoch: 7/10 step：482/720 loss：0.231906
+[train] epoch: 7/10 step：483/720 loss：0.294786
+[train] epoch: 7/10 step：484/720 loss：0.307960
+[train] epoch: 7/10 step：485/720 loss：0.153940
+[train] epoch: 7/10 step：486/720 loss：0.346997
+[train] epoch: 7/10 step：487/720 loss：0.282669
+[train] epoch: 7/10 step：488/720 loss：0.210570
+[train] epoch: 7/10 step：489/720 loss：0.236578
+[train] epoch: 7/10 step：490/720 loss：0.300108
+[train] epoch: 7/10 step：491/720 loss：0.261004
+[train] epoch: 7/10 step：492/720 loss：0.143715
+[train] epoch: 7/10 step：493/720 loss：0.238386
+[train] epoch: 7/10 step：494/720 loss：0.130444
+[train] epoch: 7/10 step：495/720 loss：0.199428
+[train] epoch: 7/10 step：496/720 loss：0.223740
+[train] epoch: 7/10 step：497/720 loss：0.135083
+[train] epoch: 7/10 step：498/720 loss：0.272596
+[train] epoch: 7/10 step：499/720 loss：0.271850
+[train] epoch: 7/10 step：500/720 loss：0.213559
+[train] epoch: 7/10 step：501/720 loss：0.284022
+[train] epoch: 7/10 step：502/720 loss：0.153980
+[train] epoch: 7/10 step：503/720 loss：0.312538
+[train] epoch: 7/10 step：504/720 loss：0.213311
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 8/10 step：505/720 loss：0.091306
+[train] epoch: 8/10 step：506/720 loss：0.179797
+[train] epoch: 8/10 step：507/720 loss：0.148774
+[train] epoch: 8/10 step：508/720 loss：0.121604
+[train] epoch: 8/10 step：509/720 loss：0.201951
+[train] epoch: 8/10 step：510/720 loss：0.206980
+[train] epoch: 8/10 step：511/720 loss：0.156342
+[train] epoch: 8/10 step：512/720 loss：0.123397
+[train] epoch: 8/10 step：513/720 loss：0.144306
+[train] epoch: 8/10 step：514/720 loss：0.213685
+[train] epoch: 8/10 step：515/720 loss：0.163255
+[train] epoch: 8/10 step：516/720 loss：0.163292
+[train] epoch: 8/10 step：517/720 loss：0.247069
+[train] epoch: 8/10 step：518/720 loss：0.132744
+[train] epoch: 8/10 step：519/720 loss：0.234334
+[train] epoch: 8/10 step：520/720 loss：0.224246
+[train] epoch: 8/10 step：521/720 loss：0.128752
+[train] epoch: 8/10 step：522/720 loss：0.113940
+[train] epoch: 8/10 step：523/720 loss：0.164548
+[train] epoch: 8/10 step：524/720 loss：0.063243
+[train] epoch: 8/10 step：525/720 loss：0.119338
+[train] epoch: 8/10 step：526/720 loss：0.206433
+[train] epoch: 8/10 step：527/720 loss：0.171724
+[train] epoch: 8/10 step：528/720 loss：0.193631
+[train] epoch: 8/10 step：529/720 loss：0.133600
+[train] epoch: 8/10 step：530/720 loss：0.136927
+[train] epoch: 8/10 step：531/720 loss：0.226761
+[train] epoch: 8/10 step：532/720 loss：0.166987
+[train] epoch: 8/10 step：533/720 loss：0.165146
+[train] epoch: 8/10 step：534/720 loss：0.076908
+[train] epoch: 8/10 step：535/720 loss：0.242715
+[train] epoch: 8/10 step：536/720 loss：0.116263
+[train] epoch: 8/10 step：537/720 loss：0.109159
+[train] epoch: 8/10 step：538/720 loss：0.185119
+[train] epoch: 8/10 step：539/720 loss：0.145337
+[train] epoch: 8/10 step：540/720 loss：0.253166
+[train] epoch: 8/10 step：541/720 loss：0.176155
+[train] epoch: 8/10 step：542/720 loss：0.239395
+[train] epoch: 8/10 step：543/720 loss：0.096920
+[train] epoch: 8/10 step：544/720 loss：0.165992
+[train] epoch: 8/10 step：545/720 loss：0.165478
+[train] epoch: 8/10 step：546/720 loss：0.107845
+[train] epoch: 8/10 step：547/720 loss：0.157155
+[train] epoch: 8/10 step：548/720 loss：0.094381
+[train] epoch: 8/10 step：549/720 loss：0.191877
+[train] epoch: 8/10 step：550/720 loss：0.188805
+[train] epoch: 8/10 step：551/720 loss：0.174058
+[train] epoch: 8/10 step：552/720 loss：0.171299
+[train] epoch: 8/10 step：553/720 loss：0.218322
+[train] epoch: 8/10 step：554/720 loss：0.166264
+[train] epoch: 8/10 step：555/720 loss：0.302296
+[train] epoch: 8/10 step：556/720 loss：0.171619
+[train] epoch: 8/10 step：557/720 loss：0.189345
+[train] epoch: 8/10 step：558/720 loss：0.182883
+[train] epoch: 8/10 step：559/720 loss：0.213986
+[train] epoch: 8/10 step：560/720 loss：0.185736
+[train] epoch: 8/10 step：561/720 loss：0.054881
+[train] epoch: 8/10 step：562/720 loss：0.157337
+[train] epoch: 8/10 step：563/720 loss：0.144695
+[train] epoch: 8/10 step：564/720 loss：0.178821
+[train] epoch: 8/10 step：565/720 loss：0.186392
+[train] epoch: 8/10 step：566/720 loss：0.172531
+[train] epoch: 8/10 step：567/720 loss：0.195589
+[train] epoch: 8/10 step：568/720 loss：0.165845
+[train] epoch: 8/10 step：569/720 loss：0.150297
+[train] epoch: 8/10 step：570/720 loss：0.147288
+[train] epoch: 8/10 step：571/720 loss：0.103681
+[train] epoch: 8/10 step：572/720 loss：0.130043
+[train] epoch: 8/10 step：573/720 loss：0.136255
+[train] epoch: 8/10 step：574/720 loss：0.273353
+[train] epoch: 8/10 step：575/720 loss：0.148603
+[train] epoch: 8/10 step：576/720 loss：0.103882
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+[train] epoch: 9/10 step：577/720 loss：0.080375
+[train] epoch: 9/10 step：578/720 loss：0.135278
+[train] epoch: 9/10 step：579/720 loss：0.068904
+[train] epoch: 9/10 step：580/720 loss：0.101712
+[train] epoch: 9/10 step：581/720 loss：0.087479
+[train] epoch: 9/10 step：582/720 loss：0.107464
+[train] epoch: 9/10 step：583/720 loss：0.108924
+[train] epoch: 9/10 step：584/720 loss：0.168402
+[train] epoch: 9/10 step：585/720 loss：0.164387
+[train] epoch: 9/10 step：586/720 loss：0.073932
+[train] epoch: 9/10 step：587/720 loss：0.069464
+[train] epoch: 9/10 step：588/720 loss：0.215482
+[train] epoch: 9/10 step：589/720 loss：0.064310
+[train] epoch: 9/10 step：590/720 loss：0.091679
+[train] epoch: 9/10 step：591/720 loss：0.154949
+[train] epoch: 9/10 step：592/720 loss：0.082473
+[train] epoch: 9/10 step：593/720 loss：0.059230
+[train] epoch: 9/10 step：594/720 loss：0.149674
+[train] epoch: 9/10 step：595/720 loss：0.184106
+[train] epoch: 9/10 step：596/720 loss：0.168943
+[train] epoch: 9/10 step：597/720 loss：0.131552
+[train] epoch: 9/10 step：598/720 loss：0.065208
+[train] epoch: 9/10 step：599/720 loss：0.258251
+[train] epoch: 9/10 step：600/720 loss：0.105110
+[train] epoch: 9/10 step：601/720 loss：0.101086
+[train] epoch: 9/10 step：602/720 loss：0.067675
+[train] epoch: 9/10 step：603/720 loss：0.073363
+[train] epoch: 9/10 step：604/720 loss：0.056826
+[train] epoch: 9/10 step：605/720 loss：0.097061
+[train] epoch: 9/10 step：606/720 loss：0.107312
+[train] epoch: 9/10 step：607/720 loss：0.053423
+[train] epoch: 9/10 step：608/720 loss：0.192160
+[train] epoch: 9/10 step：609/720 loss：0.210205
+[train] epoch: 9/10 step：610/720 loss：0.104806
+[train] epoch: 9/10 step：611/720 loss：0.081586
+[train] epoch: 9/10 step：612/720 loss：0.114310
+[train] epoch: 9/10 step：613/720 loss：0.130506
+[train] epoch: 9/10 step：614/720 loss：0.097079
+[train] epoch: 9/10 step：615/720 loss：0.084477
+[train] epoch: 9/10 step：616/720 loss：0.122815
+[train] epoch: 9/10 step：617/720 loss：0.108724
+[train] epoch: 9/10 step：618/720 loss：0.206596
+[train] epoch: 9/10 step：619/720 loss：0.184115
+[train] epoch: 9/10 step：620/720 loss：0.124831
+[train] epoch: 9/10 step：621/720 loss：0.116527
+[train] epoch: 9/10 step：622/720 loss：0.165077
+[train] epoch: 9/10 step：623/720 loss：0.112565
+[train] epoch: 9/10 step：624/720 loss：0.120328
+[train] epoch: 9/10 step：625/720 loss：0.112916
+[train] epoch: 9/10 step：626/720 loss：0.124154
+[train] epoch: 9/10 step：627/720 loss：0.195438
+[train] epoch: 9/10 step：628/720 loss：0.130485
+[train] epoch: 9/10 step：629/720 loss：0.093868
+[train] epoch: 9/10 step：630/720 loss：0.152470
+[train] epoch: 9/10 step：631/720 loss：0.153098
+[train] epoch: 9/10 step：632/720 loss：0.214029
+[train] epoch: 9/10 step：633/720 loss：0.094423
+[train] epoch: 9/10 step：634/720 loss：0.161342
+[train] epoch: 9/10 step：635/720 loss：0.180467
+[train] epoch: 9/10 step：636/720 loss：0.109584
+[train] epoch: 9/10 step：637/720 loss：0.087850
+[train] epoch: 9/10 step：638/720 loss：0.071406
+[train] epoch: 9/10 step：639/720 loss：0.119005
+[train] epoch: 9/10 step：640/720 loss：0.120975
+[train] epoch: 9/10 step：641/720 loss：0.119691
+[train] epoch: 9/10 step：642/720 loss：0.055210
+[train] epoch: 9/10 step：643/720 loss：0.165301
+[train] epoch: 9/10 step：644/720 loss：0.118354
+[train] epoch: 9/10 step：645/720 loss：0.169244
+[train] epoch: 9/10 step：646/720 loss：0.074757
+[train] epoch: 9/10 step：647/720 loss：0.140543
+[train] epoch: 9/10 step：648/720 loss：0.125305
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[train] epoch: 10/10 step：649/720 loss：0.060023
+[train] epoch: 10/10 step：650/720 loss：0.100069
+[train] epoch: 10/10 step：651/720 loss：0.060884
+[train] epoch: 10/10 step：652/720 loss：0.169126
+[train] epoch: 10/10 step：653/720 loss：0.074030
+[train] epoch: 10/10 step：654/720 loss：0.073045
+[train] epoch: 10/10 step：655/720 loss：0.106624
+[train] epoch: 10/10 step：656/720 loss：0.060873
+[train] epoch: 10/10 step：657/720 loss：0.156802
+[train] epoch: 10/10 step：658/720 loss：0.075961
+[train] epoch: 10/10 step：659/720 loss：0.186239
+[train] epoch: 10/10 step：660/720 loss：0.088757
+[train] epoch: 10/10 step：661/720 loss：0.107637
+[train] epoch: 10/10 step：662/720 loss：0.125562
+[train] epoch: 10/10 step：663/720 loss：0.099869
+[train] epoch: 10/10 step：664/720 loss：0.068650
+[train] epoch: 10/10 step：665/720 loss：0.093279
+[train] epoch: 10/10 step：666/720 loss：0.140154
+[train] epoch: 10/10 step：667/720 loss：0.101934
+[train] epoch: 10/10 step：668/720 loss：0.118662
+[train] epoch: 10/10 step：669/720 loss：0.072188
+[train] epoch: 10/10 step：670/720 loss：0.116066
+[train] epoch: 10/10 step：671/720 loss：0.038880
+[train] epoch: 10/10 step：672/720 loss：0.157610
+[train] epoch: 10/10 step：673/720 loss：0.030512
+[train] epoch: 10/10 step：674/720 loss：0.149050
+[train] epoch: 10/10 step：675/720 loss：0.100560
+[train] epoch: 10/10 step：676/720 loss：0.075426
+[train] epoch: 10/10 step：677/720 loss：0.071411
+[train] epoch: 10/10 step：678/720 loss：0.025382
+[train] epoch: 10/10 step：679/720 loss：0.116797
+[train] epoch: 10/10 step：680/720 loss：0.038640
+[train] epoch: 10/10 step：681/720 loss：0.059424
+[train] epoch: 10/10 step：682/720 loss：0.055428
+[train] epoch: 10/10 step：683/720 loss：0.159297
+[train] epoch: 10/10 step：684/720 loss：0.124531
+[train] epoch: 10/10 step：685/720 loss：0.060459
+[train] epoch: 10/10 step：686/720 loss：0.114769
+[train] epoch: 10/10 step：687/720 loss：0.082632
+[train] epoch: 10/10 step：688/720 loss：0.101042
+[train] epoch: 10/10 step：689/720 loss：0.089788
+[train] epoch: 10/10 step：690/720 loss：0.083710
+[train] epoch: 10/10 step：691/720 loss：0.128995
+[train] epoch: 10/10 step：692/720 loss：0.090987
+[train] epoch: 10/10 step：693/720 loss：0.091441
+[train] epoch: 10/10 step：694/720 loss：0.071945
+[train] epoch: 10/10 step：695/720 loss：0.129342
+[train] epoch: 10/10 step：696/720 loss：0.176023
+[train] epoch: 10/10 step：697/720 loss：0.208430
+[train] epoch: 10/10 step：698/720 loss：0.126620
+[train] epoch: 10/10 step：699/720 loss：0.084487
+[train] epoch: 10/10 step：700/720 loss：0.097739
+[train] epoch: 10/10 step：701/720 loss：0.095017
+[train] epoch: 10/10 step：702/720 loss：0.164129
+[train] epoch: 10/10 step：703/720 loss：0.159854
+[train] epoch: 10/10 step：704/720 loss：0.105994
+[train] epoch: 10/10 step：705/720 loss：0.139416
+[train] epoch: 10/10 step：706/720 loss：0.135338
+[train] epoch: 10/10 step：707/720 loss：0.059877
+[train] epoch: 10/10 step：708/720 loss：0.154167
+[train] epoch: 10/10 step：709/720 loss：0.092320
+[train] epoch: 10/10 step：710/720 loss：0.034230
+[train] epoch: 10/10 step：711/720 loss：0.112493
+[train] epoch: 10/10 step：712/720 loss：0.084212
+[train] epoch: 10/10 step：713/720 loss：0.044535
+[train] epoch: 10/10 step：714/720 loss：0.058601
+[train] epoch: 10/10 step：715/720 loss：0.166557
+[train] epoch: 10/10 step：716/720 loss：0.046533
+[train] epoch: 10/10 step：717/720 loss：0.156981
+[train] epoch: 10/10 step：718/720 loss：0.115805
+[train] epoch: 10/10 step：719/720 loss：0.096979
+[train] epoch: 10/10 step：720/720 loss：0.154961
+耗时：144.95004320144653秒
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/huggingface_hub/utils/_runtime.py:185: UserWarning: Pydantic is installed but cannot be imported. Please check your installation. `huggingface_hub` will default to not using Pydantic. Error message: '{e}'
+  warnings.warn(
+lilin3-a800-dev-7-m-0:406974:407655 [0] NCCL INFO [Service thread] Connection closed by localRank 0
+lilin3-a800-dev-7-m-0:406975:407656 [1] NCCL INFO [Service thread] Connection closed by localRank 1
+(800,) (800,)
+              precision    recall  f1-score   support
+
+          其他       0.68      0.68      0.68       291
+          喜好       0.60      0.49      0.54       133
+          悲伤       0.49      0.54      0.51       102
+          厌恶       0.41      0.47      0.44       113
+          愤怒       0.44      0.40      0.42        60
+          高兴       0.61      0.63      0.62       101
+
+    accuracy                           0.57       800
+   macro avg       0.54      0.53      0.53       800
+weighted avg       0.58      0.57      0.57       800
+
+===============end=====================
+lilin3-a800-dev-7-m-0:406974:406974 [0] NCCL INFO comm 0x8aa5000 rank 0 nranks 2 cudaDev 0 busId e000 - Abort COMPLETE
+(800,) (800,)
+===============end=====================
+lilin3-a800-dev-7-m-0:406975:406975 [1] NCCL INFO comm 0xa8a3d00 rank 1 nranks 2 cudaDev 1 busId 13000 - Abort COMPLETE

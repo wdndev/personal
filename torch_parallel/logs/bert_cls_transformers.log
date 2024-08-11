@@ -1,0 +1,381 @@
+nohup: 忽略输入
+2024-03-06 14:58:57.453736: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2024-03-06 14:58:57.506038: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.weight', 'classifier.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+  0%|          | 0/180 [00:00<?, ?it/s]lilin3-a800-dev-7-m-0:731874:731874 [0] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:731874:731874 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:731874:731874 [0] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+NCCL version 2.18.1+cuda12.1
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Setting affinity for GPU 4 to 7fff0000,00000000,00000000,00000000,ffff0000,00000000,00000000,00000000
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO NVLS multicast support is not available on dev 4
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Setting affinity for GPU 0 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO NVLS multicast support is not available on dev 0
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Setting affinity for GPU 7 to ffff0000,00000000,00000000,00000000,ffff0000,00000000,00000000
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO NVLS multicast support is not available on dev 7
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Setting affinity for GPU 1 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO NVLS multicast support is not available on dev 1
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Setting affinity for GPU 6 to ffff0000,00000000,00000000,00000000,ffff0000,00000000,00000000
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO NVLS multicast support is not available on dev 6
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Setting affinity for GPU 5 to 7fff0000,00000000,00000000,00000000,ffff0000,00000000,00000000,00000000
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO NVLS multicast support is not available on dev 5
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Setting affinity for GPU 2 to ffff0000,00000000,00000000,00000000,ffff0000
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO NVLS multicast support is not available on dev 2
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Setting affinity for GPU 3 to ffff0000,00000000,00000000,00000000,ffff0000
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO NVLS multicast support is not available on dev 3
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 00/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 01/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 02/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 03/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 04/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0 [2] 2/-1/-1->1->0 [3] 2/-1/-1->1->0 [4] 2/-1/-1->1->0 [5] 2/-1/-1->1->0 [6] 2/-1/-1->1->0 [7] 2/-1/-1->1->0 [8] 2/-1/-1->1->0 [9] 2/-1/-1->1->0 [10] 2/-1/-1->1->0 [11] 2/-1/-1->1->0 [12] 2/-1/-1->1->0 [13] 2/-1/-1->1->0 [14] 2/-1/-1->1->0 [15] 2/-1/-1->1->0
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 05/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 06/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 07/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 08/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 09/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Trees [0] -1/-1/-1->7->6 [1] -1/-1/-1->7->6 [2] -1/-1/-1->7->6 [3] -1/-1/-1->7->6 [4] -1/-1/-1->7->6 [5] -1/-1/-1->7->6 [6] -1/-1/-1->7->6 [7] -1/-1/-1->7->6 [8] -1/-1/-1->7->6 [9] -1/-1/-1->7->6 [10] -1/-1/-1->7->6 [11] -1/-1/-1->7->6 [12] -1/-1/-1->7->6 [13] -1/-1/-1->7->6 [14] -1/-1/-1->7->6 [15] -1/-1/-1->7->6
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 10/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 11/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 12/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Trees [0] 6/-1/-1->5->4 [1] 6/-1/-1->5->4 [2] 6/-1/-1->5->4 [3] 6/-1/-1->5->4 [4] 6/-1/-1->5->4 [5] 6/-1/-1->5->4 [6] 6/-1/-1->5->4 [7] 6/-1/-1->5->4 [8] 6/-1/-1->5->4 [9] 6/-1/-1->5->4 [10] 6/-1/-1->5->4 [11] 6/-1/-1->5->4 [12] 6/-1/-1->5->4 [13] 6/-1/-1->5->4 [14] 6/-1/-1->5->4 [15] 6/-1/-1->5->4
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 13/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1 [2] 3/-1/-1->2->1 [3] 3/-1/-1->2->1 [4] 3/-1/-1->2->1 [5] 3/-1/-1->2->1 [6] 3/-1/-1->2->1 [7] 3/-1/-1->2->1 [8] 3/-1/-1->2->1 [9] 3/-1/-1->2->1 [10] 3/-1/-1->2->1 [11] 3/-1/-1->2->1 [12] 3/-1/-1->2->1 [13] 3/-1/-1->2->1 [14] 3/-1/-1->2->1 [15] 3/-1/-1->2->1
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 14/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 15/16 :    0   1   2   3   4   5   6   7
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] 1/-1/-1->0->-1 [7] 1/-1/-1->0->-1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Trees [0] 7/-1/-1->6->5 [1] 7/-1/-1->6->5 [2] 7/-1/-1->6->5 [3] 7/-1/-1->6->5 [4] 7/-1/-1->6->5 [5] 7/-1/-1->6->5 [6] 7/-1/-1->6->5 [7] 7/-1/-1->6->5 [8] 7/-1/-1->6->5 [9] 7/-1/-1->6->5 [10] 7/-1/-1->6->5 [11] 7/-1/-1->6->5 [12] 7/-1/-1->6->5 [13] 7/-1/-1->6->5 [14] 7/-1/-1->6->5 [15] 7/-1/-1->6->5
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Trees [0] 5/-1/-1->4->3 [1] 5/-1/-1->4->3 [2] 5/-1/-1->4->3 [3] 5/-1/-1->4->3 [4] 5/-1/-1->4->3 [5] 5/-1/-1->4->3 [6] 5/-1/-1->4->3 [7] 5/-1/-1->4->3 [8] 5/-1/-1->4->3 [9] 5/-1/-1->4->3 [10] 5/-1/-1->4->3 [11] 5/-1/-1->4->3 [12] 5/-1/-1->4->3 [13] 5/-1/-1->4->3 [14] 5/-1/-1->4->3 [15] 5/-1/-1->4->3
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Trees [0] 4/-1/-1->3->2 [1] 4/-1/-1->3->2 [2] 4/-1/-1->3->2 [3] 4/-1/-1->3->2 [4] 4/-1/-1->3->2 [5] 4/-1/-1->3->2 [6] 4/-1/-1->3->2 [7] 4/-1/-1->3->2 [8] 4/-1/-1->3->2 [9] 4/-1/-1->3->2 [10] 4/-1/-1->3->2 [11] 4/-1/-1->3->2 [12] 4/-1/-1->3->2 [13] 4/-1/-1->3->2 [14] 4/-1/-1->3->2 [15] 4/-1/-1->3->2
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 00/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 01/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 02/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 03/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 04/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 05/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 06/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 07/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 08/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 09/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 10/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 11/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 12/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 13/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 14/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 15/0 : 1[13000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 00/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 00/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 01/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 00/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 02/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 01/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 01/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 03/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 00/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 00/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 02/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 02/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 00/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 03/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 01/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 00/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 04/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 02/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 05/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 06/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 07/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 01/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 08/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 09/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 10/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 02/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 03/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 01/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 04/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 01/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 04/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 02/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 05/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 02/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 05/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 03/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 03/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 06/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 03/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 06/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 04/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 04/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 07/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 11/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 03/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 05/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 12/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 08/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 04/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 13/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 14/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 05/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 05/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 07/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 04/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 08/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 05/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 06/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 09/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 09/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 06/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 06/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 07/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 10/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 10/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 07/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 07/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 11/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 08/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 12/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 09/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 13/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 10/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Channel 15/0 : 0[e000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 06/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 07/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 08/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 08/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 08/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 11/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 14/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 11/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 09/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 09/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 09/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 15/0 : 2[49000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 12/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 12/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 13/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 10/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 14/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 10/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 10/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 13/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 15/0 : 5[97000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 11/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 11/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 11/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 14/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 12/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 12/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 15/0 : 3[4f000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 12/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 13/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 13/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 13/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 14/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 14/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 14/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 15/0 : 6[cd000] -> 7[d2000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 15/0 : 7[d2000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 15/0 : 4[91000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 00/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 01/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 00/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 02/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 01/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 03/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 04/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 00/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 01/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 02/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 02/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 05/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 03/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 06/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 04/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 07/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 03/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 04/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 05/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 06/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 07/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 08/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 09/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 10/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 05/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 08/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 06/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 09/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 07/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 11/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 12/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 13/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 14/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Channel 15/0 : 2[49000] -> 1[13000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 08/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 10/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 09/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 11/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 10/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 12/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 00/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 01/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 02/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 13/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 11/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 14/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 12/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Channel 15/0 : 7[d2000] -> 6[cd000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 13/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 03/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 14/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 04/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 05/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 06/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 00/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 07/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Channel 15/0 : 1[13000] -> 0[e000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 00/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 08/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 00/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 01/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 01/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 09/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 01/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 02/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 02/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 03/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 10/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 02/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 03/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 04/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 11/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 03/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 04/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 05/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 06/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 07/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 08/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 09/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 10/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 11/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 12/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 13/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 04/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 05/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 12/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 13/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 05/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 06/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 14/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 07/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Channel 15/0 : 3[4f000] -> 2[49000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 06/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 07/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 08/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 09/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 10/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 11/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 12/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 14/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Channel 15/0 : 6[cd000] -> 5[97000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 08/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 09/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 10/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 13/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 14/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 11/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 12/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 13/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 14/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Channel 15/0 : 4[91000] -> 3[4f000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Channel 15/0 : 5[97000] -> 4[91000] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO threadThresholds 8/8/64 | 64/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:731874:732305 [3] NCCL INFO comm 0x13e77ef0 rank 3 nranks 8 cudaDev 3 busId 4f000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732307 [5] NCCL INFO comm 0x13e83910 rank 5 nranks 8 cudaDev 5 busId 97000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732303 [1] NCCL INFO comm 0x13e6c4d0 rank 1 nranks 8 cudaDev 1 busId 13000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732309 [7] NCCL INFO comm 0x13e8f2c0 rank 7 nranks 8 cudaDev 7 busId d2000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732308 [6] NCCL INFO comm 0x13e89620 rank 6 nranks 8 cudaDev 6 busId cd000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732306 [4] NCCL INFO comm 0x13e7dc00 rank 4 nranks 8 cudaDev 4 busId 91000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732302 [0] NCCL INFO comm 0x13e676c0 rank 0 nranks 8 cudaDev 0 busId e000 commId 0xa58b452c21219f43 - Init COMPLETE
+lilin3-a800-dev-7-m-0:731874:732304 [2] NCCL INFO comm 0x13e721e0 rank 2 nranks 8 cudaDev 2 busId 49000 commId 0xa58b452c21219f43 - Init COMPLETE
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+  1%|          | 1/180 [00:11<33:24, 11.20s/it]  1%|          | 2/180 [00:11<14:37,  4.93s/it]  2%|▏         | 3/180 [00:12<08:35,  2.91s/it]  2%|▏         | 4/180 [00:12<05:49,  1.99s/it]  3%|▎         | 5/180 [00:13<04:19,  1.48s/it]  3%|▎         | 6/180 [00:13<03:24,  1.18s/it]  4%|▍         | 7/180 [00:14<02:45,  1.04it/s]  4%|▍         | 8/180 [00:15<02:22,  1.21it/s]  5%|▌         | 9/180 [00:15<02:07,  1.34it/s]  6%|▌         | 10/180 [00:16<01:57,  1.44it/s]  6%|▌         | 11/180 [00:16<01:47,  1.57it/s]  7%|▋         | 12/180 [00:17<01:41,  1.65it/s]  7%|▋         | 13/180 [00:17<01:39,  1.69it/s]  8%|▊         | 14/180 [00:18<01:41,  1.64it/s]  8%|▊         | 15/180 [00:19<01:47,  1.53it/s]  9%|▉         | 16/180 [00:19<01:43,  1.58it/s]  9%|▉         | 17/180 [00:20<01:38,  1.65it/s] 10%|█         | 18/180 [00:20<01:24,  1.92it/s] 11%|█         | 19/180 [00:21<01:37,  1.65it/s] 11%|█         | 20/180 [00:22<01:37,  1.64it/s] 12%|█▏        | 21/180 [00:22<01:34,  1.68it/s] 12%|█▏        | 22/180 [00:23<01:30,  1.74it/s] 13%|█▎        | 23/180 [00:23<01:28,  1.78it/s] 13%|█▎        | 24/180 [00:24<01:27,  1.79it/s] 14%|█▍        | 25/180 [00:24<01:28,  1.76it/s] 14%|█▍        | 26/180 [00:25<01:27,  1.75it/s] 15%|█▌        | 27/180 [00:25<01:23,  1.84it/s] 16%|█▌        | 28/180 [00:26<01:22,  1.85it/s] 16%|█▌        | 29/180 [00:26<01:21,  1.86it/s] 17%|█▋        | 30/180 [00:27<01:19,  1.88it/s] 17%|█▋        | 31/180 [00:28<01:30,  1.64it/s] 18%|█▊        | 32/180 [00:28<01:28,  1.67it/s] 18%|█▊        | 33/180 [00:29<01:24,  1.74it/s] 19%|█▉        | 34/180 [00:29<01:22,  1.77it/s] 19%|█▉        | 35/180 [00:30<01:19,  1.82it/s] 20%|██        | 36/180 [00:30<01:08,  2.10it/s] 21%|██        | 37/180 [00:31<01:21,  1.75it/s] 21%|██        | 38/180 [00:32<01:19,  1.78it/s] 22%|██▏       | 39/180 [00:32<01:19,  1.78it/s] 22%|██▏       | 40/180 [00:33<01:20,  1.74it/s] 23%|██▎       | 41/180 [00:33<01:20,  1.72it/s] 23%|██▎       | 42/180 [00:34<01:18,  1.77it/s] 24%|██▍       | 43/180 [00:34<01:15,  1.82it/s] 24%|██▍       | 44/180 [00:35<01:14,  1.83it/s] 25%|██▌       | 45/180 [00:35<01:12,  1.87it/s] 26%|██▌       | 46/180 [00:36<01:10,  1.90it/s] 26%|██▌       | 47/180 [00:37<01:20,  1.66it/s] 27%|██▋       | 48/180 [00:37<01:16,  1.74it/s] 27%|██▋       | 49/180 [00:38<01:13,  1.79it/s] 28%|██▊       | 50/180 [00:38<01:11,  1.81it/s] 28%|██▊       | 51/180 [00:39<01:10,  1.83it/s] 29%|██▉       | 52/180 [00:39<01:09,  1.83it/s] 29%|██▉       | 53/180 [00:40<01:09,  1.84it/s] 30%|███       | 54/180 [00:40<00:59,  2.11it/s] 31%|███       | 55/180 [00:41<01:11,  1.74it/s] 31%|███       | 56/180 [00:42<01:09,  1.79it/s] 32%|███▏      | 57/180 [00:42<01:08,  1.80it/s] 32%|███▏      | 58/180 [00:43<01:05,  1.86it/s] 33%|███▎      | 59/180 [00:43<01:04,  1.89it/s] 33%|███▎      | 60/180 [00:44<01:02,  1.91it/s] 34%|███▍      | 61/180 [00:44<01:02,  1.90it/s] 34%|███▍      | 62/180 [00:45<01:03,  1.87it/s] 35%|███▌      | 63/180 [00:45<01:00,  1.92it/s] 36%|███▌      | 64/180 [00:46<01:09,  1.66it/s] 36%|███▌      | 65/180 [00:46<01:06,  1.72it/s] 37%|███▋      | 66/180 [00:47<01:04,  1.76it/s] 37%|███▋      | 67/180 [00:48<01:03,  1.79it/s] 38%|███▊      | 68/180 [00:48<01:03,  1.76it/s] 38%|███▊      | 69/180 [00:49<01:00,  1.83it/s] 39%|███▉      | 70/180 [00:49<00:57,  1.90it/s] 39%|███▉      | 71/180 [00:50<00:58,  1.86it/s] 40%|████      | 72/180 [00:50<00:50,  2.14it/s] 41%|████      | 73/180 [00:51<01:00,  1.76it/s] 41%|████      | 74/180 [00:51<00:58,  1.82it/s] 42%|████▏     | 75/180 [00:52<00:56,  1.86it/s] 42%|████▏     | 76/180 [00:52<00:57,  1.81it/s] 43%|████▎     | 77/180 [00:53<00:56,  1.81it/s] 43%|████▎     | 78/180 [00:54<01:02,  1.62it/s] 44%|████▍     | 79/180 [00:54<00:59,  1.68it/s] 44%|████▍     | 80/180 [00:55<00:57,  1.75it/s] 45%|████▌     | 81/180 [00:55<00:55,  1.80it/s] 46%|████▌     | 82/180 [00:56<00:55,  1.78it/s] 46%|████▌     | 83/180 [00:56<00:53,  1.83it/s] 47%|████▋     | 84/180 [00:57<00:51,  1.88it/s] 47%|████▋     | 85/180 [00:57<00:50,  1.88it/s] 48%|████▊     | 86/180 [00:58<00:51,  1.84it/s] 48%|████▊     | 87/180 [00:59<00:50,  1.85it/s] 49%|████▉     | 88/180 [00:59<00:48,  1.88it/s] 49%|████▉     | 89/180 [01:00<00:48,  1.87it/s] 50%|█████     | 90/180 [01:00<00:43,  2.06it/s] 51%|█████     | 91/180 [01:01<00:52,  1.71it/s] 51%|█████     | 92/180 [01:01<00:50,  1.76it/s] 52%|█████▏    | 93/180 [01:02<00:48,  1.81it/s] 52%|█████▏    | 94/180 [01:02<00:47,  1.82it/s] 53%|█████▎    | 95/180 [01:03<00:47,  1.79it/s] 53%|█████▎    | 96/180 [01:04<00:51,  1.65it/s] 54%|█████▍    | 97/180 [01:04<00:49,  1.67it/s] 54%|█████▍    | 98/180 [01:05<00:47,  1.72it/s] 55%|█████▌    | 99/180 [01:05<00:45,  1.79it/s] 56%|█████▌    | 100/180 [01:06<00:44,  1.78it/s]                                                  56%|█████▌    | 100/180 [01:06<00:44,  1.78it/s]{'loss': 1.0456, 'learning_rate': 1.3333333333333333e-05, 'epoch': 5.56}
+
+  0%|          | 0/2 [00:00<?, ?it/s][A
+100%|██████████| 2/2 [00:00<00:00,  9.99it/s][A                                                 
+                                             [A 56%|█████▌    | 100/180 [01:07<00:44,  1.78it/s]
+100%|██████████| 2/2 [00:00<00:00,  9.99it/s][A
+                                             [A/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+ 56%|█████▌    | 101/180 [01:09<01:51,  1.42s/it] 57%|█████▋    | 102/180 [01:10<01:29,  1.15s/it] 57%|█████▋    | 103/180 [01:10<01:15,  1.02it/s] 58%|█████▊    | 104/180 [01:11<01:05,  1.16it/s] 58%|█████▊    | 105/180 [01:11<00:57,  1.30it/s] 59%|█████▉    | 106/180 [01:12<00:51,  1.45it/s] 59%|█████▉    | 107/180 [01:13<00:46,  1.56it/s] 60%|██████    | 108/180 [01:13<00:39,  1.81it/s] 61%|██████    | 109/180 [01:14<00:50,  1.42it/s] 61%|██████    | 110/180 [01:14<00:46,  1.51it/s] 62%|██████▏   | 111/180 [01:15<00:42,  1.62it/s] 62%|██████▏   | 112/180 [01:16<00:40,  1.68it/s] 63%|██████▎   | 113/180 [01:16<00:38,  1.73it/s] 63%|██████▎   | 114/180 [01:17<00:37,  1.74it/s] 64%|██████▍   | 115/180 [01:17<00:37,  1.75it/s] 64%|██████▍   | 116/180 [01:18<00:36,  1.77it/s] 65%|██████▌   | 117/180 [01:18<00:34,  1.81it/s] 66%|██████▌   | 118/180 [01:19<00:34,  1.81it/s] 66%|██████▌   | 119/180 [01:19<00:33,  1.80it/s] 67%|██████▋   | 120/180 [01:20<00:33,  1.81it/s] 67%|██████▋   | 121/180 [01:20<00:31,  1.86it/s] 68%|██████▊   | 122/180 [01:21<00:31,  1.84it/s] 68%|██████▊   | 123/180 [01:22<00:31,  1.80it/s] 69%|██████▉   | 124/180 [01:22<00:30,  1.83it/s] 69%|██████▉   | 125/180 [01:23<00:34,  1.59it/s] 70%|███████   | 126/180 [01:23<00:28,  1.88it/s] 71%|███████   | 127/180 [01:24<00:33,  1.60it/s] 71%|███████   | 128/180 [01:25<00:31,  1.67it/s] 72%|███████▏  | 129/180 [01:25<00:29,  1.71it/s] 72%|███████▏  | 130/180 [01:26<00:28,  1.72it/s] 73%|███████▎  | 131/180 [01:26<00:27,  1.77it/s] 73%|███████▎  | 132/180 [01:27<00:26,  1.82it/s] 74%|███████▍  | 133/180 [01:27<00:25,  1.84it/s] 74%|███████▍  | 134/180 [01:28<00:24,  1.84it/s] 75%|███████▌  | 135/180 [01:28<00:23,  1.88it/s] 76%|███████▌  | 136/180 [01:29<00:23,  1.89it/s] 76%|███████▌  | 137/180 [01:29<00:23,  1.85it/s] 77%|███████▋  | 138/180 [01:30<00:22,  1.85it/s] 77%|███████▋  | 139/180 [01:31<00:21,  1.89it/s] 78%|███████▊  | 140/180 [01:31<00:24,  1.64it/s] 78%|███████▊  | 141/180 [01:32<00:22,  1.73it/s] 79%|███████▉  | 142/180 [01:32<00:21,  1.78it/s] 79%|███████▉  | 143/180 [01:33<00:20,  1.78it/s] 80%|████████  | 144/180 [01:33<00:17,  2.03it/s] 81%|████████  | 145/180 [01:34<00:20,  1.70it/s] 81%|████████  | 146/180 [01:35<00:19,  1.72it/s] 82%|████████▏ | 147/180 [01:35<00:18,  1.76it/s] 82%|████████▏ | 148/180 [01:36<00:18,  1.75it/s] 83%|████████▎ | 149/180 [01:36<00:17,  1.77it/s] 83%|████████▎ | 150/180 [01:37<00:16,  1.80it/s] 84%|████████▍ | 151/180 [01:37<00:15,  1.84it/s] 84%|████████▍ | 152/180 [01:38<00:15,  1.81it/s] 85%|████████▌ | 153/180 [01:38<00:15,  1.79it/s] 86%|████████▌ | 154/180 [01:39<00:14,  1.80it/s] 86%|████████▌ | 155/180 [01:40<00:13,  1.84it/s] 87%|████████▋ | 156/180 [01:40<00:15,  1.60it/s] 87%|████████▋ | 157/180 [01:41<00:13,  1.68it/s] 88%|████████▊ | 158/180 [01:41<00:12,  1.71it/s] 88%|████████▊ | 159/180 [01:42<00:12,  1.74it/s] 89%|████████▉ | 160/180 [01:43<00:11,  1.78it/s] 89%|████████▉ | 161/180 [01:43<00:10,  1.83it/s] 90%|█████████ | 162/180 [01:43<00:08,  2.10it/s] 91%|█████████ | 163/180 [01:44<00:09,  1.76it/s] 91%|█████████ | 164/180 [01:45<00:08,  1.80it/s] 92%|█████████▏| 165/180 [01:45<00:08,  1.84it/s] 92%|█████████▏| 166/180 [01:46<00:07,  1.81it/s] 93%|█████████▎| 167/180 [01:46<00:07,  1.81it/s] 93%|█████████▎| 168/180 [01:47<00:06,  1.85it/s] 94%|█████████▍| 169/180 [01:47<00:05,  1.86it/s] 94%|█████████▍| 170/180 [01:48<00:05,  1.67it/s] 95%|█████████▌| 171/180 [01:49<00:05,  1.72it/s] 96%|█████████▌| 172/180 [01:49<00:04,  1.73it/s] 96%|█████████▌| 173/180 [01:50<00:03,  1.75it/s] 97%|█████████▋| 174/180 [01:50<00:03,  1.80it/s] 97%|█████████▋| 175/180 [01:51<00:02,  1.84it/s] 98%|█████████▊| 176/180 [01:51<00:02,  1.80it/s] 98%|█████████▊| 177/180 [01:52<00:01,  1.81it/s] 99%|█████████▉| 178/180 [01:52<00:01,  1.86it/s] 99%|█████████▉| 179/180 [01:53<00:00,  1.89it/s]100%|██████████| 180/180 [01:53<00:00,  2.13it/s]                                                 100%|██████████| 180/180 [01:54<00:00,  2.13it/s]100%|██████████| 180/180 [01:54<00:00,  1.58it/s]
+{'eval_loss': 1.132585048675537, 'eval_accuracy：': 0.6, 'eval_runtime': 0.8175, 'eval_samples_per_second': 978.62, 'eval_steps_per_second': 2.447, 'epoch': 5.56}
+{'train_runtime': 114.0638, 'train_samples_per_second': 806.566, 'train_steps_per_second': 1.578, 'train_loss': 0.8538375854492187, 'epoch': 10.0}
+耗时：114.27241492271423秒
+  0%|          | 0/2 [00:00<?, ?it/s]100%|██████████| 2/2 [00:00<00:00, 11.22it/s]100%|██████████| 2/2 [00:00<00:00, 11.15it/s]{'eval_loss': 1.132585048675537, 'eval_accuracy：': 0.6, 'eval_runtime': 0.7574, 'eval_samples_per_second': 1056.257, 'eval_steps_per_second': 2.641, 'epoch': 10.0}
+
+(800,) (800,)
+              precision    recall  f1-score   support
+
+          其他       0.68      0.64      0.66       291
+          喜好       0.61      0.71      0.65       133
+          悲伤       0.52      0.61      0.56       102
+          厌恶       0.44      0.42      0.43       113
+          愤怒       0.44      0.37      0.40        60
+          高兴       0.73      0.68      0.70       101
+
+    accuracy                           0.60       800
+   macro avg       0.57      0.57      0.57       800
+weighted avg       0.60      0.60      0.60       800
+

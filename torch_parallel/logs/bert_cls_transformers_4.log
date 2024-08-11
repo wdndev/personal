@@ -1,0 +1,250 @@
+nohup: 忽略输入
+2024-03-11 16:57:50.678203: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2024-03-11 16:57:50.729616: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/utils/generic.py:311: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/utils/generic.py:311: UserWarning: torch.utils._pytree._register_pytree_node is deprecated. Please use torch.utils._pytree.register_pytree_node instead.
+  torch.utils._pytree._register_pytree_node(
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.weight', 'classifier.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Detected kernel version 5.4.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+  0%|          | 0/360 [00:00<?, ?it/s]lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO NET/Plugin: Failed to find ncclNetPlugin_v7 symbol.
+lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v6 (v6)
+lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO NET/Plugin: Failed to find ncclCollNetPlugin_v7 symbol.
+lilin3-a800-dev-7-m-0:1759917:1759917 [0] NCCL INFO NET/Plugin: Loaded coll plugin SHARP (v6)
+NCCL version 2.19.3+cuda12.3
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Using non-device net plugin version 0
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Using non-device net plugin version 0
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Using non-device net plugin version 0
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Using non-device net plugin version 0
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO comm 0x15b8b570 rank 0 nranks 4 cudaDev 0 nvmlDev 0 busId e000 commId 0x629ef73fd2e85996 - Init START
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO comm 0x15b8f4f0 rank 1 nranks 4 cudaDev 1 nvmlDev 1 busId 13000 commId 0x629ef73fd2e85996 - Init START
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO comm 0x15b93bf0 rank 2 nranks 4 cudaDev 2 nvmlDev 2 busId 49000 commId 0x629ef73fd2e85996 - Init START
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO comm 0x15b982f0 rank 3 nranks 4 cudaDev 3 nvmlDev 3 busId 4f000 commId 0x629ef73fd2e85996 - Init START
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Setting affinity for GPU 1 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO NVLS multicast support is not available on dev 1
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Setting affinity for GPU 0 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO NVLS multicast support is not available on dev 0
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Setting affinity for GPU 3 to ffff0000,00000000,00000000,00000000,ffff0000
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO NVLS multicast support is not available on dev 3
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Setting affinity for GPU 2 to ffff0000,00000000,00000000,00000000,ffff0000
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO NVLS multicast support is not available on dev 2
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 00/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 01/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 02/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 03/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 04/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 05/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 06/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 07/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Trees [0] -1/-1/-1->3->2 [1] -1/-1/-1->3->2 [2] -1/-1/-1->3->2 [3] -1/-1/-1->3->2 [4] -1/-1/-1->3->2 [5] -1/-1/-1->3->2 [6] -1/-1/-1->3->2 [7] -1/-1/-1->3->2 [8] -1/-1/-1->3->2 [9] -1/-1/-1->3->2 [10] -1/-1/-1->3->2 [11] -1/-1/-1->3->2 [12] -1/-1/-1->3->2 [13] -1/-1/-1->3->2 [14] -1/-1/-1->3->2 [15] -1/-1/-1->3->2
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Trees [0] 3/-1/-1->2->1 [1] 3/-1/-1->2->1 [2] 3/-1/-1->2->1 [3] 3/-1/-1->2->1 [4] 3/-1/-1->2->1 [5] 3/-1/-1->2->1 [6] 3/-1/-1->2->1 [7] 3/-1/-1->2->1 [8] 3/-1/-1->2->1 [9] 3/-1/-1->2->1 [10] 3/-1/-1->2->1 [11] 3/-1/-1->2->1 [12] 3/-1/-1->2->1 [13] 3/-1/-1->2->1 [14] 3/-1/-1->2->1 [15] 3/-1/-1->2->1
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 08/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 09/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 10/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 11/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 12/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 13/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 14/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Trees [0] 2/-1/-1->1->0 [1] 2/-1/-1->1->0 [2] 2/-1/-1->1->0 [3] 2/-1/-1->1->0 [4] 2/-1/-1->1->0 [5] 2/-1/-1->1->0 [6] 2/-1/-1->1->0 [7] 2/-1/-1->1->0 [8] 2/-1/-1->1->0 [9] 2/-1/-1->1->0 [10] 2/-1/-1->1->0 [11] 2/-1/-1->1->0 [12] 2/-1/-1->1->0 [13] 2/-1/-1->1->0 [14] 2/-1/-1->1->0 [15] 2/-1/-1->1->0
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 15/16 :    0   1   2   3
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] 1/-1/-1->0->-1 [5] 1/-1/-1->0->-1 [6] 1/-1/-1->0->-1 [7] 1/-1/-1->0->-1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] 1/-1/-1->0->-1 [13] 1/-1/-1->0->-1 [14] 1/-1/-1->0->-1 [15] 1/-1/-1->0->-1
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 00/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 00/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 01/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 01/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 02/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 00/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 02/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 03/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 01/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 02/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 03/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 04/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 02/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 03/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 04/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 05/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 03/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 04/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 05/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 06/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 04/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 05/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 06/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 07/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 05/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 06/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 07/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 08/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 06/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 07/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 08/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 09/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 07/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 09/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 08/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 10/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 08/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 10/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 09/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 11/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 09/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 11/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 10/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 12/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 10/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 12/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 11/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 13/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 11/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 13/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 12/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 14/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 12/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 14/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 13/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 15/0 : 1[1] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 13/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 15/0 : 3[3] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 14/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 14/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Channel 15/0 : 0[0] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 15/0 : 2[2] -> 3[3] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 00/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 01/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 02/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 03/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 04/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 05/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 06/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 07/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 08/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 09/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 10/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 00/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 11/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 01/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 12/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 02/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 13/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 03/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 14/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 04/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Channel 15/0 : 3[3] -> 2[2] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 05/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 00/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 06/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 01/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 07/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 02/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 08/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 03/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 09/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 04/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 10/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 05/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 11/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 06/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 12/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 07/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 13/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 08/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 14/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 09/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Channel 15/0 : 1[1] -> 0[0] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 10/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 11/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 12/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 13/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 14/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Channel 15/0 : 2[2] -> 1[1] via P2P/direct pointer/read
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO threadThresholds 8/8/64 | 32/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:1759917:1760403 [0] NCCL INFO comm 0x15b8b570 rank 0 nranks 4 cudaDev 0 nvmlDev 0 busId e000 commId 0x629ef73fd2e85996 - Init COMPLETE
+lilin3-a800-dev-7-m-0:1759917:1760405 [2] NCCL INFO comm 0x15b93bf0 rank 2 nranks 4 cudaDev 2 nvmlDev 2 busId 49000 commId 0x629ef73fd2e85996 - Init COMPLETE
+lilin3-a800-dev-7-m-0:1759917:1760404 [1] NCCL INFO comm 0x15b8f4f0 rank 1 nranks 4 cudaDev 1 nvmlDev 1 busId 13000 commId 0x629ef73fd2e85996 - Init COMPLETE
+lilin3-a800-dev-7-m-0:1759917:1760406 [3] NCCL INFO comm 0x15b982f0 rank 3 nranks 4 cudaDev 3 nvmlDev 3 busId 4f000 commId 0x629ef73fd2e85996 - Init COMPLETE
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+  0%|          | 1/360 [00:03<19:52,  3.32s/it]  1%|          | 2/360 [00:03<09:04,  1.52s/it]  1%|          | 3/360 [00:03<05:35,  1.06it/s]  1%|          | 4/360 [00:04<03:56,  1.50it/s]  1%|▏         | 5/360 [00:04<03:02,  1.95it/s]  2%|▏         | 6/360 [00:04<02:30,  2.35it/s]  2%|▏         | 7/360 [00:04<02:10,  2.70it/s]  2%|▏         | 8/360 [00:05<01:54,  3.06it/s]  2%|▎         | 9/360 [00:05<01:46,  3.31it/s]  3%|▎         | 10/360 [00:05<01:39,  3.53it/s]  3%|▎         | 11/360 [00:05<01:35,  3.67it/s]  3%|▎         | 12/360 [00:06<01:31,  3.82it/s]  4%|▎         | 13/360 [00:06<01:28,  3.90it/s]  4%|▍         | 14/360 [00:06<01:28,  3.93it/s]  4%|▍         | 15/360 [00:06<01:27,  3.94it/s]  4%|▍         | 16/360 [00:07<01:24,  4.06it/s]  5%|▍         | 17/360 [00:07<01:24,  4.05it/s]  5%|▌         | 18/360 [00:07<01:22,  4.14it/s]  5%|▌         | 19/360 [00:07<01:23,  4.11it/s]  6%|▌         | 20/360 [00:07<01:22,  4.14it/s]  6%|▌         | 21/360 [00:08<01:22,  4.13it/s]  6%|▌         | 22/360 [00:08<01:22,  4.12it/s]  6%|▋         | 23/360 [00:08<01:23,  4.06it/s]  7%|▋         | 24/360 [00:08<01:23,  4.02it/s]  7%|▋         | 25/360 [00:09<01:25,  3.92it/s]  7%|▋         | 26/360 [00:09<01:24,  3.94it/s]  8%|▊         | 27/360 [00:09<01:27,  3.83it/s]  8%|▊         | 28/360 [00:10<01:25,  3.88it/s]  8%|▊         | 29/360 [00:10<01:24,  3.91it/s]  8%|▊         | 30/360 [00:10<01:23,  3.95it/s]  9%|▊         | 31/360 [00:10<01:22,  3.97it/s]  9%|▉         | 32/360 [00:11<01:21,  4.03it/s]  9%|▉         | 33/360 [00:11<01:19,  4.12it/s]  9%|▉         | 34/360 [00:11<01:19,  4.11it/s] 10%|▉         | 35/360 [00:11<01:17,  4.20it/s] 10%|█         | 36/360 [00:11<01:08,  4.76it/s] 10%|█         | 37/360 [00:12<01:18,  4.09it/s] 11%|█         | 38/360 [00:12<01:19,  4.03it/s] 11%|█         | 39/360 [00:12<01:22,  3.91it/s] 11%|█         | 40/360 [00:12<01:19,  4.01it/s] 11%|█▏        | 41/360 [00:13<01:16,  4.15it/s] 12%|█▏        | 42/360 [00:13<01:15,  4.19it/s] 12%|█▏        | 43/360 [00:13<01:15,  4.23it/s] 12%|█▏        | 44/360 [00:13<01:14,  4.24it/s] 12%|█▎        | 45/360 [00:14<01:15,  4.20it/s] 13%|█▎        | 46/360 [00:14<01:16,  4.10it/s] 13%|█▎        | 47/360 [00:14<01:16,  4.08it/s] 13%|█▎        | 48/360 [00:14<01:16,  4.09it/s] 14%|█▎        | 49/360 [00:15<01:14,  4.17it/s] 14%|█▍        | 50/360 [00:15<01:14,  4.18it/s] 14%|█▍        | 51/360 [00:15<01:13,  4.19it/s] 14%|█▍        | 52/360 [00:16<01:34,  3.25it/s] 15%|█▍        | 53/360 [00:16<01:30,  3.40it/s] 15%|█▌        | 54/360 [00:16<01:24,  3.61it/s] 15%|█▌        | 55/360 [00:16<01:20,  3.79it/s] 16%|█▌        | 56/360 [00:17<01:18,  3.88it/s] 16%|█▌        | 57/360 [00:17<01:16,  3.97it/s] 16%|█▌        | 58/360 [00:17<01:15,  3.98it/s] 16%|█▋        | 59/360 [00:17<01:13,  4.09it/s] 17%|█▋        | 60/360 [00:17<01:12,  4.13it/s] 17%|█▋        | 61/360 [00:18<01:11,  4.17it/s] 17%|█▋        | 62/360 [00:18<01:11,  4.16it/s] 18%|█▊        | 63/360 [00:18<01:11,  4.14it/s] 18%|█▊        | 64/360 [00:18<01:10,  4.22it/s] 18%|█▊        | 65/360 [00:19<01:09,  4.24it/s] 18%|█▊        | 66/360 [00:19<01:09,  4.24it/s] 19%|█▊        | 67/360 [00:19<01:10,  4.18it/s] 19%|█▉        | 68/360 [00:19<01:10,  4.14it/s] 19%|█▉        | 69/360 [00:20<01:10,  4.15it/s] 19%|█▉        | 70/360 [00:20<01:10,  4.13it/s] 20%|█▉        | 71/360 [00:20<01:09,  4.18it/s] 20%|██        | 72/360 [00:20<01:02,  4.64it/s] 20%|██        | 73/360 [00:21<01:10,  4.09it/s] 21%|██        | 74/360 [00:21<01:09,  4.14it/s] 21%|██        | 75/360 [00:21<01:07,  4.21it/s] 21%|██        | 76/360 [00:21<01:07,  4.19it/s] 21%|██▏       | 77/360 [00:22<01:07,  4.19it/s] 22%|██▏       | 78/360 [00:22<01:07,  4.17it/s] 22%|██▏       | 79/360 [00:22<01:07,  4.17it/s] 22%|██▏       | 80/360 [00:22<01:06,  4.18it/s] 22%|██▎       | 81/360 [00:22<01:06,  4.16it/s] 23%|██▎       | 82/360 [00:23<01:07,  4.14it/s] 23%|██▎       | 83/360 [00:23<01:07,  4.11it/s] 23%|██▎       | 84/360 [00:23<01:08,  4.06it/s] 24%|██▎       | 85/360 [00:23<01:08,  4.03it/s] 24%|██▍       | 86/360 [00:24<01:07,  4.04it/s] 24%|██▍       | 87/360 [00:24<01:06,  4.09it/s] 24%|██▍       | 88/360 [00:24<01:05,  4.13it/s] 25%|██▍       | 89/360 [00:24<01:05,  4.11it/s] 25%|██▌       | 90/360 [00:25<01:04,  4.16it/s] 25%|██▌       | 91/360 [00:25<01:06,  4.05it/s] 26%|██▌       | 92/360 [00:25<01:06,  4.02it/s] 26%|██▌       | 93/360 [00:25<01:07,  3.97it/s] 26%|██▌       | 94/360 [00:26<01:06,  4.01it/s] 26%|██▋       | 95/360 [00:26<01:05,  4.03it/s] 27%|██▋       | 96/360 [00:26<01:04,  4.12it/s] 27%|██▋       | 97/360 [00:26<01:03,  4.13it/s] 27%|██▋       | 98/360 [00:27<01:03,  4.15it/s] 28%|██▊       | 99/360 [00:27<01:03,  4.13it/s] 28%|██▊       | 100/360 [00:27<01:03,  4.11it/s]                                                  28%|██▊       | 100/360 [00:27<01:03,  4.11it/s]{'loss': 1.1883, 'learning_rate': 2.1666666666666667e-05, 'epoch': 2.78}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00, 10.74it/s][A
+100%|██████████| 4/4 [00:00<00:00, 10.75it/s][A                                                 
+                                             [A 28%|██▊       | 100/360 [00:28<01:03,  4.11it/s]
+100%|██████████| 4/4 [00:00<00:00, 10.75it/s][A
+                                             [A/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+ 28%|██▊       | 101/360 [00:30<04:14,  1.02it/s] 28%|██▊       | 102/360 [00:30<03:16,  1.31it/s] 29%|██▊       | 103/360 [00:30<02:36,  1.64it/s] 29%|██▉       | 104/360 [00:31<02:27,  1.73it/s] 29%|██▉       | 105/360 [00:31<02:02,  2.08it/s] 29%|██▉       | 106/360 [00:31<01:44,  2.44it/s] 30%|██▉       | 107/360 [00:32<01:29,  2.81it/s] 30%|███       | 108/360 [00:32<01:14,  3.36it/s] 30%|███       | 109/360 [00:32<01:16,  3.27it/s] 31%|███       | 110/360 [00:32<01:13,  3.39it/s] 31%|███       | 111/360 [00:33<01:08,  3.62it/s] 31%|███       | 112/360 [00:33<01:05,  3.76it/s] 31%|███▏      | 113/360 [00:33<01:03,  3.86it/s] 32%|███▏      | 114/360 [00:33<01:03,  3.89it/s] 32%|███▏      | 115/360 [00:34<01:01,  4.00it/s] 32%|███▏      | 116/360 [00:34<01:00,  4.06it/s] 32%|███▎      | 117/360 [00:34<00:59,  4.09it/s] 33%|███▎      | 118/360 [00:34<00:59,  4.08it/s] 33%|███▎      | 119/360 [00:34<00:58,  4.14it/s] 33%|███▎      | 120/360 [00:35<00:58,  4.13it/s] 34%|███▎      | 121/360 [00:35<00:57,  4.18it/s] 34%|███▍      | 122/360 [00:35<00:58,  4.09it/s] 34%|███▍      | 123/360 [00:35<00:57,  4.09it/s] 34%|███▍      | 124/360 [00:36<00:57,  4.11it/s] 35%|███▍      | 125/360 [00:36<00:56,  4.15it/s] 35%|███▌      | 126/360 [00:36<00:56,  4.15it/s] 35%|███▌      | 127/360 [00:36<00:55,  4.19it/s] 36%|███▌      | 128/360 [00:37<00:55,  4.19it/s] 36%|███▌      | 129/360 [00:37<00:56,  4.10it/s] 36%|███▌      | 130/360 [00:37<00:57,  4.02it/s] 36%|███▋      | 131/360 [00:37<00:56,  4.09it/s] 37%|███▋      | 132/360 [00:38<00:54,  4.15it/s] 37%|███▋      | 133/360 [00:38<00:54,  4.16it/s] 37%|███▋      | 134/360 [00:38<00:54,  4.17it/s] 38%|███▊      | 135/360 [00:38<00:54,  4.11it/s] 38%|███▊      | 136/360 [00:39<00:54,  4.10it/s] 38%|███▊      | 137/360 [00:39<00:55,  4.04it/s] 38%|███▊      | 138/360 [00:39<00:54,  4.07it/s] 39%|███▊      | 139/360 [00:39<00:54,  4.07it/s] 39%|███▉      | 140/360 [00:40<00:53,  4.09it/s] 39%|███▉      | 141/360 [00:40<00:53,  4.08it/s] 39%|███▉      | 142/360 [00:40<00:53,  4.07it/s] 40%|███▉      | 143/360 [00:40<00:53,  4.09it/s] 40%|████      | 144/360 [00:41<00:48,  4.49it/s] 40%|████      | 145/360 [00:41<00:55,  3.90it/s] 41%|████      | 146/360 [00:41<00:54,  3.96it/s] 41%|████      | 147/360 [00:41<00:53,  4.00it/s] 41%|████      | 148/360 [00:42<00:51,  4.13it/s] 41%|████▏     | 149/360 [00:42<00:51,  4.13it/s] 42%|████▏     | 150/360 [00:42<00:50,  4.14it/s] 42%|████▏     | 151/360 [00:42<00:50,  4.15it/s] 42%|████▏     | 152/360 [00:43<00:50,  4.16it/s] 42%|████▎     | 153/360 [00:43<00:50,  4.13it/s] 43%|████▎     | 154/360 [00:43<00:50,  4.07it/s] 43%|████▎     | 155/360 [00:43<00:49,  4.11it/s] 43%|████▎     | 156/360 [00:43<00:49,  4.13it/s] 44%|████▎     | 157/360 [00:44<00:48,  4.15it/s] 44%|████▍     | 158/360 [00:44<00:49,  4.10it/s] 44%|████▍     | 159/360 [00:44<00:48,  4.17it/s] 44%|████▍     | 160/360 [00:44<00:48,  4.12it/s] 45%|████▍     | 161/360 [00:45<00:48,  4.07it/s] 45%|████▌     | 162/360 [00:45<01:05,  3.02it/s] 45%|████▌     | 163/360 [00:45<00:59,  3.31it/s] 46%|████▌     | 164/360 [00:46<00:56,  3.50it/s] 46%|████▌     | 165/360 [00:46<00:53,  3.65it/s] 46%|████▌     | 166/360 [00:46<00:51,  3.75it/s] 46%|████▋     | 167/360 [00:46<00:50,  3.84it/s] 47%|████▋     | 168/360 [00:47<00:49,  3.92it/s] 47%|████▋     | 169/360 [00:47<00:47,  4.02it/s] 47%|████▋     | 170/360 [00:47<00:47,  4.03it/s] 48%|████▊     | 171/360 [00:47<00:46,  4.10it/s] 48%|████▊     | 172/360 [00:48<00:46,  4.06it/s] 48%|████▊     | 173/360 [00:48<00:45,  4.12it/s] 48%|████▊     | 174/360 [00:48<00:45,  4.07it/s] 49%|████▊     | 175/360 [00:48<00:45,  4.11it/s] 49%|████▉     | 176/360 [00:49<00:45,  4.05it/s] 49%|████▉     | 177/360 [00:49<00:44,  4.13it/s] 49%|████▉     | 178/360 [00:49<00:44,  4.10it/s] 50%|████▉     | 179/360 [00:49<00:44,  4.11it/s] 50%|█████     | 180/360 [00:50<00:39,  4.59it/s] 50%|█████     | 181/360 [00:50<00:45,  3.95it/s] 51%|█████     | 182/360 [00:50<00:44,  3.97it/s] 51%|█████     | 183/360 [00:50<00:44,  4.00it/s] 51%|█████     | 184/360 [00:51<00:43,  4.06it/s] 51%|█████▏    | 185/360 [00:51<00:42,  4.12it/s] 52%|█████▏    | 186/360 [00:51<00:43,  4.03it/s] 52%|█████▏    | 187/360 [00:51<00:42,  4.04it/s] 52%|█████▏    | 188/360 [00:52<00:42,  4.04it/s] 52%|█████▎    | 189/360 [00:52<00:42,  4.03it/s] 53%|█████▎    | 190/360 [00:52<00:41,  4.06it/s] 53%|█████▎    | 191/360 [00:52<00:41,  4.03it/s] 53%|█████▎    | 192/360 [00:53<00:41,  4.05it/s] 54%|█████▎    | 193/360 [00:53<00:41,  4.05it/s] 54%|█████▍    | 194/360 [00:53<00:41,  4.02it/s] 54%|█████▍    | 195/360 [00:53<00:41,  4.02it/s] 54%|█████▍    | 196/360 [00:54<00:41,  3.95it/s] 55%|█████▍    | 197/360 [00:54<00:40,  3.99it/s] 55%|█████▌    | 198/360 [00:54<00:40,  3.98it/s] 55%|█████▌    | 199/360 [00:54<00:40,  3.97it/s] 56%|█████▌    | 200/360 [00:55<00:39,  4.02it/s]                                                  56%|█████▌    | 200/360 [00:55<00:39,  4.02it/s]{'eval_loss': 1.1549562215805054, 'eval_accuracy：': 0.575, 'eval_runtime': 0.6388, 'eval_samples_per_second': 1252.403, 'eval_steps_per_second': 6.262, 'epoch': 2.78}
+{'loss': 0.7465, 'learning_rate': 1.3333333333333333e-05, 'epoch': 5.56}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00, 11.60it/s][A
+100%|██████████| 4/4 [00:00<00:00, 10.74it/s][A                                                 
+                                             [A 56%|█████▌    | 200/360 [00:55<00:39,  4.02it/s]
+100%|██████████| 4/4 [00:00<00:00, 10.74it/s][A
+                                             [A/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+ 56%|█████▌    | 201/360 [00:57<02:36,  1.02it/s] 56%|█████▌    | 202/360 [00:58<01:59,  1.32it/s] 56%|█████▋    | 203/360 [00:58<01:35,  1.65it/s] 57%|█████▋    | 204/360 [00:58<01:17,  2.01it/s] 57%|█████▋    | 205/360 [00:58<01:06,  2.31it/s] 57%|█████▋    | 206/360 [00:59<00:57,  2.67it/s] 57%|█████▊    | 207/360 [00:59<00:51,  2.98it/s] 58%|█████▊    | 208/360 [00:59<00:47,  3.22it/s] 58%|█████▊    | 209/360 [00:59<00:43,  3.46it/s] 58%|█████▊    | 210/360 [00:59<00:40,  3.67it/s] 59%|█████▊    | 211/360 [01:00<00:39,  3.79it/s] 59%|█████▉    | 212/360 [01:00<00:49,  2.97it/s] 59%|█████▉    | 213/360 [01:00<00:45,  3.24it/s] 59%|█████▉    | 214/360 [01:01<00:42,  3.47it/s] 60%|█████▉    | 215/360 [01:01<00:39,  3.67it/s] 60%|██████    | 216/360 [01:01<00:35,  4.10it/s] 60%|██████    | 217/360 [01:01<00:38,  3.74it/s] 61%|██████    | 218/360 [01:02<00:37,  3.84it/s] 61%|██████    | 219/360 [01:02<00:36,  3.87it/s] 61%|██████    | 220/360 [01:02<00:35,  3.92it/s] 61%|██████▏   | 221/360 [01:02<00:34,  3.98it/s] 62%|██████▏   | 222/360 [01:03<00:34,  4.03it/s] 62%|██████▏   | 223/360 [01:03<00:33,  4.07it/s] 62%|██████▏   | 224/360 [01:03<00:33,  4.05it/s] 62%|██████▎   | 225/360 [01:03<00:33,  4.08it/s] 63%|██████▎   | 226/360 [01:04<00:32,  4.09it/s] 63%|██████▎   | 227/360 [01:04<00:32,  4.06it/s] 63%|██████▎   | 228/360 [01:04<00:32,  4.08it/s] 64%|██████▎   | 229/360 [01:04<00:32,  4.07it/s] 64%|██████▍   | 230/360 [01:05<00:31,  4.11it/s] 64%|██████▍   | 231/360 [01:05<00:31,  4.10it/s] 64%|██████▍   | 232/360 [01:05<00:31,  4.06it/s] 65%|██████▍   | 233/360 [01:05<00:31,  4.00it/s] 65%|██████▌   | 234/360 [01:06<00:31,  3.99it/s] 65%|██████▌   | 235/360 [01:06<00:31,  4.00it/s] 66%|██████▌   | 236/360 [01:06<00:30,  4.01it/s] 66%|██████▌   | 237/360 [01:06<00:30,  4.08it/s] 66%|██████▌   | 238/360 [01:07<00:29,  4.12it/s] 66%|██████▋   | 239/360 [01:07<00:29,  4.12it/s] 67%|██████▋   | 240/360 [01:07<00:29,  4.08it/s] 67%|██████▋   | 241/360 [01:07<00:28,  4.11it/s] 67%|██████▋   | 242/360 [01:08<00:28,  4.19it/s] 68%|██████▊   | 243/360 [01:08<00:28,  4.16it/s] 68%|██████▊   | 244/360 [01:08<00:27,  4.16it/s] 68%|██████▊   | 245/360 [01:08<00:27,  4.15it/s] 68%|██████▊   | 246/360 [01:09<00:27,  4.08it/s] 69%|██████▊   | 247/360 [01:09<00:27,  4.10it/s] 69%|██████▉   | 248/360 [01:09<00:27,  4.12it/s] 69%|██████▉   | 249/360 [01:09<00:26,  4.13it/s] 69%|██████▉   | 250/360 [01:10<00:26,  4.16it/s] 70%|██████▉   | 251/360 [01:10<00:25,  4.22it/s] 70%|███████   | 252/360 [01:10<00:22,  4.78it/s] 70%|███████   | 253/360 [01:10<00:26,  4.11it/s] 71%|███████   | 254/360 [01:10<00:25,  4.14it/s] 71%|███████   | 255/360 [01:11<00:25,  4.10it/s] 71%|███████   | 256/360 [01:11<00:25,  4.13it/s] 71%|███████▏  | 257/360 [01:11<00:24,  4.13it/s] 72%|███████▏  | 258/360 [01:11<00:24,  4.23it/s] 72%|███████▏  | 259/360 [01:12<00:23,  4.26it/s] 72%|███████▏  | 260/360 [01:12<00:23,  4.27it/s] 72%|███████▎  | 261/360 [01:12<00:23,  4.22it/s] 73%|███████▎  | 262/360 [01:12<00:23,  4.17it/s] 73%|███████▎  | 263/360 [01:13<00:23,  4.15it/s] 73%|███████▎  | 264/360 [01:13<00:22,  4.18it/s] 74%|███████▎  | 265/360 [01:13<00:22,  4.19it/s] 74%|███████▍  | 266/360 [01:13<00:22,  4.24it/s] 74%|███████▍  | 267/360 [01:14<00:21,  4.23it/s] 74%|███████▍  | 268/360 [01:14<00:21,  4.27it/s] 75%|███████▍  | 269/360 [01:14<00:21,  4.25it/s] 75%|███████▌  | 270/360 [01:14<00:21,  4.22it/s] 75%|███████▌  | 271/360 [01:15<00:21,  4.15it/s] 76%|███████▌  | 272/360 [01:15<00:21,  4.16it/s] 76%|███████▌  | 273/360 [01:15<00:27,  3.19it/s] 76%|███████▌  | 274/360 [01:15<00:25,  3.42it/s] 76%|███████▋  | 275/360 [01:16<00:23,  3.65it/s] 77%|███████▋  | 276/360 [01:16<00:22,  3.79it/s] 77%|███████▋  | 277/360 [01:16<00:21,  3.92it/s] 77%|███████▋  | 278/360 [01:16<00:20,  3.97it/s] 78%|███████▊  | 279/360 [01:17<00:19,  4.06it/s] 78%|███████▊  | 280/360 [01:17<00:19,  4.08it/s] 78%|███████▊  | 281/360 [01:17<00:19,  4.11it/s] 78%|███████▊  | 282/360 [01:17<00:18,  4.17it/s] 79%|███████▊  | 283/360 [01:18<00:18,  4.07it/s] 79%|███████▉  | 284/360 [01:18<00:18,  4.08it/s] 79%|███████▉  | 285/360 [01:18<00:18,  4.10it/s] 79%|███████▉  | 286/360 [01:18<00:18,  4.05it/s] 80%|███████▉  | 287/360 [01:19<00:17,  4.13it/s] 80%|████████  | 288/360 [01:19<00:15,  4.66it/s] 80%|████████  | 289/360 [01:19<00:17,  4.07it/s] 81%|████████  | 290/360 [01:19<00:16,  4.14it/s] 81%|████████  | 291/360 [01:20<00:16,  4.20it/s] 81%|████████  | 292/360 [01:20<00:16,  4.19it/s] 81%|████████▏ | 293/360 [01:20<00:16,  4.15it/s] 82%|████████▏ | 294/360 [01:20<00:16,  4.12it/s] 82%|████████▏ | 295/360 [01:20<00:15,  4.17it/s] 82%|████████▏ | 296/360 [01:21<00:15,  4.16it/s] 82%|████████▎ | 297/360 [01:21<00:14,  4.24it/s] 83%|████████▎ | 298/360 [01:21<00:14,  4.24it/s] 83%|████████▎ | 299/360 [01:21<00:14,  4.26it/s] 83%|████████▎ | 300/360 [01:22<00:14,  4.24it/s]                                                  83%|████████▎ | 300/360 [01:22<00:14,  4.24it/s]{'eval_loss': 1.1929690837860107, 'eval_accuracy：': 0.59125, 'eval_runtime': 0.6331, 'eval_samples_per_second': 1263.651, 'eval_steps_per_second': 6.318, 'epoch': 5.56}
+{'loss': 0.4845, 'learning_rate': 4.9999999999999996e-06, 'epoch': 8.33}
+
+  0%|          | 0/4 [00:00<?, ?it/s][A
+ 50%|█████     | 2/4 [00:00<00:00, 11.65it/s][A
+100%|██████████| 4/4 [00:00<00:00, 10.36it/s][A                                                 
+                                             [A 83%|████████▎ | 300/360 [01:22<00:14,  4.24it/s]
+100%|██████████| 4/4 [00:00<00:00, 10.36it/s][A
+                                             [A/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+ 84%|████████▎ | 301/360 [01:24<00:57,  1.03it/s] 84%|████████▍ | 302/360 [01:25<00:43,  1.33it/s] 84%|████████▍ | 303/360 [01:25<00:33,  1.68it/s] 84%|████████▍ | 304/360 [01:25<00:27,  2.05it/s] 85%|████████▍ | 305/360 [01:25<00:22,  2.44it/s] 85%|████████▌ | 306/360 [01:26<00:19,  2.75it/s] 85%|████████▌ | 307/360 [01:26<00:17,  3.06it/s] 86%|████████▌ | 308/360 [01:26<00:15,  3.31it/s] 86%|████████▌ | 309/360 [01:26<00:14,  3.51it/s] 86%|████████▌ | 310/360 [01:27<00:13,  3.69it/s] 86%|████████▋ | 311/360 [01:27<00:12,  3.81it/s] 87%|████████▋ | 312/360 [01:27<00:12,  3.88it/s] 87%|████████▋ | 313/360 [01:27<00:11,  3.94it/s] 87%|████████▋ | 314/360 [01:27<00:11,  3.95it/s] 88%|████████▊ | 315/360 [01:28<00:11,  3.92it/s] 88%|████████▊ | 316/360 [01:28<00:11,  3.92it/s] 88%|████████▊ | 317/360 [01:28<00:10,  4.03it/s] 88%|████████▊ | 318/360 [01:28<00:10,  4.04it/s] 89%|████████▊ | 319/360 [01:29<00:09,  4.12it/s] 89%|████████▉ | 320/360 [01:29<00:09,  4.14it/s] 89%|████████▉ | 321/360 [01:29<00:09,  4.13it/s] 89%|████████▉ | 322/360 [01:29<00:09,  4.05it/s] 90%|████████▉ | 323/360 [01:30<00:09,  4.07it/s] 90%|█████████ | 324/360 [01:30<00:10,  3.38it/s] 90%|█████████ | 325/360 [01:30<00:10,  3.26it/s] 91%|█████████ | 326/360 [01:31<00:09,  3.47it/s] 91%|█████████ | 327/360 [01:31<00:09,  3.51it/s] 91%|█████████ | 328/360 [01:31<00:08,  3.67it/s] 91%|█████████▏| 329/360 [01:31<00:08,  3.77it/s] 92%|█████████▏| 330/360 [01:32<00:07,  3.87it/s] 92%|█████████▏| 331/360 [01:32<00:07,  3.86it/s] 92%|█████████▏| 332/360 [01:32<00:07,  3.94it/s] 92%|█████████▎| 333/360 [01:32<00:06,  3.97it/s] 93%|█████████▎| 334/360 [01:33<00:06,  4.01it/s] 93%|█████████▎| 335/360 [01:33<00:06,  4.00it/s] 93%|█████████▎| 336/360 [01:33<00:05,  4.06it/s] 94%|█████████▎| 337/360 [01:33<00:05,  4.01it/s] 94%|█████████▍| 338/360 [01:34<00:05,  4.04it/s] 94%|█████████▍| 339/360 [01:34<00:05,  4.11it/s] 94%|█████████▍| 340/360 [01:34<00:04,  4.07it/s] 95%|█████████▍| 341/360 [01:34<00:04,  4.13it/s] 95%|█████████▌| 342/360 [01:35<00:04,  4.16it/s] 95%|█████████▌| 343/360 [01:35<00:04,  4.20it/s] 96%|█████████▌| 344/360 [01:35<00:03,  4.16it/s] 96%|█████████▌| 345/360 [01:35<00:03,  4.06it/s] 96%|█████████▌| 346/360 [01:36<00:03,  4.09it/s] 96%|█████████▋| 347/360 [01:36<00:03,  4.09it/s] 97%|█████████▋| 348/360 [01:36<00:02,  4.08it/s] 97%|█████████▋| 349/360 [01:36<00:02,  4.12it/s] 97%|█████████▋| 350/360 [01:37<00:02,  4.13it/s] 98%|█████████▊| 351/360 [01:37<00:02,  4.16it/s] 98%|█████████▊| 352/360 [01:37<00:01,  4.17it/s] 98%|█████████▊| 353/360 [01:37<00:01,  4.17it/s] 98%|█████████▊| 354/360 [01:38<00:01,  4.12it/s] 99%|█████████▊| 355/360 [01:38<00:01,  4.11it/s] 99%|█████████▉| 356/360 [01:38<00:00,  4.08it/s] 99%|█████████▉| 357/360 [01:38<00:00,  4.12it/s] 99%|█████████▉| 358/360 [01:39<00:00,  4.14it/s]100%|█████████▉| 359/360 [01:39<00:00,  4.23it/s]100%|██████████| 360/360 [01:39<00:00,  4.75it/s]                                                 100%|██████████| 360/360 [01:39<00:00,  4.75it/s]100%|██████████| 360/360 [01:39<00:00,  3.61it/s]
+{'eval_loss': 1.3248977661132812, 'eval_accuracy：': 0.57875, 'eval_runtime': 0.6437, 'eval_samples_per_second': 1242.816, 'eval_steps_per_second': 6.214, 'epoch': 8.33}
+{'train_runtime': 99.7412, 'train_samples_per_second': 922.387, 'train_steps_per_second': 3.609, 'train_loss': 0.7342765278286404, 'epoch': 10.0}
+耗时：99.98406887054443秒
+  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 11.91it/s]100%|██████████| 4/4 [00:00<00:00, 11.20it/s]100%|██████████| 4/4 [00:00<00:00, 11.27it/s]{'eval_loss': 1.1549562215805054, 'eval_accuracy：': 0.575, 'eval_runtime': 0.62, 'eval_samples_per_second': 1290.333, 'eval_steps_per_second': 6.452, 'epoch': 10.0}
+
+(800,) (800,)
+              precision    recall  f1-score   support
+
+          其他       0.67      0.63      0.65       291
+          喜好       0.51      0.68      0.58       133
+          悲伤       0.70      0.38      0.49       102
+          厌恶       0.41      0.58      0.48       113
+          愤怒       0.42      0.37      0.39        60
+          高兴       0.71      0.60      0.65       101
+
+    accuracy                           0.57       800
+   macro avg       0.57      0.54      0.54       800
+weighted avg       0.60      0.57      0.58       800
+

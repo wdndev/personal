@@ -1,0 +1,849 @@
+nohup: 忽略输入
+[W socket.cpp:436] [c10d] The server socket cannot be initialized on [::]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+[W socket.cpp:663] [c10d] The client socket cannot be initialized to connect to [localhost]:12345 (errno: 97 - Address family not supported by protocol).
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+lilin3-a800-dev-7-m-0:568346:568346 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:568346:568346 [0] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:568346:568346 [0] NCCL INFO cudaDriverVersion 12020
+NCCL version 2.18.1+cuda12.1
+[568347] rank = 1, world_size = 2, n = 4, device_ids = [1] 
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+[568346] rank = 0, world_size = 2, n = 4, device_ids = [0] 
+/home/miniconda3/envs/qwen/lib/python3.8/site-packages/transformers/optimization.py:429: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+lilin3-a800-dev-7-m-0:568347:568347 [1] NCCL INFO cudaDriverVersion 12020
+lilin3-a800-dev-7-m-0:568347:568347 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:568347:568347 [1] NCCL INFO Bootstrap : Using eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Setting affinity for GPU 1 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] -1/-1/-1->1->0 [2] -1/-1/-1->1->0 [3] -1/-1/-1->1->0 [4] 0/-1/-1->1->-1 [5] 0/-1/-1->1->-1 [6] 0/-1/-1->1->-1 [7] 0/-1/-1->1->-1 [8] -1/-1/-1->1->0 [9] -1/-1/-1->1->0 [10] -1/-1/-1->1->0 [11] -1/-1/-1->1->0 [12] 0/-1/-1->1->-1 [13] 0/-1/-1->1->-1 [14] 0/-1/-1->1->-1 [15] 0/-1/-1->1->-1
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 00/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 01/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 02/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 03/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 04/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 05/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 06/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 07/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 08/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 09/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 10/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 11/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 12/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 13/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 14/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Channel 15/0 : 1[13000] -> 0[e000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:568347:569032 [1] NCCL INFO comm 0x9c4e280 rank 1 nranks 2 cudaDev 1 busId 13000 commId 0x1f57daa6b38e079f - Init COMPLETE
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO P2P plugin IBext
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eth0
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO NET/IB : Using [0]mlx5_0:1/RoCE [1]mlx5_1:1/RoCE [2]mlx5_2:1/RoCE [3]mlx5_3:1/RoCE [RO]; OOB eth0:11.73.240.171<0>
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Using network IBext
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Setting affinity for GPU 0 to ffff0000,00000000,00000000,00000000,ffff0000,00000000
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 00/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 01/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 02/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 03/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 04/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 05/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 06/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 07/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 08/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 09/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 10/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 11/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 12/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 13/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 14/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 15/16 :    0   1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] 1/-1/-1->0->-1 [2] 1/-1/-1->0->-1 [3] 1/-1/-1->0->-1 [4] -1/-1/-1->0->1 [5] -1/-1/-1->0->1 [6] -1/-1/-1->0->1 [7] -1/-1/-1->0->1 [8] 1/-1/-1->0->-1 [9] 1/-1/-1->0->-1 [10] 1/-1/-1->0->-1 [11] 1/-1/-1->0->-1 [12] -1/-1/-1->0->1 [13] -1/-1/-1->0->1 [14] -1/-1/-1->0->1 [15] -1/-1/-1->0->1
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO P2P Chunksize set to 524288
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 00/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 01/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 02/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 03/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 04/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 05/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 06/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 07/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 08/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 09/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 10/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 11/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 12/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 13/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 14/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Channel 15/0 : 0[e000] -> 1[13000] via P2P/IPC/read
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Connected all rings
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO Connected all trees
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO 16 coll channels, 0 nvls channels, 16 p2p channels, 16 p2p channels per peer
+lilin3-a800-dev-7-m-0:568346:569030 [0] NCCL INFO comm 0x8aa0980 rank 0 nranks 2 cudaDev 0 busId e000 commId 0x1f57daa6b38e079f - Init COMPLETE
+[train] epoch: 1/10 step：1/720 loss：1.916550
+[train] epoch: 1/10 step：2/720 loss：1.977051
+[train] epoch: 1/10 step：3/720 loss：1.929207
+[train] epoch: 1/10 step：4/720 loss：1.918903
+[train] epoch: 1/10 step：5/720 loss：1.911842
+[train] epoch: 1/10 step：6/720 loss：1.921539
+[train] epoch: 1/10 step：7/720 loss：1.946133
+[train] epoch: 1/10 step：8/720 loss：2.008392
+[train] epoch: 1/10 step：9/720 loss：1.886372
+[train] epoch: 1/10 step：10/720 loss：1.886726
+[train] epoch: 1/10 step：11/720 loss：1.924210
+[train] epoch: 1/10 step：12/720 loss：1.943794
+[train] epoch: 1/10 step：13/720 loss：1.939728
+[train] epoch: 1/10 step：14/720 loss：1.962593
+[train] epoch: 1/10 step：15/720 loss：1.898300
+[train] epoch: 1/10 step：16/720 loss：1.963867
+[train] epoch: 1/10 step：17/720 loss：1.991592
+[train] epoch: 1/10 step：18/720 loss：1.883430
+[train] epoch: 1/10 step：19/720 loss：1.926754
+[train] epoch: 1/10 step：20/720 loss：1.937057
+[train] epoch: 1/10 step：21/720 loss：1.903130
+[train] epoch: 1/10 step：22/720 loss：1.935219
+[train] epoch: 1/10 step：23/720 loss：1.899612
+[train] epoch: 1/10 step：24/720 loss：1.944786
+[train] epoch: 1/10 step：25/720 loss：1.964394
+[train] epoch: 1/10 step：26/720 loss：1.908524
+[train] epoch: 1/10 step：27/720 loss：1.956963
+[train] epoch: 1/10 step：28/720 loss：1.901115
+[train] epoch: 1/10 step：29/720 loss：1.915283
+[train] epoch: 1/10 step：30/720 loss：1.876198
+[train] epoch: 1/10 step：31/720 loss：1.903519
+[train] epoch: 1/10 step：32/720 loss：1.942871
+[train] epoch: 1/10 step：33/720 loss：1.911957
+[train] epoch: 1/10 step：34/720 loss：1.882072
+[train] epoch: 1/10 step：35/720 loss：1.904808
+[train] epoch: 1/10 step：36/720 loss：1.930115
+[train] epoch: 1/10 step：37/720 loss：1.872204
+[train] epoch: 1/10 step：38/720 loss：1.948082
+[train] epoch: 1/10 step：39/720 loss：1.956612
+[train] epoch: 1/10 step：40/720 loss：1.911545
+[train] epoch: 1/10 step：41/720 loss：1.893105
+[train] epoch: 1/10 step：42/720 loss：1.906345
+[train] epoch: 1/10 step：43/720 loss：1.905785
+[train] epoch: 1/10 step：44/720 loss：1.923126
+[train] epoch: 1/10 step：45/720 loss：1.904610
+[train] epoch: 1/10 step：46/720 loss：1.928551
+[train] epoch: 1/10 step：47/720 loss：1.927010
+[train] epoch: 1/10 step：48/720 loss：1.925835
+[train] epoch: 1/10 step：49/720 loss：1.954651
+[train] epoch: 1/10 step：50/720 loss：1.880821
+[train] epoch: 1/10 step：51/720 loss：1.885941
+[train] epoch: 1/10 step：52/720 loss：1.934044
+[train] epoch: 1/10 step：53/720 loss：1.883072
+[train] epoch: 1/10 step：54/720 loss：1.937424
+[train] epoch: 1/10 step：55/720 loss：1.926918
+[train] epoch: 1/10 step：56/720 loss：1.886009
+[train] epoch: 1/10 step：57/720 loss：1.927265
+[train] epoch: 1/10 step：58/720 loss：1.920242
+[train] epoch: 1/10 step：59/720 loss：1.951973
+[train] epoch: 1/10 step：60/720 loss：1.926399
+[train] epoch: 1/10 step：61/720 loss：1.854530
+[train] epoch: 1/10 step：62/720 loss：1.911446
+[train] epoch: 1/10 step：63/720 loss：1.947357
+[train] epoch: 1/10 step：64/720 loss：1.912659
+[train] epoch: 1/10 step：65/720 loss：1.991913
+[train] epoch: 1/10 step：66/720 loss：1.892021
+[train] epoch: 1/10 step：67/720 loss：1.947487
+[train] epoch: 1/10 step：68/720 loss：1.888298
+[train] epoch: 1/10 step：69/720 loss：1.911598
+[train] epoch: 1/10 step：70/720 loss：1.845078
+[train] epoch: 1/10 step：71/720 loss：1.989822
+[train] epoch: 1/10 step：72/720 loss：1.885960
+[train] epoch: 2/10 step：73/720 loss：1.925846
+[train] epoch: 2/10 step：74/720 loss：1.883080
+[train] epoch: 2/10 step：75/720 loss：1.990990
+[train] epoch: 2/10 step：76/720 loss：1.939186
+[train] epoch: 2/10 step：77/720 loss：1.959946
+[train] epoch: 2/10 step：78/720 loss：1.964630
+[train] epoch: 2/10 step：79/720 loss：1.885090
+[train] epoch: 2/10 step：80/720 loss：1.879387
+[train] epoch: 2/10 step：81/720 loss：1.919212
+[train] epoch: 2/10 step：82/720 loss：1.924782
+[train] epoch: 2/10 step：83/720 loss：1.918304
+[train] epoch: 2/10 step：84/720 loss：1.940559
+[train] epoch: 2/10 step：85/720 loss：1.891487
+[train] epoch: 2/10 step：86/720 loss：1.927597
+[train] epoch: 2/10 step：87/720 loss：1.962654
+[train] epoch: 2/10 step：88/720 loss：1.952381
+[train] epoch: 2/10 step：89/720 loss：1.945869
+[train] epoch: 2/10 step：90/720 loss：1.869354
+[train] epoch: 2/10 step：91/720 loss：1.923019
+[train] epoch: 2/10 step：92/720 loss：1.942429
+[train] epoch: 2/10 step：93/720 loss：1.916344
+[train] epoch: 2/10 step：94/720 loss：1.941902
+[train] epoch: 2/10 step：95/720 loss：1.925232
+[train] epoch: 2/10 step：96/720 loss：1.958809
+[train] epoch: 2/10 step：97/720 loss：1.903248
+[train] epoch: 2/10 step：98/720 loss：1.960464
+[train] epoch: 2/10 step：99/720 loss：1.940323
+[train] epoch: 2/10 step：100/720 loss：1.909447
+[train] epoch: 2/10 step：101/720 loss：1.950554
+[train] epoch: 2/10 step：102/720 loss：1.938400
+[train] epoch: 2/10 step：103/720 loss：1.912483
+[train] epoch: 2/10 step：104/720 loss：1.903320
+[train] epoch: 2/10 step：105/720 loss：1.954926
+[train] epoch: 2/10 step：106/720 loss：1.870026
+[train] epoch: 2/10 step：107/720 loss：1.979507
+[train] epoch: 2/10 step：108/720 loss：1.924736
+[train] epoch: 2/10 step：109/720 loss：1.947140
+[train] epoch: 2/10 step：110/720 loss：1.916183
+[train] epoch: 2/10 step：111/720 loss：1.927071
+[train] epoch: 2/10 step：112/720 loss：1.880867
+[train] epoch: 2/10 step：113/720 loss：1.856445
+[train] epoch: 2/10 step：114/720 loss：1.883537
+[train] epoch: 2/10 step：115/720 loss：1.893154
+[train] epoch: 2/10 step：116/720 loss：1.956207
+[train] epoch: 2/10 step：117/720 loss：1.870979
+[train] epoch: 2/10 step：118/720 loss：1.922226
+[train] epoch: 2/10 step：119/720 loss：1.929115
+[train] epoch: 2/10 step：120/720 loss：1.960693
+[train] epoch: 2/10 step：121/720 loss：1.885643
+[train] epoch: 2/10 step：122/720 loss：1.892143
+[train] epoch: 2/10 step：123/720 loss：1.909454
+[train] epoch: 2/10 step：124/720 loss：1.885162
+[train] epoch: 2/10 step：125/720 loss：1.952469
+[train] epoch: 2/10 step：126/720 loss：1.925766
+[train] epoch: 2/10 step：127/720 loss：1.900230
+[train] epoch: 2/10 step：128/720 loss：1.930672
+[train] epoch: 2/10 step：129/720 loss：1.904480
+[train] epoch: 2/10 step：130/720 loss：1.943871
+[train] epoch: 2/10 step：131/720 loss：1.970909
+[train] epoch: 2/10 step：132/720 loss：1.904549
+[train] epoch: 2/10 step：133/720 loss：1.927597
+[train] epoch: 2/10 step：134/720 loss：1.945808
+[train] epoch: 2/10 step：135/720 loss：1.910698
+[train] epoch: 2/10 step：136/720 loss：1.877007
+[train] epoch: 2/10 step：137/720 loss：1.878174
+[train] epoch: 2/10 step：138/720 loss：1.946236
+[train] epoch: 2/10 step：139/720 loss：1.892647
+[train] epoch: 2/10 step：140/720 loss：1.896324
+[train] epoch: 2/10 step：141/720 loss：1.901440
+[train] epoch: 2/10 step：142/720 loss：1.993446
+[train] epoch: 2/10 step：143/720 loss：1.953949
+[train] epoch: 2/10 step：144/720 loss：1.929688
+[train] epoch: 3/10 step：145/720 loss：1.876549
+[train] epoch: 3/10 step：146/720 loss：1.914742
+[train] epoch: 3/10 step：147/720 loss：1.930153
+[train] epoch: 3/10 step：148/720 loss：1.944344
+[train] epoch: 3/10 step：149/720 loss：1.945610
+[train] epoch: 3/10 step：150/720 loss：1.920555
+[train] epoch: 3/10 step：151/720 loss：1.946442
+[train] epoch: 3/10 step：152/720 loss：1.944214
+[train] epoch: 3/10 step：153/720 loss：1.911095
+[train] epoch: 3/10 step：154/720 loss：1.819710
+[train] epoch: 3/10 step：155/720 loss：1.838844
+[train] epoch: 3/10 step：156/720 loss：1.930473
+[train] epoch: 3/10 step：157/720 loss：1.859650
+[train] epoch: 3/10 step：158/720 loss：1.937241
+[train] epoch: 3/10 step：159/720 loss：1.887466
+[train] epoch: 3/10 step：160/720 loss：1.887291
+[train] epoch: 3/10 step：161/720 loss：1.924004
+[train] epoch: 3/10 step：162/720 loss：1.976616
+[train] epoch: 3/10 step：163/720 loss：1.954376
+[train] epoch: 3/10 step：164/720 loss：1.914993
+[train] epoch: 3/10 step：165/720 loss：2.030945
+[train] epoch: 3/10 step：166/720 loss：1.949051
+[train] epoch: 3/10 step：167/720 loss：1.910042
+[train] epoch: 3/10 step：168/720 loss：1.938919
+[train] epoch: 3/10 step：169/720 loss：1.902367
+[train] epoch: 3/10 step：170/720 loss：1.916496
+[train] epoch: 3/10 step：171/720 loss：1.854443
+[train] epoch: 3/10 step：172/720 loss：1.958855
+[train] epoch: 3/10 step：173/720 loss：1.899223
+[train] epoch: 3/10 step：174/720 loss：1.960182
+[train] epoch: 3/10 step：175/720 loss：1.906723
+[train] epoch: 3/10 step：176/720 loss：1.951118
+[train] epoch: 3/10 step：177/720 loss：1.978111
+[train] epoch: 3/10 step：178/720 loss：1.953354
+[train] epoch: 3/10 step：179/720 loss：1.927696
+[train] epoch: 3/10 step：180/720 loss：1.924835
+[train] epoch: 3/10 step：181/720 loss：1.873920
+[train] epoch: 3/10 step：182/720 loss：1.937775
+[train] epoch: 3/10 step：183/720 loss：1.906487
+[train] epoch: 3/10 step：184/720 loss：1.917946
+[train] epoch: 3/10 step：185/720 loss：1.983017
+[train] epoch: 3/10 step：186/720 loss：1.925362
+[train] epoch: 3/10 step：187/720 loss：1.960487
+[train] epoch: 3/10 step：188/720 loss：1.890518
+[train] epoch: 3/10 step：189/720 loss：1.880611
+[train] epoch: 3/10 step：190/720 loss：1.901756
+[train] epoch: 3/10 step：191/720 loss：1.906235
+[train] epoch: 3/10 step：192/720 loss：1.890289
+[train] epoch: 3/10 step：193/720 loss：1.902855
+[train] epoch: 3/10 step：194/720 loss：1.931980
+[train] epoch: 3/10 step：195/720 loss：1.978249
+[train] epoch: 3/10 step：196/720 loss：1.993904
+[train] epoch: 3/10 step：197/720 loss：1.945503
+[train] epoch: 3/10 step：198/720 loss：1.939896
+[train] epoch: 3/10 step：199/720 loss：1.870205
+[train] epoch: 3/10 step：200/720 loss：1.993958
+[train] epoch: 3/10 step：201/720 loss：1.929512
+[train] epoch: 3/10 step：202/720 loss：1.940620
+[train] epoch: 3/10 step：203/720 loss：1.932755
+[train] epoch: 3/10 step：204/720 loss：1.919296
+[train] epoch: 3/10 step：205/720 loss：1.977943
+[train] epoch: 3/10 step：206/720 loss：1.939377
+[train] epoch: 3/10 step：207/720 loss：1.933548
+[train] epoch: 3/10 step：208/720 loss：1.985939
+[train] epoch: 3/10 step：209/720 loss：1.960114
+[train] epoch: 3/10 step：210/720 loss：1.950508
+[train] epoch: 3/10 step：211/720 loss：1.961105
+[train] epoch: 3/10 step：212/720 loss：1.937389
+[train] epoch: 3/10 step：213/720 loss：1.926598
+[train] epoch: 3/10 step：214/720 loss：1.974213
+[train] epoch: 3/10 step：215/720 loss：1.941872
+[train] epoch: 3/10 step：216/720 loss：1.912746
+[train] epoch: 4/10 step：217/720 loss：1.923889
+[train] epoch: 4/10 step：218/720 loss：1.968307
+[train] epoch: 4/10 step：219/720 loss：1.983513
+[train] epoch: 4/10 step：220/720 loss：1.911125
+[train] epoch: 4/10 step：221/720 loss：1.929813
+[train] epoch: 4/10 step：222/720 loss：1.884521
+[train] epoch: 4/10 step：223/720 loss：1.926170
+[train] epoch: 4/10 step：224/720 loss：1.955505
+[train] epoch: 4/10 step：225/720 loss：2.040642
+[train] epoch: 4/10 step：226/720 loss：1.928642
+[train] epoch: 4/10 step：227/720 loss：1.938858
+[train] epoch: 4/10 step：228/720 loss：1.977905
+[train] epoch: 4/10 step：229/720 loss：1.925346
+[train] epoch: 4/10 step：230/720 loss：1.941788
+[train] epoch: 4/10 step：231/720 loss：1.878815
+[train] epoch: 4/10 step：232/720 loss：1.934319
+[train] epoch: 4/10 step：233/720 loss：1.915131
+[train] epoch: 4/10 step：234/720 loss：1.932533
+[train] epoch: 4/10 step：235/720 loss：1.882599
+[train] epoch: 4/10 step：236/720 loss：1.937599
+[train] epoch: 4/10 step：237/720 loss：1.885937
+[train] epoch: 4/10 step：238/720 loss：1.936737
+[train] epoch: 4/10 step：239/720 loss：1.938881
+[train] epoch: 4/10 step：240/720 loss：1.926361
+[train] epoch: 4/10 step：241/720 loss：1.932724
+[train] epoch: 4/10 step：242/720 loss：1.955574
+[train] epoch: 4/10 step：243/720 loss：1.903984
+[train] epoch: 4/10 step：244/720 loss：1.889984
+[train] epoch: 4/10 step：245/720 loss：1.891357
+[train] epoch: 4/10 step：246/720 loss：1.982590
+[train] epoch: 4/10 step：247/720 loss：1.864410
+[train] epoch: 4/10 step：248/720 loss：1.915703
+[train] epoch: 4/10 step：249/720 loss：1.922607
+[train] epoch: 4/10 step：250/720 loss：1.875145
+[train] epoch: 4/10 step：251/720 loss：1.923386
+[train] epoch: 4/10 step：252/720 loss：1.863152
+[train] epoch: 4/10 step：253/720 loss：1.928932
+[train] epoch: 4/10 step：254/720 loss：1.968864
+[train] epoch: 4/10 step：255/720 loss：1.952095
+[train] epoch: 4/10 step：256/720 loss：1.986031
+[train] epoch: 4/10 step：257/720 loss：1.913216
+[train] epoch: 4/10 step：258/720 loss：1.930725
+[train] epoch: 4/10 step：259/720 loss：1.941139
+[train] epoch: 4/10 step：260/720 loss：1.920555
+[train] epoch: 4/10 step：261/720 loss：1.934975
+[train] epoch: 4/10 step：262/720 loss：1.884331
+[train] epoch: 4/10 step：263/720 loss：1.919434
+[train] epoch: 4/10 step：264/720 loss：1.883675
+[train] epoch: 4/10 step：265/720 loss：1.925331
+[train] epoch: 4/10 step：266/720 loss：1.949425
+[train] epoch: 4/10 step：267/720 loss：1.977898
+[train] epoch: 4/10 step：268/720 loss：1.915382
+[train] epoch: 4/10 step：269/720 loss：1.966339
+[train] epoch: 4/10 step：270/720 loss：1.931412
+[train] epoch: 4/10 step：271/720 loss：1.907455
+[train] epoch: 4/10 step：272/720 loss：1.955162
+[train] epoch: 4/10 step：273/720 loss：1.974052
+[train] epoch: 4/10 step：274/720 loss：1.861351
+[train] epoch: 4/10 step：275/720 loss：1.853096
+[train] epoch: 4/10 step：276/720 loss：1.947571
+[train] epoch: 4/10 step：277/720 loss：1.921730
+[train] epoch: 4/10 step：278/720 loss：1.913975
+[train] epoch: 4/10 step：279/720 loss：1.909691
+[train] epoch: 4/10 step：280/720 loss：1.915398
+[train] epoch: 4/10 step：281/720 loss：1.932983
+[train] epoch: 4/10 step：282/720 loss：1.946922
+[train] epoch: 4/10 step：283/720 loss：1.968506
+[train] epoch: 4/10 step：284/720 loss：1.963577
+[train] epoch: 4/10 step：285/720 loss：1.903969
+[train] epoch: 4/10 step：286/720 loss：1.907574
+[train] epoch: 4/10 step：287/720 loss：1.912636
+[train] epoch: 4/10 step：288/720 loss：1.986677
+[train] epoch: 5/10 step：289/720 loss：1.874893
+[train] epoch: 5/10 step：290/720 loss：1.919853
+[train] epoch: 5/10 step：291/720 loss：1.927849
+[train] epoch: 5/10 step：292/720 loss：2.012596
+[train] epoch: 5/10 step：293/720 loss：1.924934
+[train] epoch: 5/10 step：294/720 loss：1.903599
+[train] epoch: 5/10 step：295/720 loss：1.952896
+[train] epoch: 5/10 step：296/720 loss：1.866280
+[train] epoch: 5/10 step：297/720 loss：1.925240
+[train] epoch: 5/10 step：298/720 loss：1.928741
+[train] epoch: 5/10 step：299/720 loss：1.935860
+[train] epoch: 5/10 step：300/720 loss：1.923233
+[train] epoch: 5/10 step：301/720 loss：1.947189
+[train] epoch: 5/10 step：302/720 loss：1.894936
+[train] epoch: 5/10 step：303/720 loss：1.895821
+[train] epoch: 5/10 step：304/720 loss：1.914528
+[train] epoch: 5/10 step：305/720 loss：1.950668
+[train] epoch: 5/10 step：306/720 loss：1.921494
+[train] epoch: 5/10 step：307/720 loss：1.938087
+[train] epoch: 5/10 step：308/720 loss：1.866226
+[train] epoch: 5/10 step：309/720 loss：1.929779
+[train] epoch: 5/10 step：310/720 loss：1.917603
+[train] epoch: 5/10 step：311/720 loss：1.981850
+[train] epoch: 5/10 step：312/720 loss：1.958519
+[train] epoch: 5/10 step：313/720 loss：1.969109
+[train] epoch: 5/10 step：314/720 loss：1.898247
+[train] epoch: 5/10 step：315/720 loss：1.951675
+[train] epoch: 5/10 step：316/720 loss：1.953339
+[train] epoch: 5/10 step：317/720 loss：1.974472
+[train] epoch: 5/10 step：318/720 loss：1.956528
+[train] epoch: 5/10 step：319/720 loss：1.918884
+[train] epoch: 5/10 step：320/720 loss：1.868942
+[train] epoch: 5/10 step：321/720 loss：1.973976
+[train] epoch: 5/10 step：322/720 loss：1.904602
+[train] epoch: 5/10 step：323/720 loss：1.945251
+[train] epoch: 5/10 step：324/720 loss：1.991524
+[train] epoch: 5/10 step：325/720 loss：1.882172
+[train] epoch: 5/10 step：326/720 loss：1.945251
+[train] epoch: 5/10 step：327/720 loss：1.931862
+[train] epoch: 5/10 step：328/720 loss：2.047592
+[train] epoch: 5/10 step：329/720 loss：1.997086
+[train] epoch: 5/10 step：330/720 loss：1.910286
+[train] epoch: 5/10 step：331/720 loss：1.917290
+[train] epoch: 5/10 step：332/720 loss：1.946686
+[train] epoch: 5/10 step：333/720 loss：1.886322
+[train] epoch: 5/10 step：334/720 loss：1.963287
+[train] epoch: 5/10 step：335/720 loss：1.946144
+[train] epoch: 5/10 step：336/720 loss：1.919716
+[train] epoch: 5/10 step：337/720 loss：1.867355
+[train] epoch: 5/10 step：338/720 loss：1.925835
+[train] epoch: 5/10 step：339/720 loss：1.946152
+[train] epoch: 5/10 step：340/720 loss：1.899178
+[train] epoch: 5/10 step：341/720 loss：1.949440
+[train] epoch: 5/10 step：342/720 loss：1.920113
+[train] epoch: 5/10 step：343/720 loss：1.937592
+[train] epoch: 5/10 step：344/720 loss：1.921181
+[train] epoch: 5/10 step：345/720 loss：1.879726
+[train] epoch: 5/10 step：346/720 loss：1.916328
+[train] epoch: 5/10 step：347/720 loss：1.905029
+[train] epoch: 5/10 step：348/720 loss：1.929848
+[train] epoch: 5/10 step：349/720 loss：1.860199
+[train] epoch: 5/10 step：350/720 loss：1.847816
+[train] epoch: 5/10 step：351/720 loss：1.957718
+[train] epoch: 5/10 step：352/720 loss：1.878529
+[train] epoch: 5/10 step：353/720 loss：1.945488
+[train] epoch: 5/10 step：354/720 loss：1.926147
+[train] epoch: 5/10 step：355/720 loss：1.956032
+[train] epoch: 5/10 step：356/720 loss：1.917778
+[train] epoch: 5/10 step：357/720 loss：1.902344
+[train] epoch: 5/10 step：358/720 loss：1.929634
+[train] epoch: 5/10 step：359/720 loss：1.900085
+[train] epoch: 5/10 step：360/720 loss：1.956403
+[train] epoch: 6/10 step：361/720 loss：1.914246
+[train] epoch: 6/10 step：362/720 loss：1.950279
+[train] epoch: 6/10 step：363/720 loss：1.944763
+[train] epoch: 6/10 step：364/720 loss：1.936676
+[train] epoch: 6/10 step：365/720 loss：1.902382
+[train] epoch: 6/10 step：366/720 loss：1.978378
+[train] epoch: 6/10 step：367/720 loss：1.888199
+[train] epoch: 6/10 step：368/720 loss：1.862717
+[train] epoch: 6/10 step：369/720 loss：1.924278
+[train] epoch: 6/10 step：370/720 loss：1.925636
+[train] epoch: 6/10 step：371/720 loss：1.915009
+[train] epoch: 6/10 step：372/720 loss：1.953384
+[train] epoch: 6/10 step：373/720 loss：1.910957
+[train] epoch: 6/10 step：374/720 loss：1.953430
+[train] epoch: 6/10 step：375/720 loss：1.906528
+[train] epoch: 6/10 step：376/720 loss：1.909119
+[train] epoch: 6/10 step：377/720 loss：1.889587
+[train] epoch: 6/10 step：378/720 loss：1.889038
+[train] epoch: 6/10 step：379/720 loss：1.966591
+[train] epoch: 6/10 step：380/720 loss：1.911430
+[train] epoch: 6/10 step：381/720 loss：1.905067
+[train] epoch: 6/10 step：382/720 loss：1.987862
+[train] epoch: 6/10 step：383/720 loss：1.910736
+[train] epoch: 6/10 step：384/720 loss：1.935913
+[train] epoch: 6/10 step：385/720 loss：1.939377
+[train] epoch: 6/10 step：386/720 loss：1.942558
+[train] epoch: 6/10 step：387/720 loss：1.948479
+[train] epoch: 6/10 step：388/720 loss：1.935638
+[train] epoch: 6/10 step：389/720 loss：1.902267
+[train] epoch: 6/10 step：390/720 loss：1.900986
+[train] epoch: 6/10 step：391/720 loss：1.914734
+[train] epoch: 6/10 step：392/720 loss：1.951981
+[train] epoch: 6/10 step：393/720 loss：1.957207
+[train] epoch: 6/10 step：394/720 loss：1.919815
+[train] epoch: 6/10 step：395/720 loss：1.929970
+[train] epoch: 6/10 step：396/720 loss：1.858513
+[train] epoch: 6/10 step：397/720 loss：1.929207
+[train] epoch: 6/10 step：398/720 loss：2.005562
+[train] epoch: 6/10 step：399/720 loss：1.927650
+[train] epoch: 6/10 step：400/720 loss：1.957108
+[train] epoch: 6/10 step：401/720 loss：1.891991
+[train] epoch: 6/10 step：402/720 loss：1.926750
+[train] epoch: 6/10 step：403/720 loss：1.926956
+[train] epoch: 6/10 step：404/720 loss：1.915199
+[train] epoch: 6/10 step：405/720 loss：1.932648
+[train] epoch: 6/10 step：406/720 loss：1.907074
+[train] epoch: 6/10 step：407/720 loss：1.951309
+[train] epoch: 6/10 step：408/720 loss：1.915535
+[train] epoch: 6/10 step：409/720 loss：1.914165
+[train] epoch: 6/10 step：410/720 loss：1.900002
+[train] epoch: 6/10 step：411/720 loss：1.888260
+[train] epoch: 6/10 step：412/720 loss：1.924694
+[train] epoch: 6/10 step：413/720 loss：1.927422
+[train] epoch: 6/10 step：414/720 loss：1.857674
+[train] epoch: 6/10 step：415/720 loss：1.896255
+[train] epoch: 6/10 step：416/720 loss：1.881851
+[train] epoch: 6/10 step：417/720 loss：1.979614
+[train] epoch: 6/10 step：418/720 loss：1.925644
+[train] epoch: 6/10 step：419/720 loss：1.912338
+[train] epoch: 6/10 step：420/720 loss：1.883232
+[train] epoch: 6/10 step：421/720 loss：1.881569
+[train] epoch: 6/10 step：422/720 loss：1.931198
+[train] epoch: 6/10 step：423/720 loss：1.892471
+[train] epoch: 6/10 step：424/720 loss：1.925007
+[train] epoch: 6/10 step：425/720 loss：1.919930
+[train] epoch: 6/10 step：426/720 loss：1.975021
+[train] epoch: 6/10 step：427/720 loss：1.947258
+[train] epoch: 6/10 step：428/720 loss：1.913277
+[train] epoch: 6/10 step：429/720 loss：1.920486
+[train] epoch: 6/10 step：430/720 loss：1.948151
+[train] epoch: 6/10 step：431/720 loss：1.908344
+[train] epoch: 6/10 step：432/720 loss：1.942862
+[train] epoch: 7/10 step：433/720 loss：1.898281
+[train] epoch: 7/10 step：434/720 loss：1.957436
+[train] epoch: 7/10 step：435/720 loss：1.906723
+[train] epoch: 7/10 step：436/720 loss：1.930592
+[train] epoch: 7/10 step：437/720 loss：1.976990
+[train] epoch: 7/10 step：438/720 loss：1.958946
+[train] epoch: 7/10 step：439/720 loss：1.911903
+[train] epoch: 7/10 step：440/720 loss：1.923950
+[train] epoch: 7/10 step：441/720 loss：1.964546
+[train] epoch: 7/10 step：442/720 loss：1.964096
+[train] epoch: 7/10 step：443/720 loss：1.873245
+[train] epoch: 7/10 step：444/720 loss：1.927780
+[train] epoch: 7/10 step：445/720 loss：1.931671
+[train] epoch: 7/10 step：446/720 loss：1.976089
+[train] epoch: 7/10 step：447/720 loss：1.945404
+[train] epoch: 7/10 step：448/720 loss：1.980423
+[train] epoch: 7/10 step：449/720 loss：1.924515
+[train] epoch: 7/10 step：450/720 loss：1.969673
+[train] epoch: 7/10 step：451/720 loss：1.916946
+[train] epoch: 7/10 step：452/720 loss：1.943184
+[train] epoch: 7/10 step：453/720 loss：1.938614
+[train] epoch: 7/10 step：454/720 loss：1.897049
+[train] epoch: 7/10 step：455/720 loss：1.899582
+[train] epoch: 7/10 step：456/720 loss：1.944908
+[train] epoch: 7/10 step：457/720 loss：1.958435
+[train] epoch: 7/10 step：458/720 loss：1.884331
+[train] epoch: 7/10 step：459/720 loss：1.904396
+[train] epoch: 7/10 step：460/720 loss：1.918892
+[train] epoch: 7/10 step：461/720 loss：1.889267
+[train] epoch: 7/10 step：462/720 loss：1.932194
+[train] epoch: 7/10 step：463/720 loss：1.921310
+[train] epoch: 7/10 step：464/720 loss：1.935913
+[train] epoch: 7/10 step：465/720 loss：1.927757
+[train] epoch: 7/10 step：466/720 loss：1.899521
+[train] epoch: 7/10 step：467/720 loss：1.950615
+[train] epoch: 7/10 step：468/720 loss：1.936897
+[train] epoch: 7/10 step：469/720 loss：1.929970
+[train] epoch: 7/10 step：470/720 loss：1.904274
+[train] epoch: 7/10 step：471/720 loss：1.980766
+[train] epoch: 7/10 step：472/720 loss：1.870621
+[train] epoch: 7/10 step：473/720 loss：1.908012
+[train] epoch: 7/10 step：474/720 loss：1.850193
+[train] epoch: 7/10 step：475/720 loss：1.953072
+[train] epoch: 7/10 step：476/720 loss：1.877411
+[train] epoch: 7/10 step：477/720 loss：1.877029
+[train] epoch: 7/10 step：478/720 loss：1.885246
+[train] epoch: 7/10 step：479/720 loss：1.884071
+[train] epoch: 7/10 step：480/720 loss：1.966751
+[train] epoch: 7/10 step：481/720 loss：1.962547
+[train] epoch: 7/10 step：482/720 loss：1.925316
+[train] epoch: 7/10 step：483/720 loss：1.869461
+[train] epoch: 7/10 step：484/720 loss：1.920197
+[train] epoch: 7/10 step：485/720 loss：1.942398
+[train] epoch: 7/10 step：486/720 loss：1.906097
+[train] epoch: 7/10 step：487/720 loss：1.933098
+[train] epoch: 7/10 step：488/720 loss：1.911736
+[train] epoch: 7/10 step：489/720 loss：1.968628
+[train] epoch: 7/10 step：490/720 loss：1.876442
+[train] epoch: 7/10 step：491/720 loss：1.919464
+[train] epoch: 7/10 step：492/720 loss：1.948887
+[train] epoch: 7/10 step：493/720 loss：1.931046
+[train] epoch: 7/10 step：494/720 loss：1.914391
+[train] epoch: 7/10 step：495/720 loss：1.882271
+[train] epoch: 7/10 step：496/720 loss：1.936531
+[train] epoch: 7/10 step：497/720 loss：1.952843
+[train] epoch: 7/10 step：498/720 loss：1.930000
+[train] epoch: 7/10 step：499/720 loss：1.881744
+[train] epoch: 7/10 step：500/720 loss：1.958427
+[train] epoch: 7/10 step：501/720 loss：1.914406
+[train] epoch: 7/10 step：502/720 loss：1.967674
+[train] epoch: 7/10 step：503/720 loss：1.917816
+[train] epoch: 7/10 step：504/720 loss：1.972927
+[train] epoch: 8/10 step：505/720 loss：1.901070
+[train] epoch: 8/10 step：506/720 loss：1.912704
+[train] epoch: 8/10 step：507/720 loss：1.952271
+[train] epoch: 8/10 step：508/720 loss：1.925247
+[train] epoch: 8/10 step：509/720 loss：1.932434
+[train] epoch: 8/10 step：510/720 loss：1.868206
+[train] epoch: 8/10 step：511/720 loss：1.887135
+[train] epoch: 8/10 step：512/720 loss：1.860252
+[train] epoch: 8/10 step：513/720 loss：1.936676
+[train] epoch: 8/10 step：514/720 loss：1.922028
+[train] epoch: 8/10 step：515/720 loss：1.972343
+[train] epoch: 8/10 step：516/720 loss：1.906258
+[train] epoch: 8/10 step：517/720 loss：1.899788
+[train] epoch: 8/10 step：518/720 loss：1.966431
+[train] epoch: 8/10 step：519/720 loss：1.897522
+[train] epoch: 8/10 step：520/720 loss：1.905777
+[train] epoch: 8/10 step：521/720 loss：1.886269
+[train] epoch: 8/10 step：522/720 loss：1.940796
+[train] epoch: 8/10 step：523/720 loss：1.977913
+[train] epoch: 8/10 step：524/720 loss：1.960770
+[train] epoch: 8/10 step：525/720 loss：1.920319
+[train] epoch: 8/10 step：526/720 loss：1.946354
+[train] epoch: 8/10 step：527/720 loss：1.925041
+[train] epoch: 8/10 step：528/720 loss：1.935303
+[train] epoch: 8/10 step：529/720 loss：1.930008
+[train] epoch: 8/10 step：530/720 loss：1.859779
+[train] epoch: 8/10 step：531/720 loss：1.901016
+[train] epoch: 8/10 step：532/720 loss：1.939911
+[train] epoch: 8/10 step：533/720 loss：1.883980
+[train] epoch: 8/10 step：534/720 loss：1.968498
+[train] epoch: 8/10 step：535/720 loss：1.891338
+[train] epoch: 8/10 step：536/720 loss：1.928497
+[train] epoch: 8/10 step：537/720 loss：1.935867
+[train] epoch: 8/10 step：538/720 loss：1.851837
+[train] epoch: 8/10 step：539/720 loss：1.896111
+[train] epoch: 8/10 step：540/720 loss：1.904419
+[train] epoch: 8/10 step：541/720 loss：1.940262
+[train] epoch: 8/10 step：542/720 loss：1.935974
+[train] epoch: 8/10 step：543/720 loss：1.970222
+[train] epoch: 8/10 step：544/720 loss：1.908905
+[train] epoch: 8/10 step：545/720 loss：1.969276
+[train] epoch: 8/10 step：546/720 loss：1.965622
+[train] epoch: 8/10 step：547/720 loss：1.922958
+[train] epoch: 8/10 step：548/720 loss：1.893501
+[train] epoch: 8/10 step：549/720 loss：1.905174
+[train] epoch: 8/10 step：550/720 loss：1.886093
+[train] epoch: 8/10 step：551/720 loss：1.945869
+[train] epoch: 8/10 step：552/720 loss：1.963772
+[train] epoch: 8/10 step：553/720 loss：1.946053
+[train] epoch: 8/10 step：554/720 loss：1.907005
+[train] epoch: 8/10 step：555/720 loss：1.888313
+[train] epoch: 8/10 step：556/720 loss：2.003757
+[train] epoch: 8/10 step：557/720 loss：1.931458
+[train] epoch: 8/10 step：558/720 loss：1.959793
+[train] epoch: 8/10 step：559/720 loss：1.921478
+[train] epoch: 8/10 step：560/720 loss：1.913116
+[train] epoch: 8/10 step：561/720 loss：1.914093
+[train] epoch: 8/10 step：562/720 loss：1.933060
+[train] epoch: 8/10 step：563/720 loss：1.925789
+[train] epoch: 8/10 step：564/720 loss：1.855354
+[train] epoch: 8/10 step：565/720 loss：1.908638
+[train] epoch: 8/10 step：566/720 loss：1.896152
+[train] epoch: 8/10 step：567/720 loss：1.893318
+[train] epoch: 8/10 step：568/720 loss：1.964569
+[train] epoch: 8/10 step：569/720 loss：1.889400
+[train] epoch: 8/10 step：570/720 loss：1.939987
+[train] epoch: 8/10 step：571/720 loss：1.950638
+[train] epoch: 8/10 step：572/720 loss：1.871445
+[train] epoch: 8/10 step：573/720 loss：1.922722
+[train] epoch: 8/10 step：574/720 loss：1.975418
+[train] epoch: 8/10 step：575/720 loss：1.938393
+[train] epoch: 8/10 step：576/720 loss：1.877058
+[train] epoch: 9/10 step：577/720 loss：1.976524
+[train] epoch: 9/10 step：578/720 loss：1.942024
+[train] epoch: 9/10 step：579/720 loss：1.911449
+[train] epoch: 9/10 step：580/720 loss：1.981850
+[train] epoch: 9/10 step：581/720 loss：1.920677
+[train] epoch: 9/10 step：582/720 loss：1.894493
+[train] epoch: 9/10 step：583/720 loss：1.855156
+[train] epoch: 9/10 step：584/720 loss：1.910400
+[train] epoch: 9/10 step：585/720 loss：1.890320
+[train] epoch: 9/10 step：586/720 loss：1.948631
+[train] epoch: 9/10 step：587/720 loss：1.935204
+[train] epoch: 9/10 step：588/720 loss：1.947197
+[train] epoch: 9/10 step：589/720 loss：1.973137
+[train] epoch: 9/10 step：590/720 loss：1.946236
+[train] epoch: 9/10 step：591/720 loss：1.892639
+[train] epoch: 9/10 step：592/720 loss：1.879982
+[train] epoch: 9/10 step：593/720 loss：1.884499
+[train] epoch: 9/10 step：594/720 loss：1.943970
+[train] epoch: 9/10 step：595/720 loss：1.852669
+[train] epoch: 9/10 step：596/720 loss：1.880737
+[train] epoch: 9/10 step：597/720 loss：1.931847
+[train] epoch: 9/10 step：598/720 loss：1.892807
+[train] epoch: 9/10 step：599/720 loss：1.921982
+[train] epoch: 9/10 step：600/720 loss：1.823082
+[train] epoch: 9/10 step：601/720 loss：1.896156
+[train] epoch: 9/10 step：602/720 loss：1.956848
+[train] epoch: 9/10 step：603/720 loss：1.951805
+[train] epoch: 9/10 step：604/720 loss：1.944397
+[train] epoch: 9/10 step：605/720 loss：1.913490
+[train] epoch: 9/10 step：606/720 loss：1.889679
+[train] epoch: 9/10 step：607/720 loss：1.927078
+[train] epoch: 9/10 step：608/720 loss：1.942856
+[train] epoch: 9/10 step：609/720 loss：1.905762
+[train] epoch: 9/10 step：610/720 loss：1.913933
+[train] epoch: 9/10 step：611/720 loss：1.895935
+[train] epoch: 9/10 step：612/720 loss：1.948692
+[train] epoch: 9/10 step：613/720 loss：1.953293
+[train] epoch: 9/10 step：614/720 loss：1.911491
+[train] epoch: 9/10 step：615/720 loss：1.956802
+[train] epoch: 9/10 step：616/720 loss：1.924240
+[train] epoch: 9/10 step：617/720 loss：1.922470
+[train] epoch: 9/10 step：618/720 loss：1.961876
+[train] epoch: 9/10 step：619/720 loss：1.966805
+[train] epoch: 9/10 step：620/720 loss：1.952705
+[train] epoch: 9/10 step：621/720 loss：1.940903
+[train] epoch: 9/10 step：622/720 loss：1.890640
+[train] epoch: 9/10 step：623/720 loss：1.980431
+[train] epoch: 9/10 step：624/720 loss：1.891037
+[train] epoch: 9/10 step：625/720 loss：1.985481
+[train] epoch: 9/10 step：626/720 loss：1.895798
+[train] epoch: 9/10 step：627/720 loss：1.945084
+[train] epoch: 9/10 step：628/720 loss：1.897423
+[train] epoch: 9/10 step：629/720 loss：1.936878
+[train] epoch: 9/10 step：630/720 loss：1.945351
+[train] epoch: 9/10 step：631/720 loss：1.921356
+[train] epoch: 9/10 step：632/720 loss：1.932465
+[train] epoch: 9/10 step：633/720 loss：1.932922
+[train] epoch: 9/10 step：634/720 loss：1.990410
+[train] epoch: 9/10 step：635/720 loss：1.875488
+[train] epoch: 9/10 step：636/720 loss：2.003479
+[train] epoch: 9/10 step：637/720 loss：1.906593
+[train] epoch: 9/10 step：638/720 loss：1.989723
+[train] epoch: 9/10 step：639/720 loss：1.845200
+[train] epoch: 9/10 step：640/720 loss：1.952827
+[train] epoch: 9/10 step：641/720 loss：1.943806
+[train] epoch: 9/10 step：642/720 loss：1.866417
+[train] epoch: 9/10 step：643/720 loss：1.889179
+[train] epoch: 9/10 step：644/720 loss：1.927238
+[train] epoch: 9/10 step：645/720 loss：1.927826
+[train] epoch: 9/10 step：646/720 loss：1.936493
+[train] epoch: 9/10 step：647/720 loss：1.908279
+[train] epoch: 9/10 step：648/720 loss：1.909572
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at model/chinese-bert-wwm-ext and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[train] epoch: 10/10 step：649/720 loss：1.912476
+[train] epoch: 10/10 step：650/720 loss：1.900993
+[train] epoch: 10/10 step：651/720 loss：1.892143
+[train] epoch: 10/10 step：652/720 loss：1.911354
+[train] epoch: 10/10 step：653/720 loss：1.892063
+[train] epoch: 10/10 step：654/720 loss：1.864349
+[train] epoch: 10/10 step：655/720 loss：1.932266
+[train] epoch: 10/10 step：656/720 loss：1.850769
+[train] epoch: 10/10 step：657/720 loss：1.965492
+[train] epoch: 10/10 step：658/720 loss：1.971130
+[train] epoch: 10/10 step：659/720 loss：1.921577
+[train] epoch: 10/10 step：660/720 loss：1.961998
+[train] epoch: 10/10 step：661/720 loss：1.957634
+[train] epoch: 10/10 step：662/720 loss：1.928520
+[train] epoch: 10/10 step：663/720 loss：1.946205
+[train] epoch: 10/10 step：664/720 loss：1.957497
+[train] epoch: 10/10 step：665/720 loss：1.949844
+[train] epoch: 10/10 step：666/720 loss：1.924553
+[train] epoch: 10/10 step：667/720 loss：1.945740
+[train] epoch: 10/10 step：668/720 loss：1.919228
+[train] epoch: 10/10 step：669/720 loss：1.828766
+[train] epoch: 10/10 step：670/720 loss：1.930496
+[train] epoch: 10/10 step：671/720 loss：1.895027
+[train] epoch: 10/10 step：672/720 loss：1.919952
+[train] epoch: 10/10 step：673/720 loss：1.941532
+[train] epoch: 10/10 step：674/720 loss：1.896172
+[train] epoch: 10/10 step：675/720 loss：1.921875
+[train] epoch: 10/10 step：676/720 loss：1.940903
+[train] epoch: 10/10 step：677/720 loss：1.912720
+[train] epoch: 10/10 step：678/720 loss：1.948303
+[train] epoch: 10/10 step：679/720 loss：1.909256
+[train] epoch: 10/10 step：680/720 loss：1.905121
+[train] epoch: 10/10 step：681/720 loss：1.933784
+[train] epoch: 10/10 step：682/720 loss：1.916252
+[train] epoch: 10/10 step：683/720 loss：1.845032
+[train] epoch: 10/10 step：684/720 loss：1.921867
+[train] epoch: 10/10 step：685/720 loss：1.924660
+[train] epoch: 10/10 step：686/720 loss：1.965847
+[train] epoch: 10/10 step：687/720 loss：1.896675
+[train] epoch: 10/10 step：688/720 loss：1.854523
+[train] epoch: 10/10 step：689/720 loss：1.946968
+[train] epoch: 10/10 step：690/720 loss：1.890366
+[train] epoch: 10/10 step：691/720 loss：1.894135
+[train] epoch: 10/10 step：692/720 loss：1.931709
+[train] epoch: 10/10 step：693/720 loss：1.956001
+[train] epoch: 10/10 step：694/720 loss：1.915771
+[train] epoch: 10/10 step：695/720 loss：1.967522
+[train] epoch: 10/10 step：696/720 loss：1.977142
+[train] epoch: 10/10 step：697/720 loss：1.953438
+[train] epoch: 10/10 step：698/720 loss：1.951836
+[train] epoch: 10/10 step：699/720 loss：1.934494
+[train] epoch: 10/10 step：700/720 loss：1.954918
+[train] epoch: 10/10 step：701/720 loss：1.942146
+[train] epoch: 10/10 step：702/720 loss：1.912834
+[train] epoch: 10/10 step：703/720 loss：1.872116
+[train] epoch: 10/10 step：704/720 loss：1.903656
+[train] epoch: 10/10 step：705/720 loss：1.915436
+[train] epoch: 10/10 step：706/720 loss：1.898228
+[train] epoch: 10/10 step：707/720 loss：1.935081
+[train] epoch: 10/10 step：708/720 loss：1.997841
+[train] epoch: 10/10 step：709/720 loss：1.926552
+[train] epoch: 10/10 step：710/720 loss：1.920311
+[train] epoch: 10/10 step：711/720 loss：1.910828
+[train] epoch: 10/10 step：712/720 loss：1.913887
+[train] epoch: 10/10 step：713/720 loss：1.914764
+[train] epoch: 10/10 step：714/720 loss：1.870056
+[train] epoch: 10/10 step：715/720 loss：1.921707
+[train] epoch: 10/10 step：716/720 loss：1.938477
+[train] epoch: 10/10 step：717/720 loss：1.911495
+[train] epoch: 10/10 step：718/720 loss：1.931835
+[train] epoch: 10/10 step：719/720 loss：1.936226
+[train] epoch: 10/10 step：720/720 loss：1.928877
+耗时：135.31636095046997秒
+lilin3-a800-dev-7-m-0:568347:569062 [1] NCCL INFO [Service thread] Connection closed by localRank 1
+lilin3-a800-dev-7-m-0:568346:569061 [0] NCCL INFO [Service thread] Connection closed by localRank 0
+(800,) (800,)
+===============end=====================
+lilin3-a800-dev-7-m-0:568347:568347 [1] NCCL INFO comm 0x9c4e280 rank 1 nranks 2 cudaDev 1 busId 13000 - Abort COMPLETE
+(800,) (800,)
+              precision    recall  f1-score   support
+
+          其他       0.20      0.00      0.01       291
+          喜好       0.17      0.89      0.28       133
+          悲伤       0.16      0.10      0.12       102
+          厌恶       0.00      0.00      0.00       113
+          愤怒       0.00      0.00      0.00        60
+          高兴       0.00      0.00      0.00       101
+
+    accuracy                           0.16       800
+   macro avg       0.09      0.16      0.07       800
+weighted avg       0.12      0.16      0.06       800
+
+===============end=====================
+lilin3-a800-dev-7-m-0:568346:568346 [0] NCCL INFO comm 0x8aa0980 rank 0 nranks 2 cudaDev 0 busId e000 - Abort COMPLETE
